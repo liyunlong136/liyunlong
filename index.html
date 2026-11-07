@@ -1,23 +1,586 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>My Ask Mate - 我的AI提问搭档</title>
-    <style>
-        body { background-color: #1a1a1a; color: white; text-align: center; padding-top: 100px; font-family: sans-serif; }
-        h1 { color: #10b981; }
-        .card { background: #2a2a2a; padding: 20px; border-radius: 10px; width: 300px; margin: 0 auto; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模选 ModelPick · 让更多人学会使用大模型</title>
+<meta name="description" content="上传截图、PDF、Word 或代码，自动拆解问题，按时间、预算、token 约束推荐具体的大模型（含等级、模式与理由），并给出可直接使用的提示词。覆盖国内外主流模型与机器学习算法知识库，免费使用。">
+<meta name="theme-color" content="#060910">
+<link rel="canonical" href="https://myaskmate.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="模选 ModelPick">
+<meta property="og:title" content="模选 ModelPick · 选对模型，比用最强模型更重要">
+<meta property="og:description" content="按时间、预算、token 为每一步挑一个具体模型。125 个模型、506 条提示词，免费无登录。">
+<meta property="og:url" content="https://myaskmate.com/">
+<meta property="og:image" content="https://myaskmate.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="模选 ModelPick · 选对模型，比用最强模型更重要">
+<meta name="twitter:description" content="按时间、预算、token 为每一步挑一个具体模型，免费无登录。">
+<meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebSite", "name": "模选 ModelPick", "url": "https://myaskmate.com/", "inLanguage": "zh-CN" },
+    { "@type": "SoftwareApplication", "name": "模选 ModelPick", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "url": "https://myaskmate.com/", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" } }
+  ]
+}
+</script>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235eead4'/%3E%3Cstop offset='1' stop-color='%23818cf8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230a0f1c'/%3E%3Cpath d='M16 46V18h6l10 16 10-16h6v28h-6V29l-10 15-10-15v17z' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="card">
-        <h1>🎉 部署成功！</h1>
-        <p>欢迎来到 myaskmate.com</p>
-        <p>这是你的第一个网页！</p>
-        <div style="margin-top: 20px; font-size: 24px;">
-            ⭐ ⭐ ⭐ ⭐ ⭐
-        </div>
-        <p style="color: #888; font-size: 12px;">（未来这里将是用户的打分区）</p>
+
+<header class="site-head">
+  <div class="wrap head-inner">
+    <div class="brand">
+      <span class="logo">M</span>
+      <span>模选 ModelPick<br><small>MODEL PICKER</small></span>
     </div>
+    <button class="search-trigger" id="searchBtn" aria-label="全局搜索">
+      <span class="s-ico">⌕</span><span class="s-txt">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <nav class="tabs" aria-label="主导航">
+      <button class="tab active" data-view="pick">智能选型</button>
+      <button class="tab" data-view="solutions">解决方案</button>
+      <button class="tab" data-view="pk">PK 对比</button>
+      <button class="tab" data-view="models">模型库</button>
+      <button class="tab" data-view="algos">算法库</button>
+      <button class="tab" data-view="prompts">提示词库</button>
+      <button class="tab" data-view="about">关于</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ================= 选型 ================= -->
+  <section class="view active" id="view-pick">
+    <div class="hero">
+      <span class="kicker"><i></i> 免费 · 无登录 · 数据快照 2026-11</span>
+      <h1>选对模型，<br><span class="grad">比用最强模型更重要。</span></h1>
+      <p class="hero-sub">把一个大问题拆成几步，再按你的时间、预算和 token 余量，为每一步挑一个<strong>具体模型</strong>（精确到版本和等级），并告诉你为什么适合、该开什么模式、第一句话怎么问。现在也可以直接上传<strong>截图、PDF、Word 或代码</strong>，让推荐从你的文件开始。</p>
+      <div class="hero-stats">
+        <div class="stat"><b id="heroModels">125<em>个</em></b><span>国内外模型</span></div>
+        <div class="stat"><b id="heroAlgos">65<em>条</em></b><span>算法与训练要点</span></div>
+        <div class="stat"><b id="heroTasks">506<em>套</em></b><span>任务拆解与提示词</span></div>
+        <div class="stat"><b id="heroVendors">27<em>家</em></b><span>覆盖厂商</span></div>
+      </div>
+    </div>
+
+    <section class="recent" id="recentWrap" hidden>
+      <div class="recent-head"><span class="kicker">最近方案</span><button class="link-btn" id="recentClear" type="button">清空</button></div>
+      <div class="recent-list" id="recentList"></div>
+    </section>
+
+    <section class="task-hall">
+      <div class="th-head">
+        <div><span class="kicker">任务大厅</span><h2>不知道从哪开始？先选一个任务</h2>
+          <p>每张卡都标好推荐等级和大致成本，点开先看「为什么推荐」，再决定要不要自己写。</p></div>
+        <button class="btn btn-ghost btn-sm" data-view="solutions">看全部方案</button>
+      </div>
+      <div class="task-grid" id="taskGrid"></div>
+    </section>
+
+    <section class="rank-home" id="rankHome">
+      <div class="rank-head">
+        <div><span class="kicker">排行榜</span><h2>总榜与分榜</h2>
+          <p id="rankSub">能力分 + 用户评分；点任意模型看详情。</p></div>
+        <button class="btn btn-sm" id="rankMore">查看完整榜单</button>
+      </div>
+      <div class="filters" id="rankTabs"></div>
+      <div class="rank-list" id="rankList"></div>
+      <p class="rank-method">口径：能力分 80% = 自研十维评分（人工设定，参考公开基准与实测）；用户评分 20% 仅在有评分时生效。能力分不是官方 benchmark。</p>
+      <div class="rank-note" id="rankNote"></div>
+    </section>
+
+    <section class="mission">
+      <div class="mission-copy">
+        <span class="kicker">我们的目标</span>
+        <h2>让更多人<span class="grad">学会使用模型</span>，<br>而不是被模型选择。</h2>
+        <p>模型不会自己变好，是「会用」让它变好。我们把选型、模式、提示词和踩过的坑拆开讲清楚，让第一次用大模型的人，也能做出专业的选择。</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><b>01</b><h3>看懂</h3><p>65 条算法与训练要点，知道模型为什么会这样。</p></div>
+        <div class="pillar"><b>02</b><h3>选对</h3><p>按时间、预算、token 推荐到具体版本，而不是一句「用最强的」。</p></div>
+        <div class="pillar"><b>03</b><h3>用起来</h3><p>每个任务配好模式与提示词，复制就能开始。</p></div>
+      </div>
+    </section>
+
+    <div class="panel">
+      <div class="panel-head"><span class="step">1</span><h2>描述你真正要解决的问题</h2><span class="hint" id="charCount">0 字</span></div>
+      <div class="field">
+        <textarea id="problemInput" placeholder="例如：我想做一个面向大学生的 AI 求职助手小程序，只有我一个人开发，两周内上线，预算很紧。&#10;&#10;写得越具体，拆解越准：说清「要什么产出、给谁看、什么时候要、卡在哪里」。" aria-label="描述你的问题"></textarea>
+        <div class="err" id="formErr">再多写几个字吧：至少描述一下你要的产出和时间，或者上传一个文件。</div>
+      </div>
+      <div class="field">
+        <span class="label">上传截图或文件<small>本地解析，不上传服务器 · 最多 3 个，单个 ≤ 15MB</small></span>
+        <div class="drop" id="dropZone">
+          <input type="file" id="fileInput" multiple hidden accept=".png,.jpg,.jpeg,.webp,.gif,.bmp,.avif,.pdf,.docx,.pptx,.xlsx,.txt,.md,.csv,.json,.log,.py,.js,.ts,.jsx,.tsx,.java,.c,.cpp,.h,.go,.rs,.sql,.sh,.html,.css,.yaml,.yml,.xml">
+          <div class="drop-icon">↑</div>
+          <div class="drop-text"><b>拖进来，或点击选择</b><span>图片 / PDF / Word / PPT / Excel / 代码 / 文本，自动判断该不该用视觉模型</span></div>
+          <button class="btn btn-sm" id="pickFileBtn" type="button">选择文件</button>
+        </div>
+        <div class="hint-line">图片不做 OCR：补一句「这是什么图、卡在哪」，推荐会更准。文件只在本机解析，不会上传。</div>
+        <div class="file-list" id="fileList"></div>
+        <div class="file-analysis" id="fileAnalysis"></div>
+      </div>
+      <div class="field">
+        <span class="label">没想好？点一个真实场景试试 <small>会自动填入并拆解</small></span>
+        <div class="seg">
+          <button class="btn btn-sm js-example" data-text="我想做一个面向大学生的 AI 求职助手小程序，只有我一个人开发，两周内上线，预算很紧">一人两周做求职小程序</button>
+          <button class="btn btn-sm js-example" data-text="帮我读完这份 300 页的行业报告，输出 10 页汇报 PPT，明天上午就要讲，预算不限">300 页报告 → 明天讲</button>
+          <button class="btn btn-sm js-example" data-text="我的 Python 爬虫在 Windows 上跑十分钟就崩溃，日志只有一行 MemoryError，今天必须修好">爬虫 OOM 今天修好</button>
+          <button class="btn btn-sm js-example" data-text="我想系统学习大模型原理，三个月后能自己微调一个 7B 模型，只有晚上和周末有时间">三个月入门并微调 7B</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="step">2</span><h2>你的真实约束</h2><span class="hint">这些条件直接决定推荐结果</span></div>
+      <div class="field">
+        <span class="label">这件事有多急？<small>赶时间会优先推快模型</small></span>
+        <div class="seg">
+          <label class="seg-item"><input type="radio" name="time" value="urgent"><span><b>很赶</b><i>小时级 / 今天要</i></span></label>
+          <label class="seg-item"><input type="radio" name="time" value="normal" checked><span><b>正常</b><i>几天内</i></span></label>
+          <label class="seg-item"><input type="radio" name="time" value="relaxed"><span><b>很充裕</b><i>几周 / 可以慢慢磨</i></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <span class="label">预算档位<small>按每百万 token 的输入+输出均价看</small></span>
+        <div class="seg">
+          <label class="seg-item"><input type="radio" name="budget" value="free"><span><b>零预算</b><i>只用免费额度</i></span></label>
+          <label class="seg-item"><input type="radio" name="budget" value="low"><span><b>很低</b><i>¥5/M 以内</i></span></label>
+          <label class="seg-item"><input type="radio" name="budget" value="mid" checked><span><b>中等</b><i>几十块一次能接受</i></span></label>
+          <label class="seg-item"><input type="radio" name="budget" value="high"><span><b>不设限</b><i>结果最重要</i></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <span class="label">Token 余量<small>和「时间」组合，决定该省钱还是该提速</small></span>
+        <div class="seg">
+          <label class="seg-item"><input type="radio" name="tokens" value="scarce"><span><b>很紧</b><i>额度快用完</i></span></label>
+          <label class="seg-item"><input type="radio" name="tokens" value="normal" checked><span><b>够用</b><i>正常额度</i></span></label>
+          <label class="seg-item"><input type="radio" name="tokens" value="ample"><span><b>充足</b><i>额度用不完</i></span></label>
+        </div>
+        <div class="hint-line">提示：时间充裕 + token 紧张 → 走「便宜模型出初稿，旗舰只改关键段」；token 充足 + 时间紧张 → 直接上快模型并行跑。</div>
+      </div>
+      <div class="field">
+        <span class="label">硬性需求<small>勾选后不满足的模型会被直接排除</small></span>
+        <div class="checks">
+          <label class="check"><input type="checkbox" value="vision"> 要看图 / 截图 / PDF</label>
+          <label class="check"><input type="checkbox" value="audio"> 要处理语音 / 视频</label>
+          <label class="check"><input type="checkbox" value="longdoc"> 超长文档（20 万字+）</label>
+          <label class="check"><input type="checkbox" value="local"> 必须私有化 / 内网</label>
+        </div>
+      </div>
+      <div class="field">
+        <span class="label">领域<small>不确定就留「自动识别」</small></span>
+        <select id="domainSelect" aria-label="领域">
+          <option value="">自动识别（推荐）</option>
+        </select>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="runBtn">生成选型方案</button>
+        <span class="hint-line" style="margin:0">Ctrl / Cmd + Enter 也可以</span>
+      </div>
+    </div>
+
+    <div class="results" id="results"></div>
+  </section>
+
+  <!-- ================= 解决方案 ================= -->
+  <section class="view" id="view-solutions">
+    <div class="hero solution-hero">
+      <span class="kicker"><i></i> 场景驱动 · 直接给组合</span>
+      <h1>别问「哪个模型强」，<br><span class="grad">问「这件事怎么组合最划算」。</span></h1>
+      <p class="hero-sub">输入你的场景，比如「50 页 PDF 翻译成中文，最便宜」，会直接给你<strong>主模型 + 省钱替代 + 配套工具</strong>的组合，并把账算到每月。不是模型列表，是能落地的方案。</p>
+    </div>
+
+    <div class="panel solver">
+      <div class="panel-head"><span class="step">?</span><h2>说出你的场景，给你一套组合</h2><span class="hint">会匹配方案、算清单次成本</span></div>
+      <textarea id="solutionInput" placeholder="例如：我想把一份 50 页的 PDF 翻译成中文，预算越低越好，术语不能乱。&#10;&#10;或者：每天 10 万次客服问答，用哪个模型最省？"></textarea>
+      <div class="actions">
+        <button class="btn btn-primary" id="solutionBtn">给我方案</button>
+        <span class="hint-line" style="margin:0">Ctrl / Cmd + Enter 也可以</span>
+      </div>
+      <div id="solutionResults" class="match-results"></div>
+    </div>
+
+    <div class="panel calc-panel">
+      <div class="panel-head"><span class="step">¥</span><h2>算一笔账：降级到底能省多少</h2><span class="hint">人民币 / 厘，按月估算</span></div>
+      <div class="calc-controls">
+        <label>现在用<select id="calcA"></select></label>
+        <label>考虑换成<select id="calcB"></select></label>
+        <label>每天调用<input id="calcCalls" type="number" min="1" value="10000"><span>次</span></label>
+        <label>每次输入<input id="calcIn" type="number" min="0" value="1000"><span>tokens</span></label>
+        <label>每次输出<input id="calcOut" type="number" min="0" value="300"><span>tokens</span></label>
+      </div>
+      <div class="calc-presets">
+        <button class="fchip" data-preset="support">客服 10 万次/天</button>
+        <button class="fchip" data-preset="longdoc">长文总结 1000 次/天</button>
+        <button class="fchip" data-preset="coding">代码助手 5000 次/天</button>
+      </div>
+      <div id="calcResult" class="calc-result"></div>
+    </div>
+
+    <div class="lib-head" style="margin-top:24px">
+      <div><h2 style="font-size:22px">常见场景的组合</h2><p>从「够用就好」出发，先给省钱路线，再给升级路线。</p></div>
+    </div>
+    <div class="solution-grid" id="solutionGrid"></div>
+  </section>
+
+  <!-- ================= PK 对比 ================= -->
+  <section class="view" id="view-pk">
+    <div class="lib-head">
+      <div>
+        <h1>普通模式 vs 专家模式</h1>
+        <p>同一条问题：左边随便问 + L1/L2，右边结构化提示词 + L4/L5。差在哪、差多少钱，一眼看到。</p>
+      </div>
+    </div>
+
+    <div class="panel pk-topic">
+      <div class="field">
+        <span class="label">你想让 AI 做什么？<small>左边原样问，右边自动改写成结构化提示词</small></span>
+        <textarea id="pkTopic" placeholder="例如：帮我写个总结">帮我写个总结</textarea>
+      </div>
+      <div class="pk-config">
+        <label>供应商
+          <select id="pkProvider">
+            <option value="zhipu">智谱（国内直连）</option>
+            <option value="deepseek">DeepSeek（国内直连）</option>
+            <option value="qwen">通义千问（国内直连）</option>
+            <option value="openai">OpenAI</option>
+          </select>
+        </label>
+        <label>API Key（只存在本标签页）
+          <input id="pkKey" type="password" placeholder="不填也能看结构对比" autocomplete="off">
+        </label>
+        <span class="hint-line" style="margin:0">Key 不会上传服务器；关闭标签页即失效。</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="pkRun">生成对比</button>
+        <button class="btn" id="pkDemo">只看提示词对比</button>
+        <button class="btn btn-ghost btn-sm" id="pkClearKey">清除 Key</button>
+      </div>
+    </div>
+
+    <div class="pk-grid">
+      <div class="pk-col">
+        <div class="pk-head"><span class="pk-tag plain">普通模式</span><span style="display:flex;gap:6px;align-items:center"><select id="pkModelA" aria-label="左侧模型"></select><button class="btn btn-sm" data-copy-pk="a">复制</button></span></div>
+        <div class="pk-meta" id="pkMetaA">—</div>
+        <textarea id="pkPromptA" class="pk-prompt" readonly aria-label="普通提示词"></textarea>
+        <div class="pk-output" id="pkOutA"><div class="empty">还没有生成</div></div>
+      </div>
+      <div class="pk-col expert">
+        <div class="pk-head"><span class="pk-tag expert">专家模式</span><span style="display:flex;gap:6px;align-items:center"><select id="pkModelB" aria-label="右侧模型"></select><button class="btn btn-sm" data-copy-pk="b">复制</button></span></div>
+        <div class="pk-meta" id="pkMetaB">—</div>
+        <textarea id="pkPromptB" class="pk-prompt" readonly aria-label="专家提示词"></textarea>
+        <div class="pk-output" id="pkOutB"><div class="empty">还没有生成</div></div>
+      </div>
+    </div>
+
+    <div id="pkDiff"></div>
+  </section>
+
+  <!-- ================= 模型库 ================= -->
+  <section class="view" id="view-models">
+    <div class="lib-head">
+      <div>
+        <h1>模型库 <span class="chip acc" id="modelCount">0</span></h1>
+        <p>国内外主流大模型的能力画像、价格、上下文与适用场景。点卡片看详情和成本试算。</p>
+        <div class="sync-line" id="priceSync">价格快照加载中…</div>
+      </div>
+    </div>
+    <div class="stats-strip" id="libStats"></div>
+    <div class="filters" id="libFilters">
+      <button class="fchip on" data-country="all">全部</button>
+      <button class="fchip" data-country="cn">国产</button>
+      <button class="fchip" data-country="global">海外</button>
+      <button class="fchip" data-country="open">开源 / 可私有化</button>
+    </div>
+    <div class="filters" id="libTierFilters">
+      <button class="fchip on" data-tier="all">全部等级</button>
+      <button class="fchip" data-tier="1">L1 免费</button>
+      <button class="fchip" data-tier="2">L2 轻量</button>
+      <button class="fchip" data-tier="3">L3 主力</button>
+      <button class="fchip" data-tier="4">L4 旗舰</button>
+      <button class="fchip" data-tier="5">L5 顶级</button>
+    </div>
+    <div class="filters" id="libFlagFilters">
+      <button class="fchip on" data-flag="all">全部</button>
+      <button class="fchip" data-flag="cn">国内直连</button>
+      <button class="fchip" data-flag="private">可私有化</button>
+      <button class="fchip" data-flag="filed">境内备案</button>
+    </div>
+    <div class="lib-tools">
+      <input type="search" id="libSearch" placeholder="搜索模型、厂商或场景，例如「长文档」「代码」「便宜」">
+      <select id="libSort" aria-label="排序">
+        <option value="power">按等级与综合能力</option>
+        <option value="price">按价格从低到高</option>
+        <option value="ctx">按上下文从大到小</option>
+        <option value="speed">按速度从快到慢</option>
+      </select>
+    </div>
+    <div class="model-grid" id="modelGrid"></div>
+  </section>
+
+  <!-- ================= 算法库 ================= -->
+  <section class="view" id="view-algos">
+    <div class="lib-head">
+      <div>
+        <h1>算法库 <span class="chip acc" id="algoCount">0</span></h1>
+        <p>从 Transformer 到 GRPO，从 LoRA 到投机解码：每个算法讲清「怎么做、最容易踩什么坑、什么时候用」。</p>
+      </div>
+    </div>
+    <div class="lib-tools">
+      <input type="search" id="algoSearch" placeholder="搜索算法，例如「MoE」「量化」「RAG」「对齐」">
+    </div>
+    <div class="algo-layout">
+      <aside class="algo-nav" id="algoNav"></aside>
+      <div class="algo-list" id="algoList"></div>
+    </div>
+  </section>
+
+  <!-- ================= 提示词库 ================= -->
+  <section class="view" id="view-prompts">
+    <div class="lib-head">
+      <div>
+        <h1>提示词库 <span class="chip acc" id="promptCount">0</span></h1>
+        <p>按任务拆好的模板 + 按场景写的专题：角色、输入、约束、输出格式都写死了，复制就能用。每条都能展开看「为什么这样写」。</p>
+      </div>
+    </div>
+
+    <div class="prompt-hero">
+      <div class="ph-copy">
+        <span class="kicker">提示词解剖</span>
+        <h2>好提示词不是「说得客气」，<br>是「说得可执行」。</h2>
+        <p>一条稳定的提示词通常只做五件事：定角色、给输入、拆任务、加约束、定格式。下面每条模板都按这五段写，你可以直接改内容，不要改结构。</p>
+      </div>
+      <div class="ph-grid">
+        <div class="ph-item"><b>01</b><h3>角色</h3><p>谁在回答？决定知识视角和语气。</p></div>
+        <div class="ph-item"><b>02</b><h3>输入</h3><p>背景、材料、约束一次给全，少来回追问。</p></div>
+        <div class="ph-item"><b>03</b><h3>任务</h3><p>拆成编号步骤，输出才能逐条验收。</p></div>
+        <div class="ph-item"><b>04</b><h3>约束</h3><p>防幻觉、限字数、禁套话，守住下限。</p></div>
+        <div class="ph-item"><b>05</b><h3>输出格式</h3><p>表格 / 分节 / JSON，拿到就能用。</p></div>
+      </div>
+    </div>
+
+    <div class="panel matcher">
+      <div class="panel-head"><span class="step">?</span><h2>输入你的问题，找一条能直接用的提示词</h2><span class="hint">会替换占位符，并解释为什么匹配</span></div>
+      <textarea id="promptMatchInput" placeholder="例如：我要把一份 30 页的合同看出风险，重点看违约和解除条款，明天要签。&#10;&#10;不用写得很工整，按你平时说话的方式写就行。"></textarea>
+      <div class="actions">
+        <button class="btn btn-primary" id="promptMatchBtn">帮我找提示词</button>
+        <span class="hint-line" style="margin:0">Ctrl / Cmd + Enter 也可以</span>
+      </div>
+      <div id="promptMatchResults" class="match-results"></div>
+    </div>
+
+    <div class="lib-tools">
+      <input type="search" id="promptSearch" placeholder="搜索提示词：会议、合同、SQL、小红书、复盘、面试…">
+    </div>
+    <div class="filters" id="promptFilters"></div>
+    <div class="prompt-grid" id="promptGrid"></div>
+    <div class="load-more" id="promptMoreWrap"></div>
+  </section>
+
+  <!-- ================= 关于 ================= -->
+  <section class="view" id="view-about">
+    <div class="lib-head">
+      <div>
+        <h1>关于模选</h1>
+        <p>一个不做「排行榜」的选型工具：它不告诉你谁最强，而是告诉你这一步该用谁、为什么。</p>
+      </div>
+    </div>
+    <div class="mission-about">
+      <div>
+        <span class="kicker">使命</span>
+        <h2>让更多人<span class="grad">学会使用模型</span></h2>
+        <p>我们不做「最强模型排行榜」，因为那解决不了大多数人的问题。真正的问题是：不知道这一步该用谁、不知道为什么、不知道要花多少钱、不知道该怎么开口。这个站点把四件事拆开讲清楚，并且永久免费。</p>
+      </div>
+      <div class="mission-points">
+        <div><b>看懂</b><span>算法库讲原理与坑，不堆术语</span></div>
+        <div><b>选对</b><span>拆任务 + 加约束 + 给具体版本</span></div>
+        <div><b>花少</b><span>三条路线比价，先算再选</span></div>
+        <div><b>用上</b><span>模式建议 + 可复制提示词</span></div>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="panel about">
+        <h2>为什么不是「直接用最强的那个」</h2>
+        <p>同一个任务，用 L5 顶级模型和 L2 轻量模型的差距，往往远小于「提示词写得好不好」的差距。而成本可能差 30 倍。真正影响结果的，是<strong>任务有没有被拆对、约束有没有说清、输出格式有没有定死</strong>。</p>
+        <h3>推荐逻辑</h3>
+        <ul>
+          <li><b>先拆解</b>：按领域把问题拆成 3-4 个有依赖关系的子任务，每个子任务单独匹配模型（同一个问题，第 1 步和第 3 步适合的模型经常不同）。</li>
+          <li><b>再打分</b>：每个子任务有权重向量（推理 / 代码 / 写作 / 中文 / 长文 / 多模态 / 速度 / 性价比 / 智能体 / 数学），与模型能力向量做加权匹配。</li>
+          <li><b>加约束</b>：硬需求（上下文、图片、音频、私有化）先做排除；再按预算、时间、token 余量做加减分，最终给出 0-100 的匹配度。</li>
+          <li><b>给理由</b>：每条推荐必须说清「哪项能力匹配、这一步大约花多少钱、有什么坑」，而不是只给名字。</li>
+          <li><b>三套路线</b>：质量优先 / 省钱优先 / 速度优先，算好每条路线的单次成本，由你自己权衡。</li>
+        </ul>
+        <h3>等级怎么分</h3>
+        <p>L1 免费或近免费；L2 轻量，适合分类、抽取、改写等高频率低难度任务；L3 主力，日常 80% 的任务；L4 旗舰，复杂工程、长文、难推理；L5 顶级，关键路径与高价值研究。等级不是「好坏」，是「用在哪一层」。</p>
+        <h3>上传的文件怎么处理</h3>
+        <ul>
+          <li><b>不上传</b>：图片、PDF、Word、Excel、PPT、代码都在你的浏览器里解析，文件内容不会发到任何服务器，也不会被保存。</li>
+          <li><b>只读概况</b>：文本类会读取正文判断主题与篇幅；PDF 只提取可读文字；图片只读尺寸与色调，<b>不做 OCR</b>。</li>
+          <li><b>按需筛选</b>：图片或扫描件会自动按「需要视觉」过滤模型；长文档会自动抬高上下文门槛。</li>
+          <li><b>你仍要上传</b>：本站只负责推荐和写提示词。选定模型后，把原文件拖进它的对话框，提示词里已经写好了附件说明。</li>
+          <li><b>扫描件建议</b>：先转成清晰的图片或可复制文字的 PDF，再交给视觉模型；表格数字务必人工复核。</li>
+        </ul>
+        <h3>模式怎么选</h3>
+        <ul>
+          <li><b>深度思考</b>：数学、算法、架构设计、难 bug 再开。简单任务开了只会更慢更贵，还容易过度推理。</li>
+          <li><b>非思考 / 快速</b>：分类、抽取、改写、翻译这类「有明确答案」的活，快模型 + 关思考通常就够。</li>
+          <li><b>联网搜索</b>：价格、政策、新闻、竞品动态必须开；同时要求它给出处，否则容易把旧数据说成现在。</li>
+          <li><b>上传文件 / 长文档</b>：先让它复述目录和结构，再逐节提问；一次性问十个问题，质量会明显下降。</li>
+          <li><b>视觉输入</b>：截图、表格、手写稿直接喂图；涉及精确数字时，要求它把表格转成 Markdown 再计算。</li>
+          <li><b>工具调用 / 代码执行</b>：需要算数、跑代码、查数据库时开；比让模型「心算」可靠得多。</li>
+          <li><b>Batch 批处理</b>：离线、可等的任务用批量接口，通常为标准价的 5-6 折。</li>
+        </ul>
+        <h3>合规标签怎么来的</h3>
+        <p>「国内直连」表示厂商在国内有可用 API；「可私有化」表示权重开放或厂商提供私有部署；「境内备案」按厂商公开信息标注，具体以网信办公示与合同为准。本站不做合规背书，金融、医疗等强监管场景请走正式合规审查。</p>
+        <h3>价格说明</h3>
+        <p>价格是 2026-11-05 的公开价快照，单位为人民币 / 百万 tokens。海外模型按 1 美元 ≈ 7.1 元折算，未含渠道与税费；标注「推算」的条目是按同级产品估算，仅用于横向比较，下单前请以官网为准。各家阶梯计价、缓存命中、Batch 折扣差异很大，实际成本可能显著低于标价。</p>
+        <h3>免费承诺</h3>
+        <p>本站无登录、无追踪、无广告、不卖课。所有数据在浏览器本地计算，你的问题不会离开这台设备。</p>
+      </div>
+      <div>
+        <div class="panel">
+          <div class="panel-head"><h2>数据规模</h2></div>
+          <div id="aboutStats"></div>
+        </div>
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-head"><h2>数据来源</h2></div>
+          <p style="font-size:12.5px;color:var(--dim);margin-bottom:8px">优先使用官方定价页，其次为云厂商渠道页与公开报道。</p>
+          <div class="src" id="aboutSources"></div>
+        </div>
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-head"><h2>价格每日同步</h2></div>
+          <div id="aboutPriceSync"></div>
+        </div>
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-head"><h2>匿名统计（只存本地）</h2></div>
+          <div id="aboutTrack"></div>
+        </div>
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-head"><h2>怎么更新</h2></div>
+          <p style="font-size:12.5px;color:var(--muted)">所有模型与价格都在 <code style="color:#a5b4fc">assets/js/data/models.js</code> 里，一个对象就是一个模型。改完保存、刷新即可，不需要重新构建。新增模型时复制一段、改 id / 价格 / dims 即可被推荐引擎自动纳入。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>模选 ModelPick · 数据快照 <span id="footDate">2026-11</span> · 价格与能力以各平台官网为准</div>
+    <div>免费使用 · 本地计算 · 不收集你的问题 · <button class="link-btn" data-open-feedback>反馈与建议</button></div>
+  </div>
+  <div class="wrap foot-links">
+    <span>分栏索引</span>
+    <a href="model/index.html">全部模型（125）</a>
+    <a href="task/index.html">任务大厅</a>
+    <a href="solution/index.html">场景方案</a>
+    <a href="prompt/index.html">提示词库</a>
+  </div>
+</footer>
+
+<dialog id="rankDlg" class="rank-dlg">
+  <div class="dlg-head">
+    <div><h3>完整榜单</h3><div class="m-sub" id="rankDlgSub">能力分 + 用户评分</div></div>
+    <button class="dlg-close" id="rankClose" aria-label="关闭">×</button>
+  </div>
+  <div class="dlg-body">
+    <div class="filters" id="rankDlgTabs"></div>
+    <div id="rankDlgList"></div>
+  </div>
+</dialog>
+
+<dialog id="whyDlg" class="why-dlg">
+  <div class="dlg-head">
+    <div><h3 id="whyTitle">为什么推荐</h3><div class="m-sub" id="whySub"></div></div>
+    <button class="dlg-close" id="whyClose" aria-label="关闭">×</button>
+  </div>
+  <div class="dlg-body" id="whyBody"></div>
+</dialog>
+
+<dialog id="searchDlg" class="search-dlg">
+  <div class="search-top">
+    <span class="search-ico">⌕</span>
+    <input id="globalSearch" type="search" placeholder="搜模型 / 算法 / 任务，例如「长文档」「MoE」「合同」" autocomplete="off" aria-label="全局搜索">
+    <kbd>Esc</kbd>
+  </div>
+  <div class="search-results" id="searchResults"></div>
+  <div class="search-foot">回车打开第一个结果 · 模型可看能力、价格、模式与 token 估算</div>
+</dialog>
+
+<dialog id="modelDlg">
+  <div class="dlg-head">
+    <div><h3 id="dlgTitle">模型</h3><div class="m-sub" id="dlgSub"></div></div>
+    <button class="dlg-close" id="dlgClose" aria-label="关闭">×</button>
+  </div>
+  <div class="dlg-body" id="dlgBody"></div>
+</dialog>
+
+<button class="fb-fab" id="feedbackBtn" aria-label="反馈与建议"><span class="fb-fab-ico">✎</span><span>反馈</span></button>
+
+<dialog id="feedbackDlg" class="feedback-dlg">
+  <div class="dlg-head">
+    <div><h3>说说你的体验</h3><div class="m-sub">匿名也可以；留下联系方式更方便回复</div></div>
+    <button class="dlg-close" id="fbClose" aria-label="关闭">×</button>
+  </div>
+  <div class="dlg-body">
+    <div class="fb-types" id="fbTypes"></div>
+    <div class="fb-stars" id="fbStars"></div>
+    <textarea id="fbText" maxlength="1000" placeholder="哪里好用、哪里卡住、哪个模型或提示词不对？越具体越好。"></textarea>
+    <div class="fb-row">
+      <input id="fbContact" type="text" placeholder="邮箱 / 微信（可选）" autocomplete="off">
+      <label class="check"><input type="checkbox" id="fbMeta" checked> 附上页面与浏览器信息</label>
+    </div>
+    <div class="err" id="fbErr">写几句再提交吧，至少 5 个字。</div>
+    <div class="actions">
+      <button class="btn btn-primary" id="fbSubmit">提交反馈</button>
+      <button class="btn" id="fbCopy">复制反馈内容</button>
+      <span class="hint-line" style="margin:0">Ctrl / Cmd + Enter 提交</span>
+    </div>
+    <div class="fb-note">默认只保存在本机：不注册、不上传。配置 endpoint 后可直传，见 README。</div>
+    <div id="fbDone"></div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/js/data/models.js"></script>
+<script src="assets/js/data/models-extra-cn.js"></script>
+<script src="assets/js/data/models-extra-global.js"></script>
+<script src="assets/js/data/models-extra-2.js"></script>
+<script src="assets/js/data/prices.js"></script>
+<script src="assets/js/data/solutions.js"></script>
+<script src="assets/js/data/task-hall.js"></script>
+<script src="assets/js/data/algorithms.js"></script>
+<script src="assets/js/data/tasks.js"></script>
+<script src="assets/js/data/prompts-extra.js"></script>
+<script src="assets/js/data/prompts-pack-1.js"></script>
+<script src="assets/js/data/prompts-pack-2.js"></script>
+<script src="assets/js/data/prompts-pack-3.js"></script>
+<script src="assets/js/data/prompts-pack-4.js"></script>
+<script src="assets/js/data/prompts-pack-5.js"></script>
+<script src="assets/js/track.js"></script>
+<script src="assets/js/prompt-kit.js"></script>
+<script src="assets/js/file-analyzer.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/pk.js"></script>
+<script src="assets/js/feedback-config.js"></script>
+<script src="assets/js/feedback.js"></script>
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/rating.js"></script>
+<script src="assets/js/ranking.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/recent.js"></script>
 </body>
 </html>

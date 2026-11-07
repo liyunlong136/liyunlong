@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    background:#060910;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    color:#e6ecf7;position:relative;
+    background-image:
+      radial-gradient(760px 620px at 8% -18%,rgba(94,234,212,.20),transparent 62%),
+      radial-gradient(820px 700px at 88% -22%,rgba(129,140,248,.24),transparent 62%),
+      radial-gradient(700px 500px at 50% 118%,rgba(56,189,248,.10),transparent 70%);
+  }
+  .frame{position:absolute;inset:0;border:2px solid rgba(148,163,184,.16)}
+  .inner{position:absolute;inset:0;padding:72px 84px;display:flex;flex-direction:column}
+  .brand{display:flex;align-items:center;gap:16px}
+  .logo{
+    width:58px;height:58px;border-radius:16px;display:grid;place-items:center;
+    background:linear-gradient(135deg,#5eead4,#818cf8);
+    font-size:30px;font-weight:900;color:#060910;letter-spacing:-1px;
+  }
+  .bname{font-size:23px;font-weight:800;letter-spacing:.2px;line-height:1.15}
+  .bsub{font-size:11px;color:#64748b;letter-spacing:2.6px;font-weight:600;margin-top:3px}
+  .title{margin-top:74px;font-size:52px;font-weight:900;letter-spacing:-1.4px;line-height:1.28}
+  .grad{background:linear-gradient(92deg,#5eead4,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin-top:26px;font-size:20px;color:#93a1b8;line-height:1.7;font-weight:400}
+  .spacer{flex:1}
+  .stats{display:flex;align-items:center;gap:14px;font-size:17px;font-weight:700;color:#5eead4}
+  .stats i{font-style:normal;color:#334155;font-weight:400}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:26px;
+        padding-top:18px;border-top:1px solid rgba(148,163,184,.16);
+        font-size:14px;color:#64748b;font-family:ui-monospace,Consolas,monospace}
+  .badge{color:#93a1b8;font-family:inherit;font-size:13px}
+</style>
+</head>
+<body>
+<div class="frame"></div>
+<div class="inner">
+  <div class="brand">
+    <span class="logo">M</span>
+    <div>
+      <div class="bname">模选 ModelPick</div>
+      <div class="bsub">MODEL PICKER</div>
+    </div>
+  </div>
+
+  <div class="title">选对模型，<br><span class="grad">比用最强模型更重要。</span></div>
+  <div class="sub">把问题拆成几步，按时间、预算、token 为每一步挑一个具体模型，<br>并告诉你为什么、该开什么模式、第一句话怎么问。</div>
+
+  <div class="spacer"></div>
+
+  <div class="stats">
+    125 个模型 <i>·</i> 65 条算法 <i>·</i> 506 套提示词 <i>·</i> 免费 · 无登录
+  </div>
+  <div class="foot">
+    <span>myaskmate.com</span>
+    <span class="badge">让更多人学会使用大模型</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>学习与考试提示词（3 条） | 模选 ModelPick</title><meta name="description" content="学习与考试场景的结构化提示词合集，共 3 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-84.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="学习与考试提示词（3 条）"><meta property="og:description" content="学习与考试场景的结构化提示词合集，共 3 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-84.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="学习与考试提示词（3 条）"><meta name="twitter:description" content="学习与考试场景的结构化提示词合集，共 3 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"学习与考试提示词","description":"学习与考试场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 学习与考试</p><h1>学习与考试提示词</h1><p class="lead">3 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">学习</span><span class="chip">考试</span><span class="chip">考研</span><span class="chip">雅思</span><span class="chip">复习</span></div><article class="pcard" id="learn-diagnose"><div class="phead"><b>水平诊断与路径</b><span>深度思考</span></div><p class="muted">先测起点再排计划，让路径对得上你的时间和目标</p><pre class="prompt">【角色】你是带过 300 名学员的备考规划师，习惯先测水平再排计划，不卖焦虑也不灌鸡汤。
+【背景】下面是我的目标、现状与时间约束，有些信息可能没写。
+【输入】{{problem}}
+【任务】
+1) 用 5 个问题诊断我的真实起点，暂时不知道的写「待测」；
+2) 把目标拆成可量化的阶段指标与时间节点；
+3) 给出每周计划：输入（学什么）、输出（做什么题或复述什么）、复盘方式；
+4) 标出最可能拖垮进度的 2 个风险与应对。
+【约束】
+- 不编造考试大纲、题型分值和通过率，不确定的写「待核实（以官方大纲为准）」；
+- 计划必须按我给出的每日可用时间排，不许默认我能学 8 小时；
+- 不推荐具体付费课程或机构。
+【输出格式】按「起点诊断 / 阶段目标表 / 周计划 / 风险」输出；阶段目标表列名：阶段 | 时间 | 可量化指标 | 验收方式；周计划用「周一至周日 × 时段」两列表格。</pre><details><summary>为什么这样写</summary><p>把目标分数、deadline、每天可用时间和最近一次成绩给全，计划才有意义。</p></details></article><article class="pcard" id="learn-explain"><div class="phead"><b>概念讲解与自测</b><span>深度思考</span></div><p class="muted">把「好像懂了」变成能讲出来、能做对题的真懂</p><pre class="prompt">【角色】你是能把抽象概念讲到初中生都懂、但绝不牺牲准确性的理科教师。
+【背景】下面是我没弄懂的概念和我目前的理解，我的理解可能是错的。
+【输入】{{problem}}
+【任务】
+1) 先指出我现有理解里哪一句是错的或只对一半；
+2) 用一个日常生活类比建立直觉，再给严格定义；
+3) 给一个正例、一个反例、一个边界情况；
+4) 出 3 道自测题，从记忆到迁移递进，并给答案与解析。
+【约束】
+- 不确定的定义与公式适用条件标注「待核实」，不得为了顺口简化到失真；
+- 类比必须说明它在哪一步会失效；
+- 不堆术语，出现术语必须当场解释。
+【输出格式】按「纠错 / 直觉类比 / 严格定义 / 正反例 / 自测 3 题」输出；自测题的答案与解析单独放在最后，全文 800 字以内。</pre><details><summary>为什么这样写</summary><p>说清你卡在哪一步——看不懂定义、不会用、还是记不住，讲解方式完全不同。</p></details></article><article class="pcard" id="learn-review"><div class="phead"><b>错题复盘与冲刺</b><span>上传错题/笔记 · 深度思考</span></div><p class="muted">把「我粗心」拆成具体归因，并转成可执行的一周计划</p><pre class="prompt">【角色】你是做错题归因的教研老师，能把「粗心」拆成知识缺口、审题习惯和计算失误。
+【背景】下面是我的错题或薄弱点，可能只有题号没有解析。
+【输入】{{problem}}
+【任务】
+1) 按错误类型归类：概念不清、审题偏差、方法选错、计算失误、时间不足；
+2) 每类给 1 个典型题和最少必要的补救动作；
+3) 生成 7 天冲刺计划：每天 1 个主攻点 + 1 个复习点；
+4) 给 3 道同类变式题的命题思路，不编原题。
+【约束】
+- 不编造真题、答案和分值，引用不确定处标注「待核实」；
+- 错因归类必须给出判断依据，不接受「多练就好」这种结论；
+- 计划总时长不超过我给出的可用时间。
+【输出格式】按「错因分布表 / 每类补救动作 / 7 天计划 / 变式命题思路」输出；分布表列名：错误类型 | 题数 | 占比 | 判断依据 | 补救动作。</pre><details><summary>为什么这样写</summary><p>把错题的原始题干、你的答案和正确答案一起贴，只说「我粗心」是复盘不出东西的。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%B0%B4%E5%B9%B3%E8%AF%8A%E6%96%AD%E4%B8%8E%E8%B7%AF%E5%BE%84#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

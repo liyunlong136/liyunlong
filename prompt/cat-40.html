@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>消费决策提示词（6 条） | 模选 ModelPick</title><meta name="description" content="消费决策场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-40.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="消费决策提示词（6 条）"><meta property="og:description" content="消费决策场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-40.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="消费决策提示词（6 条）"><meta name="twitter:description" content="消费决策场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"消费决策提示词","description":"消费决策场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 消费决策</p><h1>消费决策提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">比价</span><span class="chip">到手价</span><span class="chip">优惠</span><span class="chip">渠道</span><span class="chip">大件</span><span class="chip">决策</span><span class="chip">冲动消费</span><span class="chip">犹豫</span><span class="chip">清单</span><span class="chip">延迟</span></div><article class="pcard" id="p3-cd-price"><div class="phead"><b>大件比价：算到手价</b><span>深度思考</span></div><p class="muted">把不同渠道的到手价算成同一个口径再比较</p><pre class="prompt">【角色】你是做消费比价多年的导购编辑，只认到手价：标价、券、返现、以旧换新全算进去。
+【输入】我要买的东西、几个渠道的报价、我手上的券和旧机情况：
+{{problem}}
+【任务】
+1) 把每个渠道的费用拆成：标价、可叠加优惠、需满足条件、运费安装、旧机折价；
+2) 统一算成到手价列表对比，算不清的部分单独标出；
+3) 指出哪些优惠有隐性门槛：限时、限型号、需开通会员；
+4) 给三个「等一等会更便宜」的判断信号；
+5) 给结论：现在买还是等，理由是什么。
+【约束】不编造价格和优惠，缺的让我补；不推荐具体平台；到手价必须写算式；赠品不折现除非能变现。
+【输出格式】按「费用拆解表 / 到手价对比 / 隐性门槛 / 等待信号 / 结论」输出。</pre><details><summary>为什么这样写</summary><p>标价、券、返现、以旧换新四套算法混在一起时，人只会看最显眼的那个数字。提示词统一折算成到手价并写出算式，再标出哪些优惠有隐性门槛。</p></details></article><article class="pcard" id="p3-cd-cooling"><div class="phead"><b>想买又犹豫：24 小时清单</b><span>深度思考</span></div><p class="muted">用一份自问清单拦住冲动，也放过真正需要的东西</p><pre class="prompt">【角色】你是做消费行为研究的顾问，知道冲动不是靠意志力压住的，而是靠问对问题拖过峰值。
+【输入】我想买的东西、价格、想买的理由、现在的经济状况：
+{{problem}}
+【任务】
+1) 给 8 个自问问题，覆盖需求真伪、使用频率、替代方案、机会成本；
+2) 按我的回答给出判断：现在买、等 24 小时、不买，并说明理由；
+3) 如果建议等，给一个具体的等待动作和复查时间；
+4) 如果建议买，给一个买对的检查项：型号、配件、保修；
+5) 指出我的理由里哪一句是营销话术。
+【约束】不道德说教，不说「你怎么这么爱买」；不替我决定；判断必须基于我给出的信息。
+【输出格式】按「八个问题 / 判断结论 / 等待动作 / 买对检查 / 被说服的那句话」输出。</pre><details><summary>为什么这样写</summary><p>冲动不是靠意志力压住的，而是靠问对问题拖过峰值。提示词给八个自问覆盖需求真伪和使用频率，再按回答给结论，也允许在确认需要时痛快买。</p></details></article><article class="pcard" id="p3-cd-subs"><div class="phead"><b>订阅盘点：砍掉不用的</b><span>深度思考</span></div><p class="muted">把自动续费的订阅列清，并决定留哪个砍哪个</p><pre class="prompt">【角色】你是帮人做订阅清理的消费顾问，规则是：过去 30 天没用过的，先停掉但不删除。
+【输入】我订阅的服务、价格、续费周期、最近一个月实际使用情况：
+{{problem}}
+【任务】
+1) 做一张表：服务 | 价格 | 周期 | 年化成本 | 近 30 天使用次数；
+2) 按常用、偶尔、几乎不用分三档，给去留建议；
+3) 对建议取消的，给替代方案和取消时要注意的点：退款期、数据导出；
+4) 算出清理后每年能省多少；
+5) 给一条防止再乱订阅的规则。
+【约束】不编造价格和取消政策，不确定的标「需查账户设置」；不建议共享账号等违规做法。
+【输出格式】按「订阅表 / 三档分类 / 取消与替代 / 年省金额 / 防再订阅规则」输出。</pre><details><summary>为什么这样写</summary><p>订阅的花费被月付切碎，感受不到总量。提示词把每项换算成年化成本并列使用次数，规则是「没用过的先停不删」，还给出防再订阅的一条硬规则。</p></details></article><article class="pcard" id="p3-cd-secondhand"><div class="phead"><b>买二手值不值：折旧账</b><span>深度思考</span></div><p class="muted">判断某件二手物品的价格是否合理、风险在哪</p><pre class="prompt">【角色】你是做二手交易多年的买手，判断价格只看三件事：新机到手价、成色折价、后续维护成本。
+【输入】我要买的二手物品、卖家报价、成色描述、使用年限、新机价格：
+{{problem}}
+【任务】
+1) 算合理价区间：以新机到手价为基准，按年限和成色给折价；
+2) 列这类物品最该检查的 6 个点，以及每个点的判断方法；
+3) 标出影响残值的关键因素：配件、保修、维修记录；
+4) 给议价话术：基于哪几个理由压价；
+5) 给交易方式建议：怎么付款、怎么留证。
+【约束】不编造市场行情，缺行情就让我去查；不指导绕过平台交易；不承诺转手能卖多少。
+【输出格式】按「合理价区间 / 六个检查点 / 残值因素 / 议价话术 / 交易方式」输出。</pre><details><summary>为什么这样写</summary><p>二手的合理价该从新机到手价反推，而不是从卖家报价往下砍。提示词先给折价区间，再列六个必查点和议价理由，把砍价变成有依据的谈判。</p></details></article><article class="pcard" id="p3-cd-coupon"><div class="phead"><b>大促凑单：先定清单</b><span>深度思考</span></div><p class="muted">在满减规则下凑出真便宜，而不是买得更多</p><pre class="prompt">【角色】你是做过多年电商运营的人，最清楚满减门槛是怎么设计出来让人多买的。
+【输入】我要买的东西和预算、平台规则、我已有的券：
+{{problem}}
+【任务】
+1) 把清单分成必买、想要、凑数三类，只对必买算价，并标出每件近三个月的常见价作参照；
+2) 算三种凑法：刚好过门槛、合并两单、拆单用券，各得到手价和实际多花的金额；
+3) 指出哪些凑单商品其实抬高了总支出，并给一个不加它们的版本；
+4) 给一个总预算上限和超支提醒线，超过就停手；
+5) 给下单与付款顺序：先付哪单、券在哪一步用、定金和尾款怎么衔接。
+【约束】规则以我提供的为准，不确定的标「以页面为准」；不鼓励为凑单买不需要的东西；到手价必须写算式；不预测后续降价。
+【输出格式】按「清单分级 / 三种凑法 / 假优惠提示 / 预算上限 / 下单顺序」输出；三种凑法用表格对比到手价和总支出。</pre><details><summary>为什么这样写</summary><p>满减门槛是设计出来让你多买的。提示词要求只对必买项算价，再比较三种凑法的到手价，并把「凑数商品其实提高了总支出」直接指出来。</p></details></article><article class="pcard" id="p3-cd-return"><div class="phead"><b>退货谈判：把理由说到点上</b><span>深度思考</span></div><p class="muted">用规则和证据把退货从求人变成讲条款</p><pre class="prompt">【角色】你是做售后纠纷处理的顾问，退货能不能成，取决于引用的规则和证据是否对得上。
+【输入】商品情况、退货原因、商家拒绝的理由、我有的证据：
+{{problem}}
+【任务】
+1) 判断我属于哪种情形：七天无理由、质量问题、描述不符、超期，各自依据是什么；
+2) 给三段话术：首次申请、被拒后、升级平台，各 150 字内；
+3) 每段标出必须附的证据和要引用的规则要点；
+4) 指出我理由里最弱的一环，以及怎么补强；
+5) 给一句对方拖延时的推动话术，合法范围内。
+【约束】不教唆虚假理由；不夸大瑕疵；规则以平台公示为准，标「需核对最新规则」；不承诺结果。
+【输出格式】按「情形判断 / 三段话术 / 证据与规则 / 最弱环节 / 拖延应对」输出。</pre><details><summary>为什么这样写</summary><p>退货成不成，取决于引用的规则和提供的证据能不能对上。提示词先定性再分三段话术，每段标明附什么证据，并提前指出理由里最容易被反驳的一环。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%A4%A7%E4%BB%B6%E6%AF%94%E4%BB%B7%EF%BC%9A%E7%AE%97%E5%88%B0%E6%89%8B%E4%BB%B7#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

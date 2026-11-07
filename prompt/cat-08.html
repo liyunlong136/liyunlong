@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>产品经理提示词（6 条） | 模选 ModelPick</title><meta name="description" content="产品经理场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-08.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="产品经理提示词（6 条）"><meta property="og:description" content="产品经理场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-08.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="产品经理提示词（6 条）"><meta name="twitter:description" content="产品经理场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"产品经理提示词","description":"产品经理场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 产品经理</p><h1>产品经理提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">PRD</span><span class="chip">评审</span><span class="chip">需求</span><span class="chip">验收</span><span class="chip">异常流</span><span class="chip">范围</span><span class="chip">用户访谈</span><span class="chip">调研</span><span class="chip">提问</span><span class="chip">假设</span></div><article class="pcard" id="p1-pm-prd-review"><div class="phead"><b>PRD 评审：把模糊需求问到底</b><span>深度思考</span></div><p class="muted">在开发前把场景、边界和验收问清楚</p><pre class="prompt">【角色】你是评审过上千份需求的技术产品负责人，评审只问谁用、什么时候用、不做会怎样。
+【输入】需求描述、目标用户、业务背景、现有系统限制、期望上线时间：
+{{problem}}
+【任务】
+1) 用 5 个问题逼出真实场景：谁、在什么情况下、现在怎么解决、频率、不做的代价；
+2) 列出需求中的模糊词和未定义状态，各给一个必须回答的问题；
+3) 写清范围：做什么、不做什么、依赖什么；
+4) 给 3 条验收标准和 3 条异常流；
+5) 给上线前必须确认的 5 件事。
+【约束】不替业务方假设答案；不编造用户数据；不写「体验好」这类不可验收标准；缺失依赖标「待确认」；全文 800 字以内，不写「提升效率」这类空话。
+【输出格式】按「五问 / 模糊点 / 范围 / 验收与异常 / 上线确认」输出。</pre><details><summary>为什么这样写</summary><p>需求返工多半不是写得少，而是场景没问透。这条先用五问逼出真实场景，再列未定义状态和验收标准，把争议提前到评审桌上。</p></details></article><article class="pcard" id="p1-pm-interview"><div class="phead"><b>用户访谈：别问出假答案</b><span>深度思考</span></div><p class="muted">用过去的行为而不是未来的意愿做访谈</p><pre class="prompt">【角色】你是做过上百场用户访谈的研究员，原则是问过去的行为，不问未来的意愿。
+【输入】研究目标、目标用户、产品阶段、已有假设、访谈时长：
+{{problem}}
+【任务】
+1) 把研究目标转成 3 个可验证假设；
+2) 设计 10 个问题：开场、行为回顾、痛点、替代方案、收尾，标出禁问；
+3) 给 5 个追问句，用于挖具体场景和数字；
+4) 给一段开场说明和知情同意要点；
+5) 给访谈记录模板和 3 个避免引导的技巧。
+【约束】不问「你会不会用」「你觉得好不好」；不诱导答案；不编造用户画像；涉及隐私要说明用途；访谈不超过 45 分钟；不写「用户表示」这类虚构引语；全文 800 字以内。
+【输出格式】按「三个假设 / 问题清单 / 追问句 / 开场与同意 / 记录模板」输出。</pre><details><summary>为什么这样写</summary><p>访谈最容易被客气话带偏。这条把研究目标转成可验证假设，只问过去行为和替代方案，并给追问句与禁用问法，减少引导。</p></details></article><article class="pcard" id="p1-pm-priority"><div class="phead"><b>需求排序：RICE 之外</b><span>深度思考</span></div><p class="muted">在资源有限时做出能解释取舍的排序</p><pre class="prompt">【角色】你是带过 B 端与 C 端产品的产品总监，排序时先看战略匹配，再看分数。
+【输入】候选需求列表、各自预估价值与成本、当前季度目标、资源约束：
+{{problem}}
+【任务】
+1) 先用 3 个问题筛掉不该做的需求；
+2) 给评估维度：战略匹配、用户价值、收入影响、实现成本、风险，各定权重；
+3) 用矩阵打分排序，标出分数接近但结论不同的项；
+4) 给本季度做 3 个的最终建议和取舍理由；
+5) 给被砍需求的沟通说法。
+【约束】不编造价值与成本数据，缺失的给区间并标「估算」；不把所有需求都排成高优；结论要能解释为什么不选；全文 800 字以内，不写「综合评估」这类空话。
+【输出格式】按「三问筛选 / 维度与权重 / 排序矩阵 / 最终建议 / 砍需求说法」输出。</pre><details><summary>为什么这样写</summary><p>排序争议往往不是公式不对，而是权重和战略没对齐。这条先三问筛掉不该做的，再用多维权重打分，并要求解释为什么不选。</p></details></article><article class="pcard" id="p1-pm-metrics"><div class="phead"><b>北极星指标拆解</b><span>深度思考</span></div><p class="muted">把一句战略拆成团队每天能影响的指标</p><pre class="prompt">【角色】你是给多家公司搭过指标体系的增长产品经理，原则是一个北极星、三层拆解、每层可干预。
+【输入】业务模式、当前阶段、核心价值、已有指标、团队能影响的动作：
+{{problem}}
+【任务】
+1) 给 3 个北极星候选，各写清它衡量什么、会误导什么；
+2) 选一个并拆成 3 层：结果指标、过程指标、护栏指标；
+3) 给每个指标写公式、口径、数据来源、更新频率；
+4) 标出 3 个容易被刷的指标及防刷方式；
+5) 给一个周度看板结构。
+【约束】不编造现有数据；指标必须能被团队动作影响；不选无法取数的指标；口径写清时间窗与去重规则；全文 800 字以内，不写「数据驱动」这类空话。
+【输出格式】按「三个候选 / 拆解树 / 指标定义 / 易刷指标 / 看板结构」输出，定义用表格。</pre><details><summary>为什么这样写</summary><p>指标体系做坏，通常是北极星选得不可干预，或口径天天变。这条给三个候选和误导风险，再拆三层并锁公式、口径与更新频率。</p></details></article><article class="pcard" id="p1-pm-launch"><div class="phead"><b>上线检查清单：别在当天翻车</b><span>深度思考</span></div><p class="muted">用七天检查和灰度方案把上线风险压住</p><pre class="prompt">【角色】你是负责过多次大版本上线的产品负责人，原则是上线前一周冻结范围。
+【输入】功能范围、上线时间、影响用户、依赖团队、回滚方案现状：
+{{problem}}
+【任务】
+1) 列上线前 7 天的检查项：功能、数据、权限、文案、埋点、客服、法务、监控；
+2) 给灰度方案：比例、观察指标、放量条件、回滚触发线；
+3) 给上线当天时间表和值班分工；
+4) 给 3 个最可能出问题的点及预案；
+5) 给上线后 72 小时的观察指标和复盘时间。
+【约束】不编造依赖方排期；每个检查项要有负责人和完成标准；回滚方案必须可执行；不省略客服与法务；全文 900 字以内，不写「确保稳定」这类空话。
+【输出格式】按「七天检查 / 灰度方案 / 当天时间表 / 风险预案 / 72 小时观察」输出，检查项用表格。</pre><details><summary>为什么这样写</summary><p>上线事故多半在客服、权限、埋点这些非功能项。这条按七天倒排检查，给灰度比例、放量条件和回滚触发线，避免当天拍脑袋。</p></details></article><article class="pcard" id="p1-pm-teardown"><div class="phead"><b>竞品体验地图：按任务走一遍</b><span>深度思考</span></div><p class="muted">带着任务走完竞品流程，找出结构与体验差距</p><pre class="prompt">【角色】你是做竞品体验拆解的产品经理，方法是带着任务走完整流程，记录卡点。
+【输入】竞品名称、要完成的核心任务、我的产品、目标用户：
+{{problem}}
+【任务】
+1) 定义 3 个用户任务和完成标准；
+2) 按发现、进入、完成、复用记录每一步：操作、耗时、提示、卡点；
+3) 给体验评分：可用性、信息清晰度、效率、容错，各 1 到 5 分并给依据；
+4) 找 3 个它做得比我们好的点，和 3 个它结构上难改的点；
+5) 给 2 个可借鉴的设计和 1 个不要抄的设计。
+【约束】只写实际观察，不凭印象；不编造竞品功能；区分设计选择与 bug；不贬低竞品；全文 800 字以内，不写「体验丝滑」这类空话。
+【输出格式】按「任务定义 / 流程记录 / 评分 / 好坏对比 / 借鉴与不抄」输出。</pre><details><summary>为什么这样写</summary><p>竞品分析容易变成功能清单。这条要求先定义任务和完成标准，再逐步记录卡点与耗时，最后区分可借鉴与结构上难改的部分。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=PRD%20%E8%AF%84%E5%AE%A1%EF%BC%9A%E6%8A%8A%E6%A8%A1%E7%B3%8A%E9%9C%80%E6%B1%82%E9%97%AE%E5%88%B0%E5%BA%95#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

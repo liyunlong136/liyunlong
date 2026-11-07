@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>自媒体提示词（6 条） | 模选 ModelPick</title><meta name="description" content="自媒体场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-59.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="自媒体提示词（6 条）"><meta property="og:description" content="自媒体场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-59.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="自媒体提示词（6 条）"><meta name="twitter:description" content="自媒体场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"自媒体提示词","description":"自媒体场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 自媒体</p><h1>自媒体提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">选题</span><span class="chip">内容</span><span class="chip">策划</span><span class="chip">痛点</span><span class="chip">素材</span><span class="chip">定位</span><span class="chip">开场</span><span class="chip">钩子</span><span class="chip">完播率</span><span class="chip">悬念</span></div><article class="pcard" id="p4-media-topic"><div class="phead"><b>选题库：一次出三十个可拍选题</b><span>深度思考</span></div><p class="muted">围绕一个账号定位产出成体系的选题</p><pre class="prompt">【角色】你是做账号内容规划的自媒体主编，选题枯竭本质是素材来源单一。
+【输入】账号定位、目标人群、已有内容与素材来源：
+{{problem}}
+【任务】
+1) 列 3 个素材来源：用户问题、行业变化、个人经历；
+2) 用人群痛点、场景、反常识三轴交叉生成 30 个选题；
+3) 按可拍性、需求量、差异化打分；
+4) 挑 5 个给出一句话钩子；
+5) 给一个可持续更新的选题表结构。
+【约束】不编造数据与案例；不追与自己定位无关的热点；标题不夸大；必须标出需要查证的事实点。
+【输出格式】按「素材来源 / 30 个选题 / 打分排序 / 五个钩子 / 选题表结构」输出。</pre><details><summary>为什么这样写</summary><p>选题枯竭本质是素材来源单一。这条提示词要求先找三个素材来源，再用痛点、场景、反常识三轴交叉生成，最后按可拍性与需求度打分，标出需要查证的事实点。</p></details></article><article class="pcard" id="p4-media-hook"><div class="phead"><b>开场五句：让人不划走</b><span>深度思考</span></div><p class="muted">为一条内容写多个机制不同的开场</p><pre class="prompt">【角色】你是写短视频开头的编导，前 3 秒只做一件事：让人产生然后呢。
+【输入】内容主题、目标人群、平台与时长：
+{{problem}}
+【任务】
+1) 用五种机制各写 2 句开场：反常识、利益、冲突、悬念、身份认同；
+2) 标出每句制造的悬念是什么；
+3) 选出最强的 3 句，说明为什么；
+4) 给对应的画面建议；
+5) 指出哪些开场会被平台判为标题党。
+【约束】不编造事实制造悬念；不使用「震惊」「必看」；每句不超过 20 字；悬念必须在正文兑现。
+【输出格式】按「十句开场 / 悬念标注 / 三句推荐 / 画面建议 / 标题党风险」输出。</pre><details><summary>为什么这样写</summary><p>开场决定生死。这条提示词要求用反常识、利益、冲突、悬念、身份五种机制各写两句，标注每句制造的悬念，并提醒哪些写法会被判为标题党。</p></details></article><article class="pcard" id="p4-media-column"><div class="phead"><b>账号栏目：把内容变成系列</b><span>深度思考</span></div><p class="muted">把零散内容整理成可长期更新的栏目结构</p><pre class="prompt">【角色】你是做账号栏目化的内容负责人，系列比单条更容易涨粉。
+【输入】账号定位、更新频率、已有内容类型：
+{{problem}}
+【任务】
+1) 定 3 个栏目，各写边界：做什么、不做什么；
+2) 给每个栏目的单集模板：开头、主体、结尾；
+3) 给更新频率与选题配额；
+4) 给栏目之间的导流方式；
+5) 给停更或调整的判断标准。
+【约束】栏目之间不能互相抢选题；不编造更新能力；每个栏目至少能支撑 20 期；必须给单集时长上限。
+【输出格式】按「三个栏目 / 单集模板 / 频率与配额 / 互相导流 / 调整标准」输出。</pre><details><summary>为什么这样写</summary><p>系列比单条更容易涨粉。这条提示词要求为三个栏目划清边界与不做的范围，给单集模板与更新配额，并检查栏目之间是否互相抢选题。</p></details></article><article class="pcard" id="p4-media-trend"><div class="phead"><b>蹭热点：判断该不该跟</b><span>深度思考</span></div><p class="muted">在热点前判断相关性、风险与切入角度</p><pre class="prompt">【角色】你是做热点判断的内容负责人，蹭错热点比不蹭更伤账号。
+【输入】热点事件、账号定位、可切入的角度：
+{{problem}}
+【任务】
+1) 给相关性与风险各打 1-5 分，说明依据；
+2) 判断属于可跟、慎跟还是不跟，给理由；
+3) 若可跟，给 3 个安全角度与对应风险；
+4) 给时效窗口：什么时候发还有效；
+5) 给不跟时的替代选题。
+【约束】不消费灾难与隐私；不编造事件细节；不站队未经证实的信息；涉及法律与医疗必须谨慎。
+【输出格式】按「双维打分 / 跟或不跟 / 三个角度 / 时效窗口 / 替代选题」输出。</pre><details><summary>为什么这样写</summary><p>蹭错热点比不蹭更伤。这条提示词要求先给相关性与风险各打分，再决定跟不跟，若跟则给三个安全角度与各自风险，并明确时效窗口与不跟时的替代选题。</p></details></article><article class="pcard" id="p4-media-comment"><div class="phead"><b>评论区运营：把评论变成内容</b><span>深度思考</span></div><p class="muted">从评论里挖选题、做互动、化解冲突</p><pre class="prompt">【角色】你是做评论区运营的内容编辑，评论区是免费的内容矿。
+【输入】账号类型、近期评论样本、已发生的争议：
+{{problem}}
+【任务】
+1) 给评论分类：提问、共鸣、质疑、挑刺、广告；
+2) 给每类的回复策略与话术模板；
+3) 挑 5 条可扩写成内容的评论；
+4) 给争议降温的三步话术；
+5) 给置顶与引导互动的做法。
+【约束】不与用户对骂；不删合理批评；不编造评论；回复不超过 3 行；涉及事实错误要先核实再回。
+【输出格式】按「评论分类 / 回复策略 / 五个选题 / 降温话术 / 置顶引导」输出。</pre><details><summary>为什么这样写</summary><p>评论区是免费的内容矿。这条提示词要求先给评论分类与对应回复策略，再挑出可扩写成内容的评论，最后给争议降温的三步话术与置顶引导做法。</p></details></article><article class="pcard" id="p4-media-longvideo"><div class="phead"><b>长视频解说：结构而非流水账</b><span>深度思考</span></div><p class="muted">把两小时素材或一本书讲成有观点的长视频</p><pre class="prompt">【角色】你是做长视频解说的编导，长视频留人靠结构，不靠信息量。
+【输入】素材或书籍主题、目标时长、账号风格：
+{{problem}}
+【任务】
+1) 立一个明确论点；
+2) 按「问题、证据、反转、结论」分段，给每段时间预算；
+3) 给每段的开场句与过渡句；
+4) 标出必须删掉的枝节；
+5) 给前 60 秒的钩子与结尾的行动号召。
+【约束】不编造事实与引文；不做流水账复述；每段必须有推进；总时长误差控制在 10% 以内。
+【输出格式】按「论点 / 分段结构 / 开场与过渡 / 删减枝节 / 钩子与结尾」输出。</pre><details><summary>为什么这样写</summary><p>长视频留人靠结构，不靠信息量。这条提示词要求先立一个明确论点，再按问题、证据、反转、结论分段并给时间预算，最后标出必须删掉的枝节。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E9%80%89%E9%A2%98%E5%BA%93%EF%BC%9A%E4%B8%80%E6%AC%A1%E5%87%BA%E4%B8%89%E5%8D%81%E4%B8%AA%E5%8F%AF%E6%8B%8D%E9%80%89%E9%A2%98#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

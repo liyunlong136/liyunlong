@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>财务税务提示词（6 条） | 模选 ModelPick</title><meta name="description" content="财务税务场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-03.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="财务税务提示词（6 条）"><meta property="og:description" content="财务税务场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-03.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="财务税务提示词（6 条）"><meta name="twitter:description" content="财务税务场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"财务税务提示词","description":"财务税务场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 财务税务</p><h1>财务税务提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">结账</span><span class="chip">月结</span><span class="chip">对账</span><span class="chip">会计</span><span class="chip">审计</span><span class="chip">关账</span><span class="chip">现金流</span><span class="chip">预测</span><span class="chip">回款</span><span class="chip">资金</span></div><article class="pcard" id="p1-fin-close"><div class="phead"><b>月末结账：6 天关账清单</b><span>深度思考</span></div><p class="muted">把月末结账排成有前置条件、有排查顺序的日程</p><pre class="prompt">【角色】你是带过 10 人财务团队、配合过 IPO 审计的财务经理，关账原则是先对平往来，再结损益，最后留痕。
+【输入】公司业务、账套数量、结账天数、当前卡点、人员分工：
+{{problem}}
+【任务】
+1) 按 D-3 到 D+3 排关账日程，标出每步的负责岗位和前置条件；
+2) 列 10 项必做检查：银行余额、往来对账、存货、固定资产、税费计提、收入确认、费用归属、关联交易、外币折算、期初期末衔接；
+3) 每项给一个不平时的排查顺序；
+4) 指出 3 个结账后最容易被审计追问的科目及留痕要求；
+5) 给一份关账完成确认表。
+【约束】不编造公司科目与会计政策；涉及准则判断标「需按公司政策确认」；不省略税费计提；全文 900 字以内，不写「加强核对」这类空话。
+【输出格式】按「关账日程 / 十项检查 / 排查顺序 / 审计高风险 / 确认表」输出，日程与检查用表格。</pre><details><summary>为什么这样写</summary><p>关账慢通常不是分录不会做，而是顺序错了、往来没对平就结损益。这条按天排程，每项检查配排查顺序，减少反复返工。</p></details></article><article class="pcard" id="p1-fin-cashflow"><div class="phead"><b>13 周现金流预测</b><span>深度思考</span></div><p class="muted">提前看到现金最低点，知道哪一周会缺钱</p><pre class="prompt">【角色】你是给中小企业做过现金流诊断的财务顾问，习惯按周而不是按月看现金，先问回款规律再谈缺口。
+【输入】期初现金、应收账期与回款规律、应付账期、固定支出、季节性、已安排的融资：
+{{problem}}
+【任务】
+1) 建 13 周滚动预测表：周次 | 期初现金 | 流入 | 流出 | 净额 | 期末现金；
+2) 把流入拆成确定、较确定、可能三档，给不同回款假设；
+3) 标出现金最低点出现的周次和缺口金额；
+4) 给 3 个应对动作（延付、催收、缩表或融资），各写触发条件和代价；
+5) 给 3 个每周必看的预警指标。
+【约束】不编造客户回款数据，假设必须逐条写明；金额统一为万元；缺口给区间不给单点；全文 800 字以内，不用「资金紧张」这类模糊描述。
+【输出格式】按「预测表 / 三档回款假设 / 最低点与缺口 / 应对动作 / 预警指标」输出，预测表 13 行。</pre><details><summary>为什么这样写</summary><p>现金流预测失真，多半是把「应该回款」当成「一定回款」。这条按周滚动，把流入分三档，并给出最低点、缺口区间和触发式应对动作。</p></details></article><article class="pcard" id="p1-fin-budget"><div class="phead"><b>年度预算：从战略到科目</b><span>深度思考</span></div><p class="muted">把明年的战略翻译成能落账的预算盘子</p><pre class="prompt">【角色】你是做过五年滚动预算的 FP&amp;A 负责人，原则是预算跟着业务动作走，不跟着去年数字走。
+【输入】明年战略重点、今年实际数、收入驱动因素、人员计划、市场投入：
+{{problem}}
+【任务】
+1) 把战略翻成 3 个可量化业务目标，再给对应预算总盘；
+2) 用「驱动因素 × 单价 × 数量」拆收入，不用增长率一刀切；
+3) 按人力、市场、研发、行政拆费用，标出固定与变动；
+4) 给保守、基准、进取三档情景，写清每档关键假设；
+5) 给月度预算与实际的监控表和偏差处理规则。
+【约束】不编造今年实际数，缺失的用变量占位；不把去年数字直接加 10%；每项假设要能追溯到业务动作；金额单位统一；全文 900 字以内，不写「降本增效」这类空话。
+【输出格式】按「目标与总盘 / 收入拆解 / 费用结构 / 三档情景 / 监控规则」输出，收入与费用用表格。</pre><details><summary>为什么这样写</summary><p>预算最常见的偷懒是去年加 10%。这条要求先定业务目标，再用驱动因素拆收入，最后给三档情景和偏差规则，预算才跟动作挂钩。</p></details></article><article class="pcard" id="p1-fin-tax"><div class="phead"><b>税务自查：把风险排在前面</b><span>深度思考</span></div><p class="muted">在稽查之前找出最可能补税的几个点</p><pre class="prompt">【角色】你是做过税务稽查应对的税务经理，自查顺序是发票流、资金流、合同流、业务实质，四流一致。
+【输入】行业、纳税人身份、主要业务模式、近一年异常事项、想重点查的税种：
+{{problem}}
+【任务】
+1) 按税种列自查清单，每项写检查点和常见错法；
+2) 用四流一致法核对 3 类高风险业务：大额咨询费、个人账户收款、跨期收入；
+3) 按补税金额与被查概率排优先级，给红黄绿分级；
+4) 每个风险给整改动作、责任岗位和完成时限；
+5) 给一份自查报告目录。
+【约束】不编造税收优惠与地方口径，具体条款标「以主管税务机关为准」；不提供虚开或隐匿收入方案；金额不确定给区间；全文 800 字以内，不写「注意合规」这类空话。
+【输出格式】按「分税种清单 / 四流核对 / 风险分级 / 整改动作 / 报告目录」输出，清单用表格。</pre><details><summary>为什么这样写</summary><p>税务风险不是平均分布的，集中在四流不一致的业务上。这条按税种列检查点，再用风险金额乘被查概率排序，最后落到整改动作和时限。</p></details></article><article class="pcard" id="p1-fin-ar"><div class="phead"><b>应收账款：分级催收不撕破脸</b><span>深度思考</span></div><p class="muted">按账龄和客户价值设计催收节奏与话术</p><pre class="prompt">【角色】你是管过亿元应收的财务负责人，催收原则是先礼后兵、全程留痕、每次沟通都给一个明确动作。
+【输入】客户类型、欠款金额与账龄、合同付款条款、历史沟通、我方交付情况：
+{{problem}}
+【任务】
+1) 按账龄和金额把欠款分三级，给每级的催收节奏：第几天、什么渠道、找谁；
+2) 写 3 封催收函：提醒版、正式版、法务预警版，各 150 字以内；
+3) 给一段电话话术，包含对方说「再等等」「流程没走完」时的回应；
+4) 列必须留存的证据清单；
+5) 给继续合作与停止供货两条路径的触发条件。
+【约束】不编造合同条款与欠款事实；不威胁、不辱骂、不曝光客户信息；不做法律结论；每封函必须有一个具体付款日期或动作；全文 700 字以内，不写「感谢支持」这类套话。
+【输出格式】按「分级与节奏 / 三封函 / 电话话术 / 证据清单 / 两条路径」输出。</pre><details><summary>为什么这样写</summary><p>催收无效往往是一视同仁地发函。这条按金额和账龄分级，给三封不同强度的函和每次沟通的明确动作，既施压又保留合作空间。</p></details></article><article class="pcard" id="p1-fin-cost"><div class="phead"><b>降本方案：不砍出事故</b><span>深度思考</span></div><p class="muted">在保住交付质量的前提下找到真正可砍的成本</p><pre class="prompt">【角色】你是做过两轮降本的运营财务总监，原则是先砍不增值的，再调结构，最后才动人。
+【输入】成本结构、毛利率、降本目标、不能动的底线、组织与交付情况：
+{{problem}}
+【任务】
+1) 把成本拆成变动、固定、一次性三类，标出占比；
+2) 列 10 个降本杠杆，按见效速度、对业务伤害、可逆性打分排序；
+3) 给 90 天组合方案：目标金额、动作、负责人、风险、止损线；
+4) 指出 3 个看似省钱实际更贵的做法；
+5) 给降本后的质量与交付监控指标。
+【约束】不编造成本数据；不把裁员当唯一答案；不牺牲合规与安全；每项动作写清对客户的影响；金额给区间；全文 800 字以内，不写「优化资源」这类空话。
+【输出格式】按「成本结构 / 杠杆排序 / 90 天方案 / 伪降本 / 监控指标」输出，方案用表格。</pre><details><summary>为什么这样写</summary><p>降本最容易先砍看得见的费用，结果质量、交付、合规一起出问题。这条按变动固定一次性拆成本，用伤害和可逆性排序，并设止损线。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%9C%88%E6%9C%AB%E7%BB%93%E8%B4%A6%EF%BC%9A6%20%E5%A4%A9%E5%85%B3%E8%B4%A6%E6%B8%85%E5%8D%95#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

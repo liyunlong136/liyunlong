@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>职场效率提示词（5 条） | 模选 ModelPick</title><meta name="description" content="职场效率场景的结构化提示词合集，共 5 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-77.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="职场效率提示词（5 条）"><meta property="og:description" content="职场效率场景的结构化提示词合集，共 5 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-77.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="职场效率提示词（5 条）"><meta name="twitter:description" content="职场效率场景的结构化提示词合集，共 5 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"职场效率提示词","description":"职场效率场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 职场效率</p><h1>职场效率提示词</h1><p class="lead">5 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">会议</span><span class="chip">纪要</span><span class="chip">待办</span><span class="chip">周会</span><span class="chip">复盘</span><span class="chip">录音</span><span class="chip">邮件</span><span class="chip">道歉</span><span class="chip">催进度</span><span class="chip">拒绝</span></div><article class="pcard" id="meeting-minutes"><div class="phead"><b>会议纪要：结论、待办与分歧</b><span>上传文件 · 深度思考</span></div><p class="muted">把零散记录或录音转写变成能直接发群的纪要</p><pre class="prompt">【角色】你是做了 10 年会议记录的总经理助理，最擅长把两小时的讨论压成一页纸。
+【输入】下面是我的会议记录或录音转写，可能杂乱、有口语和重复：
+{{problem}}
+【任务】
+1) 用 3 句话概括会议解决了什么、没解决什么；
+2) 提取「已达成结论」，每条注明依据（谁在什么上下文说的）；
+3) 提取「待办」，用表格列出：事项 | 负责人 | 截止时间 | 验收标准 | 依赖；
+4) 单独列出「分歧与未决」，写清双方观点和下一次需要谁拍板。
+【约束】记录里没出现的负责人和时间写「待确认」，不要编造；不要把讨论过程当结论；口语化内容要转成书面语。
+【输出格式】按「三句话总结 / 已达成结论 / 待办表 / 分歧与未决」四节输出；待办表最多 10 行。</pre><details><summary>为什么这样写</summary><p>会议要求「可执行」而不是「完整」。这条提示词强制把内容分成结论、待办、分歧三栏，并给每条待办补负责人和截止时间，避免写成流水账。</p></details></article><article class="pcard" id="email-comm"><div class="phead"><b>难写的邮件：道歉、催进度、拒绝</b><span>深度思考</span></div><p class="muted">把尴尬或高风险的沟通写成得体、能推进事情的邮件</p><pre class="prompt">【角色】你是带过 20 人团队、常年和甲方打交道的客户负责人，写邮件的基本原则是「先接住情绪，再给事实，最后给选项」。
+【输入】我要处理的沟通是：
+{{problem}}
+【任务】
+1) 先用一句话写出这封邮件必须达成的目标和绝不能退让的底线；
+2) 写三个版本：稳妥版（保关系）、直接版（保效率）、折中版（给台阶），每版 150-250 字；
+3) 每版标注适合的收件人类型和可能的风险；
+4) 给出一句「如果对方继续施压」的回应话术。
+【约束】不编造事实、承诺和时间点；不写「感谢理解」「深表歉意」这类空话；不用感叹号；不替我做法律或赔付承诺。
+【输出格式】按「目标与底线 / 三个版本 / 适用对象与风险 / 施压回应」输出；三个版本分别用二级标题。</pre><details><summary>为什么这样写</summary><p>这类邮件真正的难点是「关系」与「边界」的平衡。提示词先定立场和底线，再让模型写三个版本，最后按对象挑选，避免一上来就写成套话。</p></details></article><article class="pcard" id="okr-weekly"><div class="phead"><b>OKR 与周报：把苦劳写成功劳</b><span>深度思考</span></div><p class="muted">把一周的琐碎工作整理成有结果、有判断的汇报</p><pre class="prompt">【角色】你是擅长向上管理的团队负责人，写周报只写三件事：结果、判断、下一步。
+【输入】这是我这一周做的事，可能很杂：
+{{problem}}
+【任务】
+1) 按「目标」归类，不要按时间罗列；
+2) 每条写：结果（可量化）→ 关键动作 → 我的判断；
+3) 区分「已完成 / 有进展 / 卡住」，卡住的写清需要谁支持；
+4) 下周只列 3 件最重要的事，并给出验收标准。
+【约束】没有数字就写「暂无量化」，不要编数据；不写「持续推进」「积极配合」；不把苦劳当结果；总字数 600 以内。
+【输出格式】按「本周结果 / 关键判断 / 卡点与需要 / 下周三件事」输出；结果部分用表格：目标 | 结果 | 关键动作 | 状态。</pre><details><summary>为什么这样写</summary><p>周报最容易写成任务清单。提示词要求「结果先行 + 数字 + 判断」，并强制区分「做完了」和「有进展」，让上级一眼看到价值。</p></details></article><article class="pcard" id="postmortem"><div class="phead"><b>复盘：把事故变成资产</b><span>深度思考</span></div><p class="muted">不追责地还原事实、找根因、给出防再发动作</p><pre class="prompt">【角色】你是主持过多次无责复盘的 SRE 负责人，规则是：先还原时间线，再找系统性原因，最后只留能验证的动作。
+【输入】这次事故/项目的经过：
+{{problem}}
+【任务】
+1) 按时间线还原事实（只写发生了什么，不写评价）；
+2) 用「5 Why」找 2-3 条系统性根因，区分直接原因与深层原因；
+3) 列出做得好的地方（要具体，不要客套）；
+4) 给出防再发动作：动作 | 负责人 | 截止时间 | 如何验证有效；
+5) 指出哪些「动作」其实只是安慰剂。
+【约束】不点名追责、不写「加强意识」这类无法验证的动作；事实与推测分开标注；不编造时间点和数据。
+【输出格式】按「时间线 / 根因 / 做得好 / 防再发动作 / 安慰剂动作」输出；动作表不超过 6 行。</pre><details><summary>为什么这样写</summary><p>复盘最容易变成甩锅或写检查。提示词把「事实、根因、动作」分开，并要求每个动作有负责人和验证方式，才能真的防再发。</p></details></article><article class="pcard" id="resume-rewrite"><div class="phead"><b>简历改写：让经历变成证据</b><span>深度思考</span></div><p class="muted">把「负责什么」改写成「做成了什么」</p><pre class="prompt">【角色】你是帮人改过 500 份简历的求职顾问，判断标准只有一条：能不能让 HR 在 10 秒内看到「你做成过什么」。
+【输入】目标岗位 JD 和我的简历原文：
+{{problem}}
+【任务】
+1) 先从 JD 提取 8 个关键词，标出我简历里已覆盖/缺失的；
+2) 逐条改写经历：动词 + 方法 + 结果（尽量带数字），每条不超过 2 行；
+3) 标出「无法量化」和「需要补证据」的地方；
+4) 给一个 3 行的个人简介；
+5) 指出最该删的 3 条内容。
+【约束】不编造数字、项目和头衔；不堆砌形容词；不写「负责」「参与」；缺失数据用「待补」标注。
+【输出格式】按「JD 关键词对照 / 改写后的经历 / 待补证据 / 个人简介 / 建议删除」输出。</pre><details><summary>为什么这样写</summary><p>简历的每一行都应该是「动作 + 方法 + 结果」。提示词要求先提取目标岗位关键词，再逐条改写，并标出无法量化、需要补证据的地方。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%BC%9A%E8%AE%AE%E7%BA%AA%E8%A6%81%EF%BC%9A%E7%BB%93%E8%AE%BA%E3%80%81%E5%BE%85%E5%8A%9E%E4%B8%8E%E5%88%86%E6%AD%A7#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

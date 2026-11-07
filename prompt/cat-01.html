@@ -1,0 +1,119 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>数据分析提示词（11 条） | 模选 ModelPick</title><meta name="description" content="数据分析场景的结构化提示词合集，共 11 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-01.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="数据分析提示词（11 条）"><meta property="og:description" content="数据分析场景的结构化提示词合集，共 11 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-01.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="数据分析提示词（11 条）"><meta name="twitter:description" content="数据分析场景的结构化提示词合集，共 11 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"数据分析提示词","description":"数据分析场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 数据分析</p><h1>数据分析提示词</h1><p class="lead">11 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">数据</span><span class="chip">分析</span><span class="chip">sql</span><span class="chip">excel</span><span class="chip">报表</span><span class="chip">图表</span><span class="chip">解读</span><span class="chip">趋势</span><span class="chip">异常</span><span class="chip">漏斗</span></div><article class="pcard" id="data-quality"><div class="phead"><b>数据质量体检</b><span>上传数据 · 深度思考</span></div><p class="muted">在建模之前查清缺失、异常与口径，避免把脏数据当业务信号</p><pre class="prompt">【角色】你是做过 8 年埋点与数仓治理的数据分析师，坚持任何建模前先做数据体检。
+【背景】下面是我的数据说明或样本，字段含义与采集口径可能不完整。
+【输入】{{problem}}
+【任务】
+1) 列出字段清单，标注类型、含义、是否可能缺失、是否为派生指标；
+2) 设计缺失值检查：缺失率、缺失是否随机、缺失与目标变量的关系；
+3) 设计异常值检查：业务合理区间、分位数分布、时间维度上的突变；
+4) 给出清洗建议：哪些行该删、哪些该补、哪些必须回溯上游修口径。
+【约束】
+- 不得假设未给出的字段含义，定义缺失处写「待确认」；
+- 任何统计量都给出口径与计算公式，不编造具体数值；
+- 清洗动作必须可回滚，并说明对样本量的影响。
+【输出格式】按「字段清单表 / 缺失值检查方案 / 异常值检查方案 / 清洗建议」输出；字段表列名：字段 | 类型 | 业务含义 | 缺失风险 | 处理建议；检查方案各配一段可直接执行的 pandas 或 SQL 代码。</pre><details><summary>为什么这样写</summary><p>先给字段含义、时间范围和采集方式，否则缺失值和异常值会被误读成真实的业务变化。</p></details></article><article class="pcard" id="data-eda"><div class="phead"><b>探索分析与洞察</b><span>上传数据 · 深度思考</span></div><p class="muted">从数据里找出能改变决策的结论，而不是画一百张图</p><pre class="prompt">【角色】你是给业务方讲过早会的数据分析师，只讲能改变决策的结论。
+【背景】下面是我的业务问题与数据结构，指标口径可能同时存在好几套。
+【输入】{{problem}}
+【任务】
+1) 先确认分析口径：分子分母、时间窗、去重逻辑、对比基准；
+2) 按「整体趋势 → 分群差异 → 相关性 → 因果可能性」四层推进；
+3) 每个发现都写清「能说明什么、不能说明什么」；
+4) 给出 3 条可执行建议，按预期影响与验证成本排序。
+【约束】
+- 不编造数值结果，未给数据时只给分析方案与伪代码并标注「待数据验证」，口径不确定处标注「待核实」；
+- 相关不等于因果，任何因果表述必须标注证据等级；
+- 分群维度超过 3 个时必须提示多重比较风险。
+【输出格式】按「口径确认 / 关键发现（每条不超过 80 字）/ 建议表 / 需要补的数据」输出；建议表列名：建议 | 依据 | 预期影响 | 验证方式 | 成本(低/中/高)。</pre><details><summary>为什么这样写</summary><p>先声明要回答的业务问题和决策场景，否则探索性分析会变成没人看的图表集。</p></details></article><article class="pcard" id="data-sql"><div class="phead"><b>取数与指标口径</b><span>上传表结构 · 深度思考</span></div><p class="muted">把模糊的业务口径翻译成不会重复计数的查询</p><pre class="prompt">【角色】你是写了 6 年数仓 SQL 的分析工程师，最擅长把模糊口径翻译成不会重复计数的查询。
+【背景】下面是我的取数需求与表结构，字段含义可能不准确。
+【输入】{{problem}}
+【任务】
+1) 先用一句话把指标口径写成可计算的表达式：分子、分母、去重键、时间窗；
+2) 给出 SQL：先 CTE 分步，再聚合，避免多层嵌套；
+3) 说明每一步的粒度变化与可能的重复计数点；
+4) 给 2 条口径校验查询，用来判断结果是否合理。
+【约束】
+- 不编造表名、字段名和函数方言，未给出的写「待确认」，方言不确定时按标准 SQL 写并标注「待核实」；
+- 涉及时间窗必须说明时区与闭开区间；
+- 不得使用 SELECT *，不得用 DISTINCT 在没有说明的情况下掩盖重复。
+【输出格式】输出「口径定义 / SQL（分步注释）/ 粒度与重复风险 / 校验查询」四部分；SQL 控制在 80 行以内，关键行加中文注释。</pre><details><summary>为什么这样写</summary><p>把表结构、主键、数据量和口径定义贴全，SQL 才不会在小表上对、在大表上错。</p></details></article><article class="pcard" id="data-experiment"><div class="phead"><b>指标异动与 A/B 实验</b><span>上传数据 · 深度思考</span></div><p class="muted">区分统计显著与业务显著，判断结论能不能拿来决策</p><pre class="prompt">【角色】你是做了 5 年增长实验的因果推断分析师，审过大量「显著但不可信」的实验结论。
+【背景】下面是我的指标变化或实验设计，可能混入了同期其他改动。
+【输入】{{problem}}
+【任务】
+1) 判断这个结论是否具备因果解释条件，列出混杂与选择偏倚；
+2) 检查设计：随机化单位、样本量、功效、新坑效应、同期干扰；
+3) 给出分析方案：主指标、护栏指标、分层分析与多重比较校正；
+4) 明确结论等级：可上线 / 需延长观察 / 不可下结论，并说明理由。
+【约束】
+- 不编造 p 值、置信区间和提升幅度，缺原始数据时给公式与所需参数并标注「待核实」；
+- 统计显著必须与业务显著分开讨论；
+- 未做分层分析前，不得把整体提升归因于单一改动。
+【输出格式】按「因果性判断 / 设计检查表 / 分析方案 / 结论等级」输出；设计检查表列名：检查项 | 现状 | 风险 | 建议动作；结论等级必须三选一。</pre><details><summary>为什么这样写</summary><p>把实验分组方式、样本量、观察周期和同期其他变更一起给出，否则归因基本靠猜。</p></details></article><article class="pcard" id="chart-reading"><div class="phead"><b>图表解读：先问口径，再谈结论</b><span>视觉输入 · 深度思考</span></div><p class="muted">从一张图/一张表里读出趋势、异常和不能下的结论</p><pre class="prompt">【角色】你是给管理层读报表的数据分析师，习惯先确认口径，再给结论，最后说清「不能证明什么」。
+【输入】图表/表格内容或截图说明：
+{{problem}}
+【任务】
+1) 先复述图表要素：横纵轴、单位、时间范围、样本量、口径；缺失的标「待确认」；
+2) 用 3 条读出主要趋势，每条给数字支撑；
+3) 指出 2 个异常点，并给可能的解释（区分数据问题与业务问题）；
+4) 列出「这张图不能证明的 3 个结论」；
+5) 给 2 个下一步验证动作。
+【约束】不编造数字；不把相关当因果；不忽略样本量与口径；看不清的地方标「待确认」。
+【输出格式】按「图表要素 / 三条趋势 / 两个异常 / 不能证明什么 / 下一步」输出。</pre><details><summary>为什么这样写</summary><p>图表误读多半是口径问题。提示词强制先确认坐标轴、口径、样本量，再给结论，并列出「这张图不能证明什么」。</p></details></article><article class="pcard" id="p4-da-funnel"><div class="phead"><b>漏斗流失：哪一步最该修</b><span>深度思考 · 上传文件</span></div><p class="muted">从分步转化率里找出真实瓶颈，而不是最大的绝对流失</p><pre class="prompt">【角色】你是做了多年增长分析的数据分析师，看漏斗先看分母，再看步骤定义是否一致。
+【输入】漏斗步骤、各步人数、时间范围与渠道构成：
+{{problem}}
+【任务】
+1) 先检查每步的口径与去重逻辑是否一致，指出可疑处；
+2) 算整体与分渠道转化率，标出差异最大的渠道；
+3) 判断瓶颈是绝对流失大还是可改进空间大，给出排序依据；
+4) 把问题归因为产品问题、流量质量问题、统计问题三类；
+5) 给 2 个验证实验与各自的预期提升区间。
+【约束】不编造数字，缺数据先列需要补的清单；不把相关当因果；样本过小的分组要标注；结论必须指向具体步骤而不是「整体优化」。
+【输出格式】按「口径检查 / 分渠道转化 / 瓶颈排序 / 问题归因 / 验证实验」输出。</pre><details><summary>为什么这样写</summary><p>最大流失步不一定最值得修。这条提示词要求先校验各步口径是否一致，再结合可改进空间与渠道差异排序，并把产品问题、流量质量问题、统计问题分开。</p></details></article><article class="pcard" id="p4-da-retention"><div class="phead"><b>留存曲线：区分真假留存</b><span>深度思考 · 上传文件</span></div><p class="muted">判断留存来自产品价值，还是活动与推送硬撑起来的</p><pre class="prompt">【角色】你是负责留存的增长分析师，判断留存只看三件事：曲线是否走平、分层差异、首日行为。
+【输入】留存数据、渠道与版本分布、首日关键行为：
+{{problem}}
+【任务】
+1) 判断留存曲线是否走平，给出走平后的稳定值；
+2) 按渠道、版本、首日行为拆分组，找出差异最大的分组；
+3) 区分产品价值留存与活动推送撑起的留存；
+4) 指出数据本身可能的问题：口径、去重、回流定义；
+5) 给 2 个可验证的提升假设与观察周期。
+【约束】不编造留存数字；不把短期活动峰值当留存改善；样本过小的分组标「样本不足」；不把次日留存的结论外推到长期。
+【输出格式】按「曲线判断 / 分层差异 / 留存性质 / 数据问题 / 提升假设」输出。</pre><details><summary>为什么这样写</summary><p>整体留存会掩盖分层差异。这条提示词要求按渠道、版本、首日关键行为拆开看，再判断曲线是否走平，最后把「活动峰值」和真实留存改善区分开来。</p></details></article><article class="pcard" id="p4-da-abtest"><div class="phead"><b>A/B 实验：先定指标再开跑</b><span>深度思考</span></div><p class="muted">设计一个结论可信、能提前止损的实验</p><pre class="prompt">【角色】你是做过上百个实验的实验平台负责人，规矩是：主指标先定，护栏指标不能破，样本量先算。
+【输入】实验假设、改动内容、基线指标与可用流量：
+{{problem}}
+【任务】
+1) 把假设写成「改什么、影响哪个指标、为什么」；
+2) 定 1 个主指标、2 个护栏指标和若干辅助指标，说明选择理由；
+3) 算所需样本量与最短实验周期，把假设参数写出来；
+4) 规定提前终止条件：指标显著变差、护栏破线；
+5) 给结果解读的边界：什么情况算无效、什么情况要重跑。
+【约束】不编造基线与方差；不允许多重比较后挑显著的那个；不忽略新奇效应；周期必须覆盖完整业务周。
+【输出格式】按「假设 / 指标设定 / 样本量与周期 / 终止条件 / 解读边界」输出。</pre><details><summary>为什么这样写</summary><p>实验失败常因指标事后挑选。这条提示词要求先锁主指标与护栏指标，再算样本量与最短周期，并提前规定提前终止的条件，让结论在开跑前就约束好。</p></details></article><article class="pcard" id="p4-da-cohort"><div class="phead"><b>分群对比：别被平均值骗了</b><span>深度思考</span></div><p class="muted">用分群把「整体没变化」拆出结构性差异</p><pre class="prompt">【角色】你是擅长拆解结构的分析师，遇到整体没变化时的第一反应是分群看看。
+【输入】整体指标、可用的分群维度、时间范围：
+{{problem}}
+【任务】
+1) 选 2-3 个业务上有意义的切分维度，说明为什么选它们；
+2) 做分层对比表，标出在增长和在下跌的分组；
+3) 检查是否存在辛普森悖论，即分组方向与整体相反；
+4) 给结构性解释，区分真实行为变化与用户构成变化；
+5) 给下一步需要补的数据。
+【约束】不编造分组数据；不把构成变化说成用户行为变化；分组过细导致样本不足必须标注；结论要能指向具体人群。
+【输出格式】按「维度选择 / 分层对比 / 悖论检查 / 结构解释 / 待补数据」输出；对比用表格。</pre><details><summary>为什么这样写</summary><p>平均值会同时掩盖增长和下滑。这条提示词要求选业务上有意义的切分维度，做分层对比后专门检查辛普森悖论，最后区分真实变化与用户构成变化。</p></details></article><article class="pcard" id="p4-da-dashboard"><div class="phead"><b>看板设计：一页说清业务</b><span>深度思考</span></div><p class="muted">为管理者设计一页能支持决策的看板，而不是指标堆砌</p><pre class="prompt">【角色】你是给管理层做报表的 BI 分析师，一页看板只回答三个问题。
+【输入】业务目标、使用者角色、现有指标清单：
+{{problem}}
+【任务】
+1) 写出这块看板要回答的三个决策问题；
+2) 从现有指标里删掉与决策无关的，说明删除理由；
+3) 给指标分层：结果指标、过程指标、护栏指标；
+4) 为每个指标选图表类型，并说明为什么不用另一种；
+5) 给更新频率与异常提示规则。
+【约束】不堆指标；不编造数据；不使用截断纵轴这类误导性画法；必须保留至少一个能发现异常的指标。
+【输出格式】按「三个问题 / 指标取舍 / 指标分层 / 图表选择 / 更新与提示」输出。</pre><details><summary>为什么这样写</summary><p>看板的价值是让人做决定。这条提示词要求先写出看板要回答的三个决策问题，再据此增删指标，最后为每个指标选图表类型并说明为什么不用另一种。</p></details></article><article class="pcard" id="p4-da-forecast"><div class="phead"><b>销售预测：给区间不给点</b><span>深度思考 · 上传文件</span></div><p class="muted">在数据有限时给出可解释的预测区间与关键假设</p><pre class="prompt">【角色】你是做销售预测的分析师，原则是：给区间、给假设、给推翻条件。
+【输入】历史销量、季节与促销安排、可解释的驱动因素：
+{{problem}}
+【任务】
+1) 判断历史数据是否够用，指出缺失的关键变量；
+2) 列出 3-5 个驱动因子与各自假设；
+3) 给乐观、中性、悲观三档预测与区间，说明区间是怎么来的；
+4) 指出最脆弱的假设，以及它被推翻时怎么调整；
+5) 给一个每月滚动修正的机制。
+【约束】不给单点承诺；不编造历史数据与外部宏观数字；无法量化时给判断逻辑，而不是假精度；每档预测必须写出对应假设。
+【输出格式】按「数据可用性 / 驱动与假设 / 三档预测 / 脆弱假设 / 滚动修正」输出。</pre><details><summary>为什么这样写</summary><p>单点预测会被当成承诺。这条提示词要求先判断历史数据够不够用，再列驱动因子与假设，给三档预测，最后指出最脆弱的假设被推翻时怎么调整。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%93%E6%A3%80#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

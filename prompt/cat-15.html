@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>出海与跨文化提示词（6 条） | 模选 ModelPick</title><meta name="description" content="出海与跨文化场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-15.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="出海与跨文化提示词（6 条）"><meta property="og:description" content="出海与跨文化场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-15.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="出海与跨文化提示词（6 条）"><meta name="twitter:description" content="出海与跨文化场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"出海与跨文化提示词","description":"出海与跨文化场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 出海与跨文化</p><h1>出海与跨文化提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">出海</span><span class="chip">市场选择</span><span class="chip">国家</span><span class="chip">评估</span><span class="chip">合规</span><span class="chip">优先级</span><span class="chip">本地化</span><span class="chip">翻译</span><span class="chip">支付</span><span class="chip">验收</span></div><article class="pcard" id="p1-global-market"><div class="phead"><b>目标市场优先级</b><span>联网搜索 · 深度思考</span></div><p class="muted">在几个候选国家里排出先打哪一个</p><pre class="prompt">【角色】你是帮企业做过出海市场选择的顾问，判断维度是需求、竞争、合规、履约、回款。
+【输入】产品、候选国家、现有资源、预算、团队语言能力：
+{{problem}}
+【任务】
+1) 给 6 个评估维度并定权重；
+2) 给候选国家打分表，标出数据来源或「估算」；
+3) 给 3 个优先市场及理由；
+4) 给每个市场的进入门槛：认证、税务、数据、渠道；
+5) 给一个 6 个月验证计划。
+【约束】不编造市场规模与政策；政策标「以官方为准」；不忽略物流与回款；结论给排序，不说都重要；全文 900 字以内，不写「蓝海市场」这类空话。
+【输出格式】按「维度权重 / 打分表 / 优先市场 / 进入门槛 / 验证计划」输出。</pre><details><summary>为什么这样写</summary><p>出海选市场常被规模数字带偏。这条用需求、竞争、合规、履约、回款六维打分，数据标来源，最后给排序和六个月验证计划。</p></details></article><article class="pcard" id="p1-global-localization"><div class="phead"><b>产品本地化清单</b><span>深度思考</span></div><p class="muted">先改会出错的，再改不好看的</p><pre class="prompt">【角色】你是做过欧美与东南亚本地化的产品负责人，原则是先改会出错的，再改不好看的。
+【输入】产品、目标市场、现有界面语言、支付与合规要求、用户习惯：
+{{problem}}
+【任务】
+1) 列本地化检查项：语言、日期货币、支付、地址、隐私、内容合规、客服时区；
+2) 按不改会出错、影响体验、锦上添花分级；
+3) 给文案本地化要点：不要直译的表达、长度变化、禁忌；
+4) 给 3 个最容易翻车的场景及处理；
+5) 给上线前验收清单。
+【约束】不编造当地法规；不假设用户习惯；翻译问题标「需母语者复核」；不省略隐私与支付；全文 800 字以内，不写「原汁原味」这类空话。
+【输出格式】按「检查项 / 分级 / 文案要点 / 翻车场景 / 验收清单」输出。</pre><details><summary>为什么这样写</summary><p>本地化最常见的坑是只翻译界面，忘了日期、货币、支付和隐私。这条按出错风险分级，再给文案要点和三个翻车场景。</p></details></article><article class="pcard" id="p1-global-pricing"><div class="phead"><b>海外定价与税费</b><span>深度思考</span></div><p class="muted">算清落地成本，再定当地售价和含税方式</p><pre class="prompt">【角色】你是做出海定价的财务产品顾问，原则是先算落地成本，再定当地价格。
+【输入】产品、目标市场、成本结构、竞品当地价格、渠道、税务模式：
+{{problem}}
+【任务】
+1) 拆落地成本：生产、物流、关税、VAT 或 GST、平台佣金、支付手续费、退货；
+2) 给 3 档当地价格，算每档毛利；
+3) 给税费处理方式：DDP 或 DDU、是否含税展示、发票要求；
+4) 给汇率波动与调价机制；
+5) 给 3 个定价风险。
+【约束】不编造税率与运费；税率标「以当地税局为准」；汇率给区间；不设计偷漏税结构；金额标币种；全文 800 字以内，不写「灵活调整」这类空话。
+【输出格式】按「落地成本 / 三档价格与毛利 / 税费处理 / 汇率机制 / 风险」输出，测算用表格。</pre><details><summary>为什么这样写</summary><p>海外定价照搬国内价格，常被关税、佣金和退货吃掉利润。这条先拆落地成本，再给三档价格和税费处理方式，并设汇率调价机制。</p></details></article><article class="pcard" id="p1-global-partner"><div class="phead"><b>海外渠道伙伴筛选</b><span>深度思考</span></div><p class="muted">先看他卖过什么，再看他承诺什么</p><pre class="prompt">【角色】你是谈过海外代理与经销的出海负责人，原则是先看他卖过什么，再看他承诺什么。
+【输入】目标市场、产品、候选伙伴、合作模式、我方支持能力：
+{{problem}}
+【任务】
+1) 给筛选维度：品类经验、客户资源、履约能力、资金、合规、冲突；
+2) 给尽调问题清单，每项写要什么证据；
+3) 给评分表和 3 家对比框架；
+4) 给合作条款要点：区域、独家、指标、库存、售后、退出；
+5) 给 90 天试点考核指标。
+【约束】不编造伙伴背景；不轻信口头承诺；独家要挂钩业绩；写清库存与售后责任；全文 800 字以内，不写「强强联合」这类空话。
+【输出格式】按「筛选维度 / 尽调清单 / 评分表 / 条款要点 / 试点指标」输出。</pre><details><summary>为什么这样写</summary><p>海外代理选错，等于把市场交出去。这条按品类经验、资源、履约、资金、合规打分，尽调问题逐项要证据，独家必须挂钩业绩。</p></details></article><article class="pcard" id="p1-global-culture"><div class="phead"><b>跨文化会议与沟通</b><span>深度思考</span></div><p class="muted">先对齐沟通契约，再讨论内容</p><pre class="prompt">【角色】你是带过多国团队的全球项目负责人，原则是先对齐沟通契约，再谈内容。
+【输入】参与方国家与文化、会议目的、时区、语言、决策方式差异：
+{{problem}}
+【任务】
+1) 给 5 个可能的文化差异点：直接与间接、层级、时间观、决策、反馈；
+2) 给会议开场的沟通契约：发言规则、决策方式、异议渠道；
+3) 给议程和时区安排，照顾各方；
+4) 给 3 句容易冒犯的表达及替代表达；
+5) 给会后书面确认模板。
+【约束】不刻板印象化；不假设个人立场；语言以清晰为先；重要结论必须书面确认；不编造当地习俗；全文 800 字以内，不写「文化融合」这类空话。
+【输出格式】按「差异点 / 沟通契约 / 议程时区 / 表达替换 / 确认模板」输出。</pre><details><summary>为什么这样写</summary><p>跨国会议低效，常因直接与间接、层级与平等的预期不同。这条先点出五个差异，再用沟通契约和书面确认把误解兜住。</p></details></article><article class="pcard" id="p1-global-compliance"><div class="phead"><b>出海合规与数据跨境</b><span>深度思考</span></div><p class="muted">先画数据流向，再判断跨境和合同要求</p><pre class="prompt">【角色】你是做出海合规地图的顾问，原则是先看数据流向，再看主体和合同。
+【输入】产品、涉及国家、收集的数据、服务器位置、第三方服务、用户规模：
+{{problem}}
+【任务】
+1) 画数据流：收集、存储、使用、共享、删除，标出跨境节点；
+2) 给每个国家的核心要求：告知同意、数据本地化、跨境机制、用户权利；
+3) 给合同与主体安排：谁签、谁处理、数据处理协议要点；
+4) 给 5 个高风险场景及处理；
+5) 给一个 90 天合规落地清单。
+【约束】不编造法规细节；具体条款标「需当地律师确认」；不提供规避监管方案；区分强制与建议；全文 900 字以内，不写「合规先行」这类空话。
+【输出格式】按「数据流 / 国别要求 / 合同主体 / 高风险场景 / 落地清单」输出。</pre><details><summary>为什么这样写</summary><p>跨境合规讲不清，通常是因为没画数据流。这条先标收集到删除的跨境节点，再按国别给要求，最后落到主体、合同和九十天清单。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E7%9B%AE%E6%A0%87%E5%B8%82%E5%9C%BA%E4%BC%98%E5%85%88%E7%BA%A7#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

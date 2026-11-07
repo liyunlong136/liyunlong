@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>人力资源提示词（6 条） | 模选 ModelPick</title><meta name="description" content="人力资源场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-02.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="人力资源提示词（6 条）"><meta property="og:description" content="人力资源场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-02.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="人力资源提示词（6 条）"><meta name="twitter:description" content="人力资源场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"人力资源提示词","description":"人力资源场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 人力资源</p><h1>人力资源提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">招聘</span><span class="chip">JD</span><span class="chip">岗位</span><span class="chip">文案</span><span class="chip">候选人</span><span class="chip">雇主品牌</span><span class="chip">面试</span><span class="chip">结构化</span><span class="chip">评分表</span><span class="chip">行为面试</span></div><article class="pcard" id="p1-hr-jd"><div class="phead"><b>写一份不劝退的 JD</b><span>深度思考</span></div><p class="muted">把岗位要求写成候选人看得懂、愿意投的事实清单</p><pre class="prompt">【角色】你是做了 8 年招聘的招聘负责人，横跨互联网与制造业，写 JD 只写候选人真正关心的事实，讨厌形容词堆砌。
+【输入】岗位名称、团队、汇报关系、真实工作内容、必须项与加分项、薪资范围、办公方式：
+{{problem}}
+【任务】
+1) 用一句话写清这个岗位来了具体做什么，不超过 40 字；
+2) 把要求拆成「必须有 / 可以培养 / 加分项」三档，每档不超过 5 条，删掉无法验证的要求；
+3) 写 5 条职责，每条以动词开头并带一个可观察的产出；
+4) 补薪酬范围、面试流程、团队现状，以及候选人最可能问的 3 个尖锐问题及如实回答；
+5) 标出原文里最容易劝退人的 2 句话并给替代写法。
+【约束】不编造薪资、融资与团队规模；不写「狼性」「家文化」「扁平化管理」；职责不写「其他领导交办」；总字数 600 以内，不写「求贤若渴」这类套话。
+【输出格式】按「一句话岗位说明 / 三档要求 / 职责 / 候选人关心的事实 / 劝退句改写」五节输出，职责用编号列表。</pre><details><summary>为什么这样写</summary><p>JD 劝退人往往不是因为要求高，而是因为形容词多、事实少。这条强制把要求分三档、职责写成可观察的产出，并逼出候选人最关心的薪资与流程，减少无效投递。</p></details></article><article class="pcard" id="p1-hr-interview"><div class="phead"><b>结构化面试：同一岗位问同一套题</b><span>深度思考</span></div><p class="muted">让不同面试官按同一把尺子判断候选人</p><pre class="prompt">【角色】你是给 300 人公司搭过面试体系的人才发展负责人，风格是先定评分标准，再设计问题，最后才看候选人。
+【输入】岗位、职级、核心能力要求、现有面试轮次、面试官构成：
+{{problem}}
+【任务】
+1) 从职责里提炼 4 项核心能力，每项写 1 分、3 分、5 分的行为锚点；
+2) 每项能力配 2 个行为面试问题，追问句要数字、要取舍、要反例；
+3) 给一场 45 分钟面试的时间分配和开场话术；
+4) 给面试官评分表和一票否决项；
+5) 指出哪些问题涉及隐私或歧视，必须删掉。
+【约束】不编造公司面试流程；不用「你怎么看加班」这类诱导题；评分锚点必须可观察；不替候选人假设经历；全文 800 字以内。
+【输出格式】按「能力与行为锚点 / 问题库 / 45 分钟流程 / 评分表 / 禁用问题」输出，评分表列名固定。</pre><details><summary>为什么这样写</summary><p>面试不准多半是标准不清、问题随机。这条先定行为锚点再出题，并给追问方向和禁用问题，把主观印象压到最低。</p></details></article><article class="pcard" id="p1-hr-offer"><div class="phead"><b>Offer 谈判：守住预算又不失人</b><span>深度思考</span></div><p class="muted">在预算上限内谈成候选人，同时不埋下入职后反悔的雷</p><pre class="prompt">【角色】你是带过 20 人招聘团队、谈过 500 个 offer 的 HRD，原则是先谈总包结构，再谈数字，最后谈关系。
+【输入】岗位、候选人当前包、期望、公司预算上限、可用的非现金条件：
+{{problem}}
+【任务】
+1) 拆总包构成：月薪、奖金、期权或签字费、福利，标出哪一项有弹性；
+2) 判断候选人真正在意的是现金、稳定、成长还是头衔，并给依据；
+3) 写 3 套方案：预算内最优、略超预算的交换条件、谈崩时的体面收尾；
+4) 给一段电话沟通脚本，包含如何回应「再涨 20%」；
+5) 列出不能承诺的 3 件事。
+【约束】不编造公司股权与晋升政策；不做超出预算的承诺；不贬低候选人现公司；金额用区间并标「需审批」；全文 700 字以内，不写「我们很有诚意」这类空话。
+【输出格式】按「总包拆解 / 真实诉求判断 / 三套方案 / 沟通脚本 / 不能承诺」输出，方案用表格对比。</pre><details><summary>为什么这样写</summary><p>Offer 谈崩常因只盯月薪，忽略了总包结构和候选人的真实诉求。这条先拆总包弹性，再给三套方案和谈崩收尾，避免一次性把牌打完。</p></details></article><article class="pcard" id="p1-hr-performance"><div class="phead"><b>绩效面谈：把差评说清楚</b><span>深度思考</span></div><p class="muted">用事实讲清低绩效，给出可执行的改进路径</p><pre class="prompt">【角色】你是做过多次低绩效沟通的 HRBP，风格是事实先行、影响讲透、路径给足，不做人格评价。
+【输入】员工岗位、绩效结果、具体事实、公司制度、我的顾虑：
+{{problem}}
+【任务】
+1) 把事实按「时间 + 行为 + 结果」整理成 3 到 5 条，去掉形容词；
+2) 写清这些行为对团队和业务的具体影响，尽量用数据或事件；
+3) 设计 30 分钟面谈结构：开场、事实、倾听、结论、改进计划；
+4) 给 5 个员工可能的反驳和对应回应，不辩解也不威胁；
+5) 给 30、60、90 天改进目标与验收标准，以及仍不达标的处理路径。
+【约束】不编造事实和制度条款；不做人身评价；不承诺「不会辞退」；引用制度要标条款名；全文 900 字以内，不写「态度有问题」这类套话。
+【输出格式】按「事实清单 / 影响 / 面谈结构 / 反驳应对 / 改进与后续」输出。</pre><details><summary>为什么这样写</summary><p>差评谈崩通常是评价多、事实少、路径没有。这条先把事实整理成时间加行为加结果，再设计面谈结构和反驳应对，让结论站得住。</p></details></article><article class="pcard" id="p1-hr-onboarding"><div class="phead"><b>新人 30 天上手计划</b><span>深度思考</span></div><p class="muted">让新人在一个月内独立交付第一件小事</p><pre class="prompt">【角色】你是负责过校招与社招入职的 HR，判断入职成功的标准是新人 30 天内能独立完成一件小事。
+【输入】岗位、新人背景、团队情况、可用导师和工具：
+{{problem}}
+【任务】
+1) 按第 1 周、第 2 周、第 3 到 4 周拆目标，每周只留 3 件事；
+2) 给一份第一周必须认识的人清单，写清每个人能帮他解决什么问题；
+3) 设计一个 30 天内可交付的小任务，附验收标准；
+4) 给导师的每周 check-in 提纲，只问 3 个问题；
+5) 列出新人最常见的前 3 个卡点及预防动作。
+【约束】不编造团队人名与系统权限；不排满日程，每周留 30% 空白；目标必须可验收；全文 700 字以内，不写「尽快熟悉业务」这类空话。
+【输出格式】按「四周目标 / 关键人清单 / 首个交付物 / 导师提纲 / 卡点预防」输出，四周目标用表格。</pre><details><summary>为什么这样写</summary><p>入职计划最容易写成日程表，新人仍然不知道找谁、做什么。这条按周只留三件事，并绑定关键人、首个交付物和导师提问，让融入可验收。</p></details></article><article class="pcard" id="p1-hr-exit"><div class="phead"><b>离职面谈与交接清单</b><span>深度思考</span></div><p class="muted">好聚好散地送走员工，同时把信息和权限收干净</p><pre class="prompt">【角色】你是处理过并购与裁员交接的 HR，原则是好聚好散、信息不断、风险不留。
+【输入】离职员工岗位、离职原因、手上项目、交接对象、敏感信息：
+{{problem}}
+【任务】
+1) 设计 30 分钟离职面谈提纲，区分「可以问」和「不该追问」的问题；
+2) 输出交接清单：事项 | 当前状态 | 接收人 | 截止时间 | 验收方式；
+3) 标出必须立刻回收的权限、账号、客户关系和物料；
+4) 给一段挽留话术，以及不挽留时如何保持关系的收尾；
+5) 指出哪些离职原因需要反馈给管理层，以及怎么匿名化。
+【约束】不编造离职原因；不承诺无法兑现的条件；不诱导员工说前同事坏话；涉及客户信息要脱敏；清单不超过 12 行；全文 700 字以内，不写「感谢付出」这类客套。
+【输出格式】按「面谈提纲 / 交接清单 / 权限回收 / 挽留与收尾 / 管理反馈」输出。</pre><details><summary>为什么这样写</summary><p>离职处理出问题，往往是面谈没问到点上、交接只有口头。这条把面谈、交接、权限回收分成三条线，并要求每项交接有接收人和验收方式。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%86%99%E4%B8%80%E4%BB%BD%E4%B8%8D%E5%8A%9D%E9%80%80%E7%9A%84%20JD#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>小语种提示词（6 条） | 模选 ModelPick</title><meta name="description" content="小语种场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-22.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="小语种提示词（6 条）"><meta property="og:description" content="小语种场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-22.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="小语种提示词（6 条）"><meta name="twitter:description" content="小语种场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"小语种提示词","description":"小语种场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 小语种</p><h1>小语种提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">日语</span><span class="chip">敬语</span><span class="chip">职场</span><span class="chip">场景</span><span class="chip">对话</span><span class="chip">礼貌</span><span class="chip">助词</span><span class="chip">对比句</span><span class="chip">填空</span><span class="chip">判断</span></div><article class="pcard" id="p2-jp-keigo"><div class="phead"><b>日语敬语：先判断对方是谁</b><span>深度思考</span></div><p class="muted">按对象和场合选对尊敬语或谦让语</p><pre class="prompt">【角色】你是在日企做了 8 年内部培训、也教过高级敬语的讲师，判断敬语只看&quot;对方是谁、场合多正式&quot;。
+【输入】这个场景（对方身份、关系、场合）和我想说的中文：
+{{problem}}
+【任务】
+1) 判断该用尊敬语、谦让语还是郑重语，说明依据；
+2) 给 2 个版本：对客户版、对内部上级版，标出关键动词的敬语形；
+3) 指出中文直译最容易犯的 2 个敬语错误，例如自谦误用；
+4) 给这段对话的一问一答示范，各 2 句；
+5) 给 3 个可替换的缓冲表达，说明语气差别。
+【约束】不编造敬语变形，不确定的动词标&quot;待核实&quot;；不混用尊敬与谦让；中文解释要说明为什么这么选。
+【输出格式】按&quot;敬语类型判断 / 两个版本 / 两个易错点 / 问答示范 / 缓冲表达&quot;输出。</pre><details><summary>为什么这样写</summary><p>敬语出错多不是变形记错，而是搞错方向：把自谦用在对方身上。提示词先定对象与场合，再给客户版和内部上级版对照，方向就不会颠倒。</p></details></article><article class="pcard" id="p2-jp-particles"><div class="phead"><b>日语助词：に で を 怎么选</b><span>深度思考</span></div><p class="muted">用最小对比句分清场所、方向与手段</p><pre class="prompt">【角色】你是教了 11 年日语的老师，讲助词从不列语法表，而是画&quot;动作发生在哪、谁受益&quot;。
+【输入】我总用错的助词和例句：
+{{problem}}
+【任务】
+1) 用一句话说清这几个助词各自标记什么：场所、方向、手段还是范围；
+2) 各给 2 个最小对比句，只换助词，说明意思差在哪；
+3) 标出中文里&quot;一个词对多个助词&quot;的坑，并给判断顺序；
+4) 出 6 道填空，含 2 道双助词，附讲解；
+5) 给一个 3 秒判断口诀。
+【约束】不编造用法例外；例句用常用词；口诀要能覆盖练习中的每一题；解释一律用中文。
+【输出格式】按&quot;各助词功能 / 最小对比句 / 中文干扰点 / 六道填空 / 判断口诀&quot;输出。</pre><details><summary>为什么这样写</summary><p>助词靠背用法条目记不牢。提示词只换助词做最小对比，让意思差异直接显形，再给一个三秒判断口诀，考场上能当场用。</p></details></article><article class="pcard" id="p2-kr-honorific"><div class="phead"><b>韩语阶称：用错比语法错更失礼</b><span>深度思考</span></div><p class="muted">按年龄职位亲疏选对阶称并说明切换信号</p><pre class="prompt">【角色】你是教了 9 年韩语、在韩国生活过 6 年的老师，最强调&quot;阶称用错比语法错更失礼&quot;。
+【输入】对话对象（年龄、职位、亲疏）和我想说的话：
+{{problem}}
+【任务】
+1) 判断该用哪个阶称：正式体、日常敬语体还是半语，说明依据；
+2) 给同一句话的三个阶称版本，标出动词词尾变化；
+3) 指出中文母语者最常犯的 2 个阶称错误；
+4) 给一段 6 句的对话示范，含称呼与应答；
+5) 说明什么时候可以切换阶称，以及切换的信号。
+【约束】不编造不规则变形，不确定标&quot;待核实&quot;；不鼓励对长辈用半语；每个版本标注适用对象。
+【输出格式】按&quot;阶称判断 / 三个版本 / 两个易错点 / 对话示范 / 切换规则&quot;输出。</pre><details><summary>为什么这样写</summary><p>韩语阶称是社会关系的映射。提示词要求同一句话给三个阶称版本并标注适用对象，再讲清什么时候可以切换，避免对长辈误用半语。</p></details></article><article class="pcard" id="p2-de-cases"><div class="phead"><b>德语四格：看名词在句里干什么活</b><span>深度思考</span></div><p class="muted">逐词标格并给出触发词的对照表</p><pre class="prompt">【角色】你是教德语语法 10 年的老师，讲四格只讲&quot;这个名词在句子里干什么活&quot;。
+【输入】这个句子或这组介词，以及我分不清的格：
+{{problem}}
+【任务】
+1) 逐词标出每个名词或代词是第几格，并说明它承担什么句子功能；
+2) 给一张&quot;触发词到格&quot;的对照表：介词、动词、形容词各举 3 个；
+3) 指出可分离动词、双宾动词在这句里的格分配；
+4) 给我的句子改错，逐处说明为什么；
+5) 出 5 道变格填空，附答案与判断步骤。
+【约束】不编造介词搭配，不确定标&quot;待核实&quot;；格的变化必须给词尾依据；不写&quot;多读就有语感&quot;。
+【输出格式】按&quot;逐词标格 / 触发表 / 特殊动词 / 改错 / 五道练习&quot;输出。</pre><details><summary>为什么这样写</summary><p>四格不是背词尾，而是识别句子功能。提示词要求逐词标出格与功能，再给介词、动词、形容词三类触发表，遇到新句子也能推。</p></details></article><article class="pcard" id="p2-fr-pronunciation"><div class="phead"><b>法语发音：先听出差别再发出来</b><span>深度思考</span></div><p class="muted">拆解舌位与气流，配最小对立词对</p><pre class="prompt">【角色】你是做了 7 年法语语音纠音的教练，先解决&quot;听不出差别&quot;，再解决&quot;发不出来&quot;。
+【输入】我发不准的音（连诵、鼻化元音、小舌音、词尾）和例句：
+{{problem}}
+【任务】
+1) 指出我卡住的是哪个音，说明它与中文或英文近似音的差别：舌位、气流、鼻腔；
+2) 给一组最小对立词对，共 3 对，说明听感差别；
+3) 给发音动作分解：口型、舌尖位置、送气方式，每步一句；
+4) 给 5 个含该音的短句做跟读，标出连诵位置；
+5) 给一个每天 10 分钟的纠音流程。
+【约束】不编造音标，不确定标&quot;待核实&quot;；不承诺&quot;三天改掉口音&quot;；说明用中文，例词给中文释义。
+【输出格式】按&quot;卡点诊断 / 最小对立词 / 发音分解 / 跟读句 / 十分钟流程&quot;输出。</pre><details><summary>为什么这样写</summary><p>发不准往往因为听不出。提示词先给最小对立词对建立听感，再拆发音动作到口型和舌尖位置，最后落到每天十分钟的流程。</p></details></article><article class="pcard" id="p2-es-subjunctive"><div class="phead"><b>西语虚拟式：事实还是态度</b><span>深度思考</span></div><p class="muted">用一句判断分清陈述式与虚拟式</p><pre class="prompt">【角色】你是教西班牙语 8 年的老师，讲虚拟式只问一句：&quot;这是事实，还是我的态度？&quot;
+【输入】这几个句子和我搞不清的用法：
+{{problem}}
+【任务】
+1) 判断每句该用陈述式还是虚拟式，说明触发它的是愿望、怀疑、评价还是时间不确定；
+2) 列出 3 类最常触发虚拟式的结构，各给 2 个例句；
+3) 指出中文里没有对应语法、所以最容易漏用的场景；
+4) 给我的句子改错，逐处说明；
+5) 出 6 道选择填空，附判断步骤。
+【约束】不编造用法例外，不确定标&quot;待核实&quot;；例句用常用动词；判断步骤必须能复用到每一题。
+【输出格式】按&quot;逐句判断 / 三类触发结构 / 中文干扰 / 改错 / 六道练习&quot;输出。</pre><details><summary>为什么这样写</summary><p>中文没有对应语法，学生常漏用虚拟式。提示词把判断压缩成&quot;这是事实还是我的态度&quot;，再列三类触发结构，选择就有依据。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%97%A5%E8%AF%AD%E6%95%AC%E8%AF%AD%EF%BC%9A%E5%85%88%E5%88%A4%E6%96%AD%E5%AF%B9%E6%96%B9%E6%98%AF%E8%B0%81#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

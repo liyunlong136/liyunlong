@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>创业融资提示词（6 条） | 模选 ModelPick</title><meta name="description" content="创业融资场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-10.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="创业融资提示词（6 条）"><meta property="og:description" content="创业融资场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-10.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="创业融资提示词（6 条）"><meta name="twitter:description" content="创业融资场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"创业融资提示词","description":"创业融资场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 创业融资</p><h1>创业融资提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">融资</span><span class="chip">路演</span><span class="chip">BP</span><span class="chip">市场</span><span class="chip">竞争</span><span class="chip">投资人</span><span class="chip">一页纸</span><span class="chip">简介</span><span class="chip">团队</span><span class="chip">数据</span></div><article class="pcard" id="p1-fund-deck"><div class="phead"><b>路演 Deck：10 页讲清</b><span>深度思考</span></div><p class="muted">让投资人在十页内看懂问题、解法和账</p><pre class="prompt">【角色】你是看过上千份 BP 的投资经理，判断项目只看问题真不真、解法有没有壁垒、账算不算得过来。
+【输入】项目、目标用户、产品、商业模式、数据、融资额与用途：
+{{problem}}
+【任务】
+1) 给 10 页结构，每页写一句核心结论和 3 个支撑点；
+2) 第 1 页用一句话说清为谁解决什么问题，不超过 30 字；
+3) 给市场规模测算：自上而下与自下而上各一套，标假设；
+4) 给竞争格局图的两轴选择和我们的位置；
+5) 标出投资人最可能追问的 5 个问题和回答要点。
+【约束】不编造数据与客户；市场规模不用「万亿」空口径；不写「没有竞争对手」；融资额与用途要对得上；全文 1000 字以内，不写「颠覆行业」这类空话。
+【输出格式】按「十页结构 / 一句话定位 / 市场测算 / 竞争格局 / 五个追问」输出。</pre><details><summary>为什么这样写</summary><p>路演材料常见问题是想讲全，结果讲不清。这条把十页压成每页一句结论，并用两种口径算市场，避免用大词撑场面。</p></details></article><article class="pcard" id="p1-fund-onepager"><div class="phead"><b>一页纸项目简介</b><span>深度思考</span></div><p class="muted">用一页纸让投资人决定要不要见一面</p><pre class="prompt">【角色】你是帮创始人改过融资材料的 FA，原则是一页纸要能让投资人决定见不见。
+【输入】项目、团队、产品、进展、商业模式、融资需求：
+{{problem}}
+【任务】
+1) 用 5 句话写清：做什么、为谁、进展、怎么赚钱、要多少钱；
+2) 给 3 个最有说服力的数字，并写清口径；
+3) 写团队介绍，只写与这件事相关的能力；
+4) 给一句为什么是现在；
+5) 标出 3 处最像自嗨的表述并改写。
+【约束】不编造融资历史与客户；不堆形容词；数字必须给时间范围；不写「行业第一」除非有依据；全文 400 字以内。
+【输出格式】按「五句话 / 三个数字 / 团队 / 为什么现在 / 自嗨改写」输出。</pre><details><summary>为什么这样写</summary><p>一页纸的价值是降低决策成本，不是压缩 BP。这条只用五句话讲清做什么、为谁、进展、怎么赚钱、要多少钱，并标出数字口径。</p></details></article><article class="pcard" id="p1-fund-dd"><div class="phead"><b>尽调资料包清单</b><span>深度思考</span></div><p class="muted">在投资人开口前把资料和口径准备好</p><pre class="prompt">【角色】你是配合过数十次融资尽调的财务顾问，知道尽调失败多半是资料不全而不是业务不行。
+【输入】公司阶段、业务模式、融资轮次、已有资料、历史问题：
+{{problem}}
+【任务】
+1) 按业务、财务、法务、团队、技术、客户六类列资料清单；
+2) 每项标：是否已有、负责人、预计准备时间、风险等级；
+3) 标出 5 个最容易出问题的点：股权代持、关联交易、社保、收入确认、知识产权；
+4) 给一个数据室目录结构；
+5) 给 3 个提前统一口径的问题清单。
+【约束】不编造公司资料；不建议隐瞒或美化；涉及历史瑕疵要给披露与补救思路；清单按优先级排序；全文 900 字以内，不写「规范管理」这类空话。
+【输出格式】按「六类清单 / 状态表 / 高风险点 / 数据室目录 / 口径问题」输出，清单用表格。</pre><details><summary>为什么这样写</summary><p>尽调拖慢融资，多数不是业务问题，而是资料缺、口径乱。这条按六类列清单并标风险等级，最后给数据室目录和统一口径问题。</p></details></article><article class="pcard" id="p1-fund-valuation"><div class="phead"><b>估值区间与稀释测算</b><span>深度思考</span></div><p class="muted">用三种方法和一张稀释表谈估值</p><pre class="prompt">【角色】你是做过多次融资定价的财务顾问，原则是先给区间和假设，再谈故事。
+【输入】当前收入与增长、毛利率、可比公司、融资额、团队与阶段：
+{{problem}}
+【任务】
+1) 给 3 种估值方法：可比、倍数、里程碑折现，各写适用性和局限；
+2) 算估值区间，标出关键假设和敏感变量；
+3) 做稀释测算：投前投后、老股东比例、期权池影响；
+4) 给 3 个谈判筹码和 3 个可让步项；
+5) 指出估值过高对下一轮的影响。
+【约束】不编造可比交易；倍数要给来源或标「参考」；测算写公式；不做保底承诺；金额单位统一；全文 900 字以内，不写「合理估值」这类空话。
+【输出格式】按「三种方法 / 估值区间 / 稀释测算 / 谈判筹码 / 高估值风险」输出，测算用表格。</pre><details><summary>为什么这样写</summary><p>估值谈崩常因只报一个数，没有假设和区间。这条并排三种方法，算清投前投后与期权池影响，并提示高估值对下一轮的反噬。</p></details></article><article class="pcard" id="p1-fund-update"><div class="phead"><b>月度投资人更新</b><span>深度思考</span></div><p class="muted">让投资人每月花三分钟知道进展和风险</p><pre class="prompt">【角色】你是给基金做过多次 LP 汇报的创始人，原则是发好消息讲细节，坏消息讲原因和动作。
+【输入】本月关键数据、进展、问题、现金情况、需要的帮助：
+{{problem}}
+【任务】
+1) 用 3 句话写本月摘要：亮点、问题、下月重点；
+2) 给数据表：指标 | 本月 | 上月 | 目标 | 变化原因；
+3) 写 2 个做对的事和 1 个做错的事，各带复盘；
+4) 写现金跑道和融资进展；
+5) 给 3 个具体的求助请求，写清需要什么资源。
+【约束】不美化坏消息；不编造数据；指标口径保持一致；不做无法兑现的承诺；全文 800 字以内，不写「一切顺利」这类空话。
+【输出格式】按「三句话摘要 / 数据表 / 对与错 / 现金与融资 / 求助」输出。</pre><details><summary>为什么这样写</summary><p>投资人更新不是报喜，而是建立可信度。这条固定三句话摘要和数据表，要求写一件做错的事及复盘，并给具体可执行的求助。</p></details></article><article class="pcard" id="p1-fund-ts"><div class="phead"><b>TS 条款：哪些能谈</b><span>深度思考</span></div><p class="muted">看懂条款背后的控制权和退出风险</p><pre class="prompt">【角色】你是代表创始人谈过 Term Sheet 的律师，原则是价格可以谈，控制权和退出条款更要看。
+【输入】轮次、投资方类型、TS 关键条款、创始人诉求、股权结构：
+{{problem}}
+【任务】
+1) 逐条解释估值、清算优先、反稀释、董事会、领售、回购、对赌；
+2) 每条标市场常见做法和对我方的影响；
+3) 给 3 个必须谈的条款和可接受的替代方案；
+4) 指出 3 个隐藏风险：连锁清算、个人连带、回购触发；
+5) 给一段与投资人沟通的措辞。
+【约束】不编造市场数据，常见做法给范围并标「视轮次而定」；不构成正式法律意见；不建议签阴阳协议；条款要引用原文；全文 1000 字以内，不写「双方友好协商」这类套话。
+【输出格式】按「条款解释 / 惯例与影响 / 必谈条款 / 隐藏风险 / 沟通措辞」输出，解释用表格。</pre><details><summary>为什么这样写</summary><p>创始人常只盯估值，忽略清算优先和回购触发。这条逐条解释影响，标出市场惯例与隐藏风险，再给必谈项和替代措辞。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E8%B7%AF%E6%BC%94%20Deck%EF%BC%9A10%20%E9%A1%B5%E8%AE%B2%E6%B8%85#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

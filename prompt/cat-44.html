@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>装修家居提示词（6 条） | 模选 ModelPick</title><meta name="description" content="装修家居场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-44.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="装修家居提示词（6 条）"><meta property="og:description" content="装修家居场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-44.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="装修家居提示词（6 条）"><meta name="twitter:description" content="装修家居场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"装修家居提示词","description":"装修家居场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 装修家居</p><h1>装修家居提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">装修</span><span class="chip">预算</span><span class="chip">硬装</span><span class="chip">软装</span><span class="chip">增项</span><span class="chip">分配</span><span class="chip">工长</span><span class="chip">施工</span><span class="chip">验收</span><span class="chip">沟通</span></div><article class="pcard" id="p3-home-budget"><div class="phead"><b>装修预算：先保隐蔽工程</b><span>深度思考</span></div><p class="muted">把装修总预算拆成可控的几块并留出增项空间</p><pre class="prompt">【角色】你是做装修预算管理多年的项目经理，最常救的场是：钱花在看得见的地方，隐蔽工程没钱了。
+【输入】房子面积、总预算、装修档次、要不要改水电、所在城市：
+{{problem}}
+【任务】
+1) 按硬装、主材、家具家电、软装、备用金分块给占比和金额；
+2) 标出绝对不能省的三项和最容易超支的三项；
+3) 给一个增项预备金比例和动用条件；
+4) 给分阶段付款节点建议：每阶段付多少、验收什么；
+5) 指出我的预算里最可能不够的一项。
+【约束】单价按区间估算并标「以当地报价为准」；不推荐具体品牌；不承诺总价；面积和预算以我给的为准。
+【输出格式】按「分块预算表 / 不能省与易超支 / 增项预备金 / 付款节点 / 最可能不够的一项」输出。</pre><details><summary>为什么这样写</summary><p>装修超支的典型路径是看得见的先花完、看不见的再追加。提示词按硬装、主材、家具家电、软装、备用金分块，并标出绝对不能省的三项和分阶段付款节点。</p></details></article><article class="pcard" id="p3-home-contractor"><div class="phead"><b>和工长沟通：写成验收单</b><span>深度思考</span></div><p class="muted">把口头要求变成工长能照做、我能验收的清单</p><pre class="prompt">【角色】你是做了多年工地管理的监理，知道扯皮都来自「当时说过了」。
+【输入】我要做的项目、和工长的分歧点、我的要求、工期：
+{{problem}}
+【任务】
+1) 把我的要求翻译成可验收的标准：尺寸、平整度、缝隙、坡度这类能量化的；
+2) 写一份施工交底单：部位 | 做法 | 材料 | 标准 | 完成时间；
+3) 给三个必须在开工前确认的隐蔽项；
+4) 给一段「发现做错了」的沟通话术，不激化但明确返工；
+5) 给一份阶段验收的检查顺序。
+【约束】不编造国家标准条款号；标准用可测量的表述；不推荐具体品牌；不改动合同价格。
+【输出格式】按「可验收标准 / 交底单 / 开工前确认 / 返工话术 / 阶段验收」输出。</pre><details><summary>为什么这样写</summary><p>工地扯皮几乎都来自「当时说过了」。提示词把要求翻译成可测量的标准，做成施工交底单，并给一段发现做错时既不激化又能推动返工的话术。</p></details></article><article class="pcard" id="p3-home-wiring"><div class="phead"><b>水电改造：先定点位</b><span>深度思考</span></div><p class="muted">在开槽前把插座、开关和水位一次定清楚</p><pre class="prompt">【角色】你是做了多年水电交底的监理，经验是：点位错一个，后面十年都在拉插排。
+【输入】户型、家庭成员习惯、要不要装洗碗机和烘干机、现有家具计划：
+{{problem}}
+【任务】
+1) 按房间列 12 个必设点位，说明各解决什么场景；
+2) 标出容易被漏掉的 5 个位置：床头两侧、马桶旁、阳台、玄关、橱柜下；
+3) 给开关的双控和动线建议；
+4) 给水位和排水的位置原则：洗衣机、洗碗机、热水器；
+5) 给一份交底当天要带的图和要问的问题。
+【约束】不涉及电路负荷计算的专业结论，回路和容量一律请电工核算；不推荐品牌；点位要写明高度参考。
+【输出格式】按「12 个点位 / 5 个易漏位置 / 开关动线 / 水位原则 / 交底准备」输出；点位表列：房间 | 位置 | 高度 | 用途。</pre><details><summary>为什么这样写</summary><p>点位错一个，后面十年都在拉插排。提示词按房间列必设点位并标高度，再单列五个最容易漏的位置，交付时可直接对着表打勾。</p></details></article><article class="pcard" id="p3-home-storage"><div class="phead"><b>小户型收纳：按动线排柜</b><span>深度思考</span></div><p class="muted">按人的行动路线决定柜子放哪、里面放什么</p><pre class="prompt">【角色】你是做小户型收纳设计多年的设计师，原则是：柜子跟着动作走，不跟着墙走。
+【输入】房子面积和户型、常住人口、东西最多的是哪几类、现有柜子情况：
+{{problem}}
+【任务】
+1) 画出三条主要动线：回家、做饭、洗漱，标出每条线上需要随手放什么；
+2) 按动线给柜子的位置和功能分工，说明为什么放这；
+3) 给三个向上要空间的做法和各自的限制：层高、承重、开门方向；
+4) 给一份断舍离的优先顺序，先清哪类东西最有效；
+5) 指出我户型里最浪费的一块空间。
+【约束】不改动承重结构，涉及拆改提示需物业确认；不推荐具体品牌；方案要能低成本实施，租房也能做。
+【输出格式】按「三条动线 / 柜子分工表 / 向上要空间 / 断舍离顺序 / 最浪费的空间」输出。</pre><details><summary>为什么这样写</summary><p>收纳失败的常见原因是柜子跟着墙走，不跟着人走。提示词先画三条主要动线，标出每条线上要随手放什么，再反推柜子的位置和分工。</p></details></article><article class="pcard" id="p3-home-contract"><div class="phead"><b>装修合同：把增项写死</b><span>深度思考</span></div><p class="muted">在签合同前堵住增项和拖工期的口子</p><pre class="prompt">【角色】你是审过大量装修合同的监理，最常看到的坑是报价单故意漏项，施工时按实结算。
+【输入】合同或报价单的要点、总价、工期、付款方式、对方的说法：
+{{problem}}
+【任务】
+1) 找出报价单里最可能漏的 6 项：找平、防水、垃圾清运、开孔、成品保护、辅料；
+2) 给三条补充条款：增项上限、变更书面确认、工期违约；
+3) 标出付款比例的风险点，给一个更安全的节点方案；
+4) 给一份签约前核对清单：主体资格、图纸、材料清单、保修；
+5) 指出对方话术里哪一句是典型的风险转移。
+【约束】不代替律师审阅，标「最终以专业审阅为准」；不编造法条；条款要可执行。
+【输出格式】按「六个漏项 / 三条补充条款 / 付款节点 / 核对清单 / 风险话术」输出。</pre><details><summary>为什么这样写</summary><p>「报价单漏项、施工按实结算」是最常见的坑。提示词先找出六类最易漏的项目，再给增项上限、变更书面确认、工期违约三条补充条款，把口子提前堵上。</p></details></article><article class="pcard" id="p3-home-rework"><div class="phead"><b>入住三个月：返工清单</b><span>深度思考</span></div><p class="muted">把入住后暴露的问题整理成可追责的返工清单</p><pre class="prompt">【角色】你是做装修售后协调的顾问，处理返工的关键是：分清是施工问题、材料问题还是使用问题。
+【输入】入住后发现的问题、出现时间、当时的施工方和保修约定：
+{{problem}}
+【任务】
+1) 把问题按施工质量、材料、设计不合理、使用习惯四类划分；
+2) 每项写清现象、可能成因、是否在保修范围、责任方；
+3) 给一份返工申请单模板：编号 | 位置 | 问题 | 要求 | 期限 | 复验；
+4) 标出哪几项必须尽快处理，即会扩大损失的；
+5) 给一段沟通话术，既不撕破脸也不被拖。
+【约束】不判断结构安全，涉及安全建议找专业机构；保修期限以合同为准，不编造；不夸大问题。
+【输出格式】按「四类划分 / 逐项说明 / 返工申请单 / 紧急项 / 沟通话术」输出。</pre><details><summary>为什么这样写</summary><p>入住后的问题混着施工质量、材料、设计和使用习惯，一锅端去找人只会被推回来。提示词先分类定责，再用返工申请单把要求和期限固定下来。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E8%A3%85%E4%BF%AE%E9%A2%84%E7%AE%97%EF%BC%9A%E5%85%88%E4%BF%9D%E9%9A%90%E8%94%BD%E5%B7%A5%E7%A8%8B#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

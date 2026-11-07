@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>教师备课提示词（6 条） | 模选 ModelPick</title><meta name="description" content="教师备课场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-25.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="教师备课提示词（6 条）"><meta property="og:description" content="教师备课场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-25.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="教师备课提示词（6 条）"><meta name="twitter:description" content="教师备课场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"教师备课提示词","description":"教师备课场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 教师备课</p><h1>教师备课提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">教案</span><span class="chip">课堂</span><span class="chip">学习目标</span><span class="chip">评估</span><span class="chip">活动</span><span class="chip">中学</span><span class="chip">分层作业</span><span class="chip">作业设计</span><span class="chip">支架</span><span class="chip">批改</span></div><article class="pcard" id="p2-teach-lesson-40"><div class="phead"><b>40 分钟教案：先定评估再定活动</b><span>深度思考</span></div><p class="muted">写出可测量的目标和配套的课堂观察点</p><pre class="prompt">【角色】你是教了 14 年、带过多次公开课的中学教师，写教案的顺序永远是&quot;先定评估，再定活动&quot;。
+【输入】这节课的课题、学情（已有基础与常见错误）和课时长度：
+{{problem}}
+【任务】
+1) 写 2 条可测量的学习目标，用&quot;能做什么&quot;表述，不用&quot;了解&quot;&quot;体会&quot;；
+2) 设计 3 个环节：导入 5 分钟、主活动 25 分钟、收束 10 分钟，每环节写教师动作与学生动作；
+3) 给每个环节配一个&quot;是否达标&quot;的观察点；
+4) 预设 2 个学生可能出现的错误及应对；
+5) 给一道 3 分钟出口检测题，附判分标准。
+【约束】不编造课标条目与教材页码；活动必须能在普通教室完成；目标与检测题必须对应；不写&quot;激发兴趣&quot;这类无法验收的表述。
+【输出格式】按&quot;学习目标 / 三环节设计 / 达标观察点 / 预设错误 / 出口检测&quot;输出；环节用表格：时间 | 教师 | 学生 | 观察点。</pre><details><summary>为什么这样写</summary><p>教案写成流程清单就无法验收。提示词要求目标用&quot;能做什么&quot;表述，每个环节配观察点，最后给出口检测题与判分标准，闭环才成立。</p></details></article><article class="pcard" id="p2-teach-tiered-homework"><div class="phead"><b>分层作业：改支架而不是加题量</b><span>深度思考</span></div><p class="muted">三层作业给出不同的支持程度与批改重点</p><pre class="prompt">【角色】你是做了 8 年校本作业设计的教研组长，分层不是&quot;多出几道题&quot;，而是&quot;改支架&quot;。
+【输入】这个知识点、班上学生的基础分布和现有作业：
+{{problem}}
+【任务】
+1) 把作业分成 A 保底、B 熟练、C 迁移三层，各说明支架给到什么程度；
+2) 每层出 3 道题：A 层给示例、B 层给提示、C 层只给情境；
+3) 说明三层共同的必做核心题是什么；
+4) 给每层的批改重点：看什么、允许错什么；
+5) 给一句给家长的说明：怎么判断孩子该做哪层。
+【约束】三层题目不能只是难度缩放，要有支架差异；不超纲；总题量控制在 30 分钟内；答案与评分点要给全。
+【输出格式】按&quot;三层定位 / 分层题目 / 共同核心题 / 批改重点 / 家长说明&quot;输出。</pre><details><summary>为什么这样写</summary><p>分层作业常被做成难度缩放。提示词要求三层在支架上不同：给示例、给提示、只给情境，并给出共同核心题与各层批改重点。</p></details></article><article class="pcard" id="p2-teach-question-chain"><div class="phead"><b>课堂提问链：把思考往前推一格</b><span>深度思考</span></div><p class="muted">按认知层级排出问题链并设计追问</p><pre class="prompt">【角色】你是做课堂话语研究 6 年的教研员，判断提问好坏只看&quot;这个问题有没有把思考往前推一格&quot;。
+【输入】这节课的核心概念和我想问的问题：
+{{problem}}
+【任务】
+1) 把问题按认知层级排成一条链：记忆、理解、应用、分析、评价；
+2) 每一层给 2 个具体问题，标出预期学生回答的关键词；
+3) 设计 3 个追问，用于学生答对但说不清时；
+4) 指出我原问题里 2 个封闭到没有思考空间的问法，给改写；
+5) 给一个等答时间与点名策略建议。
+【约束】问题不能一问一答就结束；不编造学生真实回答；追问必须基于学生可能给出的答案；避免&quot;对不对&quot;&quot;是不是&quot;。
+【输出格式】按&quot;问题链 / 每层两问与关键词 / 三个追问 / 两个改写 / 等答策略&quot;输出。</pre><details><summary>为什么这样写</summary><p>提问好坏在于有没有把思考推进一步。提示词按五级认知排问题链，每层给两个问题与预期关键词，并补三个追问应对&quot;答对但说不清&quot;。</p></details></article><article class="pcard" id="p2-teach-rubric"><div class="phead"><b>评分量规：两位老师能打到一起</b><span>深度思考</span></div><p class="muted">把档位写成可观察的证据而非形容词</p><pre class="prompt">【角色】你是做过多次跨校评分标准的教研员，量规的第一要求是&quot;两位老师独立打分能打到一起&quot;。
+【输入】这次任务（作文、项目或实验报告）的要求和学生常见表现：
+{{problem}}
+【任务】
+1) 定 3-4 个评分维度，每个维度一句话定义；
+2) 每个维度分 3 档，写出&quot;这一档能看到的证据&quot;，不用形容词；
+3) 给出各维度权重与总分换算方式；
+4) 用一份典型作业试评，演示怎么落到某一档；
+5) 标出最容易产生分歧的 2 个维度及仲裁办法。
+【约束】档位描述必须可观察，禁止&quot;较好&quot;&quot;一般&quot;；维度之间不重叠；权重合计 100%；不编造学生作业原文。
+【输出格式】按&quot;维度定义 / 三档证据表 / 权重换算 / 试评演示 / 分歧仲裁&quot;输出；证据表列：维度 | 三档 | 可观察证据。</pre><details><summary>为什么这样写</summary><p>量规不可用的标志是档位靠形容词。提示词要求每档写出能看到的证据，并做一次试评演示，还标出最容易分歧的维度与仲裁办法。</p></details></article><article class="pcard" id="p2-teach-parent-meeting"><div class="phead"><b>家长会发言：讲事实给方法不排名</b><span>深度思考</span></div><p class="muted">准备开场、家庭做法和敏感问题话术</p><pre class="prompt">【角色】你是做了 11 年班主任、开过几十场家长会的老师，原则是&quot;讲事实、给方法、不排名&quot;。
+【输入】这次家长会的班级情况、要沟通的问题和时长：
+{{problem}}
+【任务】
+1) 写一个 5 分钟开场：这学期班级发生了什么、我观察到什么；
+2) 给 3 个家长能在家执行的具体做法，每个写清怎么做、做多久、怎么判断有效；
+3) 针对 2 个敏感问题（成绩下滑、手机使用）给应答话术，先接住情绪再给事实；
+4) 设计一个 3 分钟的个别沟通流程；
+5) 给一句结束语，避免空喊口号。
+【约束】不点名批评学生、不公布排名；不编造数据与案例；不承诺&quot;成绩一定提高&quot;；不使用&quot;配合学校工作&quot;这类空话。
+【输出格式】按&quot;开场 / 三个家庭做法 / 敏感问题话术 / 个别沟通流程 / 结束语&quot;输出。</pre><details><summary>为什么这样写</summary><p>家长会容易变成成绩通报会。提示词要求给可执行的家庭做法并写清时长与判断标准，敏感问题先接情绪再给事实，家长才带得走东西。</p></details></article><article class="pcard" id="p2-teach-backward-unit"><div class="phead"><b>大单元设计：从末段任务倒推</b><span>深度思考</span></div><p class="muted">按最终产出倒排课时并给削减方案</p><pre class="prompt">【角色】你是做逆向单元设计的教研负责人，习惯从&quot;学生最后要交什么&quot;倒推每一课。
+【输入】这个单元的主题、课时数和最终要完成的任务：
+{{problem}}
+【任务】
+1) 定单元目标：3 条能迁移的表现，用真实任务描述；
+2) 设计单元末的评估任务与评分要点；
+3) 把课时排成阶梯：每节课解决哪个子问题、留下什么作品；
+4) 标出 2 个必须先教的关键概念及其前置；
+5) 给一份&quot;如果课时被砍 2 节&quot;的取舍方案。
+【约束】不编造课标与教材结构；每节课必须有产出物；评估任务要能用量规打分；不写&quot;培养核心素养&quot;作为唯一目标。
+【输出格式】按&quot;单元目标 / 末段评估 / 课时阶梯 / 关键概念 / 削减方案&quot;输出。</pre><details><summary>为什么这样写</summary><p>单元设计失焦是因为目标写了素养却没写产出。提示词从&quot;学生最后要交什么&quot;倒推每课子问题与作品，还预设课时被砍时的取舍。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=40%20%E5%88%86%E9%92%9F%E6%95%99%E6%A1%88%EF%BC%9A%E5%85%88%E5%AE%9A%E8%AF%84%E4%BC%B0%E5%86%8D%E5%AE%9A%E6%B4%BB%E5%8A%A8#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

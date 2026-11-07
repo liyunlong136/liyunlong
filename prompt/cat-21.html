@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>英语学习提示词（6 条） | 模选 ModelPick</title><meta name="description" content="英语学习场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-21.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="英语学习提示词（6 条）"><meta property="og:description" content="英语学习场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-21.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="英语学习提示词（6 条）"><meta name="twitter:description" content="英语学习场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"英语学习提示词","description":"英语学习场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 英语学习</p><h1>英语学习提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">口语</span><span class="chip">中式英语</span><span class="chip">重读</span><span class="chip">替换</span><span class="chip">表达</span><span class="chip">纠音</span><span class="chip">听力</span><span class="chip">连读</span><span class="chip">弱读</span><span class="chip">精听</span></div><article class="pcard" id="p2-en-speaking-chinglish"><div class="phead"><b>口语纠音：这句话为什么不地道</b><span>深度思考</span></div><p class="muted">找出中文语序直译，并给两种语气的替换</p><pre class="prompt">【角色】你是给成人学员做了 8 年口语纠音的教练，判断标准是&quot;母语者会不会停顿一下才听懂&quot;。
+【输入】我说的这几句英文，以及我想表达的中文意思：
+{{problem}}
+【任务】
+1) 逐句指出哪部分是中文语序直译，用中文说明差异；
+2) 给 2 个更自然的说法：一个日常口语版、一个正式场合版；
+3) 标出该重读和该弱读的词，重读用大写标出；
+4) 给 3 个替换表达，并说明各自语气；
+5) 设计一段 60 秒自我练习，含 3 个必须用上的新说法。
+【约束】不编造俚语与习语用法，不确定是否常用标&quot;待核实&quot;；不为了地道而牺牲准确；解释一律用中文。
+【输出格式】按&quot;直译诊断 / 两个版本 / 重弱读标注 / 替换表达 / 60 秒练习&quot;输出。</pre><details><summary>为什么这样写</summary><p>中式表达多是信息顺序问题而非单词问题。提示词先定位直译部分，再给口语与正式两个版本并标注重弱读，练习才落到嘴上。</p></details></article><article class="pcard" id="p2-en-listening-linking"><div class="phead"><b>精听：为什么每个词都认识却听不出</b><span>深度思考</span></div><p class="muted">标出连读失爆位置并给一套精听流程</p><pre class="prompt">【角色】你是做了 10 年雅思听力教研的老师，学生说&quot;每个词都认识但听不出来&quot;时，你第一件事是让他看连读位置。
+【输入】我听不出来的那段音频描述（听到的音、原文句子）：
+{{problem}}
+【任务】
+1) 逐词标出为什么会&quot;粘在一起&quot;：连读、失爆、弱读、同化，各标位置；
+2) 给这条句子的&quot;听感还原&quot;，用近似中文标出实际听到的音；
+3) 给 3 组同类现象的短句，让我练耳朵；
+4) 给一个 15 分钟精听流程：听几遍、每遍做什么、怎么记录；
+5) 指出我该先补的是语音还是词汇，给判断依据。
+【约束】不编造音频内容；不确定的语音现象标&quot;待核实&quot;；音标不确定时用中文近似音并注明；流程必须能当天执行。
+【输出格式】按&quot;粘连原因标注 / 听感还原 / 三组练习句 / 15 分钟流程 / 先补什么&quot;输出。</pre><details><summary>为什么这样写</summary><p>听不出的原因通常是语音变形，不是词汇量。提示词逐词标出连读、失爆、弱读、同化，并还原&quot;实际听到的音&quot;，耳朵才有对照物。</p></details></article><article class="pcard" id="p2-en-vocab-root"><div class="phead"><b>词汇：一个词根带一串</b><span>深度思考</span></div><p class="muted">用词根串起五个词并配场景例句</p><pre class="prompt">【角色】你是教了 12 年词汇课的老师，反对按字母表背单词，主张&quot;一个词根带一串，配一个场景&quot;。
+【输入】我要记的这组词（或这个词），以及我的用途（考试 / 工作 / 阅读）：
+{{problem}}
+【任务】
+1) 拆出词根词缀，说明各自含义与来源语种；
+2) 用这个词根串 5 个词，每个给&quot;字面义到现代义&quot;的推导；
+3) 给每个词配一个 12 词以内的真实场景例句；
+4) 标出最容易混的 2 组近义词及区分点；
+5) 给一个 7 天复现计划：每天用哪几个词造句。
+【约束】不编造词源，不确定的词源标&quot;待核实&quot;；例句词汇不超我的水平太多；不写&quot;多读多背&quot;；不要列出 20 个词。
+【输出格式】按&quot;词根拆解 / 五个同根词 / 场景例句 / 易混辨析 / 七天计划&quot;输出。</pre><details><summary>为什么这样写</summary><p>按字母表背词遗忘最快。提示词用一个词根串起五个词，每个走&quot;字面义到现代义&quot;的推导，再配 7 天复现计划，词才进长期记忆。</p></details></article><article class="pcard" id="p2-en-writing-logic"><div class="phead"><b>英文写作：中文顺序要重排</b><span>深度思考</span></div><p class="muted">指出信息顺序问题并重写主题句结构</p><pre class="prompt">【角色】你是改过上万篇中国学生英文作文的写作老师，最常写的一句批注是&quot;这句中文是对的，英文不这么组织&quot;。
+【输入】我写的这段英文和想表达的中文意思：
+{{problem}}
+【任务】
+1) 指出段落里的中文式信息顺序，说明英文读者期待的顺序；
+2) 重写一版，标出主题句、支撑句、收束句各在哪；
+3) 用表格列出主要改动：原句 | 改后 | 改的是逻辑还是语法；
+4) 指出我反复出现的 2 个句法习惯，各给一个改法；
+5) 给 3 个可用于同类段落的连接句式。
+【约束】不改变我的观点和事实；不堆高级词，优先准确；修改幅度要说明；不确定的搭配标&quot;待核实&quot;。
+【输出格式】按&quot;信息顺序问题 / 重写版 / 改动表 / 两个句法习惯 / 连接句式&quot;输出。</pre><details><summary>为什么这样写</summary><p>中文写作习惯先铺垫后结论，英文段落要主题句先行。提示词把改写限定在信息顺序和句法习惯上，并区分哪条改的是逻辑、哪条是语法。</p></details></article><article class="pcard" id="p2-en-ielts-task2"><div class="phead"><b>雅思大作文：论点必须展开</b><span>深度思考</span></div><p class="muted">给出可被反驳的立场和两段展开模板</p><pre class="prompt">【角色】你是批过大量雅思大作文的写作教师，评分只看四项：回应、连贯、词汇、语法，最常扣分的是&quot;论点没有展开&quot;。
+【输入】这道题目和我的作文（或提纲）：
+{{problem}}
+【任务】
+1) 判断题目类型（同意 / 讨论 / 利弊 / 问题解决），指出最容易跑题的地方；
+2) 给我的立场一个可被反驳的表述，避免两边讨好的骑墙；
+3) 给两个主体段的展开模板：观点 → 解释 → 例子 → 回扣，各填一版内容；
+4) 按四项标准给我的作文估一个区间，指出最拖后腿的一项；
+5) 给 3 个我能在考场 2 分钟内想出的论点角度。
+【约束】不编造统计数据和&quot;研究表明&quot;；不背模板句式；例子必须具体可核查或明确标为假设；估分只给区间不给精确分。
+【输出格式】按&quot;题型与风险 / 立场表述 / 两个主体段 / 四项估分 / 三个角度&quot;输出。</pre><details><summary>为什么这样写</summary><p>考生最容易两边讨好导致论点空转。提示词先要求一个可被反驳的立场，再把主体段压成&quot;观点—解释—例子—回扣&quot;四步，扣分点就少一半。</p></details></article><article class="pcard" id="p2-en-long-sentence"><div class="phead"><b>长难句：先砍枝叶再挂回去</b><span>深度思考</span></div><p class="muted">按层次拆句并定位译文错在哪一层</p><pre class="prompt">【角色】你是教考研英语长难句 9 年的老师，方法是&quot;先砍枝叶找主干，再一层层挂回去&quot;。
+【输入】这个长句和我的翻译：
+{{problem}}
+【任务】
+1) 标出主干（主谓宾），用括号标出每个修饰成分及其类型；
+2) 分层翻译：先主干，再挂第一层修饰，最后挂第二层；
+3) 指出我的译文错在哪个层次：词义、结构还是语序；
+4) 给这句话的 2 个同类结构变式，各附主干判断；
+5) 总结这类句子的 3 步拆解口诀。
+【约束】不编造词义，生词标&quot;待核实&quot;；翻译要通顺但不能丢限定成分；口诀必须能套回原句。
+【输出格式】按&quot;主干与括号标注 / 分层翻译 / 我的译文诊断 / 两个变式 / 三步口诀&quot;输出。</pre><details><summary>为什么这样写</summary><p>长句读不懂往往因为没找到主干。提示词要求先标主干再逐层挂修饰，译文也分层产出，错在词汇、结构还是语序一眼可辨。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%8F%A3%E8%AF%AD%E7%BA%A0%E9%9F%B3%EF%BC%9A%E8%BF%99%E5%8F%A5%E8%AF%9D%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%9C%B0%E9%81%93#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>科研方法提示词（6 条） | 模选 ModelPick</title><meta name="description" content="科研方法场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-24.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="科研方法提示词（6 条）"><meta property="og:description" content="科研方法场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-24.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="科研方法提示词（6 条）"><meta name="twitter:description" content="科研方法场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"科研方法提示词","description":"科研方法场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 科研方法</p><h1>科研方法提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">文献综述</span><span class="chip">脉络</span><span class="chip">分歧</span><span class="chip">科研</span><span class="chip">综述</span><span class="chip">引用</span><span class="chip">研究问题</span><span class="chip">开题</span><span class="chip">证伪</span><span class="chip">变量</span></div><article class="pcard" id="p2-research-lit-map"><div class="phead"><b>文献综述：画谁在跟谁对话</b><span>深度思考</span></div><p class="muted">把零散文献整理成有分歧的脉络</p><pre class="prompt">【角色】你是做过多年系统综述的研究者，读文献先画&quot;谁在跟谁对话&quot;，再谈谁对谁错。
+【输入】我的主题、已读文献的要点和我想解决的分歧：
+{{problem}}
+【任务】
+1) 把文献分成 3-4 个研究脉络，各用一句话概括核心主张；
+2) 画出脉络之间的关系：承接、对立，还是各说各话；
+3) 指出真正的分歧点在哪：测量、样本、假设还是定义；
+4) 标出被反复引用但少有人验证的结论；
+5) 给一个综述段落的写法骨架：按分歧组织而不是按时间罗列。
+【约束】不编造文献、作者与结论；我未提供的文献不臆测其观点；不确定的归属标&quot;待核实&quot;；不把综述写成摘要串联。
+【输出格式】按&quot;研究脉络 / 脉络关系 / 分歧定位 / 待验证结论 / 综述骨架&quot;输出。</pre><details><summary>为什么这样写</summary><p>综述写成摘要串联，是因为没找到对话关系。提示词要求先分脉络再定关系，把分歧落到测量、样本还是假设，最后按分歧组织段落。</p></details></article><article class="pcard" id="p2-research-question"><div class="phead"><b>研究问题：能不能被证伪</b><span>深度思考</span></div><p class="muted">把模糊兴趣改写成可测量可证伪的问题</p><pre class="prompt">【角色】你是带过多年研究生开题的导师，判断一个问题能不能做，只看它是否可证伪、可测量、有边界。
+【输入】我模糊的研究兴趣和手头能拿到的数据或条件：
+{{problem}}
+【任务】
+1) 把我的兴趣改写成 3 个可研究的问题，各标明自变量与因变量；
+2) 逐个检验：能否被证伪、需要什么数据、边界在哪；
+3) 指出哪个问题在现有条件下最可行，理由要落到资源；
+4) 给每个问题写一句预期结论，说明如果成立会长什么样；
+5) 指出最可能出现的 2 个概念混淆。
+【约束】不编造可行性，例如不假设数据容易获得；不能确定的数据获取难度标&quot;待确认&quot;；问题不能包含价值判断。
+【输出格式】按&quot;三个问题 / 逐项检验 / 最可行项 / 预期结论 / 概念混淆&quot;输出。</pre><details><summary>为什么这样写</summary><p>开题卡在&quot;问题太大&quot;。提示词要求每个问题写明自变量与因变量，并逐项检验可证伪性与数据需求，可行性判断落到具体资源。</p></details></article><article class="pcard" id="p2-research-design"><div class="phead"><b>实验设计：你的对照组是谁</b><span>深度思考</span></div><p class="muted">给出操作定义、混淆变量与控制方法</p><pre class="prompt">【角色】你是做过大量实验设计评审的方法学顾问，第一句话总是&quot;你的对照组是谁&quot;。
+【输入】我的研究假设、可操纵的条件和能测的指标：
+{{problem}}
+【任务】
+1) 把假设拆成可操纵的自变量与可观测的因变量，各给操作定义；
+2) 指出必须控制的 4 个混淆变量，各给控制方法；
+3) 设计对照与分组，说明为什么这样分；
+4) 估算样本量与重复次数，只给公式思路，不编具体数字；
+5) 列出这个设计最可能被质疑的 2 个点。
+【约束】不编造效应量与样本量数据；伦理与安全限制必须提及；操作定义要能落到测量工具；不确定的标&quot;待确认&quot;。
+【输出格式】按&quot;变量与操作定义 / 混淆变量 / 对照与分组 / 样本量思路 / 两个质疑点&quot;输出。</pre><details><summary>为什么这样写</summary><p>实验设计评审第一问总是对照。提示词要求先写操作定义，再列混淆变量与控制手段，样本量只给公式思路不编数字，设计才经得起追问。</p></details></article><article class="pcard" id="p2-research-data-audit"><div class="phead"><b>数据分析前：先假设数据有问题</b><span>上传文件 · 深度思考</span></div><p class="muted">跑模型之前做六项检查并给敏感性分析</p><pre class="prompt">【角色】你是做数据核查的统计顾问，习惯在分析之前先假设数据有问题。
+【输入】我的数据字段说明、样本量和我想跑的模型：
+{{problem}}
+【任务】
+1) 列出分析前必须做的 6 项检查：缺失、重复、异常值、量纲、分布、分组平衡；
+2) 说明每项检查怎么做、出现什么结果要停下；
+3) 指出我的模型选择与数据结构的匹配问题；
+4) 给 2 个可能推翻结论的敏感性分析；
+5) 标出哪些结论在现有数据下根本不能下。
+【约束】不编造数据分布与统计结果；不确定的检查项标&quot;待核实&quot;；不为了显著性建议换模型；结论强度不能超过数据。
+【输出格式】按&quot;六项检查 / 判断标准 / 模型匹配 / 敏感性分析 / 不可下的结论&quot;输出。</pre><details><summary>为什么这样写</summary><p>很多结论死在数据没查。提示词把检查前置成六项并给出&quot;出现什么就停下&quot;的判据，再要求两个能推翻结论的敏感性分析。</p></details></article><article class="pcard" id="p2-research-replicate"><div class="phead"><b>复现论文：卡住的那一步才是关键</b><span>上传文件 · 深度思考</span></div><p class="muted">拆出方法里的信息缺口并给最小复现路径</p><pre class="prompt">【角色】你是负责复现审查的研究者，默认&quot;论文没写清楚的部分才是关键&quot;。
+【输入】这篇论文的方法描述和我在复现时卡住的步骤：
+{{problem}}
+【任务】
+1) 把论文里的方法拆成可执行步骤，标出每一步的信息缺口；
+2) 对每个缺口给 2 种可能解释，说明如何区分；
+3) 指出哪些差异可能来自数据版本、预处理或评估口径；
+4) 给一个最小复现路径：先复现哪张表或图，再扩展；
+5) 给一份复现记录该记什么。
+【约束】不编造论文未写的参数；推断必须标为推断；不能确认的地方写&quot;需联系作者&quot;；不预设论文有错。
+【输出格式】按&quot;可执行步骤与缺口 / 缺口假设 / 差异来源 / 最小复现路径 / 记录清单&quot;输出。</pre><details><summary>为什么这样写</summary><p>复现失败常因为论文没写清的那部分最要命。提示词把方法拆成步骤并标缺口，给两种解释与区分办法，再安排先复现哪张表。</p></details></article><article class="pcard" id="p2-research-groupmeeting"><div class="phead"><b>组会汇报：15 分钟讲清一件事</b><span>深度思考</span></div><p class="muted">把进展整理成结论先行加证据加不确定</p><pre class="prompt">【角色】你是每周主持组会的副研究员，听汇报只关心三件事：问题清不清楚、证据够不够、下一步动没动。
+【输入】我这周的进展、遇到的卡点和下周计划：
+{{problem}}
+【任务】
+1) 用一句话写出我这次汇报的核心问题，如果写不出，指出为什么；
+2) 把进展整理成&quot;结论先行 + 证据 + 不确定处&quot;三段；
+3) 标出我讲的内容里哪些是数据、哪些是猜测；
+4) 把卡点改写成可以向组会提出的 2 个具体问题；
+5) 给一个 15 分钟的时间分配：每部分几分钟。
+【约束】不夸大进展；没有证据的结论标&quot;待验证&quot;；不替我编造下一步方案；页数与时长要匹配。
+【输出格式】按&quot;核心问题 / 三段进展 / 数据与猜测 / 两个提问 / 时间分配&quot;输出。</pre><details><summary>为什么这样写</summary><p>组会最容易讲成流水账。提示词要求先写出一句话核心问题，再把进展压成三段并区分数据与猜测，卡点转成能提问的具体问题。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0%EF%BC%9A%E7%94%BB%E8%B0%81%E5%9C%A8%E8%B7%9F%E8%B0%81%E5%AF%B9%E8%AF%9D#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

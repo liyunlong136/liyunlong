@@ -1,0 +1,49 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>智能体与自动化提示词（4 条） | 模选 ModelPick</title><meta name="description" content="智能体与自动化场景的结构化提示词合集，共 4 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-83.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="智能体与自动化提示词（4 条）"><meta property="og:description" content="智能体与自动化场景的结构化提示词合集，共 4 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-83.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="智能体与自动化提示词（4 条）"><meta name="twitter:description" content="智能体与自动化场景的结构化提示词合集，共 4 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"智能体与自动化提示词","description":"智能体与自动化场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 智能体与自动化</p><h1>智能体与自动化提示词</h1><p class="lead">4 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">智能体</span><span class="chip">agent</span><span class="chip">自动化</span><span class="chip">工作流</span><span class="chip">prompt</span></div><article class="pcard" id="agent-design"><div class="phead"><b>任务拆解与智能体设计</b><span>深度思考</span></div><p class="muted">判断该不该用 Agent，并把步骤、上下文和人工接管点定清楚</p><pre class="prompt">【角色】你是设计过多个生产级 Agent 系统的架构师，见过太多「demo 惊艳、上线翻车」的项目。
+【背景】下面是我要自动化的任务与现有条件，边界可能没说清。
+【输入】{{problem}}
+【任务】
+1) 判断该任务是否适合用 Agent，给出「适合/不适合/部分适合」及理由；
+2) 拆成最小步骤序列，标注每步的输入、输出、失败模式；
+3) 给角色分工（单 Agent 还是多 Agent）与上下文传递方式；
+4) 定义成功标准、人工接管点和成本上限。
+【约束】
+- 不假设我已有的模型、框架和预算，缺失处写「待确认」；
+- 不编造工具能力与 API 名称，不确定处标注「待核实」；
+- 能用确定性代码解决的步骤不要交给模型，必须明确指出。
+【输出格式】按「适用性判断 / 步骤表 / 角色与上下文 / 成功标准与兜底」输出；步骤表列名：步骤 | 输入 | 动作 | 输出 | 失败模式 | 是否需要人工确认。</pre><details><summary>为什么这样写</summary><p>先写清成功标准和「不许做的事」，再谈用几个 Agent，否则拆出来的都是空壳。</p></details></article><article class="pcard" id="agent-tools"><div class="phead"><b>工具与函数契约设计</b><span>深度思考</span></div><p class="muted">让模型知道什么时候调、怎么填参、错了怎么办</p><pre class="prompt">【角色】你是写过大量 function calling 契约的后端工程师，深知模糊的 schema 会让模型胡乱填参。
+【背景】下面是我要暴露给模型的能力清单，部分接口还没定稿。
+【输入】{{problem}}
+【任务】
+1) 把能力拆成粒度合适的工具，避免一个工具做五件事；
+2) 为每个工具写 JSON Schema：字段名、类型、必填、取值范围、示例；
+3) 定义错误返回结构与重试语义（可重试、不可重试、需人工）；
+4) 指出 3 个最容易导致误调用的设计点并给出修正。
+【约束】
+- 不编造我未提供的接口地址、鉴权方式和字段，缺失处写「待确认」；
+- 所有写操作必须考虑幂等与二次确认；
+- schema 必须能直接使用，不写「参数若干」这类占位描述。
+【输出格式】按「工具清单 / 每个工具的 JSON Schema / 错误与重试约定 / 风险点」输出；Schema 用 JSON 形式给出，字段说明写进 description。</pre><details><summary>为什么这样写</summary><p>把每个工具的入参、返回、错误码和幂等性写全，模型调错工具多半是契约没写清。</p></details></article><article class="pcard" id="agent-workflow"><div class="phead"><b>自动化流程与脚本</b><span>上传代码/日志 · 深度思考</span></div><p class="muted">让流程跑得住，而不是一失败就静默</p><pre class="prompt">【角色】你是做业务流程自动化的工程师，写过大量工作流与脚本，最怕「失败静默」。
+【背景】下面是我要自动化的流程与现有系统，部分环节还靠人工。
+【输入】{{problem}}
+【任务】
+1) 画出流程步骤与数据流向，标出人工节点；
+2) 为每步指定实现方式：脚本、API、人工或模型；
+3) 设计错误处理：重试次数、退避策略、告警渠道、死信处理；
+4) 给出最小可运行版本，以及后续可迭代项。
+【约束】
+- 不编造系统 API、字段和权限模型，未确认处标注「待核实」；
+- 涉及删除、付款、对外发送的动作必须加人工确认；
+- 密钥与个人信息不得写进代码或日志，需说明存放方式。
+【输出格式】按「流程步骤表 / 实现方式 / 错误处理 / MVP 范围」输出；步骤表列名：序号 | 步骤 | 触发方式 | 实现方式 | 输入 | 输出 | 失败处理。</pre><details><summary>为什么这样写</summary><p>把触发条件、数据来源和失败后要通知谁写清，工作流才跑得住。</p></details></article><article class="pcard" id="agent-eval"><div class="phead"><b>提示词与智能体评测</b><span>深度思考 · 上传样本</span></div><p class="muted">用可复现的评测集代替「感觉好多了」</p><pre class="prompt">【角色】你是做 AI 应用评测的工程师，坚持「没有测试集就没有优化」。
+【背景】下面是我的智能体或提示词与业务目标，可能还没有评测集。
+【输入】{{problem}}
+【任务】
+1) 把业务目标翻译成 3-5 个可打分维度，每个维度给判定标准；
+2) 设计评测集：覆盖正常、边界、对抗、应拒答四类，各给示例构造方法；
+3) 给评测流程：单次评测、回归对比、人工抽检比例；
+4) 列出当前提示词最可能失效的 3 个场景与改法。
+【约束】
+- 不编造评测分数与线上指标，缺数据时给方案并标注「待实测」，指标口径不确定处标注「待核实」；
+- 判定标准必须能被第三人复现，避免「回答是否优质」这类主观项；
+- 涉及模型能力对比时保持模型无关，不指定具体产品。
+【输出格式】按「评分维度表 / 评测集设计 / 评测流程 / 失效场景」输出；维度表列名：维度 | 判定标准 | 打分方式(0-2) | 样本数 | 通过线。</pre><details><summary>为什么这样写</summary><p>先定 20 条真实输入和判定标准，再谈优化，否则永远只能说「感觉好多了」。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%BB%BB%E5%8A%A1%E6%8B%86%E8%A7%A3%E4%B8%8E%E6%99%BA%E8%83%BD%E4%BD%93%E8%AE%BE%E8%AE%A1#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

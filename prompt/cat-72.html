@@ -1,0 +1,49 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>复盘提示词（6 条） | 模选 ModelPick</title><meta name="description" content="复盘场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-72.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="复盘提示词（6 条）"><meta property="og:description" content="复盘场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-72.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="复盘提示词（6 条）"><meta name="twitter:description" content="复盘场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"复盘提示词","description":"复盘场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 复盘</p><h1>复盘提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">复盘</span><span class="chip">事故</span><span class="chip">根因</span><span class="chip">改进</span><span class="chip">SOP</span><span class="chip">项目</span></div><article class="pcard" id="p5-postmortem-diagnose"><div class="phead"><b>项目复盘与改进：先诊断再下结论</b><span>深度思考</span></div><p class="muted">先定位问题，不急着给方案（把一次经历变成可复用的组织资产）</p><pre class="prompt">【角色】你是主持过多次无责复盘的项目负责人，先还原事实再找系统原因。
+【输入】项目/事故经过、目标、结果、参与方与时间线：
+{{problem}}
+【任务】
+1) 用 3 句话复述目标、对象和成功标准，指出 2 处歧义；
+2) 按影响面列出 3 个最可能的问题或机会，每个给一条证据；
+3) 给出验证顺序：先查什么、再查什么、各自需要什么数据。
+【约束】不追责、不写无法验证的动作；事实与推测分开；不编造时间点；不确定的信息标注「待核实」，不要编造。
+【输出格式】按「目标复述 / 3 个问题 / 验证顺序」三节输出，总字数 600 以内；问题用表格：问题 | 证据 | 影响 | 验证成本。</pre><details><summary>为什么这样写</summary><p>诊断型提示词把「下结论」推迟到证据之后，避免模型一上来就给通用建议。 这条围绕「项目复盘与改进」的具体场景，要求引用原文/数据并给出可验收的输出。</p></details></article><article class="pcard" id="p5-postmortem-plan"><div class="phead"><b>项目复盘与改进：给三套可执行方案</b><span>深度思考</span></div><p class="muted">在多个方案之间做取舍（把一次经历变成可复用的组织资产）</p><pre class="prompt">【角色】你是主持过多次无责复盘的项目负责人，先还原事实再找系统原因。
+【输入】项目/事故经过、目标、结果、参与方与时间线：
+{{problem}}
+【任务】
+1) 给 3 套可选方案，每套写核心动作、适用前提和最小启动条件；
+2) 用表格对比成本、周期、风险、可逆性和对组织的要求；
+3) 推荐一套，并写清什么信号出现时应该换方案。
+【约束】不追责、不写无法验证的动作；事实与推测分开；不编造时间点；不确定的信息标注「待核实」，不要编造。
+【输出格式】按「3 套方案 / 对比表 / 推荐与止损」输出；对比表列名固定：方案 | 核心动作 | 成本 | 周期 | 主要风险 | 可逆性。</pre><details><summary>为什么这样写</summary><p>方案型提示词强制比较「代价」和「退出条件」，避免只给一个看似正确的答案。 这条围绕「项目复盘与改进」的具体场景，要求引用原文/数据并给出可验收的输出。</p></details></article><article class="pcard" id="p5-postmortem-draft"><div class="phead"><b>项目复盘与改进：写成可直接用的稿子</b><span>深度思考</span></div><p class="muted">拿到一份能直接改的成稿（把一次经历变成可复用的组织资产）</p><pre class="prompt">【角色】你是主持过多次无责复盘的项目负责人，先还原事实再找系统原因。
+【输入】项目/事故经过、目标、结果、参与方与时间线：
+{{problem}}
+【任务】
+1) 先给结论，再给 3 层依据，每层配一个具体例子或数据；
+2) 按读者关心的问题组织段落，不按时间流水账；
+3) 标出需要补数据、补案例或需要领导确认的地方。
+【约束】不追责、不写无法验证的动作；事实与推测分开；不编造时间点；不确定的信息标注「待核实」，不要编造。
+【输出格式】直接输出可交付正文，分 3-5 节，800-1200 字；文末单列「待核实清单」，没有则写「无」。</pre><details><summary>为什么这样写</summary><p>成稿型提示词规定结构、字数和待核实清单，减少「看起来完整但没法用」的输出。 这条围绕「项目复盘与改进」的具体场景，要求引用原文/数据并给出可验收的输出。</p></details></article><article class="pcard" id="p5-postmortem-audit"><div class="phead"><b>项目复盘与改进：按风险等级审查</b><span>深度思考</span></div><p class="muted">找出会出事的地方（把一次经历变成可复用的组织资产）</p><pre class="prompt">【角色】你是主持过多次无责复盘的项目负责人，先还原事实再找系统原因。
+【输入】项目/事故经过、目标、结果、参与方与时间线：
+{{problem}}
+【任务】
+1) 按高/中/低列出问题，引用原文、数据或具体做法作为证据；
+2) 每个问题给最小修改建议，并标明能否单独上线/发送；
+3) 单独列出「这份材料不能证明的 3 个结论」。
+【约束】不追责、不写无法验证的动作；事实与推测分开；不编造时间点；不确定的信息标注「待核实」，不要编造。
+【输出格式】按「风险清单表 / 修改建议 / 不能下的结论」输出；表列名：等级 | 位置 | 问题 | 证据 | 修改建议 | 可否单独处理。</pre><details><summary>为什么这样写</summary><p>审查型提示词要求证据和等级，避免模型用「可能存在风险」这类无法验收的话。 这条围绕「项目复盘与改进」的具体场景，要求引用原文/数据并给出可验收的输出。</p></details></article><article class="pcard" id="p5-postmortem-teach"><div class="phead"><b>项目复盘与改进：讲给外行听</b><span>深度思考</span></div><p class="muted">让不懂的人也能复述（把一次经历变成可复用的组织资产）</p><pre class="prompt">【角色】你是主持过多次无责复盘的项目负责人，先还原事实再找系统原因。
+【输入】项目/事故经过、目标、结果、参与方与时间线：
+{{problem}}
+【任务】
+1) 用一个生活类比讲清它解决什么问题；
+2) 给一个正例和一个反例，说明边界；
+3) 出 3 道由浅入深的题，先别给答案，等我作答。
+【约束】不追责、不写无法验证的动作；事实与推测分开；不编造时间点；不确定的信息标注「待核实」，不要编造。
+【输出格式】按「类比 / 正例 / 反例 / 3 道题」输出；讲完停住，不要一次性把答案说完。</pre><details><summary>为什么这样写</summary><p>教学型提示词用类比+反例+自测，逼模型把概念讲到可复述，而不是堆术语。 这条围绕「项目复盘与改进」的具体场景，要求引用原文/数据并给出可验收的输出。</p></details></article><article class="pcard" id="p5-postmortem-retro"><div class="phead"><b>项目复盘与改进：复盘成改进清单</b><span>深度思考</span></div><p class="muted">把经历变成下次能用的动作（把一次经历变成可复用的组织资产）</p><pre class="prompt">【角色】你是主持过多次无责复盘的项目负责人，先还原事实再找系统原因。
+【输入】项目/事故经过、目标、结果、参与方与时间线：
+{{problem}}
+【任务】
+1) 按时间线还原事实，区分事实与推测；
+2) 用 5 Why 找 2-3 条系统性根因；
+3) 给改进动作表：动作 | 负责人 | 截止时间 | 如何验证有效。
+【约束】不追责、不写无法验证的动作；事实与推测分开；不编造时间点；不确定的信息标注「待核实」，不要编造。
+【输出格式】按「时间线 / 根因 / 改进动作表」输出；动作不超过 6 条，删除无法验证的「加强意识」。</pre><details><summary>为什么这样写</summary><p>复盘型提示词把事实、根因、动作分开，避免变成追责或写检查。 这条围绕「项目复盘与改进」的具体场景，要求引用原文/数据并给出可验收的输出。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98%E4%B8%8E%E6%94%B9%E8%BF%9B%EF%BC%9A%E5%85%88%E8%AF%8A%E6%96%AD%E5%86%8D%E4%B8%8B%E7%BB%93%E8%AE%BA#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

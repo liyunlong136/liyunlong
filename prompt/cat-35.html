@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>日常法律提示词（6 条） | 模选 ModelPick</title><meta name="description" content="日常法律场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-35.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="日常法律提示词（6 条）"><meta property="og:description" content="日常法律场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-35.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="日常法律提示词（6 条）"><meta name="twitter:description" content="日常法律场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"日常法律提示词","description":"日常法律场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 日常法律</p><h1>日常法律提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">租房</span><span class="chip">押金</span><span class="chip">催告</span><span class="chip">合同</span><span class="chip">维权</span><span class="chip">证据</span><span class="chip">劳动仲裁</span><span class="chip">离职</span><span class="chip">赔偿</span><span class="chip">加班费</span></div><article class="pcard" id="p3-lw-deposit"><div class="phead"><b>押金被扣：写一份催告函</b><span>深度思考</span></div><p class="muted">把退押金纠纷写成有理有据、能留证的书面催告</p><pre class="prompt">【角色】你是做房屋租赁纠纷多年的执业律师，写催告函只讲三件事：合同依据、事实、期限。
+【输入】租房和退租的情况：合同怎么约定、扣了多少、对方理由、我有哪些证据：
+{{problem}}
+【任务】
+1) 梳理时间线：入住、退租、交接、对方答复各是什么时候；
+2) 找出合同和法条里对我有利的依据，写明是哪一条、大致内容；
+3) 写一份 300-500 字的催告函，含事实、依据、要求、期限、后续措施；
+4) 列出我还缺哪些证据，以及怎么补：聊天记录、照片、转账凭证；
+5) 给两条谈判底线：可以让什么、不能让什么。
+【约束】不虚构事实和证据，缺的标「待补」；不承诺胜诉；法条不确定时写「需核实具体条文」；不使用威胁性语言。
+【输出格式】按「时间线 / 有利依据 / 催告函正文 / 证据清单 / 谈判底线」输出；催告函单独成段，可直接复制。</pre><details><summary>为什么这样写</summary><p>押金纠纷靠吵架没用，靠的是时间线、条款和期限。提示词先梳理事实再找依据，最后产出一封可直接发出的催告函，并附上还缺哪些证据。</p></details></article><article class="pcard" id="p3-lw-arbitration"><div class="phead"><b>劳动仲裁：请求事项怎么写</b><span>深度思考</span></div><p class="muted">把劳动争议拆成可受理的请求项和对应证据</p><pre class="prompt">【角色】你是代理过大量劳动争议的律师，写仲裁申请的第一原则是：一项请求对应一个计算方式和一组证据。
+【输入】我的入职离职时间、工资结构、争议点、手上有的材料：
+{{problem}}
+【任务】
+1) 把争议拆成请求项：工资、加班费、补偿金、社保等，每项写计算方式和金额区间；
+2) 每项配证据：已经有什么、还缺什么、怎么补；
+3) 判断仲裁时效，指出哪几项可能已经过了；
+4) 写申请书的事实与理由部分，400 字内，只写事实不写情绪；
+5) 列 5 件开庭前必须准备的事。
+【约束】不编造工资和考勤数据；金额算法必须写出来让我核对；当地口径不确定的标「需核实」；不承诺结果。
+【输出格式】按「请求项表 / 证据对应 / 时效判断 / 事实与理由 / 开庭准备」输出；请求项表列：请求 | 金额算法 | 证据 | 风险。</pre><details><summary>为什么这样写</summary><p>仲裁输在请求写不清、金额算不出、证据对不上。提示词要求每项请求配一个计算方式和一组证据，并先做时效判断，避免带着过期请求进场。</p></details></article><article class="pcard" id="p3-lw-sued"><div class="phead"><b>被起诉了：先做应诉时间表</b><span>深度思考</span></div><p class="muted">收到起诉材料后，把期限、动作和要准备的材料排清楚</p><pre class="prompt">【角色】你是做民事诉讼多年的律师，接到案子的第一件事是把所有法定期限标到日历上。
+【输入】我收到的材料类型、送达时间、案由、对方的诉求：
+{{problem}}
+【任务】
+1) 列关键期限：举证、答辩、开庭、上诉，各从哪天算、还剩几天；
+2) 判断有没有反诉或管辖权异议的空间，写清条件和代价；
+3) 列答辩要点：对方必须证明哪几件事，我有哪些反驳方向；
+4) 给证据清单模板：证明目的 | 材料 | 有无 | 怎么取得；
+5) 给一份开庭前的准备清单。
+【约束】不预测判决结果；日期按我给的送达日推算并标注「以法院文书为准」；不编造法条编号；不替代正式法律意见。
+【输出格式】按「期限表 / 反诉与管辖 / 答辩要点 / 证据清单 / 开庭准备」输出；期限表列：事项 | 起算日 | 截止日 | 依据。</pre><details><summary>为什么这样写</summary><p>被起诉最怕的是错过期限。提示词第一件事就是把举证、答辩、开庭的日期推算出来，再谈反诉和管辖，让应诉从慌乱变成一张可执行的日历。</p></details></article><article class="pcard" id="p3-lw-iou"><div class="phead"><b>借条与转账：怎么写站得住</b><span>深度思考</span></div><p class="muted">把民间借贷的凭证写成日后能举证的形式</p><pre class="prompt">【角色】你是办过大量民间借贷案件的律师，最常看到的败诉原因是借条写得太简单。
+【输入】借钱的对象、金额、用途、期限、利息约定、支付方式：
+{{problem}}
+【任务】
+1) 先指出这笔借款在我的描述里有哪些举证风险；
+2) 给一份借条模板，写清必备要素：身份信息、金额大小写、交付方式、期限、利息、违约；
+3) 给交付环节的操作建议：转账备注怎么写、要不要另收收据；
+4) 列 5 个常见坑：现金交付、他人代收、口头约定利息等；
+5) 给一份到期不还时的处理顺序。
+【约束】利率必须提示法定上限并让我核实当地口径；不帮助规避法律；不虚构事实；模板留空处标「填」。
+【输出格式】按「风险点 / 借条模板 / 交付建议 / 五个坑 / 催收顺序」输出；模板单独成段。</pre><details><summary>为什么这样写</summary><p>借贷纠纷的败诉原因往往不是没借钱，而是借条写得太简单。提示词先指出举证风险，再给含必备要素的模板，并把交付环节的操作也一起补上。</p></details></article><article class="pcard" id="p3-lw-ecom"><div class="phead"><b>网购纠纷：三级投诉话术</b><span>深度思考</span></div><p class="muted">按商家、平台、监管三级推进，每步都有话术和留证</p><pre class="prompt">【角色】你是做消费维权的顾问，处理顺序是先固定证据，再走平台，最后才是监管和诉讼。
+【输入】我买的东西、出的问题、商家和平台的答复、我有哪些截图：
+{{problem}}
+【任务】
+1) 判断属于哪种性质：质量问题、虚假宣传、不发货、拒绝退货，并说明哪种诉求可行；
+2) 写三段话术：给商家的、给平台客服的、给监管投诉的，各 150 字内；
+3) 每段标出要附什么证据，以及哪一句诉求最有效；
+4) 给一个升级时间表：几天没回应就进入下一级；
+5) 指出我现在的说法里哪些会被对方抓住反驳。
+【约束】不夸大事实，不建议恶意投诉或刷差评；不承诺退款成功；金额和时间的表述必须来自我提供的信息。
+【输出格式】按「性质判断 / 三段话术 / 证据与诉求 / 升级时间表 / 话术风险」输出。</pre><details><summary>为什么这样写</summary><p>维权失败常常是一上来就把话说绝，把可协商的路堵死。提示词先定性再分三级输出话术，每级标明附什么证据、几天不回应就升级。</p></details></article><article class="pcard" id="p3-lw-accident"><div class="phead"><b>事故现场：先记这八项</b><span>深度思考</span></div><p class="muted">在现场用清单固定关键信息，避免事后说不清</p><pre class="prompt">【角色】你是处理交通事故多年的理赔顾问，现场只做一件事：把之后会扯皮的点先记下来。
+【输入】事故的大致经过、地点、有没有人伤、双方车辆和保险情况：
+{{problem}}
+【任务】
+1) 给一份现场必记 8 项清单：时间地点、双方证件、保险、碰撞部位、路面标线、证人、行车记录、报警编号；
+2) 说明每项为什么要记，之后会用来证明什么；
+3) 给拍照顺序：先拍什么后拍什么、几个角度；
+4) 说明有人伤和无人伤两种情况的处理顺序差异；
+5) 列 3 句在现场不该说的话。
+【约束】不判断责任比例；不指导私了或离开现场；涉及人伤一律先报警和就医；不替代交警认定。
+【输出格式】按「必记八项 / 用途说明 / 拍照顺序 / 两种情形 / 不该说的话」输出；八项用编号列表。</pre><details><summary>为什么这样写</summary><p>现场只有十几分钟，事后扯皮的点却很多。提示词给一份八项必记清单并说明每项之后拿来证明什么，再固定拍照顺序，让证据链在现场就成型。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%8A%BC%E9%87%91%E8%A2%AB%E6%89%A3%EF%BC%9A%E5%86%99%E4%B8%80%E4%BB%BD%E5%82%AC%E5%91%8A%E5%87%BD#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

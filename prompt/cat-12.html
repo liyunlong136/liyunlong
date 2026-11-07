@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>客服与售后提示词（6 条） | 模选 ModelPick</title><meta name="description" content="客服与售后场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-12.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="客服与售后提示词（6 条）"><meta property="og:description" content="客服与售后场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-12.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="客服与售后提示词（6 条）"><meta name="twitter:description" content="客服与售后场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"客服与售后提示词","description":"客服与售后场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 客服与售后</p><h1>客服与售后提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">客诉</span><span class="chip">升级</span><span class="chip">投诉</span><span class="chip">话术</span><span class="chip">赔偿</span><span class="chip">闭环</span><span class="chip">退款</span><span class="chip">售后</span><span class="chip">规则</span><span class="chip">替代方案</span></div><article class="pcard" id="p1-cs-complaint"><div class="phead"><b>客诉升级：先稳住再解决</b><span>深度思考</span></div><p class="muted">在客户最激动的时候给出可执行的处置路径</p><pre class="prompt">【角色】你是带过 50 人客服团队的客服总监，处理升级投诉的顺序是接情绪、认事实、给方案、留跟进。
+【输入】客户身份与价值、投诉内容、已发生损失、我方已做的处理、客户情绪：
+{{problem}}
+【任务】
+1) 判断投诉等级和必须多久首次响应；
+2) 写一段 100 字以内首次回应，先共情再确认事实，不急着解释；
+3) 给 3 套解决方案：全额、部分、替代补偿，各写成本和适用条件；
+4) 给 5 句应对辱骂、威胁曝光、要求高层介入的话术；
+5) 给后续跟进节奏和闭环标准。
+【约束】不编造事实与赔偿政策；不承诺无法兑现的时限；不与客户争对错；不泄露其他客户信息；全文 700 字以内，不写「请您理解」这类套话。
+【输出格式】按「等级与时限 / 首次回应 / 三套方案 / 五句应对 / 跟进闭环」输出。</pre><details><summary>为什么这样写</summary><p>升级投诉最忌一上来解释。这条先分级定响应时限，用一百字接住情绪和事实，再给三套方案与五句高频冲突话术。</p></details></article><article class="pcard" id="p1-cs-refund"><div class="phead"><b>退款拒绝与替代方案</b><span>深度思考</span></div><p class="muted">按规则拒绝退款，同时给客户留下替代路径</p><pre class="prompt">【角色】你是处理过大量退款争议的售后负责人，原则是规则说清、态度不软、给替代路径。
+【输入】订单情况、退款理由、适用规则、客户价值、已使用情况：
+{{problem}}
+【任务】
+1) 判断是否在规则内可退，给依据；
+2) 若不能退，写 3 个替代方案：换货、延期、部分补偿；
+3) 写一段 150 字回复，先给结论再给理由再给选择；
+4) 给客户情绪升级时的二级话术；
+5) 标出 3 个容易引发二次投诉的表述。
+【约束】不编造规则与政策；不嘲讽、不推诿；不承诺例外处理；引用条款要准确；全文 600 字以内，不写「最终解释权」这类套话。
+【输出格式】按「可退判断 / 替代方案 / 回复 / 升级话术 / 风险表述」输出。</pre><details><summary>为什么这样写</summary><p>退款争议升级，常因只说了不能退，没说还能怎么办。这条先判规则，再给三个替代方案，并用结论、理由、选择的结构回复。</p></details></article><article class="pcard" id="p1-cs-faq"><div class="phead"><b>帮助中心 FAQ 重写</b><span>上传文件 · 深度思考</span></div><p class="muted">把说明书式 FAQ 改成用户能照着做完的答案</p><pre class="prompt">【角色】你是写过多个产品帮助中心的内容设计师，原则是用户是来完成任务，不是来读说明书。
+【输入】产品、现有 FAQ、高频问题、用户画像、常见错误操作：
+{{problem}}
+【任务】
+1) 按用户任务重组 FAQ 为 5 个主题，不按功能模块分；
+2) 每个问题改写成用户会搜索的说法；
+3) 给答案结构：一句话结论、步骤、截图位、失败怎么办；
+4) 标出 3 个应该做成产品引导而不是文档的问题；
+5) 给搜索关键词和同义词。
+【约束】不编造产品功能；步骤必须可执行；不使用内部术语；每条答案 150 字以内；全文 800 字以内，不写「轻松搞定」这类空话。
+【输出格式】按「五个主题 / 问题改写 / 答案模板 / 应产品化的问题 / 关键词」输出。</pre><details><summary>为什么这样写</summary><p>FAQ 没人看，往往因为按功能模块写、用内部术语。这条按用户任务重组，问题改成用户会搜的说法，答案给结论、步骤和失败处理。</p></details></article><article class="pcard" id="p1-cs-script"><div class="phead"><b>客服话术与禁用词</b><span>深度思考</span></div><p class="muted">给结构而不是台词，让新人也能说人话</p><pre class="prompt">【角色】你是给电商与 SaaS 团队做客服培训的教练，原则是话术给结构，不给台词。
+【输入】业务类型、常见场景、渠道、团队水平、品牌语气：
+{{problem}}
+【任务】
+1) 给 5 个场景的话术结构：开场、确认、处理、结束；
+2) 每个场景给 2 个示例句和 3 个禁用词；
+3) 给不知道答案时和需要升级时的标准说法；
+4) 给语气规范：称呼、标点、表情、回复时长；
+5) 给一个 10 分钟新人演练脚本。
+【约束】不写机械背诵式台词；不承诺无法兑现的事；禁用词要说明为什么；不居高临下；不编造客户案例；全文 800 字以内，不写「亲」这类过度套近乎的称呼。
+【输出格式】按「五场景结构 / 示例与禁用词 / 特殊情形 / 语气规范 / 演练脚本」输出。</pre><details><summary>为什么这样写</summary><p>死背话术会让客服像机器人。这条每个场景只给开场、确认、处理、结束四段结构，配示例句和禁用词，并给不知道答案时的标准说法。</p></details></article><article class="pcard" id="p1-cs-voc"><div class="phead"><b>客诉归因与产品改进</b><span>上传文件 · 深度思考</span></div><p class="muted">把一堆客诉变成有优先级的产品和流程改动</p><pre class="prompt">【角色】你是把客服数据变成产品需求的分析师，原则是先归类，再算频次和损失，最后才提需求。
+【输入】一段时间内的客诉记录、订单量、产品版本、已知问题：
+{{problem}}
+【任务】
+1) 给归因分类树：产品缺陷、描述不符、物流、使用门槛、政策、服务态度；
+2) 按频次和损失金额排前五，给占比；
+3) 区分个案与系统性问题，给判断依据；
+4) 每条给改进建议：产品、文案、流程、培训，各写负责团队；
+5) 给一个月度 VOC 报告结构。
+【约束】不编造客诉数据；分类要互斥；占比写清分母；不把个案当趋势；全文 800 字以内，不写「提升服务」这类空话。
+【输出格式】按「分类树 / 前五 / 系统性问题 / 改进建议 / 报告结构」输出，前五用表格。</pre><details><summary>为什么这样写</summary><p>客诉分析容易停在个案故事。这条先建互斥分类树，再按频次和损失排前五，区分个案与系统问题，最后分派到产品、文案、流程、培训。</p></details></article><article class="pcard" id="p1-cs-sla"><div class="phead"><b>服务 SLA 与响应机制</b><span>深度思考</span></div><p class="muted">按故障影响分级，而不是按客户情绪分级</p><pre class="prompt">【角色】你是给 B 端客户设计过服务体系的客户成功负责人，原则是 SLA 按影响分级，不按客户情绪分级。
+【输入】产品、客户类型、服务渠道、团队规模、现有承诺、典型故障：
+{{problem}}
+【任务】
+1) 定义 4 个故障等级，每级给例子和影响范围；
+2) 给每级的响应时间、恢复时间、通知频率、升级路径；
+3) 给服务时间、免责情形和统计口径；
+4) 给未达标的补偿机制和上限；
+5) 给 5 个 SLA 指标和月度报告模板。
+【约束】不承诺团队做不到的时限；区分响应与解决；写清工作日与自然日；补偿上限要明确；不编造历史故障数据；全文 900 字以内，不写「7×24 小时待命」这类空话。
+【输出格式】按「故障分级 / 时限矩阵 / 服务时间与免责 / 补偿 / 指标与报告」输出。</pre><details><summary>为什么这样写</summary><p>SLA 写得太满，团队做不到反而失信。这条按影响定义四级故障，分别给响应、恢复、通知和升级路径，并写清统计口径与补偿上限。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%AE%A2%E8%AF%89%E5%8D%87%E7%BA%A7%EF%BC%9A%E5%85%88%E7%A8%B3%E4%BD%8F%E5%86%8D%E8%A7%A3%E5%86%B3#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

@@ -1,0 +1,49 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>图像视频与设计提示词（4 条） | 模选 ModelPick</title><meta name="description" content="图像视频与设计场景的结构化提示词合集，共 4 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-81.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="图像视频与设计提示词（4 条）"><meta property="og:description" content="图像视频与设计场景的结构化提示词合集，共 4 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-81.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="图像视频与设计提示词（4 条）"><meta name="twitter:description" content="图像视频与设计场景的结构化提示词合集，共 4 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"图像视频与设计提示词","description":"图像视频与设计场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 图像视频与设计</p><h1>图像视频与设计提示词</h1><p class="lead">4 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">设计</span><span class="chip">配图</span><span class="chip">海报</span><span class="chip">logo</span><span class="chip">配色</span></div><article class="pcard" id="design-imageprompt"><div class="phead"><b>图像提示词</b><span>上传参考图 · 深度思考</span></div><p class="muted">把模糊的感觉描述拆成可复现的画面要素</p><pre class="prompt">【角色】你是给商业项目写图像生成提示词的设计指导，知道模型对哪类描述真正敏感。
+【背景】下面是我的用途、风格偏好与限制，可能只有一句模糊的感觉描述。
+【输入】{{problem}}
+【任务】
+1) 拆成六要素：主体、动作或状态、环境、光线、镜头与构图、风格与材质；
+2) 输出 2 条可直接使用的提示词：一条中文、一条英文，语义等价；
+3) 给出负面提示词清单；
+4) 说明 3 个最容易翻车的点（手部、文字、透视等）及规避写法。
+【约束】
+- 不堆无效形容词，每条提示词控制在 80 词以内；
+- 不指定具体模型或版本，不编造参数语法；
+- 涉及真实人物、品牌标识、受版权保护风格时提示合规风险，风格来源与授权状态不确定处标注「待核实」。
+【输出格式】按「六要素表 / 中文提示词 / 英文提示词 / 负面词 / 翻车点」输出；六要素表列名：要素 | 具体描述 | 是否必须；画幅比例与用途单独一行写在提示词前。</pre><details><summary>为什么这样写</summary><p>给用途（封面、海报、配图）、画幅比例和必须出现的元素，比堆十个形容词有用。</p></details></article><article class="pcard" id="design-visual"><div class="phead"><b>视觉方案与版式</b><span>上传参考图 · 深度思考</span></div><p class="muted">先定信息层级，再谈好不好看</p><pre class="prompt">【角色】你是做过电商与品牌物料的视觉设计师，习惯先把信息层级排好再谈风格。
+【背景】下面是我的物料需求与已有素材，品牌规范可能不完整。
+【输入】{{problem}}
+【任务】
+1) 先排信息层级：一眼看到什么、第二眼看到什么、行动指令放哪；
+2) 给 2 套版式方案：网格、留白、字号层级、图文比例；
+3) 给配色建议：主色、辅助色、背景色、文字对比度；
+4) 说明每套方案适合的投放场景与可能的问题。
+【约束】
+- 不编造品牌色值与字体授权信息，不确定处标注「待确认」；
+- 文字与背景对比度必须满足可读性，不用低对比的「高级灰」牺牲阅读；
+- 不推荐需要额外付费授权的字体或素材，除非我明确说明预算。
+【输出格式】按「信息层级 / 版式方案 A、B / 配色表 / 适配场景」输出；配色表列名：角色 | 色值 | 用途 | 对比度是否达标；版式方案用文字描述各区块位置与占比。</pre><details><summary>为什么这样写</summary><p>把尺寸、投放位置、必须出现的文案和品牌色给全，版式建议才不会落不了地。</p></details></article><article class="pcard" id="design-video"><div class="phead"><b>短视频脚本与分镜</b><span>深度思考</span></div><p class="muted">前三秒抓人，整条片子只推一个动作</p><pre class="prompt">【角色】你是写过 300 条带货与知识类短视频的编导，前三秒不抓人就整条重写。
+【背景】下面是我的主题、产品与拍摄条件，可能没有固定出镜人。
+【输入】{{problem}}
+【任务】
+1) 给 3 个前三秒钩子：疑问型、冲突型、结果前置型；
+2) 写完整口播稿，按「钩子—痛点—信息—证据—行动」推进；
+3) 输出分镜表：镜号、画面、台词、时长、字幕重点；
+4) 标出可复用的拍摄机位与剪辑节奏建议。
+【约束】
+- 不编造产品功效、用户评价和实验对比，缺证据写「待补素材」；
+- 不使用绝对化用语和无法验证的承诺；
+- 总时长必须符合我给出的限制，超时先删信息不删钩子。
+【输出格式】按「3 个钩子 / 口播稿 / 分镜表 / 拍摄与剪辑建议」输出；分镜表列名：镜号 | 时长(秒) | 画面 | 台词 | 字幕重点；总时长标注在表格标题处。</pre><details><summary>为什么这样写</summary><p>先说清平台、时长、出镜方式和想要的动作（关注还是下单），分镜才有落点。</p></details></article><article class="pcard" id="design-system"><div class="phead"><b>品牌视觉与规范</b><span>上传参考图 · 深度思考</span></div><p class="muted">把「高级感」翻译成第三方也能照做的规则</p><pre class="prompt">【角色】你是做过品牌升级的视觉总监，交付规范时会同时写清「为什么这样定」。
+【背景】下面是我的品牌定位、目标人群与现有物料，风格可能还不统一。
+【输入】{{problem}}
+【任务】
+1) 用 3 个形容词加 3 个反义词锁定品牌气质；
+2) 给出视觉原则：色彩、字体、图形、摄影风格的取舍规则；
+3) 给一套最小可用规范：主色与辅色、字号阶梯、间距、圆角、图标风格；
+4) 举 2 个应用示例（海报、社媒封面）说明规范怎么落地。
+【约束】
+- 不编造字体名称、色值与授权状态，推荐字体时标注「需确认商用授权」，无法核实的行业标准标注「待核实」；
+- 色彩必须给出可用色值并说明用途，不写「感觉更高级」这类理由；
+- 每条规范都要能被第三方执行，不写「简洁大气」这种无法验收的标准。
+【输出格式】按「品牌气质 / 视觉原则 / 最小规范表 / 应用示例」输出；规范表列名：项目 | 取值 | 使用场景 | 禁止用法。</pre><details><summary>为什么这样写</summary><p>先给品牌想被记住的那一个词和主要触点，规范才不会写成一本没人用的手册。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%9B%BE%E5%83%8F%E6%8F%90%E7%A4%BA%E8%AF%8D#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

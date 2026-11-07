@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>面试求职提示词（6 条） | 模选 ModelPick</title><meta name="description" content="面试求职场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-28.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="面试求职提示词（6 条）"><meta property="og:description" content="面试求职场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-28.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="面试求职提示词（6 条）"><meta name="twitter:description" content="面试求职场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"面试求职提示词","description":"面试求职场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 面试求职</p><h1>面试求职提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">简历</span><span class="chip">求职</span><span class="chip">量化</span><span class="chip">改写</span><span class="chip">筛选</span><span class="chip">摘要</span><span class="chip">自我介绍</span><span class="chip">面试</span><span class="chip">口播</span><span class="chip">追问</span></div><article class="pcard" id="p2-job-resume-bullet"><div class="phead"><b>简历：把职责改成成果</b><span>上传文件 · 深度思考</span></div><p class="muted">每条改成动作加对象加方法加结果</p><pre class="prompt">【角色】你是看过上万份简历的技术招聘负责人，筛简历平均 8 秒，只看&quot;你解决过什么规模的问题&quot;。
+【输入】我的岗位、原始简历条目和想投的方向：
+{{problem}}
+【任务】
+1) 把每条职责改写成&quot;动作 + 对象 + 方法 + 结果&quot;，结果没有数字就标&quot;待补&quot;；
+2) 按与目标岗位的相关度重排，删掉 3 条无关内容；
+3) 标出哪些词是&quot;人人都能写&quot;的空话，例如负责、参与、协助，给替换；
+4) 指出我简历里最容易被追问的 2 条，各给一句准备细节的提示；
+5) 给一版 6 秒能读完的顶部摘要，3 行内。
+【约束】不编造项目规模、数字与职级；没有量化就写清&quot;未量化&quot;；不用&quot;精通&quot;；总长度控制在 1 页。
+【输出格式】按&quot;改写条目表 / 排序与删减 / 空话替换 / 易追问项 / 顶部摘要&quot;输出；条目表列：原句 | 改后 | 缺什么。</pre><details><summary>为什么这样写</summary><p>筛简历只看解决过多大规模的问题。提示词要求逐条改写并删掉无关内容，把&quot;负责、参与&quot;这类人人都能写的词换掉，顶部加六秒摘要。</p></details></article><article class="pcard" id="p2-job-intro-90s"><div class="phead"><b>自我介绍：90 秒讲清你和岗位的关系</b><span>深度思考</span></div><p class="muted">删掉空话并按定位成果动机三步成稿</p><pre class="prompt">【角色】你是做过几百场模拟面试的招聘教练，判断自我介绍的标准是&quot;听完能不能说出你和这岗位的关系&quot;。
+【输入】我的岗位背景、目标职位和现有自我介绍稿：
+{{problem}}
+【任务】
+1) 指出我稿子里&quot;没有信息量&quot;的 3 句，说明为什么；
+2) 给一个 90 秒结构：一句定位 + 一个最相关成果 + 一句为什么是这家；
+3) 按这个结构写一版，字数按每秒 4 字控制在 90 秒内；
+4) 给 2 个不同岗位方向的可替换版本开头；
+5) 标出面试官最可能接着追问的 2 个点。
+【约束】不编造经历与业绩数字；不用&quot;热爱学习&quot;&quot;抗压能力强&quot;这类自评；不背公司简介；不写长句。
+【输出格式】按&quot;三句空话 / 90 秒结构 / 成稿 / 两个替换开头 / 追问点&quot;输出。</pre><details><summary>为什么这样写</summary><p>自我介绍最容易变成履历朗读。提示词先挑出没有信息量的三句，再压成&quot;定位+最相关成果+为什么是这家&quot;，并按口播字数控制时长。</p></details></article><article class="pcard" id="p2-job-star-probe"><div class="phead"><b>行为面：把&quot;我们&quot;改成&quot;我&quot;</b><span>深度思考</span></div><p class="muted">检查四要素并把团队功劳拆成个人动作</p><pre class="prompt">【角色】你是擅长行为面试的面试官，习惯用连续追问把&quot;我们团队&quot;逼成&quot;你做了什么&quot;。
+【输入】我要讲的那段经历和我的四要素草稿：
+{{problem}}
+【任务】
+1) 检查四要素是否齐全：情境、任务、我的动作、结果，缺哪项标出来；
+2) 指出草稿里团队功劳和我的动作混在一起的地方，要求拆开；
+3) 给 5 个连环追问，针对动作细节、判断依据、失败可能，由浅入深；
+4) 给我的回答打分：信息密度、可核查性、与岗位的相关性；
+5) 给一版 250 字内的重写。
+【约束】不替我编造动作与数据；追问必须基于我提供的情节；不把假设说成事实；打分要给依据。
+【输出格式】按&quot;四要素检查 / 功劳拆分 / 五个追问 / 三项打分 / 重写版&quot;输出。</pre><details><summary>为什么这样写</summary><p>行为面失分在说不清自己做了什么。提示词要求拆开团队与个人动作，用五个连环追问压出细节，再按信息密度和可核查性打分。</p></details></article><article class="pcard" id="p2-job-salary"><div class="phead"><b>谈薪：先问区间再给区间</b><span>深度思考</span></div><p class="muted">准备三句话术和压价时的回应</p><pre class="prompt">【角色】你是做过多年薪酬谈判辅导的人力顾问，原则是&quot;先问区间，再给区间，最后谈结构&quot;。
+【输入】我的当前薪资、目标岗位、市场信息和我的底线：
+{{problem}}
+【任务】
+1) 判断我该先报数字还是先问范围，给理由；
+2) 写 3 句应对&quot;你期望多少&quot;的话术：反问版、给区间版、给结构版；
+3) 标出我能谈的非现金项：职级、签字费、远程、培训，各给一句开口方式；
+4) 给一个底线被压时的回应，要求不撕破脸也不松口；
+5) 指出我材料里可能被压价的 2 个弱点及补救。
+【约束】不编造市场薪酬数据，缺数据标&quot;需查招聘平台&quot;；不建议虚报现薪；不给&quot;必须谈到某数字&quot;的硬指令。
+【输出格式】按&quot;报价顺序 / 三句话术 / 非现金项 / 压价回应 / 两个弱点&quot;输出。</pre><details><summary>为什么这样写</summary><p>谈薪崩在第一次报价。提示词先判断该问还是该给，再准备反问、区间、结构三套话术，并标出可谈的非现金项与可能被压价的弱点。</p></details></article><article class="pcard" id="p2-job-gap"><div class="phead"><b>空窗期：40 秒讲清不卖惨</b><span>深度思考</span></div><p class="muted">准备事实型解释和稳定性追问的应答</p><pre class="prompt">【角色】你是做过大量背景核查与面试的招聘经理，对空窗期只关心两件事：这段时间有没有产出、回来是否稳定。
+【输入】我的空窗原因、时长、这段时间做的事和要面的岗位：
+{{problem}}
+【任务】
+1) 判断这个空窗在简历上要不要主动写、写在哪；
+2) 给一段 40 秒的解释：事实一句、做了什么两句、为什么现在回来一句；
+3) 指出我解释里可能被追问的 3 个点，各给一句应答；
+4) 给一个&quot;这段时间产出&quot;的表述方式，学习、兼职、照护都算；
+5) 说明哪些说法会让人怀疑稳定性，给替换。
+【约束】不编造经历与证书；不建议隐瞒或模糊时长；不卖惨；解释不超过 4 句，不许长篇铺垫。
+【输出格式】按&quot;是否写进简历 / 40 秒解释 / 三个追问 / 产出表述 / 危险说法替换&quot;输出。</pre><details><summary>为什么这样写</summary><p>空窗期被追问，本质是怀疑稳定性。提示词把解释压到四句：事实、做了什么、为什么回来，并列出会引发怀疑的说法与替换。</p></details></article><article class="pcard" id="p2-job-case-interview"><div class="phead"><b>案例面：答案不重要拆解才重要</b><span>深度思考</span></div><p class="muted">给出澄清问题、拆解树与结论模板</p><pre class="prompt">【角色】你是常做案例面试的咨询顾问，评估的是&quot;拆解是否有结构&quot;，不是答案是否漂亮。
+【输入】这个案例题和我的初步思路：
+{{problem}}
+【任务】
+1) 先澄清 3 个必要信息：目标、范围、约束，说明为什么要问；
+2) 给我的思路做结构诊断：是自下而上堆信息，还是自上而下拆解；
+3) 给一个拆解树：一层 3 个分支，每个分支再拆 2 层，标注需要的数据；
+4) 指出我漏掉的关键假设，以及假设变化会怎么改结论；
+5) 给一段 30 秒的结论陈述模板：结论、依据、风险。
+【约束】不编造行业数据与市场规模；算数要写出公式；不确定的假设要显式声明；不追求标准答案。
+【输出格式】按&quot;澄清问题 / 结构诊断 / 拆解树 / 关键假设 / 结论模板&quot;输出。</pre><details><summary>为什么这样写</summary><p>案例面考的是拆解是否成树，而不是算得对。提示词先要求澄清三个信息，再把思路分成三层分支并标出关键假设，结论用结论加依据加风险。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E7%AE%80%E5%8E%86%EF%BC%9A%E6%8A%8A%E8%81%8C%E8%B4%A3%E6%94%B9%E6%88%90%E6%88%90%E6%9E%9C#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

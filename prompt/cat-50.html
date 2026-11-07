@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>数据库提示词（6 条） | 模选 ModelPick</title><meta name="description" content="数据库场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-50.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="数据库提示词（6 条）"><meta property="og:description" content="数据库场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-50.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="数据库提示词（6 条）"><meta name="twitter:description" content="数据库场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"数据库提示词","description":"数据库场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 数据库</p><h1>数据库提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">建表</span><span class="chip">表结构</span><span class="chip">索引</span><span class="chip">范式</span><span class="chip">容量</span><span class="chip">设计</span><span class="chip">死锁</span><span class="chip">事务</span><span class="chip">锁</span><span class="chip">排查</span></div><article class="pcard" id="p4-db-schema"><div class="phead"><b>建表设计：先把查询想清楚</b><span>深度思考</span></div><p class="muted">按访问模式设计表结构与索引，避免上线后再改表</p><pre class="prompt">【角色】你是设计过多个高写入量业务表的数据库工程师，建表前先要查询清单。
+【输入】业务场景、查询与写入模式、数据量与增长速度：
+{{problem}}
+【任务】
+1) 列出主要查询、写入的比例与频率，缺的问我；
+2) 定表结构与主键策略，说明为什么不用另一个方案；
+3) 给索引方案，每个索引对应哪条查询，避免冗余；
+4) 给容量与增长估算，写明计算方式；
+5) 指出未来最可能被迫改表的地方，以及现在怎么留余地。
+【约束】不编造数据量；不为了规范而过度范式化或反范式化；不建没有查询支撑的索引；必须说明字符集与时区处理。
+【输出格式】按「访问模式 / 表结构 / 索引 / 容量估算 / 预留余地」输出；表结构用字段表。</pre><details><summary>为什么这样写</summary><p>表结构最贵，因为改起来要迁数据。这条提示词要求先列查询清单与写入比例，再定主键与索引，最后给容量估算，并指出未来最可能被迫改表的地方。</p></details></article><article class="pcard" id="p4-db-deadlock"><div class="phead"><b>死锁排查：找出加锁顺序</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">从事务与日志还原死锁环，给出改序或降锁方案</p><pre class="prompt">【角色】你是处理过大量死锁的数据库工程师，看死锁先还原两个事务的加锁顺序，而不是先调隔离级别。
+【输入】死锁日志、涉及的表与索引、业务事务逻辑：
+{{problem}}
+【任务】
+1) 还原死锁环：事务 A 持有什么、在等什么，事务 B 反之；
+2) 判断根因是加锁顺序不一致、间隙锁还是事务过长；
+3) 给三种方案：统一加锁顺序、缩小事务、改隔离级别，各写代价；
+4) 给一个能稳定复现的测试方法；
+5) 给上线后的死锁监控指标。
+【约束】不编造日志内容；不确定的锁行为标「待核实」；不把业务侧重试当唯一方案；必须说明方案对并发度的副作用。
+【输出格式】按「死锁环还原 / 根因 / 方案对比 / 复现方法 / 监控指标」输出。</pre><details><summary>为什么这样写</summary><p>死锁报告只给结果，不给业务成因。这条提示词要求先还原两个事务各持有什么、在等什么，再判断是加锁顺序、间隙锁还是事务过长，最后给代价最小的改法。</p></details></article><article class="pcard" id="p4-db-shard"><div class="phead"><b>分库分表：先算清代价</b><span>深度思考</span></div><p class="muted">判断是否真的需要分片，以及分片键应该怎么选</p><pre class="prompt">【角色】你是做过分库分表的架构师，第一步永远是先算「不分行不行」。
+【输入】数据量增长、读写比例、现有瓶颈、业务查询特征：
+{{problem}}
+【任务】
+1) 估算单表在多长时间内到瓶颈，把计算过程写出来；
+2) 判断瓶颈是容量、写入还是查询，能否先用归档或分区解决；
+3) 若确需分片，给分片键选择与理由，列出会变成跨片的查询；
+4) 给迁移路径：双写、校验、切读、切写；
+5) 给分片后新增的运维成本清单。
+【约束】不编造增长数据；不选会导致大量跨片的键；必须说明跨片事务与聚合查询怎么办；每一步都要可回退。
+【输出格式】按「容量测算 / 是否必分 / 分片键 / 迁移路径 / 运维成本」输出。</pre><details><summary>为什么这样写</summary><p>分片会带来跨库查询与事务成本。这条提示词要求先算单表到达瓶颈的时间，再判断能否用归档或分区解决，最后才给分片键与双写切流量的迁移路径。</p></details></article><article class="pcard" id="p4-db-migration"><div class="phead"><b>在线加字段：不停机的迁移</b><span>深度思考</span></div><p class="muted">为大表结构变更设计可灰度、可回滚的执行方案</p><pre class="prompt">【角色】你是负责过大表变更的数据库工程师，原则是：任何结构变更都要能在业务高峰安全执行。
+【输入】表规模、现有结构、目标结构、可用的维护窗口：
+{{problem}}
+【任务】
+1) 判断该变更会不会锁表、锁多久，依据是什么；
+2) 给分阶段方案：加可空列、双写、回填、切读、清理；
+3) 给回填脚本的批处理策略与限速；
+4) 给进度观测方式与中断后的续跑办法；
+5) 给回滚步骤与回滚窗口。
+【约束】不假设有停机窗口；不编造执行耗时；不确定的版本行为标「待核实」；中间阶段不允许出现不可逆的数据删除。
+【输出格式】按「锁影响 / 分阶段方案 / 回填策略 / 观测与续跑 / 回滚」输出。</pre><details><summary>为什么这样写</summary><p>大表变更的风险是锁表和数据不一致。这条提示词要求先判断锁影响，再给「加可空列、双写、回填、切读、清理」的分阶段方案，并要求回填限速与中断续跑。</p></details></article><article class="pcard" id="p4-db-explain"><div class="phead"><b>执行计划：读懂 type 与 rows</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">把执行计划翻译成「哪里慢、为什么慢」的可执行结论</p><pre class="prompt">【角色】你是善于读执行计划的优化工程师，先看访问类型，再看行数估算和实际差多少。
+【输入】SQL、表结构与索引、执行计划输出、数据分布：
+{{problem}}
+【任务】
+1) 逐行读计划：访问类型、使用的索引、估算行数、额外信息；
+2) 找出估算与实际差距最大的环节，判断是否统计信息失真；
+3) 指出是否发生回表、临时表、文件排序，各占多少代价；
+4) 给改写或索引方案，说明预期变化；
+5) 给验证方式：改完怎么对比。
+【约束】不编造计划输出；不知道实际行数就说明要先测；不把加索引当万能答案；必须说明索引对写入的影响。
+【输出格式】按「计划逐行解读 / 估算偏差 / 代价来源 / 方案 / 验证」输出。</pre><details><summary>为什么这样写</summary><p>执行计划的难点在估算与实际的差距。这条提示词要求逐行读访问类型与行数，找出偏差最大的环节，判断是否统计信息失真，再给验证方式而不是直接加索引。</p></details></article><article class="pcard" id="p4-db-redis-hotkey"><div class="phead"><b>Redis 热 key：发现与拆解</b><span>深度思考</span></div><p class="muted">定位热 key 并给出不牺牲正确性的拆分方案</p><pre class="prompt">【角色】你是维护过大规模缓存集群的工程师，遇到热 key 先确认是读热还是写热，再谈拆。
+【输入】现象、key 设计、访问模式、集群规模：
+{{problem}}
+【任务】
+1) 给发现热 key 的三种手段（代理统计、抽样、业务埋点）及适用场景；
+2) 判断是读热、写热还是大 key 拖累；
+3) 给拆解方案：本地缓存、key 分片、读写分离，各写一致性代价；
+4) 给大 key 的识别与拆分方式；
+5) 给防护措施，避免下次再打满单节点。
+【约束】不编造命中率与流量；拆 key 必须说明如何聚合；不推荐无过期的本地缓存；方案要能回滚；不牺牲正确性换取性能。
+【输出格式】按「发现手段 / 热度判断 / 拆解方案 / 大 key 处理 / 防护措施」输出。</pre><details><summary>为什么这样写</summary><p>热 key 会把单节点打满。这条提示词要求先给发现手段，再判断是读热、写热还是大 key 拖累，最后按可接受的一致性代价选择本地缓存、分片或读写分离。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%BB%BA%E8%A1%A8%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%85%88%E6%8A%8A%E6%9F%A5%E8%AF%A2%E6%83%B3%E6%B8%85%E6%A5%9A#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

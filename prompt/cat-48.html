@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>后端架构提示词（6 条） | 模选 ModelPick</title><meta name="description" content="后端架构场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-48.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="后端架构提示词（6 条）"><meta property="og:description" content="后端架构场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-48.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="后端架构提示词（6 条）"><meta name="twitter:description" content="后端架构场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"后端架构提示词","description":"后端架构场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 后端架构</p><h1>后端架构提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">幂等</span><span class="chip">重试</span><span class="chip">接口</span><span class="chip">支付</span><span class="chip">并发</span><span class="chip">一致性</span><span class="chip">缓存</span><span class="chip">Redis</span><span class="chip">过期</span><span class="chip">架构</span></div><article class="pcard" id="p4-arch-idempotent"><div class="phead"><b>幂等设计：让重试不出事</b><span>深度思考</span></div><p class="muted">为下单、支付、回调这类接口设计可重试且不重复执行的方案</p><pre class="prompt">【角色】你是做过支付与订单系统 8 年的后端架构师，设计接口的第一条规矩是：任何请求都可能被重发三次。
+【输入】接口用途、调用方、存储与并发情况：
+{{problem}}
+【任务】
+1) 判断该操作属于天然幂等、可加唯一键、还是必须用幂等令牌，说明依据；
+2) 给幂等键设计：由谁生成、放在哪、有效期多长、冲突时返回什么；
+3) 写清首次请求进行中又来了重复请求时怎么处理（锁、状态机、返回原结果）；
+4) 给数据层兜底：唯一索引、状态机约束、对账任务；
+5) 给 3 个并发重复请求的验证用例。
+【约束】不假设调用方保证不重发；不编造流量与存储选型；不把加一把分布式锁当完整方案，必须说明锁失效后的行为；不改变接口契约除非我同意。
+【输出格式】按「幂等类型判断 / 幂等键设计 / 并发重复处理 / 数据兜底 / 验证用例」输出；关键流程用状态迁移表示。</pre><details><summary>为什么这样写</summary><p>重试是常态，重复执行才是事故。这条提示词先区分天然幂等与必须用令牌的情况，再给幂等键的生成、存储与过期策略，最后要求给出并发重复请求的验证用例。</p></details></article><article class="pcard" id="p4-arch-cache-consistency"><div class="phead"><b>缓存一致性：先定失效策略</b><span>深度思考</span></div><p class="muted">在读写并发下选一套能解释清楚、能兜底的缓存更新方案</p><pre class="prompt">【角色】你是维护过千万级读缓存的后端工程师，处理一致性只问一句：业务能容忍多旧的数据。
+【输入】读写比例、缓存选型、能容忍的脏数据时长、现有更新逻辑：
+{{problem}}
+【任务】
+1) 先确认可容忍的陈旧窗口，以及是读多写少还是写多读少；
+2) 对比 3 种策略（先更库后删缓存、延迟双删、订阅变更日志），各写清窗口期与失败场景；
+3) 给推荐策略与具体参数：过期时间、重试、补偿；
+4) 说明缓存击穿、雪崩、穿透在该业务下的表现与对应处理；
+5) 给一个能验证脏数据最多存活多久的观测方法。
+【约束】不承诺强一致；不编造压测数据；不确定的中间件能力标「待核实」；必须写清缓存不可用时的降级读法。
+【输出格式】按「一致性目标 / 策略对比 / 推荐参数 / 三类异常 / 验证方法」输出。</pre><details><summary>为什么这样写</summary><p>缓存问题不是背「先删还是后删」的口诀。这条提示词要求先确认业务能容忍多旧的数据，再在几种策略里选，并明确脏数据出现时用户会看到什么。</p></details></article><article class="pcard" id="p4-arch-mq-backlog"><div class="phead"><b>消息积压：定位堵在哪一段</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">从生产、存储、消费三段找出积压原因并给出止血顺序</p><pre class="prompt">【角色】你是处理过多次消息积压的中间件负责人，排查顺序是：生产速率、存储层、消费速率、单条耗时。
+【输入】积压现象、分区数、生产与消费速率、消费者配置：
+{{problem}}
+【任务】
+1) 用速率对比判断堵在哪一段，并给出判断依据；
+2) 区分四类原因：生产突增、消费变慢、分区倾斜、重复消费；
+3) 给止血顺序：先限流还是先扩容，各自副作用是什么；
+4) 给消费端提速的具体手段（批量、并发、异步化）及其风险；
+5) 给积压消化时间的估算方法与观测指标。
+【约束】不编造速率数字；不假设可以随意重置消费位点；扩容建议必须说明分区数限制；不把加机器当唯一答案。
+【输出格式】按「堵塞段判断 / 原因分类 / 止血顺序 / 消费提速 / 估算与观测」输出。</pre><details><summary>为什么这样写</summary><p>积压时最怕一上来就扩消费者。这条提示词要求先用速率对比判断瓶颈段，再区分消费变慢与生产突增，最后把止血和根治分成两条线，避免扩容掩盖问题。</p></details></article><article class="pcard" id="p4-arch-split-service"><div class="phead"><b>服务拆分：先找缝再动刀</b><span>深度思考</span></div><p class="muted">判断一个模块该不该独立成服务，以及怎么分步迁移</p><pre class="prompt">【角色】你是做过单体拆分的技术负责人，判断标准是：能不能独立部署、独立扩容、独立背锅。
+【输入】现有模块、调用关系、团队规模与发布节奏：
+{{problem}}
+【任务】
+1) 用调用量与数据耦合度判断该模块是否值得拆，同时给出反对意见；
+2) 给拆分边界（按业务能力还是按数据所有权），列出所有跨边界调用；
+3) 排迁移步骤：先分代码、再分库、再分流量，每步的验证与回退；
+4) 指出拆分后新增的成本（分布式事务、链路追踪、发布协调）；
+5) 给一个不拆也能解决当前问题的替代方案。
+【约束】不为了微服务而微服务；不编造团队与流量数据；不确定的依赖标「待确认」；每步必须可回退。
+【输出格式】按「是否该拆 / 边界与调用 / 迁移步骤 / 新增成本 / 替代方案」输出。</pre><details><summary>为什么这样写</summary><p>拆服务的成本常被低估。这条提示词先算耦合度与调用量，再给先分代码、再分库、再分流量的顺序，并要求每一步都有回退方案和一个「不拆也能解决」的替代答案。</p></details></article><article class="pcard" id="p4-arch-rate-limit"><div class="phead"><b>限流降级：把雪崩挡在门外</b><span>深度思考</span></div><p class="muted">为一条关键链路设计限流、熔断与降级的具体阈值</p><pre class="prompt">【角色】你是做高可用保障的架构师，限流阈值只从实测容量来，降级必须有兜底数据。
+【输入】链路拓扑、单机容量、峰值流量、可降级的功能：
+{{problem}}
+【任务】
+1) 先算每个环节的安全容量（留 30% 余量），把计算过程写出来；
+2) 给分层限流方案：网关、服务、依赖各用什么算法与阈值；
+3) 设计降级梯度：先关什么、再关什么，用户看到什么提示；
+4) 给熔断的判定条件与恢复策略，避免反复抖动；
+5) 给一次压测验证方案与要观察的指标。
+【约束】阈值必须由容量推导，不能拍脑袋；不编造流量数据；降级不得影响资金与数据正确性；必须写清恢复方式。
+【输出格式】按「容量测算 / 分层限流 / 降级梯度 / 熔断恢复 / 压测验证」输出；限流用表格。</pre><details><summary>为什么这样写</summary><p>限流阈值要从容量推，降级要有兜底数据。这条提示词要求先算每个环节的安全余量，再分层设阈值，最后写明触发后用户看到什么、怎么恢复，避免降级变成二次事故。</p></details></article><article class="pcard" id="p4-arch-api-version"><div class="phead"><b>接口版本演进：不破坏老客户端</b><span>深度思考</span></div><p class="muted">在不能强制升级客户端的前提下安全地改接口</p><pre class="prompt">【角色】你是维护开放接口多年的后端负责人，改接口前先数调用方，再谈方案。
+【输入】接口现状、调用方清单、要改的字段与原因：
+{{problem}}
+【任务】
+1) 先列调用方盘点清单，标出无法升级的（第三方、老版本客户端）；
+2) 判断改动属于兼容、条件兼容还是破坏性，给依据；
+3) 给字段级兼容方案：新增而非修改、双写、默认值、废弃标记；
+4) 排灰度与下线时间表，含观测指标与回退；
+5) 写给调用方的变更通知要点。
+【约束】不假设调用方会及时升级；不编造调用量；不删除字段直到确认无人使用；必须保留至少一个版本的过渡期。
+【输出格式】按「调用方盘点 / 兼容性判定 / 字段方案 / 灰度与下线 / 通知要点」输出。</pre><details><summary>为什么这样写</summary><p>兼容事故多来自「以为没人用」。这条提示词要求先做调用方盘点，再按字段级兼容规则改，最后给观测指标与下线时间表，把「删字段」变成一个有证据的流程。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%B9%82%E7%AD%89%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%AE%A9%E9%87%8D%E8%AF%95%E4%B8%8D%E5%87%BA%E4%BA%8B#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

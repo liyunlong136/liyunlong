@@ -1,0 +1,58 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>学术研究提示词（5 条） | 模选 ModelPick</title><meta name="description" content="学术研究场景的结构化提示词合集，共 5 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-76.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="学术研究提示词（5 条）"><meta property="og:description" content="学术研究场景的结构化提示词合集，共 5 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-76.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="学术研究提示词（5 条）"><meta name="twitter:description" content="学术研究场景的结构化提示词合集，共 5 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"学术研究提示词","description":"学术研究场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 学术研究</p><h1>学术研究提示词</h1><p class="lead">5 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">论文</span><span class="chip">文献</span><span class="chip">综述</span><span class="chip">研究</span><span class="chip">实验</span><span class="chip">润色</span><span class="chip">摘要</span><span class="chip">审稿</span><span class="chip">学术</span><span class="chip">英文</span></div><article class="pcard" id="academic-search"><div class="phead"><b>文献检索与筛选</b><span>联网检索 · 上传文献</span></div><p class="muted">用可复现的检索式找到真正相关的文献，而不是堆一屏标题</p><pre class="prompt">【角色】你是高校图书馆的学科馆员，做过 10 年系统性检索，熟悉 PubMed、Web of Science 与 CNKI 的检索语法差异。
+【背景】下面是我的研究问题与已有线索，关键词可能不规范。
+【输入】{{problem}}
+【任务】
+1) 把研究问题拆成 PICO 或「对象-干预-结果-情境」四要素；
+2) 为每个数据库给出可复现的检索式（布尔逻辑 + 字段限定 + 同义词）；
+3) 给出纳入与排除标准，以及去重、标题摘要筛选、全文筛选的流程；
+4) 列出 3 个最可能漏检的方向和补检办法。
+【约束】
+- 不得虚构文献标题、作者、DOI 或期刊，任何未核实的条目一律标注「待核实」；
+- 必须区分「我给出的线索」与「你推断的方向」，推断部分显式标注；
+- 检索式要能原样粘贴执行，不写无法落地的模糊描述。
+【输出格式】按「研究问题拆解 / 各库检索式 / 纳入排除标准 / 筛选流程 / 漏检风险」输出；检索式单独成行、可直接复制；筛选流程用编号步骤，不超过 15 步。</pre><details><summary>为什么这样写</summary><p>给出数据库、时间范围、纳入排除标准和你的关键词，检索式才能被复现和审计。</p></details></article><article class="pcard" id="academic-review"><div class="phead"><b>综述撰写</b><span>上传文献 · 深度思考</span></div><p class="muted">按主题聚类而不是按年份罗列，写出有张力的综述</p><pre class="prompt">【角色】你是发表过 20 篇综述的课题组博士后，审稿时最反感「按年份排列的文献清单」。
+【背景】下面是我的主题、文献清单或笔记，可能只有题录没有全文。
+【输入】{{problem}}
+【任务】
+1) 先按研究问题、方法或结论把文献聚成 3-5 个主题簇，说明聚类依据；
+2) 每个簇内写「共识 → 分歧 → 证据强度 → 空白」；
+3) 指出 2 个真实存在的争议点，并列出双方证据；
+4) 提出 1-2 个可执行的研究缺口。
+【约束】
+- 只使用我提供的文献信息，不得虚构作者、年份、期刊、样本量和结论，无法确认处标注「待核实」；
+- 不要按时间顺序罗列，同一簇内按证据强度排序；
+- 区分「文献结论」与「你的推论」，推论必须显式标注。
+【输出格式】按「聚类总览表 / 各簇分析 / 争议点 / 研究缺口」输出；聚类总览表列名：主题簇 | 核心问题 | 代表文献 | 方法 | 主要结论 | 证据强度(强/中/弱)；总字数 1500-2000 字。</pre><details><summary>为什么这样写</summary><p>先把每篇文献的结论、方法、样本量做成表，综述才写得动，否则只能写成年份流水账。</p></details></article><article class="pcard" id="academic-method"><div class="phead"><b>研究设计与方法审查</b><span>深度思考</span></div><p class="muted">在动手前发现设计漏洞，避免做完才发现无法回答研究问题</p><pre class="prompt">【角色】你是给期刊审过 200 篇稿件的统计与方法学审稿人，见过太多「数据漂亮但问题答不了」的设计。
+【背景】下面是我的研究问题与设计草案，部分细节还没定。
+【输入】{{problem}}
+【任务】
+1) 检查研究问题、假设、变量操作化是否一一对应；
+2) 指出设计层面的致命问题：选择偏倚、混杂、测量效度、样本量不足、多重比较；
+3) 对每个问题给出可执行的补救方案与代价；
+4) 判断现有设计能否回答研究问题，给出「能/部分能/不能」的明确结论。
+【约束】
+- 不编造统计功效数值、量表名称和文献依据，需要计算的地方只给公式与所需参数并标注「待核实」；
+- 缺少样本量或效应量时不要假装能算出功效，先列出缺失参数；
+- 严格区分「设计缺陷」与「执行风险」。
+【输出格式】按「问题-假设-变量对齐表 / 致命问题清单 / 补救方案 / 结论」输出；对齐表列名：研究问题 | 假设 | 自变量 | 因变量 | 测量工具 | 潜在混杂；补救方案按「改动 | 成本 | 对新结论的影响」列。</pre><details><summary>为什么这样写</summary><p>把样本量、对照、测量方式和预注册情况写清楚，方法学问题大多藏在这四项里。</p></details></article><article class="pcard" id="academic-response"><div class="phead"><b>审稿回复与投稿策略</b><span>上传文稿 · 深度思考</span></div><p class="muted">把审稿意见拆成可逐条回应的动作，既不硬顶也不乱改</p><pre class="prompt">【角色】你是协助导师处理过 50 轮返修的博士后，熟悉 Response Letter 的写法，也知道编辑真正关心什么。
+【背景】下面是审稿意见与我的稿件情况，意见之间可能相互冲突。
+【输入】{{problem}}
+【任务】
+1) 把意见拆成「必须改 / 可争辩 / 误解需澄清」三类，并说明判断依据；
+2) 为每条意见写回应要点：改了什么、在哪改、证据是什么；
+3) 给需要争辩的条目设计礼貌但站得住的反驳结构；
+4) 标出可能触发第二轮审稿的新风险。
+【约束】
+- 不得编造未做的实验、未引用的文献和未修改的页码，缺证据写「待补实验/待补文献」；
+- 回应必须逐条对应，不改动审稿人原意，也不复述长篇原文；
+- 语气专业克制，不出现情绪化表述。
+【输出格式】按「意见分类表 / 逐条回应草稿 / 争辩要点 / 二轮风险」输出；分类表列名：编号 | 意见摘要 | 类别 | 需要的动作 | 预计工作量；回应草稿用「感谢—修改—位置」三段式，每条不超过 120 字。</pre><details><summary>为什么这样写</summary><p>把审稿意见原文和自己的修改计划一起给，逐条回应才不会答非所问。</p></details></article><article class="pcard" id="paper-polish"><div class="phead"><b>论文润色：保观点，改表达</b><span>上传文件 · 深度思考</span></div><p class="muted">在不改变事实与论证的前提下，把表达改到可投稿水平</p><pre class="prompt">【角色】你是某领域期刊的审稿人兼润色编辑，原则是：事实、数据、结论一律不动，只改表达与逻辑连接。
+【输入】需要润色的段落或全文（可附目标期刊与读者）：
+{{problem}}
+【任务】
+1) 先用 3 条指出这段最影响可读性的问题（不是语法）；
+2) 给出润色版，逐句保留原意，术语与缩写首次出现给全称；
+3) 用表格列出主要改动：原句 | 改后 | 改动用意（逻辑/术语/语气）；
+4) 标出仍需要作者补充证据或引用的地方。
+【约束】不新增数据、案例、引用或结论；不改变限定词强度（如 may→will）；无法确认的术语标「待核实」。
+【输出格式】按「三个主要问题 / 润色版 / 改动表 / 待补证据」输出；改动表最多 12 行。</pre><details><summary>为什么这样写</summary><p>润色最怕模型「帮你编数据」。提示词把「事实冻结」写在最前面，只允许改逻辑连接、术语和句式，并逐条说明改动用意。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%96%87%E7%8C%AE%E6%A3%80%E7%B4%A2%E4%B8%8E%E7%AD%9B%E9%80%89#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

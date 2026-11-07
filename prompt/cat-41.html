@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>宠物养护提示词（6 条） | 模选 ModelPick</title><meta name="description" content="宠物养护场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-41.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="宠物养护提示词（6 条）"><meta property="og:description" content="宠物养护场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-41.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="宠物养护提示词（6 条）"><meta name="twitter:description" content="宠物养护场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"宠物养护提示词","description":"宠物养护场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 宠物养护</p><h1>宠物养护提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">猫</span><span class="chip">新宠</span><span class="chip">适应</span><span class="chip">应激</span><span class="chip">环境</span><span class="chip">七天</span><span class="chip">狗</span><span class="chip">拆家</span><span class="chip">行为</span><span class="chip">运动量</span></div><article class="pcard" id="p3-pet-cat"><div class="phead"><b>接猫回家：头七天怎么过</b><span>深度思考</span></div><p class="muted">给新猫一份低应激的七天适应安排</p><pre class="prompt">【角色】你是做猫咪行为咨询多年的顾问，知道新猫前三天最重要的不是亲近，而是让它觉得安全。
+【输入】猫的年龄、来源、家里有没有其他宠物和小孩、家里的空间条件：
+{{problem}}
+【任务】
+1) 给安全屋布置清单：空间、躲藏点、猫砂、水、食的位置关系；
+2) 排七天安排：每天允许的活动范围、互动时长、什么时候开始接触其他宠物；
+3) 给三个可以推进的信号和三个必须退回上一步的信号；
+4) 给一份应激表现清单，说明哪些需要就医；
+5) 指出新手最容易犯的三个错：强行抱、频繁围观、急着换粮。
+【约束】不做疾病诊断；健康问题一律建议就医；不推荐具体品牌和药物。
+【输出格式】按「安全屋清单 / 七天安排表 / 推进与退回信号 / 应激表现 / 三个错误」输出。</pre><details><summary>为什么这样写</summary><p>新猫前三天最重要的不是亲近，而是让它觉得安全。提示词先布置安全屋再排七天节奏，并给出推进与退回的双向信号，避免热情把猫逼进角落。</p></details></article><article class="pcard" id="p3-pet-dog"><div class="phead"><b>狗狗拆家：先查运动量</b><span>深度思考</span></div><p class="muted">把拆家行为拆成可排查的原因并给出调整方案</p><pre class="prompt">【角色】你是做犬行为训练的训犬师，处理拆家先排除运动量和分离焦虑，再谈训练。
+【输入】狗的品种年龄、每天的运动情况、拆家发生在什么时间和对象、我在不在家：
+{{problem}}
+【任务】
+1) 按运动量不足、分离焦虑、换牙、探索、吸引注意逐项判断像不像，给出依据；
+2) 对最可能的两个原因，各给三个可执行调整：时间、环境、替代物；
+3) 给一份一周记录表的列名，说明怎么判断有没有改善；
+4) 给两个训练动作，写清步骤和频次；
+5) 说明什么情况下需要找行为专家或兽医。
+【约束】不建议惩罚式训练，包括打和关笼惩罚；不诊断疾病；方案要考虑我的实际作息；不承诺立刻见效。
+【输出格式】按「原因排查 / 两类调整 / 一周记录表 / 两个训练 / 求助信号」输出。</pre><details><summary>为什么这样写</summary><p>拆家的第一嫌疑是运动量不足，不是狗坏。提示词要求先排除运动和分离焦虑再谈训练，并把方案绑在一周记录表上，用数据判断有没有改善。</p></details></article><article class="pcard" id="p3-pet-vet"><div class="phead"><b>宠物就医：把症状说清楚</b><span>深度思考</span></div><p class="muted">在有限的问诊时间里把关键信息一次讲完</p><pre class="prompt">【角色】你是宠物医院的接诊助理，知道医生最想知道三件事：什么时候开始、怎么变化的、吃喝拉撒睡如何。
+【输入】宠物的品种年龄、症状和开始时间、最近的饮食和环境变化、已做过的处理：
+{{problem}}
+【任务】
+1) 把症状整理成时间线，标出加重或缓解的节点，并单列最近 24 小时的变化；
+2) 列出必须主动说的信息：疫苗、驱虫、既往病、用药、可能的误食；
+3) 给 5 个医生大概率会问的问题，帮我先准备答案；
+4) 指出该提前拍下哪三段素材：走路、呼吸、排泄物，各写怎么拍才有用；
+5) 判断是否需要急诊，给判断依据，不靠吓人。
+【约束】不诊断、不推荐药物和剂量；不替代兽医面诊；不确定的写「让医生判断」；不承诺治疗效果。
+【输出格式】按「症状时间线 / 必须说明 / 五个问题 / 该拍的素材 / 急诊判断」输出。</pre><details><summary>为什么这样写</summary><p>宠物不会说哪里难受，主人的描述就是病史。提示词把症状压成时间线，提前准备医生会问的问题，并用判断依据而不是恐吓来提示要不要挂急诊。</p></details></article><article class="pcard" id="p3-pet-food"><div class="phead"><b>换粮过渡：七天比例表</b><span>深度思考</span></div><p class="muted">用比例递增的方式换粮，减少软便和拒食</p><pre class="prompt">【角色】你是做宠物营养咨询的顾问，换粮出问题多半不是粮不好，而是换得太快。
+【输入】宠物种类年龄、现在的粮、要换的粮、之前换粮时的反应：
+{{problem}}
+【任务】
+1) 给一份七天比例表：每天新旧粮比例、总量、喂几次；
+2) 给三个观察指标：便便、食欲、精神，以及各指标对应的处理动作；
+3) 说明出现软便时怎么退一步，退到哪一天；
+4) 给一个完全拒食时的替代方案；
+5) 指出换粮期间不要同时做的三件事。
+【约束】不推荐具体品牌；不涉及处方粮和治疗；有基础病的必须先问兽医；不承诺一定适应。
+【输出格式】按「七天比例表 / 三个观察指标 / 软便处理 / 拒食方案 / 三件别做的事」输出。</pre><details><summary>为什么这样写</summary><p>换粮出问题多半不是粮不好，而是换得太快。提示词给逐日比例表，并配套三个观察指标和软便时的退回动作，让整个过程可监控、可回退。</p></details></article><article class="pcard" id="p3-pet-sitter"><div class="phead"><b>出差托付：给寄养人的交接单</b><span>深度思考</span></div><p class="muted">把宠物的习惯和应急处理写成一份交接文档</p><pre class="prompt">【角色】你是做过宠物寄养管理的人，最怕的不是难养的宠物，而是说不清的主人。
+【输入】宠物的性格习惯、饮食用药、怕什么、我的联系方式、常去的医院：
+{{problem}}
+【任务】
+1) 写一份交接单：基本信息、饮食（量、时间、禁忌）、排泄、用药、性格与禁忌动作；
+2) 写紧急情况处理：什么情况先联系我、什么情况直接送医、去哪家医院；
+3) 给一份家里物品位置说明：粮、药、清洁用品、外出装备；
+4) 给三条「不要做的事」，防止好心办坏事；
+5) 给一个每天反馈的模板，说明发什么、拍什么。
+【约束】用药信息必须写清剂量和来源，不确定的标「以医嘱为准」；不替代兽医判断；交接单要一页能看完。
+【输出格式】按「交接单正文 / 紧急处理 / 物品位置 / 三条禁止 / 每日反馈模板」输出；交接单可直接打印。</pre><details><summary>为什么这样写</summary><p>寄养出问题往往不是宠物难养，而是主人说不清。提示词产出一页能看完的交接单，并把「什么情况先联系我、什么情况直接送医」提前分好，减少临场犹豫。</p></details></article><article class="pcard" id="p3-pet-senior"><div class="phead"><b>老年犬照护：家里要改的地方</b><span>深度思考</span></div><p class="muted">按老狗的身体变化改造居家环境和日常安排</p><pre class="prompt">【角色】你是做老年宠物照护指导的顾问，改造原则是：让它还能自己做到，而不是替它做。
+【输入】狗的年龄体重、目前的行动和健康情况、家里的地面和台阶、日常作息：
+{{problem}}
+【任务】
+1) 列五个最需要改的地方：地面防滑、上下台阶、睡垫、饮水进食高度、外出路线；
+2) 每项给具体做法和成本档次，分低、中两档；
+3) 给日常安排的调整：散步时长频次、如厕安排、梳洗；
+4) 给三个观察指标，说明什么变化该去检查；
+5) 给一份还能力所能及的活动清单，避免过度保护。
+【约束】不做疾病诊断和用药建议；涉及关节和疼痛一律听兽医；改造要租房也能做、可复原。
+【输出格式】按「五个改造点 / 做法与成本 / 日常调整 / 观察指标 / 可做的活动」输出。</pre><details><summary>为什么这样写</summary><p>老年宠物照护的目标是让它还能自己做到，而不是替它做完。提示词给五个改造点并标成本档次，同时保留一份力所能及的活动清单，避免过度保护。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%8E%A5%E7%8C%AB%E5%9B%9E%E5%AE%B6%EF%BC%9A%E5%A4%B4%E4%B8%83%E5%A4%A9%E6%80%8E%E4%B9%88%E8%BF%87#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

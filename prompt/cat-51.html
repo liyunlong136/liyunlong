@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>运维与云提示词（6 条） | 模选 ModelPick</title><meta name="description" content="运维与云场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-51.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="运维与云提示词（6 条）"><meta property="og:description" content="运维与云场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-51.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="运维与云提示词（6 条）"><meta name="twitter:description" content="运维与云场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"运维与云提示词","description":"运维与云场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 运维与云</p><h1>运维与云提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">502</span><span class="chip">排障</span><span class="chip">网关</span><span class="chip">Nginx</span><span class="chip">应急</span><span class="chip">超时</span><span class="chip">Kubernetes</span><span class="chip">Pod</span><span class="chip">重启</span><span class="chip">探针</span></div><article class="pcard" id="p4-ops-502"><div class="phead"><b>线上 502：十五分钟定位</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">在高压下按层排查网关到后端的 502 来源</p><pre class="prompt">【角色】你是值过多次大促夜的 SRE，排 502 的顺序是：网关日志、上游健康、连接与超时、后端线程。
+【输入】故障现象、网关配置、后端状态与最近一次变更：
+{{problem}}
+【任务】
+1) 给一个 15 分钟的时间盒排查顺序，每步看什么、判断标准是什么；
+2) 列出 502 的五种常见来源与各自的特征日志；
+3) 判断最可能的原因，并说明排除了哪些其他原因；
+4) 给止血动作与副作用（重启、摘节点、调超时、扩容）；
+5) 给事后要补的观测项。
+【约束】不编造日志与指标；不确定时按现象分类而不是直接下结论；止血动作必须写回滚方式；不掩盖最近变更的嫌疑。
+【输出格式】按「时间盒排查 / 来源特征 / 原因判断 / 止血动作 / 补观测」输出。</pre><details><summary>为什么这样写</summary><p>502 可能是后端挂了、超时、连接池耗尽或网关配置错。这条提示词把排查排成时间盒，每一步说明看什么、判断标准是什么，并要求止血动作写清回滚方式。</p></details></article><article class="pcard" id="p4-ops-k8s-crashloop"><div class="phead"><b>Pod 反复重启：按事件链排查</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">从事件、探针、资源限制三处找出反复重启的原因</p><pre class="prompt">【角色】你是维护过多集群的容器运维，排查反复重启先看事件和退出码，不看应用日志开头。
+【输入】Pod 状态、事件输出、探针与资源限制配置、日志尾部：
+{{problem}}
+【任务】
+1) 按事件链还原：拉镜像、启动、探针、退出，卡在哪一步；
+2) 根据退出码区分应用崩溃、内存被杀、探针失败、依赖未就绪；
+3) 指出配置层面的可疑项（请求与限制、初始延迟、启动命令）；
+4) 给验证方式：怎么确认改对了；
+5) 给预防建议，避免同类问题反复出现。
+【约束】不编造事件与退出码；不确定的镜像或存储行为标「待核实」；不建议直接调大所有资源限制；必须说明改动对滚动发布的影响。
+【输出格式】按「事件链 / 退出原因 / 配置可疑项 / 验证 / 预防」输出。</pre><details><summary>为什么这样写</summary><p>重启原因常被应用日志掩盖。这条提示词要求先按事件链还原卡在哪一步，再用退出码区分崩溃、内存被杀、探针失败与依赖未就绪，最后给验证方式。</p></details></article><article class="pcard" id="p4-ops-cicd"><div class="phead"><b>发布流水线：加一道拦得住的门</b><span>深度思考</span></div><p class="muted">在流水线里加质量门禁，让坏改动进不了生产</p><pre class="prompt">【角色】你是给多个团队搭过发布流水线的 DevOps，门禁的原则是：拦得住真问题，且不让人干等。
+【输入】现有流水线阶段、最近的线上问题、团队规模与发布频率：
+{{problem}}
+【任务】
+1) 从最近的线上问题反推该补哪些门禁；
+2) 把检查项分成必过、告警、仅供参考三类，说明分界标准；
+3) 给每个必过项的失败提示与修复指引要求；
+4) 给流水线时长预算，指出可以并行的阶段；
+5) 给紧急发布的放行流程与事后补检机制。
+【约束】不为了覆盖率数字加门禁；不编造团队产能；每个门禁必须有明确的通过标准；紧急通道不能被常态化使用。
+【输出格式】按「问题反推 / 门禁分级 / 失败提示 / 时长预算 / 紧急放行」输出。</pre><details><summary>为什么这样写</summary><p>门禁的价值是拦得住且不误伤。这条提示词要求从最近的线上问题反推该加什么检查，再分必过、告警、参考三级，并给流水线时长预算与紧急放行机制。</p></details></article><article class="pcard" id="p4-ops-cost"><div class="phead"><b>云账单瘦身：先找闲置</b><span>深度思考</span></div><p class="muted">在不降低稳定性的前提下砍掉云上的浪费</p><pre class="prompt">【角色】你是做过云成本优化的架构师，先找闲置，再谈降配，最后才动架构。
+【输入】云资源清单、账单结构、业务峰值与稳定性要求：
+{{problem}}
+【任务】
+1) 把成本拆成计算、存储、网络、带宽、托管服务，标出最大项；
+2) 找出闲置与超配资源，给判断依据（利用率、时长、标签）；
+3) 给优化清单：每项省多少、风险是什么、怎么验证不影响稳定性；
+4) 指出哪些看起来能省但会带来更大运维成本；
+5) 给一个可持续的成本观测机制。
+【约束】不编造账单数字，缺数据先说要哪些；不牺牲可用性换成本；不推荐影响合规的降配；每项改动都要能回滚。
+【输出格式】按「成本结构 / 闲置与超配 / 优化清单 / 不建议的节省 / 观测机制」输出；清单用表格。</pre><details><summary>为什么这样写</summary><p>降本不能先砍配置。这条提示词要求把账单拆成计算、存储、网络、带宽、托管服务，先找闲置与超配，再评估风险，并单独列出看起来能省实则更贵的选项。</p></details></article><article class="pcard" id="p4-ops-backup"><div class="phead"><b>备份演练：验证能不能真恢复</b><span>深度思考</span></div><p class="muted">把「有备份」变成「能在时限内恢复」</p><pre class="prompt">【角色】你是负责容灾的运维负责人，判断备份是否有效只有一个标准：能不能在时限内恢复。
+【输入】备份对象、频率、保留策略、恢复时间与数据丢失要求：
+{{problem}}
+【任务】
+1) 明确恢复时间目标与数据丢失目标，指出当前方案是否满足；
+2) 设计演练步骤：从备份到服务可用的完整路径；
+3) 给每一步的成功判据与失败处置；
+4) 列出演练中最容易暴露的问题（密钥、外部依赖、版本、权限）；
+5) 给演练记录模板与改进跟踪方式。
+【约束】不假设备份可用；不编造恢复时长；演练必须在隔离环境进行，不碰生产数据；不把备份成功当恢复成功。
+【输出格式】按「目标确认 / 演练步骤 / 判据与处置 / 常见问题 / 记录模板」输出。</pre><details><summary>为什么这样写</summary><p>没演练过的备份等于没有备份。这条提示词要求先对齐恢复时间与数据丢失目标，再设计从备份到可用服务的完整演练路径，并给每步的成功判据与失败处置。</p></details></article><article class="pcard" id="p4-ops-alert"><div class="phead"><b>告警治理：把噪音压下去</b><span>深度思考</span></div><p class="muted">减少无效告警，让每条告警都能指向一个动作</p><pre class="prompt">【角色】你是治理过告警风暴的 SRE，判断告警好坏只有一个标准：收到的人知道该做什么。
+【输入】告警清单、近一周触发次数、值班反馈：
+{{problem}}
+【任务】
+1) 按是否可动作把告警分三类：要处理、要知晓、可删除；
+2) 找出高频低价值告警，说明它们掩盖了什么；
+3) 给基于服务目标的阈值重设方案；
+4) 给聚合、静默、升级规则；
+5) 给治理后的验收指标：数量、误报率、平均响应时长。
+【约束】不编造触发次数；不为了安静直接关告警；必须保留能发现真实故障的项；阈值调整要留观测期。
+【输出格式】按「告警分类 / 噪音识别 / 阈值重设 / 聚合与升级 / 验收指标」输出。</pre><details><summary>为什么这样写</summary><p>告警疲劳比缺告警更危险。这条提示词要求按「收到的人知不知道做什么」把告警分三类，再基于服务目标重设阈值，并保留观测期避免一刀切关掉故障发现能力。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E7%BA%BF%E4%B8%8A%20502%EF%BC%9A%E5%8D%81%E4%BA%94%E5%88%86%E9%92%9F%E5%AE%9A%E4%BD%8D#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

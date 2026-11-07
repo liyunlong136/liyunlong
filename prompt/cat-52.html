@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>安全合规提示词（6 条） | 模选 ModelPick</title><meta name="description" content="安全合规场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-52.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="安全合规提示词（6 条）"><meta property="og:description" content="安全合规场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-52.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="安全合规提示词（6 条）"><meta name="twitter:description" content="安全合规场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"安全合规提示词","description":"安全合规场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 安全合规</p><h1>安全合规提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">越权</span><span class="chip">权限</span><span class="chip">接口</span><span class="chip">鉴权</span><span class="chip">自查</span><span class="chip">安全</span><span class="chip">隐私</span><span class="chip">合规</span><span class="chip">最小必要</span><span class="chip">授权</span></div><article class="pcard" id="p4-sec-authz"><div class="phead"><b>越权自查：横向与纵向</b><span>深度思考</span></div><p class="muted">系统性地找出接口层面的权限缺失</p><pre class="prompt">【角色】你是做应用安全的工程师，判断越权只看服务端有没有在每次请求里校验这个人能不能动这个资源。
+【输入】角色体系、接口清单、资源归属规则：
+{{problem}}
+【任务】
+1) 列出角色、资源、动作的权限矩阵，标出空档；
+2) 给接口自查清单，区分横向越权与纵向越权；
+3) 指出常见错误实现：只查登录、用前端传的标识、批量接口漏检；
+4) 给统一鉴权的落点与改造顺序；
+5) 给验证用例：用低权限账号逐个试。
+【约束】不给可直接利用的攻击步骤；不编造接口行为；改造必须兼容现有业务；不确定的部分标「待核实」。
+【输出格式】按「权限矩阵 / 自查清单 / 错误实现 / 改造落点 / 验证用例」输出。</pre><details><summary>为什么这样写</summary><p>越权多因前端藏了按钮就被当成鉴权。这条提示词要求先列角色、资源、动作的权限矩阵找出空档，再给接口自查清单，并指明统一鉴权应该落在哪一层。</p></details></article><article class="pcard" id="p4-sec-privacy"><div class="phead"><b>隐私合规：最小必要整改</b><span>深度思考 · 上传文件</span></div><p class="muted">把隐私政策与收集清单对齐，删掉不必要的字段</p><pre class="prompt">【角色】你是做过个人信息合规整改的安全顾问，检查的核心是：声明与实际收集是否一致。
+【输入】隐私政策、收集字段清单、第三方组件与用途：
+{{problem}}
+【任务】
+1) 做字段级清单：字段、用途、是否必要、存储时长、共享方；
+2) 对照政策文本，找出声明缺失与超范围收集；
+3) 指出不授权就不让用的强制同意风险；
+4) 给整改顺序：先停收集、再改文案、再补授权；
+5) 给留痕与定期复审机制。
+【约束】不编造法规条款，不确定的标「以属地法规为准」；不构成正式法律意见；不推荐隐藏式同意；必须写清整改证据怎么留。
+【输出格式】按「字段清单 / 声明差异 / 同意风险 / 整改顺序 / 留痕机制」输出。</pre><details><summary>为什么这样写</summary><p>合规检查看的是说的和做的是否一致。这条提示词要求先做字段级清单，再对照政策文本与第三方组件找差异，最后按「先停收集、再改文案、再补授权」的顺序整改并留痕。</p></details></article><article class="pcard" id="p4-sec-supply"><div class="phead"><b>依赖供应链：从清单到升级</b><span>深度思考 · 上传文件</span></div><p class="muted">梳理第三方依赖风险，排出可执行的升级顺序</p><pre class="prompt">【角色】你是负责软件供应链安全的安全工程师，漏洞不等于风险，要看能不能被触达。
+【输入】依赖清单、漏洞报告、服务暴露面：
+{{problem}}
+【任务】
+1) 按是否直接依赖、是否在运行路径上、是否对外暴露给漏洞分级；
+2) 给升级顺序：先修可利用且暴露的，再修内部的；
+3) 指出无法升级时的缓解措施（隔离、访问控制、禁用功能）；
+4) 给依赖治理机制：锁定版本、定期扫描、来源校验；
+5) 给一份最小字段的软件物料清单建议。
+【约束】不编造漏洞编号与影响范围；不确定的标「待核实」；不建议盲目全量升级；必须说明每次升级的回归成本。
+【输出格式】按「分级 / 升级顺序 / 缓解措施 / 治理机制 / 清单字段」输出。</pre><details><summary>为什么这样写</summary><p>漏洞列表不等于风险清单。这条提示词要求按「是否直接依赖、是否在运行路径上、是否对外暴露」分级，再给升级顺序与无法升级时的缓解措施，避免盲目全量升级。</p></details></article><article class="pcard" id="p4-sec-log"><div class="phead"><b>日志脱敏：别把手机号写进去</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">找出日志与埋点里的敏感字段并给出脱敏方案</p><pre class="prompt">【角色】你是做数据安全的工程师，检查日志时按字段类型扫，而不是靠人肉翻。
+【输入】日志样例、埋点字段、业务涉及的个人信息类型：
+{{problem}}
+【任务】
+1) 列出日志里出现的敏感字段类型（证件、手机、地址、位置、生物特征）；
+2) 给分级处理建议：删除、掩码、哈希、聚合；
+3) 指出调试日志与异常堆栈里的高风险写法；
+4) 给检测规则，防止新代码再写进去；
+5) 给已泄露日志的处置建议。
+【约束】不编造日志内容；不提供可用于还原真实个人信息的示例；处理方案要兼顾排障需要；不确定的字段标「待确认」。
+【输出格式】按「敏感字段清单 / 分级处理 / 高风险写法 / 检测规则 / 泄露处置」输出。</pre><details><summary>为什么这样写</summary><p>敏感信息泄露常发生在调试日志里。这条提示词要求先按字段类型扫描，再分级处理为删除、掩码、哈希或聚合，最后给检测规则防止新代码再写进去。</p></details></article><article class="pcard" id="p4-sec-pentest"><div class="phead"><b>渗透报告：从漏洞到排期</b><span>深度思考 · 上传文件</span></div><p class="muted">把扫描结果整理成开发能直接排期的修复清单</p><pre class="prompt">【角色】你是做渗透测试并写报告的安全工程师，报告的唯一标准是让开发能直接排期。
+【输入】扫描或测试结果、系统架构、业务影响面：
+{{problem}}
+【任务】
+1) 去重合并同类问题，标出可能的误报；
+2) 按可利用性与业务影响定级，写出排序依据；
+3) 每条给：位置、复现条件、影响、修复建议、验证方法；
+4) 指出哪些必须立即修、哪些可以排入正常迭代；
+5) 给修复后的复测清单。
+【约束】不编造漏洞与利用链；不写出可直接攻击生产环境的步骤；不确定的定级标「待复核」；修复建议必须可落地。
+【输出格式】按「问题合并 / 定级排序 / 逐条详情 / 修复节奏 / 复测清单」输出；详情用表格。</pre><details><summary>为什么这样写</summary><p>扫描器给的是清单，管理者要的是排序。这条提示词要求先合并同类问题与去误报，再按可利用性与业务影响定级，每条给位置、复现条件、修复建议与验证方法。</p></details></article><article class="pcard" id="p4-sec-phishing"><div class="phead"><b>钓鱼演练：写一封会被举报的邮件</b><span>深度思考</span></div><p class="muted">设计合规的安全意识演练邮件与不羞辱人的复盘流程</p><pre class="prompt">【角色】你是做安全意识培训的顾问，演练的目标是提升识别率，不是抓人。
+【输入】公司规模、以往演练情况、合规要求：
+{{problem}}
+【任务】
+1) 先写清授权范围、不针对的岗位与红线；
+2) 设计一封有破绽但不过分的演练邮件，列出 3 个破绽点；
+3) 给埋点指标：打开率、点击率、举报率、上报时长；
+4) 写给中招者的复盘话术，不羞辱、指向改进；
+5) 给后续培训内容与复测安排。
+【约束】不使用真实敏感信息与恐吓话术；不针对个人通报；不编造法律要求；必须保留举报通道说明；演练数据只做聚合统计。
+【输出格式】按「授权与红线 / 邮件与破绽 / 埋点指标 / 复盘话术 / 培训安排」输出。</pre><details><summary>为什么这样写</summary><p>演练目的是提升识别率而不是抓人。这条提示词要求先写清授权范围与红线，再设计有破绽但不过分的邮件，最后给面向中招者的复盘话术与复测安排。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E8%B6%8A%E6%9D%83%E8%87%AA%E6%9F%A5%EF%BC%9A%E6%A8%AA%E5%90%91%E4%B8%8E%E7%BA%B5%E5%90%91#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

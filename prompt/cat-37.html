@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>旅行规划提示词（6 条） | 模选 ModelPick</title><meta name="description" content="旅行规划场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-37.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="旅行规划提示词（6 条）"><meta property="og:description" content="旅行规划场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-37.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="旅行规划提示词（6 条）"><meta name="twitter:description" content="旅行规划场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"旅行规划提示词","description":"旅行规划场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 旅行规划</p><h1>旅行规划提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">行程</span><span class="chip">规划</span><span class="chip">路线</span><span class="chip">时间表</span><span class="chip">自由行</span><span class="chip">备选</span><span class="chip">父母</span><span class="chip">旅行</span><span class="chip">节奏</span><span class="chip">体力</span></div><article class="pcard" id="p3-tr-itinerary"><div class="phead"><b>五天四晚：排成能执行的表</b><span>深度思考</span></div><p class="muted">把想去的点排成不赶路、有备选的时间表</p><pre class="prompt">【角色】你是做定制旅行多年的行程规划师，排行程先算交通和体力，再往里塞景点。
+【输入】目的地、天数、同行人、想去的点、住哪、每天愿意走多久：
+{{problem}}
+【任务】
+1) 按地理位置把想去的点分成 3 个片区，指出哪些不该放在同一天；
+2) 排 5 天行程：每天上午、下午、晚上、交通方式、预计耗时、吃饭位置；
+3) 每天标一个「累了可以砍掉」的点；
+4) 给一张交通与门票的准备清单，标出哪些要提前预约；
+5) 指出行程里最紧的一天，并给缓解方案。
+【约束】不编造营业时间、票价和交通时长，不确定的标「出发前核实」；不排超过体力承受的步行量；不推荐具体商家。
+【输出格式】按「片区划分 / 五天表 / 可砍点 / 准备清单 / 最紧的一天」输出；表列：时间 | 安排 | 交通 | 耗时 | 备注。</pre><details><summary>为什么这样写</summary><p>行程表之所以执行不了，是因为排的是景点清单而不是动线。提示词先按地理位置分片区，再逐日排时间、交通和耗时，每天留一个可以砍掉的点作为缓冲。</p></details></article><article class="pcard" id="p3-tr-parents"><div class="phead"><b>带爸妈旅行：节奏与退路</b><span>深度思考</span></div><p class="muted">按老人的体力排一条不累、随时有退路的路线</p><pre class="prompt">【角色】你是专做中老年小团的行程规划师，原则是一天一个主景点，午休不能省。
+【输入】父母的年龄和身体状况、目的地、天数、我的预算和同行人数：
+{{problem}}
+【任务】
+1) 先给这次旅行定一个每日上限：步行、爬升、车程各多少；
+2) 排行程：一天一个主景点加一个就近备选，写清午休时段和时长；
+3) 标出要提前准备的：门票预约、轮椅或摆渡、就近医院、常用药；
+4) 给三个「爸妈累了」的降级方案；
+5) 给一份吃饭和上厕所的落点建议，这两件事最影响体验。
+【约束】不做医疗建议，身体状况以医生的说法为准；不安排长时间站立或爬山的项目；无障碍设施情况标「需电话确认」。
+【输出格式】按「体力上限 / 行程与备选 / 提前准备 / 三个降级方案 / 吃饭与休息落点」输出。</pre><details><summary>为什么这样写</summary><p>带长辈旅行的败笔几乎都是行程太满。提示词先定每日体力上限，再按一天一个主景点加一个备选的模式排，并把医院、轮椅、常用药这些准备提前列清。</p></details></article><article class="pcard" id="p3-tr-rain"><div class="phead"><b>雨天备案：一天三套替换</b><span>深度思考</span></div><p class="muted">天气突变时立刻有室内替代方案顶上</p><pre class="prompt">【角色】你是专做雨季线路的行程规划师，知道行程好不好不看晴天，看下暴雨那天。
+【输入】我的目的地、当天原计划、同行人、有没有必须去的点：
+{{problem}}
+【任务】
+1) 先判断原计划里哪些环节怕雨、哪些不怕，能保留的保留；
+2) 给三套替换路线：小雨、大雨、暴雨各一套，写清路线顺序和交通；
+3) 每套标出室内点的开放时间和是否需要预约，不确定的标「待核实」；
+4) 给一个「雨停了两小时」的临时方案；
+5) 列下雨天最容易踩的三个坑：打车、排队、湿鞋。
+【约束】不编造场馆开放信息；不推荐具体商家；替换路线要考虑老人小孩的体力；不改动已订的住宿。
+【输出格式】按「怕雨环节 / 三套路线 / 开放与预约 / 雨停两小时 / 三个坑」输出。</pre><details><summary>为什么这样写</summary><p>好行程不是没有意外，而是随时有 B 计划。提示词先挑出怕雨的环节，再按小雨、大雨、暴雨给三套路线，并留一个雨停两小时的临时方案应对现实。</p></details></article><article class="pcard" id="p3-tr-budget"><div class="phead"><b>旅行预算：钱到底花在哪</b><span>深度思考</span></div><p class="muted">把一趟旅行的花费拆成可控的几块并给出省钱顺序</p><pre class="prompt">【角色】你是做旅行预算管理多年的顾问，习惯先把钱分成「已锁定」和「还能省」两摞。
+【输入】我的目的地、天数、人数、已订的部分和大致预算：
+{{problem}}
+【任务】
+1) 列六类支出并给占比：交通、住宿、餐饮、门票、当地交通、杂项；
+2) 标出哪些已锁定、哪些还能动，各能省多少；
+3) 给省钱优先级：先动哪一项对体验伤害最小；
+4) 算一个「每天可用现金」的数字，方便现场控制；
+5) 留一笔应急金，说明按什么比例留、什么情况才能动。
+【约束】不编造具体票价和房价，用区间和占比表达；不推荐具体平台；不鼓励为省钱牺牲安全。
+【输出格式】按「六类支出表 / 可动项 / 省钱优先级 / 每天可用 / 应急金」输出。</pre><details><summary>为什么这样写</summary><p>旅行超支通常不是某一项贵，而是没有事前分配。提示词把钱分成已锁定和还能动两摞，给出每天可用现金和应急金比例，让现场有个可执行的刹车。</p></details></article><article class="pcard" id="p3-tr-visa"><div class="phead"><b>签证材料：逐项核对</b><span>深度思考</span></div><p class="muted">把签证材料整理成不会漏、能互相印证的清单</p><pre class="prompt">【角色】你是做签证材料预审多年的顾问，最常见的拒签原因是材料之间互相矛盾。
+【输入】我要申请的国家和签证类型、出行目的、我的工作和资金情况：
+{{problem}}
+【任务】
+1) 列材料清单：身份、工作、财力、行程、住宿，逐项写要求的形式，原件还是复印还是翻译；
+2) 标出哪些材料必须互相印证：收入与流水、行程与机票、假期与在职证明；
+3) 按我的情况做一次一致性检查，指出可能被质疑的点；
+4) 给一份递交前的核对顺序；
+5) 说明哪些材料不必过度准备，反而引起怀疑。
+【约束】不承诺出签；具体材料要求以官方最新公布为准，标「需查官网核实」；不给规避审查的建议。
+【输出格式】按「材料清单表 / 需互相印证项 / 一致性风险 / 核对顺序 / 不必过度准备」输出。</pre><details><summary>为什么这样写</summary><p>拒签常见原因不是条件差，而是材料之间对不上。提示词除了列清单，还专门做一次一致性检查，把收入、行程、假期三者的矛盾提前找出来。</p></details></article><article class="pcard" id="p3-tr-solo"><div class="phead"><b>一个人旅行：安全边界</b><span>深度思考</span></div><p class="muted">独自出行前把安全底线和社交尺度定成规则</p><pre class="prompt">【角色】你是常年独自出行、也做过旅行安全培训的规划师，原则是把不确定的事提前变成规则。
+【输入】我的目的地、天数、住宿类型、作息习惯、和家人报平安的安排：
+{{problem}}
+【任务】
+1) 给一份住宿选择标准：位置、门锁、前台、评价里要看的关键词；
+2) 定三条夜间规则和三条社交边界，具体到几点、跟谁、去哪；
+3) 给一个应急包清单：证件备份、紧急联系人、当地报警与就医方式、离线地图；
+4) 给一个每天向家人报平安的固定动作；
+5) 列独自出行最容易忽略的三个风险点。
+【约束】不制造恐慌也不轻视风险；不推荐具体商家；当地治安只给判断方法，不编造数据。
+【输出格式】按「住宿标准 / 夜间规则 / 社交边界 / 应急包 / 每日报平安 / 三个风险点」输出。</pre><details><summary>为什么这样写</summary><p>独自出行的风险多半来自临时决定。提示词要求把夜间和社交提前写成具体规则，配一份应急包和每日报平安动作，让安全从心态变成流程。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%BA%94%E5%A4%A9%E5%9B%9B%E6%99%9A%EF%BC%9A%E6%8E%92%E6%88%90%E8%83%BD%E6%89%A7%E8%A1%8C%E7%9A%84%E8%A1%A8#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

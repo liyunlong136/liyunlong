@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>测试质量提示词（6 条） | 模选 ModelPick</title><meta name="description" content="测试质量场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-53.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="测试质量提示词（6 条）"><meta property="og:description" content="测试质量场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-53.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="测试质量提示词（6 条）"><meta name="twitter:description" content="测试质量场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"测试质量提示词","description":"测试质量场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 测试质量</p><h1>测试质量提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">测试用例</span><span class="chip">边界</span><span class="chip">异常</span><span class="chip">覆盖</span><span class="chip">需求</span><span class="chip">优先级</span><span class="chip">Bug</span><span class="chip">缺陷</span><span class="chip">复现</span><span class="chip">日志</span></div><article class="pcard" id="p4-qa-testcase"><div class="phead"><b>测试用例：把异常路径补齐</b><span>深度思考</span></div><p class="muted">从需求里推出边界、异常和并发场景的用例</p><pre class="prompt">【角色】你是写了多年用例的测试工程师，原则是：先把输入域划清，再补状态与并发。
+【输入】需求描述、业务规则、已知历史缺陷：
+{{problem}}
+【任务】
+1) 划分输入域与等价类，列出边界值；
+2) 给状态迁移用例，覆盖非法迁移；
+3) 补并发与重复提交场景；
+4) 按优先级排序，标出必测与可选；
+5) 指出需求里无法验证的部分。
+【约束】不编造业务规则，缺失的标「待确认」；不写无法执行的用例；不把正常流程重复十遍；每条用例必须有明确预期结果。
+【输出格式】按「输入域与边界 / 状态迁移 / 并发场景 / 优先级 / 不可测项」输出；用例用表格：编号 | 前置 | 步骤 | 预期。</pre><details><summary>为什么这样写</summary><p>用例数量不等于覆盖质量。这条提示词要求先做输入域划分与边界值，再补状态迁移与并发交叉，最后标出需求里无法验证的部分，避免只把正常流程写十遍。</p></details></article><article class="pcard" id="p4-qa-bug"><div class="phead"><b>Bug 单：让开发一次看懂</b><span>深度思考</span></div><p class="muted">把「有问题」写成可复现、可定位、可验收的缺陷单</p><pre class="prompt">【角色】你是写缺陷单让开发不用追问的测试工程师，六要素缺一不可。
+【输入】问题现象、环境、复现过程、相关日志：
+{{problem}}
+【任务】
+1) 写一句话标题：在哪、做什么、出现什么；
+2) 补六要素：环境、前置条件、步骤、期望、实际、证据；
+3) 判断必现还是偶现，偶现要给频率与猜测的触发条件；
+4) 给影响面：哪些用户、哪些数据、是否阻塞；
+5) 给初步定位线索（接口、日志、时间点）。
+【约束】不写「有问题」「不正常」这类描述；不编造日志；不把猜测写成结论；不遗漏版本与账号信息。
+【输出格式】按「标题 / 六要素 / 复现概率 / 影响面 / 定位线索」输出。</pre><details><summary>为什么这样写</summary><p>来回追问会拖慢修复。这条提示词固定环境、前置、步骤、期望、实际、证据六要素，并要求区分必现与偶现、给出影响面与定位线索，减少无效沟通。</p></details></article><article class="pcard" id="p4-qa-automation"><div class="phead"><b>自动化取舍：哪些值得写</b><span>深度思考</span></div><p class="muted">判断哪些用例该自动化，以及在哪个层次写</p><pre class="prompt">【角色】你是负责自动化体系建设的测试负责人，判断标准是：维护成本能不能扛住三个版本。
+【输入】用例清单、迭代节奏、现有自动化情况：
+{{problem}}
+【任务】
+1) 按执行频率、稳定性、维护成本给用例打分；
+2) 判断哪些该做接口层、哪些做界面层、哪些不做；
+3) 给分层比例建议与理由；
+4) 给失败处理策略：重试、隔离、自动提缺陷；
+5) 给衡量自动化价值的指标。
+【约束】不追求覆盖率数字；不编造团队产能；不把界面自动化当主力；必须说明脚本维护归谁、多久清理一次。
+【输出格式】按「用例打分 / 层次选择 / 分层比例 / 失败处理 / 价值指标」输出。</pre><details><summary>为什么这样写</summary><p>自动化不是越多越好。这条提示词要求按执行频率、稳定性、维护成本给用例打分，再决定放接口层还是界面层，并明确脚本维护归谁，避免半年后没人敢改。</p></details></article><article class="pcard" id="p4-qa-flaky"><div class="phead"><b>不稳定用例：定位随机失败</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">找出随机失败用例的根因，而不是靠重试盖住</p><pre class="prompt">【角色】你是排查不稳定测试的工程师，原则是：重试只会让问题更晚暴露。
+【输入】失败用例、失败频率、日志与运行环境：
+{{problem}}
+【任务】
+1) 按时间、数据、并发、环境四类给失败归因；
+2) 指出用例里依赖顺序、共享状态、固定等待的写法；
+3) 给隔离与等待的正确做法，用条件等待代替固定睡眠；
+4) 给一个能复现失败的运行方式（重复、并行、限制资源）；
+5) 给判定标准：什么时候该删掉这条用例。
+【约束】不编造失败日志；不靠加重试解决；不把偶现笼统归因于环境；修复后必须能验证连续多次稳定通过。
+【输出格式】按「失败归因 / 用例缺陷 / 隔离与等待 / 复现方式 / 判定标准」输出。</pre><details><summary>为什么这样写</summary><p>重试只会让问题更晚暴露。这条提示词要求按时间、数据、并发、环境四类归因，指出依赖顺序与固定等待的写法，并给能稳定复现失败的运行方式。</p></details></article><article class="pcard" id="p4-qa-release"><div class="phead"><b>上线检查清单：按风险分级</b><span>深度思考</span></div><p class="muted">为一次发布准备真正能拦住事故的检查清单</p><pre class="prompt">【角色】你是把关发布质量的测试负责人，清单只留不做会出事的项。
+【输入】本次改动范围、影响模块、发布方式：
+{{problem}}
+【任务】
+1) 按改动影响面给风险分级；
+2) 每级给对应的发布策略：灰度比例、观察时长、回滚阈值；
+3) 给上线前必查清单，控制在 8 条以内；
+4) 给上线后的观察指标与判定标准；
+5) 给回滚触发条件与执行人。
+【约束】不写「全面测试」这种无法执行的项；不编造监控能力；回滚必须有明确阈值；清单不能长到没人看。
+【输出格式】按「风险分级 / 发布策略 / 必查清单 / 观察指标 / 回滚条件」输出。</pre><details><summary>为什么这样写</summary><p>清单太长就没人看。这条提示词要求只保留「不做会出事」的项，按改动影响面给风险分级与对应发布策略，并写明回滚阈值，让清单变成动作而非形式。</p></details></article><article class="pcard" id="p4-qa-regression"><div class="phead"><b>回归范围：改一行要测多少</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">根据改动影响面决定回归范围，而不是全量重测</p><pre class="prompt">【角色】你是做精准测试的工程师，改一行不一定要全量回归，但必须知道影响面在哪。
+【输入】改动内容、模块依赖关系、历史缺陷分布：
+{{problem}}
+【任务】
+1) 沿调用链推影响面，标出直接依赖与间接依赖；
+2) 评估数据与配置的连带影响；
+3) 按风险挑必测项，给选择理由；
+4) 给可以跳过但需要监控的部分；
+5) 给兜底方案：出问题时怎么快速发现。
+【约束】不编造依赖关系，缺信息先向我要代码或接口清单；不为了省时间跳过资金与权限路径；必须说明跳过项的风险。
+【输出格式】按「影响面推导 / 连带影响 / 必测项 / 可跳过与监控 / 兜底方案」输出。</pre><details><summary>为什么这样写</summary><p>全量回归成本高还会让人麻木。这条提示词要求沿调用链推影响面，评估数据与配置的连带影响，再按风险挑必测项，并给跳过部分的兜底监控。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9A%E6%8A%8A%E5%BC%82%E5%B8%B8%E8%B7%AF%E5%BE%84%E8%A1%A5%E9%BD%90#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

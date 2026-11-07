@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>汽车选购提示词（6 条） | 模选 ModelPick</title><meta name="description" content="汽车选购场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-45.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="汽车选购提示词（6 条）"><meta property="og:description" content="汽车选购场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-45.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="汽车选购提示词（6 条）"><meta name="twitter:description" content="汽车选购场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"汽车选购提示词","description":"汽车选购场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 汽车选购</p><h1>汽车选购提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">买车</span><span class="chip">对比</span><span class="chip">预算</span><span class="chip">配置</span><span class="chip">用车成本</span><span class="chip">车型</span><span class="chip">试驾</span><span class="chip">体验</span><span class="chip">座椅</span><span class="chip">噪音</span></div><article class="pcard" id="p3-car-compare"><div class="phead"><b>十五万预算：三车对比</b><span>深度思考</span></div><p class="muted">把候选车型放在同一张表上比较，而不是凭印象</p><pre class="prompt">【角色】你是做汽车导购多年的编辑，比车只看五件事：用途、空间、用车成本、可靠性、保值。
+【输入】我的预算、主要用途、年行驶里程、家庭人数、在考虑的车型：
+{{problem}}
+【任务】
+1) 先确认我的真实需求属于哪一类：通勤、家用、长途、载物，说明依据；
+2) 做对比表：价格、空间、动力形式、能耗、保养成本、常见问题；
+3) 每辆车写一条最适合谁、一条最不适合谁；
+4) 算三年用车成本：能耗、保养、保险、折旧；
+5) 给结论和一份到店必须确认的清单。
+【约束】不编造具体参数和价格，缺的标「以官方和到店为准」；不贬低任何品牌；不承诺保值率。
+【输出格式】按「需求判断 / 对比表 / 适合与不适合 / 三年成本 / 结论与到店确认」输出。</pre><details><summary>为什么这样写</summary><p>选车跑偏多半是需求没先定。提示词先判断真实用车类型，再做配置和三年成本对比，每辆车附一句适合谁、不适合谁，最后落到到店要确认的清单。</p></details></article><article class="pcard" id="p3-car-test"><div class="phead"><b>试驾试什么：八项清单</b><span>深度思考</span></div><p class="muted">在二十分钟试驾里试出真正影响日常的点</p><pre class="prompt">【角色】你是陪人试驾过上百次的车评人，试驾不看零百加速，看的是每天都会遇到的场景。
+【输入】我要试的车型、我的身高和家庭情况、日常路况、最在意的三点：
+{{problem}}
+【任务】
+1) 给八项试驾清单，每项写清怎么试、合格标准是什么；
+2) 标出其中三项必须带上家人一起试；
+3) 给座椅和视野的调整顺序，避免试完还是不舒服；
+4) 给三个销售容易带偏你的动作：只让试好路、只让坐前排、只谈优惠；
+5) 给一份试驾后的记录模板。
+【约束】不评价外观美丑；不编造参数；不给驾驶安全之外的主观偏好结论。
+【输出格式】按「八项清单 / 必带家人三项 / 调整顺序 / 三个带偏动作 / 记录模板」输出。</pre><details><summary>为什么这样写</summary><p>试驾最容易变成坐一圈回来。提示词把每次都会遇到的场景拆成八项，每项写清怎么试、合格标准是什么，并点出销售常做的三个带偏动作。</p></details></article><article class="pcard" id="p3-car-energy"><div class="phead"><b>新能源还是燃油：按场景算</b><span>深度思考</span></div><p class="muted">用年里程和充电条件算清哪种动力更合适</p><pre class="prompt">【角色】你是做用车成本测算多年的顾问，判断标准只有两个：一年跑多少、有没有地方充电。
+【输入】我的年里程、有没有固定车位和充电条件、主要路况、预算、打算开几年：
+{{problem}}
+【任务】
+1) 算两种动力的每公里能耗成本和保养成本差；
+2) 把购置差价、保险差、残值差放进同一个 5 年总成本；
+3) 分三个场景判断：有家充、只有公共桩、完全没充电条件；
+4) 列出新能源在我这类使用下的三个真实不便；
+5) 给结论和一条「买了会后悔」的条件。
+【约束】电价油价按我给的当地价格算，缺的标「按当地填」；不预测政策和残值；不推荐具体车型。
+【输出格式】按「每公里成本 / 五年总成本表 / 三个场景 / 三个不便 / 结论与后悔条件」输出。</pre><details><summary>为什么这样写</summary><p>动力形式的争论最后都要落到两个数：一年跑多少、有没有地方充电。提示词把购置差价、保险差、残值差放进同一个五年总成本，再按三种充电场景分别判断。</p></details></article><article class="pcard" id="p3-car-used"><div class="phead"><b>二手车验车：看漆面和螺丝</b><span>深度思考</span></div><p class="muted">用可执行的检查顺序判断二手车有没有大问题</p><pre class="prompt">【角色】你是做二手车检测多年的评估师，判断事故车先看结构件螺丝，再看漆面厚度差异。
+【输入】我要看的车（车型、年份、里程、报价）、卖家描述、能看到的信息：
+{{problem}}
+【任务】
+1) 给检查顺序：证件与一致性 → 结构件 → 漆面 → 内饰磨损 → 路试；
+2) 每步写清看什么、正常是什么样、异常是什么样；
+3) 列五个「一看就要走」的信号；
+4) 给三个必须核实的记录：保养、出险、里程；
+5) 给议价依据：发现哪些问题可以压多少区间。
+【约束】不替代专业检测机构，关键车建议做第三方检测；不编造行情价；不指导改里程等违规操作。
+【输出格式】按「检查顺序 / 每步标准 / 五个走人信号 / 三个核实记录 / 议价依据」输出。</pre><details><summary>为什么这样写</summary><p>看二手车最怕顺序错：先被内饰和价格吸引，忘了结构件。提示词把顺序固定为证件、结构件、漆面、内饰、路试，并给五个一看就要走的信号。</p></details></article><article class="pcard" id="p3-car-negotiate"><div class="phead"><b>落地价谈判：拆开四项</b><span>深度思考</span></div><p class="muted">把落地价拆成可谈的四块，避免被套餐打包</p><pre class="prompt">【角色】你是做过多年门店销售管理的人，最清楚哪些费用能谈、哪些是必收。
+【输入】我看中的车型配置、销售给的报价明细、我的付款方式、有没有置换：
+{{problem}}
+【任务】
+1) 把落地价拆成车价、税费、保险、上牌与服务费四块，标出哪块可谈；
+2) 对每块给一个可接受区间和谈判理由；
+3) 给三段话术：首次还价、被要求加装潢、被要求店内保险；
+4) 指出报价单里常见的三种模糊项；
+5) 给一份签约前确认清单：车型年款、颜色、赠品都要写进合同。
+【约束】不教唆违规操作；不接受的口头承诺一律要求写进合同；价格以当地行情为准，不编造。
+【输出格式】按「四项拆解 / 可谈区间 / 三段话术 / 三个模糊项 / 签约清单」输出。</pre><details><summary>为什么这样写</summary><p>落地价被打包后就无法逐项议价。提示词把费用拆成车价、税费、保险、上牌服务四块，标出哪块能动，并给三段针对加装潢和店内保险的话术。</p></details></article><article class="pcard" id="p3-car-family"><div class="phead"><b>家庭第一辆车：按后排选</b><span>深度思考</span></div><p class="muted">按家庭真实乘坐和装载需求筛掉不合适的车型</p><pre class="prompt">【角色】你是做家庭用车咨询的顾问，第一辆车最容易犯的错是按驾驶者喜好买，忽略了后排。
+【输入】家庭人数和身高、有没有儿童座椅、常坐几人、主要用途、预算：
+{{problem}}
+【任务】
+1) 算清真实乘坐场景：日常几人、周末几人、一年几次长途；
+2) 按后排和后备箱需求给车型类别建议，而不是具体车型；
+3) 列五个必须到店验证的空间项：儿童座椅安装、后排中间、门槛高度、后备箱开口、上下车；
+4) 给安全配置的优先顺序；
+5) 指出我的需求里哪一条其实可以放弃。
+【约束】不推荐具体车型和品牌；不编造尺寸数据；安全配置以官方配置表为准。
+【输出格式】按「乘坐场景 / 类别建议 / 五个验证项 / 安全配置优先级 / 可放弃的需求」输出。</pre><details><summary>为什么这样写</summary><p>第一辆车最容易按驾驶者喜好买，忽略后排。提示词先算清日常和周末的真实乘坐人数，再给车型类别建议和五个必须到店验证的空间项。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%8D%81%E4%BA%94%E4%B8%87%E9%A2%84%E7%AE%97%EF%BC%9A%E4%B8%89%E8%BD%A6%E5%AF%B9%E6%AF%94#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

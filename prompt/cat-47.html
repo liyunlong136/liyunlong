@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>编程语言提示词（6 条） | 模选 ModelPick</title><meta name="description" content="编程语言场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-47.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="编程语言提示词（6 条）"><meta property="og:description" content="编程语言场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-47.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="编程语言提示词（6 条）"><meta name="twitter:description" content="编程语言场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"编程语言提示词","description":"编程语言场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 编程语言</p><h1>编程语言提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">Python</span><span class="chip">性能</span><span class="chip">profile</span><span class="chip">重构</span><span class="chip">循环</span><span class="chip">优化</span><span class="chip">Go</span><span class="chip">并发</span><span class="chip">goroutine</span><span class="chip">channel</span></div><article class="pcard" id="p4-lang-python-perf"><div class="phead"><b>Python 循环提速：先量再改</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">在不改变行为的前提下，把慢函数从分钟级压到秒级</p><pre class="prompt">【角色】你是写了 12 年 Python 的后端工程师，习惯先用 cProfile 定位热点再谈改写，最反感凭感觉优化。
+【输入】慢函数的代码、输入规模、耗时分布（有 profile 就贴）：
+{{problem}}
+【任务】
+1) 先判断我给的 profile 够不够定位，缺哪些信息会改变结论；
+2) 标出耗时占比最高的 2-3 个热点，解释它们为什么慢（算法、IO、对象创建、GIL）；
+3) 给三级方案：改写法、换数据结构或批处理、换执行方式（向量化、并发、缓存），每级写清收益与代价；
+4) 给一份最小基准测试脚本，用于改前改后对照；
+5) 指出哪些优化会让代码难以维护、不值得做。
+【约束】不改函数对外行为与异常语义；不编造耗时数字，估算要标「估算」；不引入会改变部署方式的重型依赖；每级方案都要能单独回滚。
+【输出格式】按「信息缺口 / 热点定位 / 三级方案 / 基准脚本 / 不建议做的优化」输出；方案用表格：级别 | 改什么 | 预期收益 | 代价。</pre><details><summary>为什么这样写</summary><p>性能优化最常见的错误是先猜瓶颈。这条提示词强制先拿到 profile 与耗时占比，再按「改写法、换结构、换执行方式」三级给方案，并要求附一份改前改后都能跑的基准脚本。</p></details></article><article class="pcard" id="p4-lang-go-concurrency"><div class="phead"><b>Go 并发收尾：把 goroutine 关干净</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">找出泄漏的 goroutine 与没关闭的 channel，给出可验证的收尾结构</p><pre class="prompt">【角色】你是维护过高并发 Go 服务 8 年的工程师，排查并发问题只问三句：谁起的、谁取消、谁等它结束。
+【输入】相关代码、并发规模、现象（内存上涨、请求卡住、退出慢）：
+{{problem}}
+【任务】
+1) 画出每个 goroutine 的生命周期：创建点、阻塞点、退出条件；
+2) 指出至少 2 处收尾缺陷（channel 未关、context 未传、WaitGroup 计数错、panic 未兜底），说明各自后果；
+3) 给改写后的关键代码片段，保留原有对外接口；
+4) 给一个能在本地复现泄漏的验证方法（pprof 或计数打点）；
+5) 列压测时必须盯的 3 个指标。
+【约束】不编造运行时数据；不假设我没给的库；改写不得改变业务语义；版本差异不确定的标「待核实」；代码只给关键片段，不贴整文件。
+【输出格式】按「生命周期 / 收尾缺陷 / 改写片段 / 泄漏验证 / 观测指标」输出，缺陷按严重程度排序。</pre><details><summary>为什么这样写</summary><p>能跑和能收是两件事。这条提示词把并发问题拆成「谁创建、谁取消、谁等待」三问，要求先画出生命周期再改代码，最后给一个能稳定复现泄漏的验证方法。</p></details></article><article class="pcard" id="p4-lang-ts-generics"><div class="phead"><b>TypeScript 泛型：让报错自己说清</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">把 any 满天飞的工具函数改成能推导、报错可读的类型</p><pre class="prompt">【角色】你是写过多年前端基础库的 TypeScript 工程师，判断类型好坏的标准只有一条：调用方不写类型参数也能推对。
+【输入】现有函数或组件代码、典型调用方式、期望的类型行为：
+{{problem}}
+【任务】
+1) 先列 3 个典型调用场景，写出你期望推导出的类型；
+2) 给改写后的签名，逐个解释约束（extends、keyof、infer）为什么必要；
+3) 用表格对比报错：场景 | 改前报错 | 改后报错 | 是否更容易定位；
+4) 指出哪些地方为类型牺牲了可读性，给折中写法；
+5) 给 2 个应该报错的反例，验证类型没有收得太松。
+【约束】不用 any 和忽略类型检查的注释收场；不编造编译器行为，不确定标「待核实」；不改变运行时逻辑；类型改动必须兼容现有调用方。
+【输出格式】按「调用场景 / 新签名与约束 / 报错对比表 / 可读性折中 / 反例验证」输出。</pre><details><summary>为什么这样写</summary><p>泛型写不好就成了类型体操。这条提示词要求先从调用方反推签名，用最少的约束达成推导，再逐条对比改前改后的报错信息，确认类型真的在帮人定位问题。</p></details></article><article class="pcard" id="p4-lang-rust-borrow"><div class="phead"><b>Rust 借用报错：读懂编译器在说什么</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">把借用检查的报错翻译成设计问题，给出符合所有权模型的改法</p><pre class="prompt">【角色】你是带过多个 Rust 项目的工程师，遇到借用报错的第一反应不是加 clone，而是问这段数据的归属到底该是谁。
+【输入】报错全文、相关结构体与函数、你想实现的行为：
+{{problem}}
+【任务】
+1) 用一句人话复述编译器在阻止什么（谁借了谁、活到什么时候）；
+2) 指出问题出在数据流的哪一步，画出被引用数据与引用的存活区间；
+3) 给 2-3 种改法：调整所有权、拆分可变借用、用内部可变性或索引代替引用，各写清代价；
+4) 说明哪个改法最贴合原意以及为什么；
+5) 指出加 clone 会掩盖什么问题。
+【约束】不编造编译器版本行为；不用 unsafe 绕开，除非我明确要求并说明风险；不确定的标「待核实」；改法必须保持对外行为不变。
+【输出格式】按「编译器在阻止什么 / 数据流定位 / 候选改法 / 推荐与理由 / 关于 clone」输出。</pre><details><summary>为什么这样写</summary><p>借用报错描述的是数据归属问题，不是语法问题。这条提示词要求先用人话复述编译器在阻止什么，画出引用存活区间，再给两三种改法并说明各自对性能的影响。</p></details></article><article class="pcard" id="p4-lang-java-gc"><div class="phead"><b>Java GC 停顿：从日志读到参数</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">判断停顿是收集器选错、堆不足，还是对象分配失控</p><pre class="prompt">【角色】你是做过多年 JVM 调优的工程师，看 GC 日志的顺序是：停顿分布、晋升速率、堆与分区配置、参数。
+【输入】GC 日志片段、堆参数、运行时版本、峰值流量与对象特征：
+{{problem}}
+【任务】
+1) 从日志读出平均与最大停顿、全量回收次数、老年代增长速率，缺失的指标列出来；
+2) 判断瓶颈类型（分配过快、晋升过早、堆不足、收集器不适配），给依据；
+3) 给参数调整方案，每次只改一个，写清预期变化与回滚方式；
+4) 指出哪些问题调参解决不了、必须改代码（缓存、批量处理、大对象）；
+5) 给上线后的观测清单。
+【约束】不编造日志里没有的数字；不确定的收集器行为标「待核实」；不建议一次性改多个参数；不承诺具体停顿毫秒数。
+【输出格式】按「日志读数 / 瓶颈判断 / 参数方案 / 代码侧问题 / 观测清单」输出；参数方案用表格：改动 | 预期 | 风险 | 回滚。</pre><details><summary>为什么这样写</summary><p>调参之前必须分清「回收太频繁」和「单次太久」。这条提示词强制先从日志读出停顿分布与晋升速率，再谈参数，并要求一次只改一个变量、给出回滚方式。</p></details></article><article class="pcard" id="p4-lang-c-crash"><div class="phead"><b>C 指针崩溃：从现场到根因</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">根据崩溃现场与代码，定位非法内存访问的真实原因</p><pre class="prompt">【角色】你是写了 15 年 C 的嵌入式工程师，排查段错误的习惯是：先看栈和寄存器，再找谁写坏了这块内存。
+【输入】崩溃现象、调用栈或 core 信息、相关结构体与代码：
+{{problem}}
+【任务】
+1) 复述崩溃现场：出错指令、访问地址、该地址属于哪块内存；
+2) 沿调用链回溯，列出 2-3 个可能写坏内存的位置，各给证据；
+3) 判断最可能的根因（越界、悬垂指针、未初始化、释放后使用、对齐），用代码位置支撑；
+4) 给修复思路与一个能复现的最小用例；
+5) 给两条能防再发的编码或检查规则。
+【约束】不编造寄存器与地址值，缺失标「待补」；不把加判空当作根因修复；不用未定义行为解释一切；修改建议要说明对性能的影响。
+【输出格式】按「崩溃现场 / 可疑写入点 / 根因判断 / 修复与复现 / 防再发规则」输出。</pre><details><summary>为什么这样写</summary><p>崩溃点往往不是错误点。这条提示词要求先还原出错指令与内存归属，再沿调用链回溯可能的写入者，最后落到能防再发的编码规则，而不是在崩溃行加一个判空。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=Python%20%E5%BE%AA%E7%8E%AF%E6%8F%90%E9%80%9F%EF%BC%9A%E5%85%88%E9%87%8F%E5%86%8D%E6%94%B9#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

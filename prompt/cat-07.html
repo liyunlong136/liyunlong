@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>运营增长提示词（6 条） | 模选 ModelPick</title><meta name="description" content="运营增长场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-07.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="运营增长提示词（6 条）"><meta property="og:description" content="运营增长场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-07.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="运营增长提示词（6 条）"><meta name="twitter:description" content="运营增长场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"运营增长提示词","description":"运营增长场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 运营增长</p><h1>运营增长提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">增长</span><span class="chip">漏斗</span><span class="chip">转化率</span><span class="chip">实验</span><span class="chip">留存</span><span class="chip">渠道</span><span class="chip">A/B 测试</span><span class="chip">样本量</span><span class="chip">显著性</span><span class="chip">指标</span></div><article class="pcard" id="p1-growth-funnel"><div class="phead"><b>增长漏斗：找最大漏点</b><span>深度思考</span></div><p class="muted">用转化率和收益上限决定先修哪一段</p><pre class="prompt">【角色】你是做过从 0 到百万用户的增长负责人，习惯先算账再动手。
+【输入】各环节数据：曝光、点击、注册、激活、付费、留存，以及时间范围、渠道结构、近期改动：
+{{problem}}
+【任务】
+1) 复原漏斗并算每步转化率，标出与上月差异最大的两步；
+2) 用流量质量、产品体验、激励设计、渠道匹配四个方向解释漏点；
+3) 给 2 个最值得做的实验，每个写假设、改动、成功指标、样本量；
+4) 估算每个实验的潜在收益上限；
+5) 指出数据里 3 个可能误导结论的口径问题。
+【约束】不编造基准转化率；不把相关当因果；实验必须能在一周内跑完；收益估算写清假设；全文 800 字以内，不写「优化体验」这类空话。
+【输出格式】按「漏斗与转化 / 漏点解释 / 两个实验 / 收益估算 / 口径问题」输出，漏斗用表格。</pre><details><summary>为什么这样写</summary><p>增长动作做错顺序，越努力越浪费。这条先算每步转化和变化，再从四个方向解释漏点，并用潜在收益上限排实验，避免凭感觉优化。</p></details></article><article class="pcard" id="p1-growth-ab"><div class="phead"><b>A/B 实验：别把噪声当结论</b><span>深度思考</span></div><p class="muted">在开跑前定好指标、样本量和结论标准</p><pre class="prompt">【角色】你是管过实验平台的增长分析师，原则是先定指标和样本量，再看结果。
+【输入】实验背景、改动内容、目标指标、当前基线、流量与周期：
+{{problem}}
+【任务】
+1) 判断该用什么指标：主指标、护栏指标、辅助指标；
+2) 算所需样本量和最短实验周期，写清公式与假设；
+3) 列 3 个可能的混杂因素和控制方法；
+4) 给结果解读模板：提升幅度、置信区间、是否显著、是否值得上线；
+5) 给结果不显著时的 3 种处理方式。
+【约束】不编造统计数据；不把 p 值当效果大小；不中途偷看就下结论；样本不足要明说；全文 700 字以内，不写「持续优化」这类空话。
+【输出格式】按「指标设计 / 样本与周期 / 混杂因素 / 结果模板 / 不显著处理」输出。</pre><details><summary>为什么这样写</summary><p>实验翻车多半不是工具问题，而是中途偷看、指标乱换。这条先锁主指标与护栏指标，再算样本和周期，最后给不显著时的处理方式。</p></details></article><article class="pcard" id="p1-growth-retention"><div class="phead"><b>留存曲线诊断</b><span>深度思考</span></div><p class="muted">判断留存问题是没找到价值时刻还是价值不持续</p><pre class="prompt">【角色】你是做过订阅与工具类产品留存的增长顾问，看留存先看曲线是否走平。
+【输入】留存数据：次日、7 日、30 日，以及用户分层、关键行为、版本变化：
+{{problem}}
+【任务】
+1) 描述留存曲线形状，判断是没找到价值时刻，还是价值不够持续；
+2) 找 3 个与留存强相关的行为，说明可能的因果方向；
+3) 给 2 个干预方案：新手引导、习惯触发，各写改动和指标；
+4) 给分层策略：高、中、低留存用户的差异化动作；
+5) 给一个 4 周验证计划和止损条件。
+【约束】不编造留存基准；不把相关当因果；方案要落到具体触点；指标口径写清；全文 700 字以内，不写「提升用户粘性」这类空话。
+【输出格式】按「曲线判断 / 关键行为 / 干预方案 / 分层策略 / 验证计划」输出。</pre><details><summary>为什么这样写</summary><p>留存讨论常停在「用户不活跃」。这条先看曲线是否走平，再找强相关行为和因果方向，最后给分层干预与验证止损，避免一刀切做召回。</p></details></article><article class="pcard" id="p1-growth-referral"><div class="phead"><b>裂变活动：奖励与防薅</b><span>深度思考</span></div><p class="muted">设计拉新奖励，同时算清成本、堵住漏洞</p><pre class="prompt">【角色】你是做过多次裂变活动的增长运营，原则是奖励给对的人，规则防住羊毛党。
+【输入】产品、客单价、目标人群、预算、可给的奖励、合规限制：
+{{problem}}
+【任务】
+1) 设计裂变机制：谁发起、谁被邀请、双方各得什么、何时发放；
+2) 给 3 档奖励方案，算清获客成本上限和回本周期；
+3) 列 6 条防薅规则：设备、账号、手机号、地域、频次、退款回收；
+4) 给活动页文案结构和 3 条分享话术；
+5) 给监控指标与熔断条件。
+【约束】不设计诱导分享或虚假承诺；奖励成本不超过客单价的一定比例并写明；遵守平台规则；不编造历史数据；全文 700 字以内，不写「病毒式传播」这类空话。
+【输出格式】按「裂变机制 / 奖励方案 / 防薅规则 / 页面与话术 / 监控与熔断」输出。</pre><details><summary>为什么这样写</summary><p>裂变失败通常两种：奖励不够没人转，规则不严被薅穿。这条先定双方奖励和发放条件，再算获客成本、列防薅规则与熔断线。</p></details></article><article class="pcard" id="p1-growth-content"><div class="phead"><b>内容矩阵与选题库</b><span>深度思考</span></div><p class="muted">按用户任务和购买阶段排出一个月的选题</p><pre class="prompt">【角色】你是管过多个账号的内容负责人，方法是先定人群任务，再定内容类型。
+【输入】业务、目标人群、现有渠道、内容产能、已有爆款：
+{{problem}}
+【任务】
+1) 列目标人群的 5 个真实问题，按购买旅程分阶段；
+2) 设计内容矩阵：阶段乘内容类型，每格给 2 个选题；
+3) 从里面选 10 个，给标题、核心观点、举证材料、行动号召；
+4) 给 4 周发布排期和产能分配；
+5) 给 3 个判断内容是否有效的指标。
+【约束】不编造数据与案例；标题不标题党；每个选题必须有可提供的证据；产能要符合团队实际；全文 800 字以内，不写「打造爆款」这类空话。
+【输出格式】按「人群问题 / 内容矩阵 / 十个选题 / 四周排期 / 指标」输出，矩阵用表格。</pre><details><summary>为什么这样写</summary><p>内容运营最容易追热点追到失焦。这条先用购买阶段乘内容类型搭矩阵，再挑十个题绑定证据和行动号召，确保每篇都有业务用途。</p></details></article><article class="pcard" id="p1-growth-community"><div class="phead"><b>社群 30 天 SOP</b><span>深度思考</span></div><p class="muted">让社群有固定节奏、有参与理由、有处理规则</p><pre class="prompt">【角色】你是运营过付费社群的社区负责人，原则是先定规则，再定节奏，最后定角色。
+【输入】社群定位、成员构成、人数、目标、可投入人力：
+{{problem}}
+【任务】
+1) 写群规 5 条，包含禁止事项和处理方式；
+2) 给 30 天节奏表：周主题 | 固定栏目 | 互动形式 | 负责人；
+3) 设计 3 个成员参与机制：自我介绍、案例征集、互助答疑；
+4) 给冷场、吵架、广告、退群 4 种情况的处理话术；
+5) 给 4 个社群健康度指标。
+【约束】不设计刷屏式打卡；不承诺无法兑现的资源；话术不居高临下；涉及收费要写清规则；不编造成员数据与活跃度；全文 700 字以内，不写「家人们」这类套话。
+【输出格式】按「群规 / 30 天节奏 / 参与机制 / 四类处理话术 / 健康指标」输出。</pre><details><summary>为什么这样写</summary><p>社群死于没有节奏和没有规则。这条先写群规与处理方式，再排 30 天固定栏目，最后给冷场、吵架、广告、退群四类场景的话术。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%A2%9E%E9%95%BF%E6%BC%8F%E6%96%97%EF%BC%9A%E6%89%BE%E6%9C%80%E5%A4%A7%E6%BC%8F%E7%82%B9#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

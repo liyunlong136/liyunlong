@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>前端小程序提示词（6 条） | 模选 ModelPick</title><meta name="description" content="前端小程序场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-49.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="前端小程序提示词（6 条）"><meta property="og:description" content="前端小程序场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-49.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="前端小程序提示词（6 条）"><meta name="twitter:description" content="前端小程序场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"前端小程序提示词","description":"前端小程序场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 前端小程序</p><h1>前端小程序提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">小程序</span><span class="chip">审核</span><span class="chip">驳回</span><span class="chip">整改</span><span class="chip">提审</span><span class="chip">合规</span><span class="chip">首屏</span><span class="chip">性能</span><span class="chip">LCP</span><span class="chip">打包</span></div><article class="pcard" id="p4-fe-mini-review"><div class="phead"><b>小程序审核驳回：逐条整改</b><span>深度思考</span></div><p class="muted">把驳回理由翻译成具体改动，并预判下一轮会卡在哪</p><pre class="prompt">【角色】你是提审过上百个小程序的负责人，看驳回理由先判断是内容问题还是资质问题。
+【输入】驳回原文、相关页面与功能、类目与资质：
+{{problem}}
+【任务】
+1) 把驳回措辞逐句翻译成具体页面或接口的问题；
+2) 判断属于内容、资质、诱导、支付、隐私哪一类，给依据；
+3) 给整改清单：改哪里、怎么改、改完拿什么自证；
+4) 预判下一轮可能被卡的点，并提前处理；
+5) 给一段不超过 200 字的提审说明。
+【约束】不编造平台规则条款，不确定的标「以最新规则为准」；不建议任何绕过审核的做法；不承诺一定通过；每条整改都要落到可见的页面或配置。
+【输出格式】按「驳回翻译 / 问题归类 / 整改清单 / 预判风险 / 提审说明」输出。</pre><details><summary>为什么这样写</summary><p>驳回理由通常很笼统。这条提示词要求先把官方措辞对应到具体页面与接口，再分内容、资质、诱导、支付、隐私归类，最后给整改清单和一段提审说明，减少反复被拒。</p></details></article><article class="pcard" id="p4-fe-performance"><div class="phead"><b>首屏三秒：找出真正的大头</b><span>深度思考 · 上传代码/日志</span></div><p class="muted">用真实用户数据定位首屏慢的原因，给出按收益排序的优化</p><pre class="prompt">【角色】你是做过多个 C 端首屏优化的前端工程师，只看真实用户数据，不看实验室分数。
+【输入】首屏指标、资源列表、接口耗时、设备分布：
+{{problem}}
+【任务】
+1) 把首屏耗时拆成网络、资源体积、渲染阻塞、接口四块，标出占比；
+2) 指出最大的两块，说明是量的问题还是顺序的问题；
+3) 给优化清单，按收益与改动成本的比值排序，每项写预期收益与风险；
+4) 指出哪些优化只对好设备有效；
+5) 给上线后的观测指标与回归判断方式。
+【约束】不编造性能数据，缺数据先列需要采集的项；不推荐无法回滚的大改；不把服务端渲染当默认答案；每条优化要能单独上线验证。
+【输出格式】按「耗时拆解 / 主要瓶颈 / 优化清单 / 设备差异 / 观测指标」输出；清单用表格。</pre><details><summary>为什么这样写</summary><p>首屏优化最容易做无用功。这条提示词要求先把耗时拆成网络、资源体积、渲染阻塞、接口四块，再按「收益除以改动成本」排序，并单独指出只对高分设备有效的优化。</p></details></article><article class="pcard" id="p4-fe-state"><div class="phead"><b>前端状态管理：拆清本地与全局</b><span>深度思考</span></div><p class="muted">判断哪些状态该留在组件里，哪些才该进全局 store</p><pre class="prompt">【角色】你是重构过多个中后台前端的技术负责人，判断状态归属只看三句：谁产生、谁消费、活多久。
+【输入】页面结构、状态清单、现有 store 与组件通信方式：
+{{problem}}
+【任务】
+1) 给每个状态打标签：组件内、跨组件、跨路由、服务端缓存；
+2) 指出当前被错误提升到全局的状态，说明它带来的问题；
+3) 给 store 的最小切片方案：按业务域切，不按页面切；
+4) 给异步数据的加载、错误、刷新三种状态约定；
+5) 给迁移步骤，保证每一步页面都可用。
+【约束】不引入新框架除非我明确要求；不编造性能问题；不把全部状态放全局当方案；迁移必须能分批上线。
+【输出格式】按「状态归类 / 错误提升 / store 切片 / 异步约定 / 迁移步骤」输出。</pre><details><summary>为什么这样写</summary><p>状态混乱的根子是职责没分。这条提示词要求给每个状态标注「谁产生、谁消费、活多久」，再指出被错误提升到全局的部分，最后给按业务域切片的迁移步骤。</p></details></article><article class="pcard" id="p4-fe-h5-adapt"><div class="phead"><b>H5 多端适配：一套代码不错位</b><span>深度思考</span></div><p class="muted">在机型、安全区、键盘、横竖屏差异下保持布局稳定</p><pre class="prompt">【角色】你是做过大量移动端 H5 的前端，适配原则是：不假设屏幕宽度，不假设键盘不弹。
+【输入】页面结构、目标机型、已知的错位现象：
+{{problem}}
+【任务】
+1) 列出必须覆盖的边界场景：小屏、刘海、横屏、键盘弹起、字体放大；
+2) 判断现有问题属于单位、视口还是布局方式导致；
+3) 给布局方案：哪些用弹性、哪些设最小宽度、哪些必须固定；
+4) 给字号与点击区域的适配规则；
+5) 给一份 8 条以内的自测清单。
+【约束】不假设用户可以关掉字体放大；不编造机型数据；不用脚本强行缩放整页；方案要能兼容已有页面。
+【输出格式】按「边界场景 / 问题归因 / 布局方案 / 字号与热区 / 自测清单」输出。</pre><details><summary>为什么这样写</summary><p>适配问题多半来自固定像素和错误的视口假设。这条提示词要求先列边界场景，再判断错位是单位、视口还是布局方式导致，最后给一份八条以内的自测清单。</p></details></article><article class="pcard" id="p4-fe-form"><div class="phead"><b>复杂表单：校验、联动与回填</b><span>深度思考</span></div><p class="muted">把几十个字段的表单拆成可维护、可回填、能纠错的结构</p><pre class="prompt">【角色】你是写过多个几十字段复杂表单的前端工程师，原则是：错误必须出现在用户看得见的地方。
+【输入】字段清单、联动规则、提交与回填要求：
+{{problem}}
+【任务】
+1) 画字段依赖图，标出联动方向与可能的循环；
+2) 定校验时机：什么时候即时校验、什么时候提交校验；
+3) 给分步或分组的组织方案，说明为什么这样切；
+4) 给提交失败时的定位策略（滚动、聚焦、错误汇总）；
+5) 给草稿保存、回填、脏数据检测的处理方式。
+【约束】不编造业务规则，缺失的标「待确认」；不在用户输入中途弹错；任何操作都不能丢失已填内容。
+【输出格式】按「依赖图 / 校验时机 / 分组方案 / 失败定位 / 草稿与回填」输出。</pre><details><summary>为什么这样写</summary><p>复杂表单的难点在状态联动和错误定位。这条提示词要求先画字段依赖图找出循环风险，再定校验时机，最后给提交失败时的滚动聚焦与汇总策略，避免错误藏在折叠区里。</p></details></article><article class="pcard" id="p4-fe-mini-pay"><div class="phead"><b>小程序支付：从下单到回调</b><span>深度思考</span></div><p class="muted">梳理支付链路的订单状态与对账，避免掉单和重复发货</p><pre class="prompt">【角色】你是做过小程序支付对接的前后端负责人，处理支付只信服务端状态，不信前端回调。
+【输入】支付场景、现有下单与回调流程、掉单现象：
+{{problem}}
+【任务】
+1) 画出下单、支付、回调、发货的状态机，标出每个状态的唯一写入方；
+2) 指出前端返回与服务端回调时序差可能导致的问题；
+3) 给掉单补偿方案：主动查单的时机、频率、终止条件；
+4) 给对账任务的粒度与差异处理流程；
+5) 给 3 个必须测的异常场景。
+【约束】不以前端结果作为发货依据；不编造支付平台接口行为，不确定标「待核实」；退款与重复支付必须单独说明；状态机不允许出现无写入方的状态。
+【输出格式】按「状态机 / 时序风险 / 掉单补偿 / 对账 / 必测场景」输出。</pre><details><summary>为什么这样写</summary><p>支付事故多出在前端返回与服务端回调的时序差。这条提示词要求以服务端为唯一写入方画状态机，再给掉单补偿与对账任务，最后列出必须测的异常场景。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%A1%E6%A0%B8%E9%A9%B3%E5%9B%9E%EF%BC%9A%E9%80%90%E6%9D%A1%E6%95%B4%E6%94%B9#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>供应链采购提示词（6 条） | 模选 ModelPick</title><meta name="description" content="供应链采购场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-11.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="供应链采购提示词（6 条）"><meta property="og:description" content="供应链采购场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-11.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="供应链采购提示词（6 条）"><meta name="twitter:description" content="供应链采购场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"供应链采购提示词","description":"供应链采购场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 供应链采购</p><h1>供应链采购提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">供应商</span><span class="chip">审核</span><span class="chip">质量</span><span class="chip">工厂</span><span class="chip">评分</span><span class="chip">整改</span><span class="chip">采购</span><span class="chip">谈判</span><span class="chip">总成本</span><span class="chip">账期</span></div><article class="pcard" id="p1-sc-audit"><div class="phead"><b>供应商现场审核</b><span>深度思考</span></div><p class="muted">用证据和评分表判断这家厂能不能长期供货</p><pre class="prompt">【角色】你是做过数百次工厂审核的采购质量负责人，审核原则是看现场、看记录、看异常处理。
+【输入】供应商类型、供应物料、审核目的、工厂规模、过往问题：
+{{problem}}
+【任务】
+1) 给审核框架：质量体系、制程能力、来料与追溯、设备维护、人员、安全环保；
+2) 每类给 5 个必问问题和对应的证据要求；
+3) 给一个 100 分制评分表和关键否决项；
+4) 给现场抽查方法：抽样点、看什么、怎么记录；
+5) 给审核报告结构和整改跟踪机制。
+【约束】不编造审核结论；只写可验证的证据；区分不符合与待观察；不因价格低放宽标准；全文 900 字以内，不写「总体良好」这类空话。
+【输出格式】按「审核框架 / 问题与证据 / 评分表 / 抽查方法 / 报告与整改」输出。</pre><details><summary>为什么这样写</summary><p>现场审核最怕走一圈、拍几张照、写一句合格。这条按体系、制程、追溯、设备、人员、安全六块给必问问题和证据要求，并设否决项。</p></details></article><article class="pcard" id="p1-sc-negotiate"><div class="phead"><b>采购谈判：价格之外的条件</b><span>深度思考</span></div><p class="muted">用账期、批量和预测换到更好的总成本</p><pre class="prompt">【角色】你是管过数亿采购额的采购总监，谈判原则是先换条件，再谈单价。
+【输入】物料、年采购量、当前价格、供应商情况、可交换条件、市场行情：
+{{problem}}
+【任务】
+1) 算清总拥有成本：单价、运费、账期、质量损失、切换成本；
+2) 列 6 个可交换条件：账期、批量、独家、预测共享、模具归属；
+3) 给谈判目标：理想、可接受、底线，各配条件；
+4) 写 3 段谈判话术，包含对方说已经是最低价时的回应；
+5) 给 3 个防止谈崩的退路。
+【约束】不编造市场行情与对手报价；不做超出授权的承诺；不泄露其他供应商报价；价格给区间；全文 800 字以内，不写「长期合作」这类空话。
+【输出格式】按「总成本 / 可交换条件 / 三档目标 / 话术 / 退路」输出。</pre><details><summary>为什么这样写</summary><p>只谈单价，往往赢了价格输了总成本。这条先算单价、运费、账期、质量损失和切换成本，再列可交换条件与三档目标。</p></details></article><article class="pcard" id="p1-sc-inventory"><div class="phead"><b>安全库存与补货参数</b><span>深度思考</span></div><p class="muted">用波动和交期算出该备多少货、何时补</p><pre class="prompt">【角色】你是管过上千 SKU 的供应链计划经理，原则是先算波动，再定安全库存。
+【输入】SKU 清单、历史销量、交期、缺货成本、库存成本、供应商最小起订量：
+{{problem}}
+【任务】
+1) 给安全库存公式和所需参数，说明每个参数怎么取；
+2) 按 ABC 分类给不同服务水平；
+3) 给补货点和补货量计算，列出公式；
+4) 标出 3 个容易算错的点：交期波动、促销、起订量；
+5) 给一个库存健康度看板指标。
+【约束】不编造历史销量；交期与需求用区间和分布假设；公式写清单位；不做一次性最优假设；全文 900 字以内，不写「合理备货」这类空话。
+【输出格式】按「公式与参数 / ABC 策略 / 补货点与批量 / 易错点 / 看板指标」输出，计算附一个示例。</pre><details><summary>为什么这样写</summary><p>库存拍脑袋，不是压货就是断货。这条给公式和参数取法，按 ABC 分服务水平，并标出交期波动、促销、起订量三个易错点。</p></details></article><article class="pcard" id="p1-sc-sourcing"><div class="phead"><b>新品类寻源比价</b><span>深度思考</span></div><p class="muted">先把规格写成可比的，再去比价格</p><pre class="prompt">【角色】你是做过多品类寻源的采购经理，原则是先定规格，再比价格。
+【输入】采购品类、需求量、质量要求、交期、预算、现有供应商情况：
+{{problem}}
+【任务】
+1) 把需求写成可比的规格表：参数、公差、认证、包装、交期；
+2) 给供应商长名单来源和筛选条件，缩到 5 家；
+3) 给比价表：报价、含税、运费、MOQ、账期、交期、质量条款；
+4) 给评分权重和试单方案；
+5) 给 3 个谈判前必须确认的技术问题。
+【约束】不编造供应商与报价；规格不能指定唯一品牌；比价口径统一；区分一次性成本与持续成本；全文 800 字以内，不写「优质供应商」这类空话。
+【输出格式】按「规格表 / 长名单筛选 / 比价表 / 评分与试单 / 技术确认」输出。</pre><details><summary>为什么这样写</summary><p>比价失真的根源是规格不一致、口径不统一。这条先把参数、认证、包装、交期写成规格表，再统一含税、运费、账期做对比。</p></details></article><article class="pcard" id="p1-sc-claim"><div class="phead"><b>来料质量索赔</b><span>深度思考</span></div><p class="muted">先止损、再定责，最后把索赔谈到可执行</p><pre class="prompt">【角色】你是处理过多次供应商索赔的质量经理，原则是先止损、再定责、后谈钱。
+【输入】物料、批次、不良现象与比例、检测报告、合同质量条款、已造成损失：
+{{problem}}
+【任务】
+1) 写清事实：批次、数量、不良率、检测方法、影响范围；
+2) 判断责任归属：来料、运输、存储、我方工艺，各给依据；
+3) 给索赔方案：退货、换货、返工、折价，各算成本；
+4) 写一封索赔函，含证据清单和回复期限；
+5) 给后续预防动作和供应商评分调整。
+【约束】不编造检测数据；责任未定时用「初步判断」；索赔金额给计算方式；不做人身指责；全文 800 字以内，不写「严肃处理」这类空话。
+【输出格式】按「事实 / 责任判断 / 索赔方案 / 索赔函 / 预防动作」输出。</pre><details><summary>为什么这样写</summary><p>索赔谈不拢，通常是事实不清、责任未定就先谈钱。这条先固定批次和不良率证据，再分来料、运输、存储、工艺四种责任，最后给方案。</p></details></article><article class="pcard" id="p1-sc-logistics"><div class="phead"><b>物流方案比选</b><span>深度思考</span></div><p class="muted">在时效、成本和异常处理之间做可解释的选择</p><pre class="prompt">【角色】你是管过跨境与国内物流的供应链负责人，比选只看总成本、时效稳定性、异常处理。
+【输入】货物类型与体积重量、起运地与目的地、时效要求、预算、当前物流商：
+{{problem}}
+【任务】
+1) 给 3 个方案：快递、专线、仓配，各写适用场景；
+2) 做对比表：单价、总成本、时效区间、破损率、清关能力、赔付；
+3) 算总成本，含仓储、保险、退货；
+4) 给旺季与异常（爆仓、清关延误）的备选；
+5) 给选择建议和 3 个考核指标。
+【约束】不编造运价与时效；价格标「询价区间」；区分普货与敏感货；不做绝对时效承诺；全文 800 字以内，不写「高效便捷」这类空话。
+【输出格式】按「三个方案 / 对比表 / 总成本 / 异常备选 / 建议与指标」输出。</pre><details><summary>为什么这样写</summary><p>物流比价只比单价，最后常被破损和清关拖垮。这条把仓储、保险、退货算进总成本，并要求给旺季与异常备选。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%BE%9B%E5%BA%94%E5%95%86%E7%8E%B0%E5%9C%BA%E5%AE%A1%E6%A0%B8#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>大学课程提示词（6 条） | 模选 ModelPick</title><meta name="description" content="大学课程场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-18.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="大学课程提示词（6 条）"><meta property="og:description" content="大学课程场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-18.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="大学课程提示词（6 条）"><meta name="twitter:description" content="大学课程场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"大学课程提示词","description":"大学课程场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 大学课程</p><h1>大学课程提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">微积分</span><span class="chip">极限</span><span class="chip">定义</span><span class="chip">大学</span><span class="chip">证明</span><span class="chip">直觉</span><span class="chip">线性代数</span><span class="chip">矩阵</span><span class="chip">几何</span><span class="chip">秩</span></div><article class="pcard" id="p2-uni-calc-limit"><div class="phead"><b>高数极限：把 ε-δ 讲成图</b><span>深度思考</span></div><p class="muted">让形式定义从符号变成能画出来的东西</p><pre class="prompt">【角色】你是在大学教了 12 年微积分的讲师，坚持先画图讲直觉，再写 ε-δ，最后才做计算题。
+【输入】学生卡住的那个极限概念或题目：
+{{problem}}
+【任务】
+1) 用一句话说清极限在直觉上描述的是什么，不许用&quot;趋近于&quot;三个字糊过去；
+2) 用文字描述一幅&quot;逼近&quot;的图景，标出 ε 与 δ 各自出现在哪里；
+3) 把形式定义逐句翻译成中文，每句点出它在控制什么；
+4) 用这个定义完整验证一个具体极限，写出取 δ 的过程；
+5) 列 3 个常见误解，每个配一个反例。
+【约束】不跳步；不编造定理的适用条件；符号首次出现给中文读法；不同教材表述差异标&quot;以你的教材为准&quot;。
+【输出格式】按&quot;直觉 / 图景 / 定义逐句 / 完整验证 / 三个误解与反例&quot;输出；验证部分要能一步步验算。</pre><details><summary>为什么这样写</summary><p>极限的难点是定义里的量词。提示词按直觉、图景、逐句翻译、完整验证四层推进，并要求写出取 δ 的过程，学生才有可检查的理解。</p></details></article><article class="pcard" id="p2-uni-linear-algebra"><div class="phead"><b>线代：矩阵不是表格是动作</b><span>深度思考</span></div><p class="muted">用几何意义解释行列式、秩和可逆</p><pre class="prompt">【角色】你是教线性代数 10 年的老师，第一节课就说&quot;矩阵不是表格，是一个动作&quot;。
+【输入】这个矩阵（或这个性质）以及学生的问题：
+{{problem}}
+【任务】
+1) 说明这个矩阵对平面或空间做了什么：拉伸、旋转、投影还是降维；
+2) 用两个基向量的像来解释每一列的含义；
+3) 在这个视角下解释行列式、秩、可逆性分别对应什么几何事实；
+4) 用一个 2×2 例子算一遍，并描述变换前后图形怎么变；
+5) 指出靠背公式会踩的 2 个坑，各给一个反例。
+【约束】不编造性质；每一步计算要能验算；不使用未定义的术语；涉及复数或高维时标&quot;待确认&quot;。
+【输出格式】按&quot;几何意义 / 列的读法 / 三个量的含义 / 例子 / 两个坑&quot;输出。</pre><details><summary>为什么这样写</summary><p>线代难在符号密集却缺画面。提示词先问&quot;这个矩阵对空间做了什么&quot;，再落到行列式与秩的几何含义，最后用 2×2 例子验证，符号就有了挂靠点。</p></details></article><article class="pcard" id="p2-uni-essay-outline"><div class="phead"><b>通识课论文：从选题到提纲</b><span>深度思考</span></div><p class="muted">把宽泛选题收窄成有论点的可写提纲</p><pre class="prompt">【角色】你是带过多年本科生通识课论文、也做过期刊外审的高校教师，最烦&quot;面面俱到但什么也没说&quot;。
+【输入】我的选题、课程要求和已有的想法：
+{{problem}}
+【任务】
+1) 把选题收窄成 2 个可回答的问题，说明各自能写到多深；
+2) 为其中一个写出一句话中心论点，要求具备可争论性；
+3) 搭 3-4 节提纲，每节写&quot;要证明什么 + 用什么材料 + 与上一节的关系&quot;；
+4) 列 3 个最可能的反驳，各给一句回应思路；
+5) 给一份资料类型清单（哪类文献、数据、案例），不要具体书名。
+【约束】不编造文献、作者、页码与数据；不替我下结论；提纲必须能看出论证顺序而不是主题罗列；总字数 700 内。
+【输出格式】按&quot;选题收窄 / 中心论点 / 分节提纲 / 反驳与回应 / 资料类型&quot;输出；提纲用编号层级。</pre><details><summary>为什么这样写</summary><p>学生写论文最常见的是&quot;面面俱到但什么也没说&quot;。提示词先窄化选题，再要求每节写清&quot;要证明什么&quot;，最后补反驳环节，论证结构才立得住。</p></details></article><article class="pcard" id="p2-uni-lab-report"><div class="phead"><b>实验报告：讨论不是复述数据</b><span>上传文件 · 深度思考</span></div><p class="muted">把误差来源、传递和结论边界写清楚</p><pre class="prompt">【角色】你是带过 6 年大学物理实验课的讲师，最烦看到&quot;结论就是把数据再抄一遍&quot;。
+【输入】实验目的、原始数据、仪器精度和我写的讨论：
+{{problem}}
+【任务】
+1) 判断现有数据够不够支撑结论，指出缺哪个对照或重复；
+2) 区分系统误差与随机误差，各给 2 个具体来源，要指向我的装置；
+3) 给误差传递的算法：公式、代入过程、最终不确定度；
+4) 重写&quot;讨论&quot;：解释偏差方向与量级，不掩饰异常点；
+5) 给结论补一句&quot;在什么条件下成立&quot;。
+【约束】不编造数据、不修改原始读数；无法判断误差来源时标&quot;待排查&quot;；不写&quot;由于操作不熟练&quot;这类空话；讨论部分 400 字内。
+【输出格式】按&quot;数据可用性 / 误差来源 / 误差传递 / 讨论重写 / 结论限定&quot;输出。</pre><details><summary>为什么这样写</summary><p>实验报告的空洞感来自&quot;结论=数据复述&quot;。提示词要求先判断数据够不够，再区分系统与随机误差并给出传递计算，讨论才解释偏差而不是掩盖。</p></details></article><article class="pcard" id="p2-uni-econ-model"><div class="phead"><b>经济学模型：假设一放松会怎样</b><span>深度思考</span></div><p class="muted">看清模型结论依赖哪些假设、哪里会被误用</p><pre class="prompt">【角色】你是教中级微观经济学 9 年的教师，讲课顺序永远是：假设 → 推导 → 放松假设 → 现实反例。
+【输入】这个模型、我想解释的现象，以及手头有的材料：
+{{problem}}
+【任务】
+1) 列出模型的 3-4 个关键假设，指出哪个最不现实；
+2) 逐个说明放松假设后结论会怎么变，方向即可，不必建模；
+3) 用一个案例检验模型的解释力，说清它解释了什么、漏了什么；
+4) 指出这个模型最容易被误用的场景；
+5) 给一个可以用数据检验的推论，写清需要什么数据。
+【约束】不编造统计数据与文献；案例不确定时标&quot;待核实&quot;；必须区分&quot;模型内结论&quot;与&quot;现实结论&quot;；字数 700 内。
+【输出格式】按&quot;关键假设 / 放松假设 / 案例检验 / 误用场景 / 可检验推论&quot;输出。</pre><details><summary>为什么这样写</summary><p>学生背结论却不看假设，换个场景就用错。提示词按&quot;假设—放松—案例—误用—可检验推论&quot;推进，把模型从答案变成工具。</p></details></article><article class="pcard" id="p2-uni-exam-week"><div class="phead"><b>期末周 14 天复习排程</b><span>深度思考</span></div><p class="muted">按分值乘掌握度排优先级并排到时段</p><pre class="prompt">【角色】你是做了 8 年学业辅导的辅导员，擅长把复习计划排到具体时段，并且默认人会偷懒。
+【输入】我要考的科目、考试日期、每科掌握程度和每天可用时间：
+{{problem}}
+【任务】
+1) 按&quot;分值占比 × 掌握度缺口&quot;给各科排优先级，写出算式；
+2) 排出 14 天日程表：每天 3 个时段，标科目、任务和产出物；
+3) 每科给&quot;必须拿下的 3 个题型&quot;，说明为什么是这 3 个；
+4) 留出 2 个缓冲半天和 1 天机动，并说明怎么用；
+5) 给一个&quot;崩盘后 48 小时重启&quot;方案。
+【约束】不假设我有无限精力；单时段不超过 90 分钟；每个任务必须能打勾验收；不编造考试范围与题型。
+【输出格式】按&quot;优先级与算式 / 14 天日历表 / 三题型 / 缓冲安排 / 重启方案&quot;输出；日历表列名：日期 | 时段 | 科目 | 任务 | 完成标记。</pre><details><summary>为什么这样写</summary><p>期末崩盘往往不是不努力，而是平均用力。提示词用&quot;分值 × 掌握缺口&quot;算出优先级，再排到具体时段并留缓冲，计划才真能执行。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E9%AB%98%E6%95%B0%E6%9E%81%E9%99%90%EF%BC%9A%E6%8A%8A%20%CE%B5-%CE%B4%20%E8%AE%B2%E6%88%90%E5%9B%BE#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

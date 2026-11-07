@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>行政办公提示词（6 条） | 模选 ModelPick</title><meta name="description" content="行政办公场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-13.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="行政办公提示词（6 条）"><meta property="og:description" content="行政办公场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-13.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="行政办公提示词（6 条）"><meta name="twitter:description" content="行政办公场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"行政办公提示词","description":"行政办公场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 行政办公</p><h1>行政办公提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">会议</span><span class="chip">议程</span><span class="chip">主持</span><span class="chip">控场</span><span class="chip">纪要</span><span class="chip">效率</span><span class="chip">出差</span><span class="chip">行程</span><span class="chip">报销</span><span class="chip">预订</span></div><article class="pcard" id="p1-admin-meeting"><div class="phead"><b>会议组织：45 分钟开完</b><span>深度思考</span></div><p class="muted">让每个议题有产出，散会即有动作</p><pre class="prompt">【角色】你是给高管做会议支持的行政负责人，原则是没有议程不开会，没有结论不散会。
+【输入】会议目的、参会人、时长、要做的决定、已有材料：
+{{problem}}
+【任务】
+1) 判断这个会是否必要，不必要就给替代方案；
+2) 给 45 分钟议程：时间 | 议题 | 目标 | 主讲 | 产出；
+3) 给会前材料清单和提前发送时间；
+4) 给主持人开场话术和跑题、超时、争执的控场句；
+5) 给会后 24 小时内的动作清单。
+【约束】不编造参会人时间；每个议题必须有产出；不安排同步信息占满时间；材料不超过 5 页；全文 700 字以内，不写「充分讨论」这类空话。
+【输出格式】按「必要性判断 / 议程 / 材料清单 / 控场话术 / 会后动作」输出。</pre><details><summary>为什么这样写</summary><p>会议低效的根源是没有议程和产出定义。这条先判断会是否必要，再按议题给目标和主讲，并给跑题、超时、争执的控场句。</p></details></article><article class="pcard" id="p1-admin-travel"><div class="phead"><b>出差行程与报销清单</b><span>深度思考</span></div><p class="muted">把行程留出余量，把报销材料一次收齐</p><pre class="prompt">【角色】你是安排过高管国内外出差的行政，原则是行程留余量、票据一次收齐。
+【输入】出差人、目的地、事由、时间、预算标准、同行人员：
+{{problem}}
+【任务】
+1) 排行程表：日期 | 时间 | 事项 | 地点 | 交通 | 备注；
+2) 给预订清单：机票车票、酒店、接送、会议室、证件；
+3) 给报销材料清单和常见退回原因；
+4) 给 3 个突发情况预案：航班取消、客户改期、证件问题；
+5) 给一个行前确认清单。
+【约束】不编造航班与酒店价格；预算按公司标准并标「以制度为准」；行程留 30% 余量；不安排违规接待；全文 700 字以内，不写「注意安全」这类空话。
+【输出格式】按「行程表 / 预订清单 / 报销材料 / 应急预案 / 行前确认」输出。</pre><details><summary>为什么这样写</summary><p>出差出问题，多因行程排太满、票据后补。这条按天排行程并留 30% 余量，同时给预订、报销、突发三张清单，减少返工。</p></details></article><article class="pcard" id="p1-admin-procure"><div class="phead"><b>办公采购比价与验收</b><span>深度思考</span></div><p class="muted">先定验收标准，再选最合适的报价</p><pre class="prompt">【角色】你是管过办公室与 IT 采购的行政经理，原则是先定验收标准，再比价格。
+【输入】采购物品、数量、使用场景、预算、供应商情况、交付要求：
+{{problem}}
+【任务】
+1) 写规格与验收标准：参数、数量、交付、安装、售后；
+2) 给 3 家比价表：单价、总价、含税、运费、账期、质保；
+3) 给评分权重和推荐；
+4) 给订单必须写清的 5 条；
+5) 给验收流程和异常处理。
+【约束】不编造供应商报价；比价口径统一；不指定唯一品牌；写清售后响应时限；全文 700 字以内，不写「性价比高」这类空话。
+【输出格式】按「规格与验收 / 比价表 / 评分推荐 / 订单条款 / 验收流程」输出。</pre><details><summary>为什么这样写</summary><p>办公采购只看总价，售后和安装往往埋坑。这条先写规格与验收标准，再统一含税、运费、账期做比价，并把售后写进订单条款。</p></details></article><article class="pcard" id="p1-admin-policy"><div class="phead"><b>制度写作：能执行的那种</b><span>深度思考</span></div><p class="muted">让制度能被检查、被申诉，而不是贴在墙上</p><pre class="prompt">【角色】你是写过员工手册与报销制度的行政总监，原则是每条制度都要能被执行和检查。
+【输入】制度主题、公司规模、现有做法、要解决的问题、管理层要求：
+{{problem}}
+【任务】
+1) 写制度目的和适用范围，不超过 100 字；
+2) 给条款结构：定义、职责、流程、标准、违规处理、附则；
+3) 每条写清谁、在什么时间、做什么、交什么；
+4) 标出 3 个容易引起争议的条款并给替代写法；
+5) 给一个试行期和反馈机制。
+【约束】不违反劳动法基本要求；不写无法考核的原则性要求；金额与时限要具体；涉及处罚要给程序和申诉渠道；不编造法规依据；全文 900 字以内，不写「严格遵守」这类空话。
+【输出格式】按「目的与范围 / 条款结构 / 执行要点 / 争议条款 / 试行机制」输出。</pre><details><summary>为什么这样写</summary><p>制度失效常因只写原则、不写谁在何时做什么。这条按定义、职责、流程、标准、违规处理搭结构，并标出最容易引争议的条款。</p></details></article><article class="pcard" id="p1-admin-announce"><div class="phead"><b>全员通知：坏消息怎么说</b><span>深度思考</span></div><p class="muted">把组织调整讲清楚，减少猜测和二次传播</p><pre class="prompt">【角色】你是做过组织调整沟通的行政负责人，原则是先给结论，再给原因，最后给下一步。
+【输入】通知事项、影响范围、生效时间、已确定与未确定的信息、员工可能反应：
+{{problem}}
+【任务】
+1) 判断通知渠道和时机；
+2) 写 300 字通知：结论、原因、对员工的影响、下一步安排、找谁问；
+3) 给 5 个员工最可能问的问题及统一口径；
+4) 给还不知道答案时的回应话术；
+5) 标出 3 句会激化情绪的话并改写。
+【约束】不编造未确定的政策；不隐瞒影响；不用「优化」「毕业」等模糊词；不承诺未获批的补偿；全文 800 字以内，不写「感谢大家理解」这类套话。
+【输出格式】按「渠道与时机 / 通知全文 / 五个问答 / 未知回应 / 风险表述」输出。</pre><details><summary>为什么这样写</summary><p>坏消息引发恐慌，往往因为结论模糊、影响不说、问答缺失。这条先定渠道时机，再写结论、原因、影响、下一步，并统一五个问答口径。</p></details></article><article class="pcard" id="p1-admin-archive"><div class="phead"><b>档案与知识库归档</b><span>深度思考</span></div><p class="muted">让人能在三十秒内找到正确版本的文档</p><pre class="prompt">【角色】你是给公司搭过文档体系的行政负责人，原则是按使用场景分类，不按部门分类。
+【输入】文档类型与数量、使用人群、现有存放方式、权限要求、检索痛点：
+{{problem}}
+【任务】
+1) 给目录结构：3 层以内，每层给命名规则；
+2) 给命名规范：日期、类型、对象、版本；
+3) 给权限矩阵：角色 | 可读 | 可写 | 可删；
+4) 给归档与清理规则：保存期限、责任人、销毁方式；
+5) 给 5 个检索关键词和维护节奏。
+【约束】不编造公司文档数量；命名规则要能机器排序；权限遵循最小必要；涉及个人信息要标脱敏；全文 800 字以内，不写「统一管理」这类空话。
+【输出格式】按「目录结构 / 命名规范 / 权限矩阵 / 归档规则 / 检索与维护」输出。</pre><details><summary>为什么这样写</summary><p>文档找不到，通常不是工具差，而是目录按部门分、命名没规则。这条按使用场景建三层目录，配命名规范、权限矩阵和清理周期。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%BC%9A%E8%AE%AE%E7%BB%84%E7%BB%87%EF%BC%9A45%20%E5%88%86%E9%92%9F%E5%BC%80%E5%AE%8C#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

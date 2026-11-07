@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UI/UX提示词（6 条） | 模选 ModelPick</title><meta name="description" content="UI/UX场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-55.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="UI/UX提示词（6 条）"><meta property="og:description" content="UI/UX场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-55.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="UI/UX提示词（6 条）"><meta name="twitter:description" content="UI/UX场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"UI/UX提示词","description":"UI/UX场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / UI/UX</p><h1>UI/UX提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">新手引导</span><span class="chip">留存</span><span class="chip">流程</span><span class="chip">转化</span><span class="chip">体验</span><span class="chip">权限</span><span class="chip">空状态</span><span class="chip">异常</span><span class="chip">引导</span><span class="chip">文案</span></div><article class="pcard" id="p4-ux-onboarding"><div class="phead"><b>新手引导：降低第一步门槛</b><span>深度思考</span></div><p class="muted">设计让用户尽快拿到第一次价值的引导流程</p><pre class="prompt">【角色】你是做过多个 C 端产品冷启动的交互设计师，引导的目标是让用户完成第一个价值动作。
+【输入】产品类型、核心价值动作、新用户流失点：
+{{problem}}
+【任务】
+1) 定义首个价值时刻，说明为什么是它；
+2) 给引导步骤，砍到最少，标出可跳过项；
+3) 给权限、资料填写等阻塞点的延后策略；
+4) 给中断后的恢复路径；
+5) 给衡量引导效果的指标与判定标准。
+【约束】不为了收集信息而加步骤；不编造流失数据；不做无法跳过的强制引导（合规要求除外）；必须给跳过后的兜底方案。
+【输出格式】按「首个价值时刻 / 引导步骤 / 阻塞延后 / 中断恢复 / 效果指标」输出。</pre><details><summary>为什么这样写</summary><p>引导的目标不是讲完功能，而是让用户完成关键动作。这条提示词要求先定义首个价值时刻，再砍步骤、延后阻塞、给中断恢复路径，最后给可衡量的效果指标。</p></details></article><article class="pcard" id="p4-ux-empty"><div class="phead"><b>空状态设计：把空白变成引导</b><span>深度思考</span></div><p class="muted">为没有数据、没有权限、加载失败设计有下一步的界面</p><pre class="prompt">【角色】你是关注异常态体验的交互设计师，空状态是最容易被浪费的转化位。
+【输入】页面类型、会出现空状态的场景、可用动作：
+{{problem}}
+【任务】
+1) 区分四类空状态：首次无数据、筛选无结果、无权限、加载失败；
+2) 给每类的文案要点、视觉建议与主行动；
+3) 定优先级：哪个动作最该被点；
+4) 给筛选无结果时的放宽条件建议；
+5) 给错误态的区分：可重试与不可重试。
+【约束】不把四类空状态写成同一句话；不编造功能；不用卖萌文案掩盖问题；必须给出可执行的下一步。
+【输出格式】按「空状态分类 / 文案与行动 / 优先级 / 放宽建议 / 错误区分」输出。</pre><details><summary>为什么这样写</summary><p>空状态是最容易被浪费的转化位。这条提示词要求先区分首次无数据、筛选无结果、无权限、加载失败四类，再分别给文案、视觉与主行动，并明确重试与不重试的边界。</p></details></article><article class="pcard" id="p4-ux-error-copy"><div class="phead"><b>报错文案：说清怎么改</b><span>深度思考</span></div><p class="muted">把「操作失败」改写成用户能自己解决的话</p><pre class="prompt">【角色】你是写界面文案的内容设计师，报错要回答：发生了什么、为什么、怎么办。
+【输入】报错场景、现有文案、涉及的系统限制：
+{{problem}}
+【任务】
+1) 按错误类型分组：输入错误、权限、网络、系统、业务规则；
+2) 给每类文案模板，含标题、说明、行动；
+3) 指出甩锅式措辞并改写，比如「操作有误」「系统繁忙」；
+4) 给技术错误码与用户文案的映射规则；
+5) 给需要保留原文给客服的场景。
+【约束】不暴露内部实现与堆栈；不指责用户；不编造解决方式；每条文案不超过 40 字。
+【输出格式】按「错误分组 / 文案模板 / 甩锅改写 / 错误码映射 / 需留原文」输出。</pre><details><summary>为什么这样写</summary><p>报错文案要回答三件事：发生了什么、为什么、怎么办。这条提示词要求按错误类型给模板，改写甩锅式措辞，并明确错误码与用户文案的映射以及哪些原文要留给客服。</p></details></article><article class="pcard" id="p4-ux-usability"><div class="phead"><b>可用性测试：五个人怎么测</b><span>深度思考</span></div><p class="muted">用低成本的小样本测试拿到可行动的界面问题</p><pre class="prompt">【角色】你是做过大量小样本可用性测试的研究员，五个人足以发现大部分严重问题。
+【输入】产品类型、待测任务、目标用户特征：
+{{problem}}
+【任务】
+1) 定 3-5 个任务与各自的成功标准；
+2) 写给主持人的脚本，包含不引导的提问方式；
+3) 给观察记录表：任务、路径、卡点、原话；
+4) 给问题归类的严重度标准；
+5) 给结论输出方式：按严重度排序的改法。
+【约束】不在测试中教用户操作；不编造用户反馈；不把偏好当问题；样本结论不外推为普遍规律。
+【输出格式】按「任务与标准 / 主持脚本 / 观察表 / 严重度标准 / 结论输出」输出。</pre><details><summary>为什么这样写</summary><p>小样本测试的价值在发现严重问题。这条提示词要求先定任务与成功标准，再写不引导的主持脚本与观察表，最后按严重度归类，避免把个人偏好当缺陷。</p></details></article><article class="pcard" id="p4-ux-ia"><div class="phead"><b>信息架构：给导航做减法</b><span>深度思考</span></div><p class="muted">重整菜单与页面层级，让用户在三次点击内找到目标</p><pre class="prompt">【角色】你是做过信息架构重构的交互设计师，导航膨胀通常来自不敢删。
+【输入】现有菜单结构、用户主要任务、访问数据：
+{{problem}}
+【任务】
+1) 列出用户主要任务，按频率与重要性排序；
+2) 判断现有层级的深度与宽度是否失衡；
+3) 给新的分类方案，说明合并与降级的依据；
+4) 给命名规则：用用户词还是内部词；
+5) 给迁移映射表与旧链接兼容方案。
+【约束】不为了整齐牺牲可达性；不编造访问数据；一级菜单数量要给出上限理由；必须给旧路径跳转。
+【输出格式】按「任务排序 / 层级诊断 / 新分类 / 命名规则 / 迁移映射」输出。</pre><details><summary>为什么这样写</summary><p>导航膨胀来自什么都想放一级。这条提示词要求先按频率与重要性排用户任务，再诊断层级深度与宽度，最后给合并降级的依据与旧链接兼容方案。</p></details></article><article class="pcard" id="p4-ux-dark"><div class="phead"><b>暗色模式：对比度与层级</b><span>深度思考</span></div><p class="muted">把亮色界面改成不刺眼、层级清楚的暗色主题</p><pre class="prompt">【角色】你是做过暗色主题适配的视觉设计师，暗色不是把白换黑。
+【输入】现有亮色规范、界面类型、品牌色：
+{{problem}}
+【任务】
+1) 定背景层级：底色、卡片、浮层与各自的明度差；
+2) 给文字与图标在不同层级上的对比度要求；
+3) 处理品牌色在暗底上的失真，给替代色；
+4) 给图片、阴影、分割线的替换策略；
+5) 给手动切换与跟随系统的规则。
+【约束】不使用纯黑与纯白；不靠阴影做层级；必须给对比度数值；不确定的屏幕差异标「需实测」。
+【输出格式】按「背景层级 / 对比度要求 / 品牌色处理 / 元素替换 / 切换规则」输出。</pre><details><summary>为什么这样写</summary><p>暗色不是把白底换黑底。这条提示词要求用背景明度差建立层级替代阴影，校验文字与图标对比度，并处理品牌色失真和图片、分割线的替换。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%96%B0%E6%89%8B%E5%BC%95%E5%AF%BC%EF%BC%9A%E9%99%8D%E4%BD%8E%E7%AC%AC%E4%B8%80%E6%AD%A5%E9%97%A8%E6%A7%9B#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>项目管理提示词（6 条） | 模选 ModelPick</title><meta name="description" content="项目管理场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-09.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="项目管理提示词（6 条）"><meta property="og:description" content="项目管理场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-09.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="项目管理提示词（6 条）"><meta name="twitter:description" content="项目管理场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"项目管理提示词","description":"项目管理场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 项目管理</p><h1>项目管理提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">立项</span><span class="chip">项目</span><span class="chip">目标</span><span class="chip">范围</span><span class="chip">治理</span><span class="chip">章程</span><span class="chip">风险</span><span class="chip">登记册</span><span class="chip">预警</span><span class="chip">应对</span></div><article class="pcard" id="p1-proj-charter"><div class="phead"><b>项目立项书：一页说清</b><span>深度思考</span></div><p class="muted">用一页纸锁定目标、边界、成败标准和拍板人</p><pre class="prompt">【角色】你是管过多条业务线的 PMO 负责人，立项只看目标、边界、成败标准、谁拍板。
+【输入】项目背景、期望结果、发起人、预算、关键干系人、时间要求：
+{{problem}}
+【任务】
+1) 用一句话写项目目标，必须包含对象、动作、指标、时间；
+2) 写清范围与非范围，各 3 条；
+3) 列 5 个成功标准，区分必须达成与加分；
+4) 给治理结构：发起人、项目经理、决策机制、例会节奏；
+5) 列 5 个前置假设和 3 个主要风险。
+【约束】不编造预算与人员；目标不能是「提升体验」这类空话；非范围必须具体；决策机制要写清谁有最终否决权；全文 700 字以内。
+【输出格式】按「目标 / 范围与非范围 / 成功标准 / 治理结构 / 假设与风险」输出，控制在一页内。</pre><details><summary>为什么这样写</summary><p>项目失控常从立项开始：目标含糊、边界开放、没人拍板。这条强制写非范围、成功标准和决策机制，让后续变更有了参照。</p></details></article><article class="pcard" id="p1-proj-risk"><div class="phead"><b>风险登记册：别只写「可能延期」</b><span>深度思考</span></div><p class="muted">让每个风险都有触发信号、责任人和动作</p><pre class="prompt">【角色】你是做过大型交付的项目经理，风险管理原则是每个风险都有触发信号和动作。
+【输入】项目类型、当前阶段、已知风险、关键依赖、团队与供应商情况：
+{{problem}}
+【任务】
+1) 列 10 个风险，按概率乘影响打分排序；
+2) 每个风险写：触发信号 | 预防动作 | 应对动作 | 负责人 | 复查时间；
+3) 区分可承受、需转移、必须规避三类；
+4) 给 3 个早期预警指标和阈值；
+5) 标出 3 个被低估的风险及原因。
+【约束】不编造概率与损失金额，给区间并标「估算」；风险描述要具体到事件；不写「加强沟通」这类动作；每个风险必须有负责人；全文 800 字以内。
+【输出格式】按「风险排序 / 登记册 / 应对分类 / 预警指标 / 被低估风险」输出，登记册用表格。</pre><details><summary>为什么这样写</summary><p>风险表写成许愿池，是因为只有描述没有触发条件。这条按概率乘影响排序，每个风险配预警信号和应对动作，并单独标出被低估的项。</p></details></article><article class="pcard" id="p1-proj-schedule"><div class="phead"><b>里程碑排期与关键路径</b><span>深度思考</span></div><p class="muted">倒推出关键路径，知道哪一步拖不得</p><pre class="prompt">【角色】你是排过硬件与软件联合交付计划的项目经理，原则是先定里程碑，再倒推依赖。
+【输入】交付目标、里程碑、团队产能、外部依赖、固定时间点：
+{{problem}}
+【任务】
+1) 列 6 个里程碑，每个给交付物和验收人；
+2) 拆任务并标依赖，找出关键路径；
+3) 给每项任务的乐观、正常、悲观工期，算缓冲；
+4) 标出 3 个最可能拖累进度的依赖和替代方案；
+5) 给一个双周检查节奏和进度预警规则。
+【约束】不编造外部依赖时间；工期给区间不给单点；不把缓冲集中在最后；资源冲突要写明；全文 800 字以内，不写「按计划推进」这类空话。
+【输出格式】按「里程碑 / 关键路径 / 工期与缓冲 / 依赖风险 / 检查节奏」输出，排期用表格。</pre><details><summary>为什么这样写</summary><p>排期看起来都紧，真正决定交付的只有关键路径。这条先定里程碑和验收人，再拆依赖、算三档工期和缓冲，避免把余量藏在最后。</p></details></article><article class="pcard" id="p1-proj-stakeholder"><div class="phead"><b>干系人沟通计划</b><span>深度思考</span></div><p class="muted">按影响力和关注度决定找谁、多久找一次、说什么</p><pre class="prompt">【角色】你是跨部门项目出身、擅长处理多方博弈的项目总监，原则是先分类，再定频率和话术。
+【输入】项目、干系人名单与角色、各自诉求、影响力、当前支持度：
+{{problem}}
+【任务】
+1) 用影响力和关注度给干系人分四类；
+2) 每类给沟通目标、频率、渠道、信息颗粒度；
+3) 给 3 个关键人物的单独沟通策略，写清他们最在意什么；
+4) 给一次资源争夺会的开场和让步顺序；
+5) 给一个沟通日历模板。
+【约束】不编造他人立场；不做人身评价；沟通频率要符合实际工时；不承诺未获批的资源；全文 800 字以内，不写「保持沟通」这类空话。
+【输出格式】按「四类分群 / 沟通矩阵 / 关键人物策略 / 会议打法 / 日历模板」输出。</pre><details><summary>为什么这样写</summary><p>项目推不动，往往不是方案差，而是关键人没被照顾好。这条按影响力和关注度分四类，给沟通频率与颗粒度，并写清关键人物的真实诉求。</p></details></article><article class="pcard" id="p1-proj-status"><div class="phead"><b>项目周报：红黄绿</b><span>深度思考</span></div><p class="muted">用一页纸让管理层看到偏差和该拍的决定</p><pre class="prompt">【角色】你是给管理层做项目汇报的 PMO，周报只写偏差、原因、要什么决定。
+【输入】项目目标、本周进展、计划对比、问题、需要决策的事项：
+{{problem}}
+【任务】
+1) 用红黄绿标状态，并给判定依据：进度、成本、范围、质量；
+2) 写 3 条本周关键进展，每条带数字或交付物；
+3) 写偏差分析：计划对实际、原因、影响；
+4) 列需要管理层拍的 2 个决定，各给选项和推荐；
+5) 给下周 3 件事和风险预警。
+【约束】不掩盖坏消息；不写「进展顺利」而无数据；不把问题推给其他部门；每个决定要写清不决定的后果；不编造进度数据；全文 500 字以内。
+【输出格式】按「状态与依据 / 关键进展 / 偏差分析 / 待决策 / 下周计划」输出。</pre><details><summary>为什么这样写</summary><p>项目周报写成流水账，管理层就无法介入。这条用红黄绿和判定依据说状态，用计划对实际说偏差，最后只留两个需要拍板的问题。</p></details></article><article class="pcard" id="p1-proj-change"><div class="phead"><b>变更控制：需求加进来怎么办</b><span>深度思考</span></div><p class="muted">把新增需求变成一次重新算账，而不是白干</p><pre class="prompt">【角色】你是管过范围蔓延项目的交付经理，原则是变更不是拒绝，是重新算账。
+【输入】原范围与基线、新增需求、提出人、剩余工期与预算、影响面：
+{{problem}}
+【任务】
+1) 判断变更类型：范围、时间、成本、质量，哪一项必须让；
+2) 算影响：工作量、依赖、测试、上线时间，给区间；
+3) 给 3 个方案：全接、分期接、不接，各写代价；
+4) 写一段对提出人的沟通话术，先确认价值再谈交换；
+5) 给变更后的基线更新与通知模板。
+【约束】不编造工作量；不私自承诺时间；不做无记录的口头变更；方案必须写清对原目标的影响；全文 800 字以内，不写「克服困难」这类空话。
+【输出格式】按「变更类型 / 影响测算 / 三个方案 / 沟通话术 / 基线更新」输出。</pre><details><summary>为什么这样写</summary><p>范围蔓延往往从一句「顺手加一下」开始。这条先判断哪一项必须让，再算影响，给全接、分期、不接三个方案与交换条件。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E9%A1%B9%E7%9B%AE%E7%AB%8B%E9%A1%B9%E4%B9%A6%EF%BC%9A%E4%B8%80%E9%A1%B5%E8%AF%B4%E6%B8%85#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

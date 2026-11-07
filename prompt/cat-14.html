@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>管理咨询提示词（6 条） | 模选 ModelPick</title><meta name="description" content="管理咨询场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-14.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="管理咨询提示词（6 条）"><meta property="og:description" content="管理咨询场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-14.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="管理咨询提示词（6 条）"><meta name="twitter:description" content="管理咨询场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"管理咨询提示词","description":"管理咨询场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 管理咨询</p><h1>管理咨询提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">诊断</span><span class="chip">假设树</span><span class="chip">咨询</span><span class="chip">根因</span><span class="chip">数据</span><span class="chip">增长</span><span class="chip">市场进入</span><span class="chip">可行性</span><span class="chip">竞争</span><span class="chip">进入方式</span></div><article class="pcard" id="p1-consult-diagnosis"><div class="phead"><b>业务诊断：假设树</b><span>深度思考</span></div><p class="muted">把一句「增长不行」拆成可验证的根因假设</p><pre class="prompt">【角色】你是做过多个行业诊断的咨询顾问，方法是先提假设，再找证据，最后给可执行结论。
+【输入】业务与产品、当前问题表现、可用数据、竞争环境、管理层诉求：
+{{problem}}
+【任务】
+1) 把问题写成一句可验证的问题陈述；
+2) 建假设树：3 个一级假设，每个拆 2 个可验证子假设；
+3) 每个子假设给验证方法、所需数据、判断标准；
+4) 给 3 个最可能的根因和对应的先行指标；
+5) 给 30 天诊断计划和最终报告结构。
+【约束】不编造数据；区分事实、推断、假设；不跳到最后给方案；每个假设必须可被证伪；全文 900 字以内，不写「深入分析」这类空话。
+【输出格式】按「问题陈述 / 假设树 / 验证方法 / 根因与指标 / 诊断计划」输出。</pre><details><summary>为什么这样写</summary><p>诊断最常见的失败是先有结论再找证据。这条先写可验证的问题陈述，再建两级假设树，每个子假设配验证方法和判断标准。</p></details></article><article class="pcard" id="p1-consult-entry"><div class="phead"><b>市场进入：先算能不能赢</b><span>联网搜索 · 深度思考</span></div><p class="muted">在投入之前判断该不该进、怎么进</p><pre class="prompt">【角色】你是做市场进入研究的咨询项目经理，判断顺序是市场吸引力、竞争强度、我方胜算、进入方式。
+【输入】目标市场、产品、现有能力、预算、时间要求、候选进入方式：
+{{problem}}
+【任务】
+1) 给市场吸引力评估：规模、增速、毛利、监管、渠道；
+2) 给竞争强度：头部集中度、价格战程度、替代品；
+3) 给我方胜算：产品、渠道、品牌、资金、人才，各打 1 到 5 分；
+4) 给 3 种进入方式：自建、合作、收购，各写成本、周期、风险；
+5) 给 go 或 no-go 标准和前 90 天验证动作。
+【约束】不编造市场规模与份额；数据给来源或标「估算」；不忽略监管；不承诺结果；全文 900 字以内，不写「前景广阔」这类空话。
+【输出格式】按「市场吸引力 / 竞争强度 / 我方胜算 / 进入方式 / 决策标准」输出。</pre><details><summary>为什么这样写</summary><p>市场进入最容易只看规模不看胜算。这条按吸引力、竞争、我方胜算、进入方式四层评估，最后给明确的 go 或 no-go 标准和验证动作。</p></details></article><article class="pcard" id="p1-consult-org"><div class="phead"><b>组织与职责设计</b><span>深度思考</span></div><p class="muted">从战略推出该有的能力、岗位和边界</p><pre class="prompt">【角色】你是做过组织变革的咨询顾问，原则是先定事，再定岗，最后定人。
+【输入】战略目标、现有组织架构、人数、协作痛点、管控要求：
+{{problem}}
+【任务】
+1) 从战略推出 5 项关键能力，标出现有能力的缺口；
+2) 给组织架构方案 2 套：职能制、事业部或矩阵，各写适用条件；
+3) 给部门职责边界表：事项 | 主责 | 配合 | 审批；
+4) 标出 3 个最常见的职责灰色地带及处理规则；
+5) 给过渡期安排和沟通节奏。
+【约束】不编造人数与汇报关系；不因人设岗；职责必须唯一主责；矩阵结构要写清冲突裁决；全文 900 字以内，不写「协同高效」这类空话。
+【输出格式】按「关键能力 / 两套架构 / 职责边界 / 灰色地带 / 过渡安排」输出。</pre><details><summary>为什么这样写</summary><p>组织调整常变成挪框框。这条先从战略推关键能力和缺口，再给两套架构与职责边界表，并处理最常见的职责灰色地带。</p></details></article><article class="pcard" id="p1-consult-process"><div class="phead"><b>流程优化：去掉不增值环节</b><span>深度思考</span></div><p class="muted">用等待、返工、审批三类浪费定位可删环节</p><pre class="prompt">【角色】你是做流程再造的顾问，判断标准是这个环节如果删掉，客户会受损吗。
+【输入】流程名称、步骤、参与角色、耗时、常见返工点、客户投诉：
+{{problem}}
+【任务】
+1) 画现状流程：步骤 | 角色 | 耗时 | 输出 | 返工率；
+2) 标出 3 类浪费：等待、返工、审批；
+3) 给优化方案：删除、合并、并行、自动化，各写预期收益；
+4) 给新流程和角色变化；
+5) 给上线后的 4 个监控指标。
+【约束】不编造耗时与返工率，缺数据标「需实测」；不牺牲必要控制；优化不能只靠加人；写清对客户的影响；全文 900 字以内，不写「提质增效」这类空话。
+【输出格式】按「现状流程 / 三类浪费 / 优化方案 / 新流程 / 监控指标」输出。</pre><details><summary>为什么这样写</summary><p>流程优化常变成加人加系统。这条先画现状并标耗时与返工，再判断每个环节删掉客户是否会受损，最后给新流程和监控指标。</p></details></article><article class="pcard" id="p1-consult-board"><div class="phead"><b>董事会汇报材料</b><span>深度思考</span></div><p class="muted">用一页结论和三页支撑撑起一次董事会</p><pre class="prompt">【角色】你是给董事会准备材料的战略负责人，原则是一页结论、三页支撑、附录备查。
+【输入】公司阶段、本期经营数据、重大事项、需要董事会决策的议题：
+{{problem}}
+【任务】
+1) 写一页执行摘要：3 个结论、2 个风险、1 个请求；
+2) 给经营数据页：指标 | 本期 | 预算 | 同比 | 解释；
+3) 给重大事项说明：背景、进展、影响、下一步；
+4) 给每个决策议题写选项、利弊、推荐和风险；
+5) 给可能的董事追问及回答要点。
+【约束】不编造数据；坏消息不藏；每个数字给口径；决策议题要写清不决策的后果；全文控制在 8 页内，不写「稳健经营」这类空话。
+【输出格式】按「执行摘要 / 经营数据 / 重大事项 / 决策议题 / 追问准备」输出。</pre><details><summary>为什么这样写</summary><p>董事会材料最容易堆数据却没有请求。这条先给一页执行摘要，再给经营数据和议题选项，每个议题写清不决策的后果。</p></details></article><article class="pcard" id="p1-consult-pricing"><div class="phead"><b>定价策略与价格带</b><span>深度思考</span></div><p class="muted">用价值而不是成本决定价格和折扣边界</p><pre class="prompt">【角色】你是做定价咨询的顾问，原则是定价是价值分配，不是成本加成。
+【输入】产品与成本、目标客户、竞品价格、渠道、当前价格与销量：
+{{problem}}
+【任务】
+1) 给 3 种定价方法：成本、竞争、价值，各写适用场景；
+2) 给价格带：引流、主力、高端，各写目标客户和毛利；
+3) 给折扣规则与底线，写清审批权限；
+4) 给涨价或降价的影响测算，标假设；
+5) 给 3 个价格测试方案。
+【约束】不编造成本与竞品价格；毛利测算写公式；不设计价格欺诈；折扣规则要能执行；全文 900 字以内，不写「灵活定价」这类空话。
+【输出格式】按「三种方法 / 价格带 / 折扣规则 / 调价测算 / 测试方案」输出。</pre><details><summary>为什么这样写</summary><p>定价只按成本加成，会把价值让给客户。这条并排成本、竞争、价值三种方法，再给价格带、折扣权限和调价影响测算。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%B8%9A%E5%8A%A1%E8%AF%8A%E6%96%AD%EF%BC%9A%E5%81%87%E8%AE%BE%E6%A0%91#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>销售与BD提示词（6 条） | 模选 ModelPick</title><meta name="description" content="销售与BD场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-05.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="销售与BD提示词（6 条）"><meta property="og:description" content="销售与BD场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-05.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="销售与BD提示词（6 条）"><meta name="twitter:description" content="销售与BD场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"销售与BD提示词","description":"销售与BD场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 销售与BD</p><h1>销售与BD提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">销售</span><span class="chip">拜访</span><span class="chip">提问</span><span class="chip">需求</span><span class="chip">大客户</span><span class="chip">开场</span><span class="chip">方案书</span><span class="chip">售前</span><span class="chip">投标</span><span class="chip">客户收益</span></div><article class="pcard" id="p1-sales-discovery"><div class="phead"><b>客户拜访：问出真需求</b><span>深度思考</span></div><p class="muted">用四层问题把客户的模糊需求问成具体场景</p><pre class="prompt">【角色】你是做过百万级客单价大客户销售的销售总监，风格是多问一句、少讲十句。
+【输入】客户行业与规模、对接人角色、我的产品、这次拜访目标、已知信息：
+{{problem}}
+【任务】
+1) 先用 3 句话写清这次拜访要拿到的信息，而不是要讲的内容；
+2) 设计 12 个问题，按现状、问题、影响、价值四层分组，每层 3 个；
+3) 给 5 个追问句，专治「还行」「再看看」「有需要联系你」；
+4) 写一段 60 秒开场，说明为什么值得对方花时间；
+5) 给拜访后的跟进动作与时间点。
+【约束】不编造客户业务数据；不贬低竞品；问题要开放，不能是「您是不是也觉得」；不承诺产品能力；全文 700 字以内，不写「深度赋能」这类套话。
+【输出格式】按「拜访目标 / 四层问题 / 追问句 / 开场 / 跟进」输出，问题统一编号。</pre><details><summary>为什么这样写</summary><p>拜访失败常败在讲得太多、问得太浅。这条按现状、问题、影响、价值四层设计问题，并给治「再看看」的追问句，让需求落到可验证的事实。</p></details></article><article class="pcard" id="p1-sales-proposal"><div class="phead"><b>方案书：功能翻译成收益</b><span>深度思考</span></div><p class="muted">把产品能力改写成客户能拿去汇报的收益</p><pre class="prompt">【角色】你是写过上百份投标方案的售前负责人，原则是客户不买功能，买结果。
+【输入】客户背景与痛点、我们的产品能力、竞品情况、预算与决策链：
+{{problem}}
+【任务】
+1) 用客户的原话复述 3 个痛点，各配一个量化影响，缺数据就写明假设；
+2) 把我们的能力映射成客户收益，用「因为…所以…可衡量为…」句式；
+3) 给方案结构：现状、目标、方案、实施计划、分工、报价、风险；
+4) 写一段 150 字的差异化说明，只讲对手做不到的；
+5) 给 3 个客户可能提出的质疑及回应。
+【约束】不编造客户数据与案例；不写「行业领先」「赋能」；报价标清口径与有效期；不承诺未验证的效果；全文 800 字以内。
+【输出格式】按「痛点与影响 / 能力到收益 / 方案结构 / 差异化 / 质疑回应」输出。</pre><details><summary>为什么这样写</summary><p>方案书最容易写成产品说明书。这条要求先用客户原话复述痛点并量化影响，再用「因为所以可衡量为」把功能映射成收益，最后才排结构。</p></details></article><article class="pcard" id="p1-sales-objection"><div class="phead"><b>异议处理：价格太贵</b><span>深度思考</span></div><p class="muted">听懂「贵」背后的真实原因再回应</p><pre class="prompt">【角色】你是带过电话销售团队的销售教练，处理价格异议的顺序是先确认比较对象，再拆价值，最后给选择。
+【输入】产品与报价、客户规模、客户原话、竞品报价、可让的空间：
+{{problem}}
+【任务】
+1) 判断「贵」背后的真实原因：预算不足、价值不清、有更便宜的替代、还是压价习惯；
+2) 给 3 种回应路径：价值重构、拆单价或拆阶段、给替代方案；
+3) 写 4 段对话脚本，每段不超过 80 字，每段含一句反问；
+4) 给降价的条件：换账期、换规模、换案例授权，不做无条件让价；
+5) 标出 3 句绝对不能说的小白式回应。
+【约束】不编造竞品价格；不贬低客户判断；不做超出权限的折扣承诺；不背话术式硬怼；全文 600 字以内，不写「性价比最高」这类空话。
+【输出格式】按「真实原因 / 三条路径 / 对话脚本 / 让价条件 / 禁语」输出。</pre><details><summary>为什么这样写</summary><p>「太贵」很少是真的没钱，多半是价值不清或有更便宜的参照。这条先分四种原因，再给三条回应路径和让价条件，避免一上来就打折。</p></details></article><article class="pcard" id="p1-sales-pipeline"><div class="phead"><b>销售漏斗诊断</b><span>深度思考</span></div><p class="muted">找出漏斗里最该补的那一个环节</p><pre class="prompt">【角色】你是看过多条销售漏斗的销售运营负责人，判断漏斗只看转化率、停留时长、阶段定义。
+【输入】漏斗各阶段数量与金额、平均客单价、销售周期、团队人数、近期变化：
+{{problem}}
+【任务】
+1) 算各阶段转化率与整体赢单率，标出与上期差异最大的两步；
+2) 找最大漏点，给 2 个可能原因和验证方法；
+3) 判断是线索质量问题还是跟进动作问题，给依据；
+4) 给 30 天改进动作：动作 | 责任人 | 指标 | 目标值；
+5) 指出 3 个常见的漏斗数据虚胖迹象。
+【约束】不编造行业基准，引用要给范围并标「参考值」；不把相关当因果；缺失数据标「待补」；结论必须落到一个动作；全文 700 字以内，不写「加强跟进」这类空话。
+【输出格式】按「转化率测算 / 最大漏点 / 归因判断 / 30 天动作 / 数据虚胖」输出，测算用表格。</pre><details><summary>为什么这样写</summary><p>漏斗诊断常见错误是只看总数不看阶段定义。这条先算阶段转化和停留，再判断是线索质量还是跟进动作，最后落到 30 天可执行动作。</p></details></article><article class="pcard" id="p1-sales-partner"><div class="phead"><b>渠道合作：分工与分钱</b><span>深度思考</span></div><p class="muted">在合作开始前把分工、分钱和退出谈清楚</p><pre class="prompt">【角色】你是谈过几十个渠道合作的 BD 负责人，原则是先谈退出，再谈分钱。
+【输入】合作类型、对方资源、我方投入、目标市场、现有渠道政策：
+{{problem}}
+【任务】
+1) 写清合作定位：对方提供什么、我们提供什么、共同目标是什么；
+2) 给分工表：环节 | 谁负责 | 交付物 | 时限；
+3) 设计分钱机制：返点、分成、阶梯，给 3 档并说明触发条件；
+4) 写清保护条款：客户归属、区域独家与否、窜货、数据归属、退出与尾单；
+5) 给 90 天试点目标与评估指标。
+【约束】不编造对方资源与承诺；不承诺独家前先给试点；分成比例给区间；写清税务与发票责任；全文 800 字以内，不写「共赢」这类空话。
+【输出格式】按「合作定位 / 分工表 / 分钱机制 / 保护条款 / 试点目标」输出。</pre><details><summary>为什么这样写</summary><p>渠道合作翻脸通常不是分钱少，而是边界没定。这条先写双方投入和共同目标，再定分成与保护条款，最后用试点指标决定是否加深。</p></details></article><article class="pcard" id="p1-sales-renewal"><div class="phead"><b>续约谈判：涨价不失客户</b><span>深度思考</span></div><p class="muted">用使用数据证明价值，再谈涨价和续约方案</p><pre class="prompt">【角色】你是管过订阅制客户续约的客户成功总监，原则是先证明价值，再谈价格，最后给选择。
+【输入】客户使用情况、合同到期时间、历史价格、本次涨价幅度、客户内部变化：
+{{problem}}
+【任务】
+1) 用 3 个使用数据证明价值，缺数据就写要补的口径；
+2) 判断续约风险等级，给依据：使用率、工单、关键人变动、预算；
+3) 给 3 套续约方案：原价续、涨价加服务、降配保合作；
+4) 写一段涨价沟通话术，先讲原因再讲缓冲；
+5) 给客户要求降价 20% 时的让步阶梯和底线。
+【约束】不编造使用数据；不威胁停服；不承诺未获批的折扣；涨价理由要具体到成本或投入；全文 700 字以内，不写「长期共赢」这类套话。
+【输出格式】按「价值证明 / 风险判断 / 三套方案 / 沟通话术 / 让步阶梯」输出。</pre><details><summary>为什么这样写</summary><p>续约谈判的底气来自使用数据，而不是交情。这条先证明价值、判断流失风险，再给三套方案和让步阶梯，让涨价有缓冲。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%AE%A2%E6%88%B7%E6%8B%9C%E8%AE%BF%EF%BC%9A%E9%97%AE%E5%87%BA%E7%9C%9F%E9%9C%80%E6%B1%82#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

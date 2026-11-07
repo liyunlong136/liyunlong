@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>留学申请提示词（6 条） | 模选 ModelPick</title><meta name="description" content="留学申请场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-20.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="留学申请提示词（6 条）"><meta property="og:description" content="留学申请场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-20.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="留学申请提示词（6 条）"><meta name="twitter:description" content="留学申请场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"留学申请提示词","description":"留学申请场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 留学申请</p><h1>留学申请提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">选校</span><span class="chip">留学</span><span class="chip">申请</span><span class="chip">匹配</span><span class="chip">冲刺</span><span class="chip">保底</span><span class="chip">申请时间线</span><span class="chip">推荐信</span><span class="chip">截止日期</span><span class="chip">周任务</span></div><article class="pcard" id="p2-apply-school-list"><div class="phead"><b>选校清单：冲刺匹配保底怎么分</b><span>联网搜索 · 深度思考</span></div><p class="muted">按课程匹配与录取画像排出九宫格选校</p><pre class="prompt">【角色】你是做了 9 年研究生申请咨询的顾问，选校只看三件事：课程匹配、录取画像、就业出口。
+【输入】我的本科背景、绩点、语言成绩、目标方向和预算：
+{{problem}}
+【任务】
+1) 把我的背景翻译成 3 条&quot;可被录取的标签&quot;，并指出 1 条硬伤；
+2) 按冲刺 / 匹配 / 保底各给 3 个项目，理由要指到具体课程或研究方向；
+3) 对每个项目标出&quot;我缺什么、能不能补、补的成本&quot;；
+4) 给一个申请批次建议：哪些先投、哪些等成绩；
+5) 列出 3 个我可能高估或低估自己的地方。
+【约束】不编造排名、录取率和截止日期，缺数据标&quot;需查官网&quot;；不承诺录取概率；理由必须落到课程或导师方向，不许只说&quot;学校好&quot;。
+【输出格式】按&quot;背景标签与硬伤 / 九宫格选校表 / 缺口与成本 / 投递批次 / 自我评估偏差&quot;输出；选校表列：档位 | 项目 | 理由 | 缺口。</pre><details><summary>为什么这样写</summary><p>选校常见的错误是按排名排队。提示词先把背景翻译成可被录取的标签并指出硬伤，再要求理由落到具体课程，档位才有意义。</p></details></article><article class="pcard" id="p2-apply-timeline"><div class="phead"><b>申请倒排：把截止日期拆成周任务</b><span>深度思考</span></div><p class="muted">从截止日反推节点，并给推荐人留提前量</p><pre class="prompt">【角色】你是做了 7 年申请季统筹的顾问，习惯把所有截止日期倒排成周任务，并默认推荐人会很晚回信。
+【输入】目标国家与项目、语言考试时间、目前材料完成度和推荐人情况：
+{{problem}}
+【任务】
+1) 从最早的截止日期倒推出 5 个关键节点：考试、文书定稿、推荐信、送分、网申提交；
+2) 按周排出任务表，标出哪些任务有外部依赖；
+3) 给推荐人一份&quot;提前 6 周启动&quot;的沟通节奏，含两次提醒；
+4) 标出最容易被拖延卡住的 3 个环节和缓冲天数；
+5) 给一个&quot;截止前 72 小时&quot;的检查清单。
+【约束】不编造具体截止日期，缺信息标&quot;待确认&quot;；每个任务要写负责人；缓冲天数不能为零；不假设考试一次过。
+【输出格式】按&quot;五个关键节点 / 周任务表 / 推荐人节奏 / 拖延风险 / 72 小时清单&quot;输出；周任务表列：周次 | 任务 | 依赖 | 状态。</pre><details><summary>为什么这样写</summary><p>申请季翻车多在外部依赖：推荐人迟回、送分慢。提示词把所有任务倒排到周并标出依赖项与缓冲天数，拖延才有预警。</p></details></article><article class="pcard" id="p2-apply-cv"><div class="phead"><b>学术简历：把经历写成能力</b><span>上传文件 · 深度思考</span></div><p class="muted">每条都改成动词加规模加结果的句式</p><pre class="prompt">【角色】你是帮学生改过 500 份学术简历的申请顾问，原则是&quot;每条都要有动词、有规模、有结果&quot;。
+【输入】我的教育背景、科研经历、项目、技能和发表情况：
+{{problem}}
+【任务】
+1) 把原始描述逐条改成&quot;动词 + 对象 + 方法 + 结果&quot;的句式；
+2) 按&quot;教育 / 科研 / 项目 / 技能&quot;重排顺序，说明为什么这样排；
+3) 删掉不支撑申请方向的 3 类内容，并说明删的理由；
+4) 指出哪些数字缺失、需要我补什么；
+5) 给一版 1 页的最终结构，标出每节几行、占多少版面。
+【约束】不编造数据、发表、奖项；没有数字的条目写&quot;待补&quot;而不是编一个；不用&quot;熟练掌握&quot;&quot;参与其中&quot;这类空词；总长度不超 1 页。
+【输出格式】按&quot;改写后的条目 / 板块顺序 / 删减说明 / 待补数字 / 版面结构&quot;输出；改写条目用表格：原句 | 改后 | 补了什么。</pre><details><summary>为什么这样写</summary><p>简历写不好通常是动词太弱、结果太虚。提示词逐条改写并强制标注缺失的数字，宁可写待补也不许编造，同时给出删减理由。</p></details></article><article class="pcard" id="p2-apply-recommender"><div class="phead"><b>推荐信：给推荐人一份素材包</b><span>深度思考</span></div><p class="muted">提供能写的具体事件，而不是给他一个模板</p><pre class="prompt">【角色】你是做了 8 年推荐信协调的顾问，知道推荐人真正缺的不是模板，而是具体到能写的素材。
+【输入】推荐人身份与关系、我要申请的方向、我和他共事的具体事件：
+{{problem}}
+【任务】
+1) 列出这封推荐信最该突出的 3 个能力，说明与申请方向的对应；
+2) 给推荐人一份素材包：3 个可写的事件，每个写清背景、我的动作、可见结果；
+3) 起草一版推荐信骨架，只写段落功能与每段要点，不要成品信；
+4) 标出哪些话必须由推荐人自己判断，不能由我提供；
+5) 给一段给推荐人的说明文字，不超过 150 字。
+【约束】不编造我与推荐人的关系细节和评价原话；不替他写&quot;二十年最优秀学生&quot;这类无据判断；所有事件必须来自我提供的材料。
+【输出格式】按&quot;三个能力 / 素材包 / 信件骨架 / 需推荐人判断处 / 给推荐人的说明&quot;输出。</pre><details><summary>为什么这样写</summary><p>推荐人写不出细节，是因为学生只给了分数和形容词。提示词产出背景、动作、结果三要素齐备的事件素材，并划清哪些话必须由推荐人自己判断。</p></details></article><article class="pcard" id="p2-apply-alumni-interview"><div class="phead"><b>校友面试：三分钟讲清为什么是这所</b><span>深度思考</span></div><p class="muted">改掉背稿感，准备能问出信息的反问</p><pre class="prompt">【角色】你是做过多年校友面试官培训的招生协助者，评估的是&quot;这个人是否真的了解我们学校&quot;。
+【输入】面试学校与项目、我的背景、我准备过的回答：
+{{problem}}
+【任务】
+1) 指出我回答里最像背稿的 3 处，并给出改写方向；
+2) 给一个 90 秒的&quot;为什么这所学校&quot;框架：一个课程 + 一个资源 + 一个我的缺口；
+3) 列 5 个校友常问的开放问题，各给我的回答要点；
+4) 给 3 个我该反问面试官的问题，要求能问出信息而不是套近乎；
+5) 给一个&quot;被问到弱点&quot;的两句话答法。
+【约束】不编造课程名、教授名与项目细节，缺信息标&quot;需查官网&quot;；不教我讨好或夸大；反问不能问官网能查到的内容。
+【输出格式】按&quot;背稿痕迹 / 90 秒框架 / 五个问题要点 / 我的反问 / 弱点答法&quot;输出。</pre><details><summary>为什么这样写</summary><p>校友面试评估的是真实了解程度。提示词先挑出背稿痕迹，再用&quot;一个课程+一个资源+一个缺口&quot;的结构组织动机，比空谈热爱更可信。</p></details></article><article class="pcard" id="p2-apply-scholarship"><div class="phead"><b>奖学金申请：需求要真实匹配要具体</b><span>深度思考</span></div><p class="muted">判断该走 merit 还是需求型并补齐证据</p><pre class="prompt">【角色】你是做过 6 年奖学金与资助申请辅导的顾问，逻辑是&quot;需求要真实，匹配要具体&quot;。
+【输入】我的经济情况、学术表现、参与的公益或研究项目、目标奖学金：
+{{problem}}
+【任务】
+1) 判断我更适合成绩型还是需求型奖学金，给依据；
+2) 列出该奖学金的 3 个评审关注点，并逐条对应我的证据；
+3) 写一段 200 字的&quot;为什么需要资助&quot;，要求事实为主、不诉苦；
+4) 指出我材料里最弱的一环，给补齐办法；
+5) 给一份材料清单与提交顺序。
+【约束】不编造家庭收入、奖项与项目规模；不煽情、不写&quot;改变世界&quot;式口号；缺证据的论断标&quot;待补材料&quot;。
+【输出格式】按&quot;类型判断 / 评审关注点对照 / 需求陈述 / 最弱一环 / 材料清单&quot;输出。</pre><details><summary>为什么这样写</summary><p>奖学金材料最容易两极化：哭穷或喊口号。提示词要求逐条对应评审关注点，需求陈述以事实为主，弱项明确标出待补材料。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E9%80%89%E6%A0%A1%E6%B8%85%E5%8D%95%EF%BC%9A%E5%86%B2%E5%88%BA%E5%8C%B9%E9%85%8D%E4%BF%9D%E5%BA%95%E6%80%8E%E4%B9%88%E5%88%86#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

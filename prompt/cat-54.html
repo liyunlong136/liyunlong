@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>品牌设计提示词（6 条） | 模选 ModelPick</title><meta name="description" content="品牌设计场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-54.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="品牌设计提示词（6 条）"><meta property="og:description" content="品牌设计场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-54.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="品牌设计提示词（6 条）"><meta name="twitter:description" content="品牌设计场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"品牌设计提示词","description":"品牌设计场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 品牌设计</p><h1>品牌设计提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">Logo</span><span class="chip">品牌</span><span class="chip">brief</span><span class="chip">标志</span><span class="chip">视觉</span><span class="chip">评审</span><span class="chip">配色</span><span class="chip">色板</span><span class="chip">对比度</span><span class="chip">印刷</span></div><article class="pcard" id="p4-brand-logo"><div class="phead"><b>Logo 设计 brief：把感觉变约束</b><span>深度思考</span></div><p class="muted">把「高级一点」翻译成设计师能执行的设计要求</p><pre class="prompt">【角色】你是做过多个消费品牌视觉的设计总监，接 brief 时先问它要在哪出现、给谁看。
+【输入】品牌名称、行业、目标人群、使用场景与禁忌：
+{{problem}}
+【任务】
+1) 用 3 个词定义品牌性格，每个词给一个反例说明它不是什么意思；
+2) 列出必须适配的场景：小尺寸、单色、深色底、动效；
+3) 给 3 个不同的设计方向，各写视觉语言与风险；
+4) 给评审标准：什么样的方案算过；
+5) 给交付清单与文件规范。
+【约束】不写「高端大气」这类无法执行的描述；不指定具体图形；不编造竞品视觉信息；必须包含禁用项。
+【输出格式】按「性格定义 / 场景清单 / 三个方向 / 评审标准 / 交付规范」输出。</pre><details><summary>为什么这样写</summary><p>模糊的形容词会让方案反复。这条提示词要求用三个词定义品牌性格并各给反例，列出必须适配的场景与禁用项，最后给评审标准与交付规范。</p></details></article><article class="pcard" id="p4-brand-color"><div class="phead"><b>品牌配色：从主色到色板</b><span>深度思考</span></div><p class="muted">建立一套能落地到界面与印刷的配色系统</p><pre class="prompt">【角色】你是做品牌视觉系统的设计师，配色先定情绪与来源，再谈好看。
+【输入】品牌定位、现有主色、使用介质（屏幕、印刷、物料）：
+{{problem}}
+【任务】
+1) 定主色的来源与情绪，说明为什么适合该人群；
+2) 推导辅助色与中性色阶，给每个色值的使用场景；
+3) 校验文字对比度，标出不达标的组合；
+4) 给印刷与屏幕的色差处理建议；
+5) 给一个不超过 6 个色的最小色板。
+【约束】不编造色值来源；不建议超过三种高饱和色；必须给无障碍对比度结论；不确定的印刷工艺标「待打样」。
+【输出格式】按「主色依据 / 色板推导 / 对比度校验 / 色差处理 / 最小色板」输出。</pre><details><summary>为什么这样写</summary><p>配色不是选一个好看的颜色。这条提示词要求先定主色的来源与情绪，再推导辅助色与中性色阶，最后校验文字对比度与印刷色差，形成可直接使用的色板。</p></details></article><article class="pcard" id="p4-brand-poster"><div class="phead"><b>活动海报：信息层级与留白</b><span>深度思考</span></div><p class="muted">让海报在三米外能读懂，走近还有细节</p><pre class="prompt">【角色】你是做过大量线下物料的平面设计师，判断海报先看三米外能不能读懂。
+【输入】活动信息、投放场景与尺寸、目标人群：
+{{problem}}
+【任务】
+1) 排信息优先级：三米可见、走近才看、可扫可不看；
+2) 给版式方案：网格、留白比例、视觉动线；
+3) 给字号阶梯与主标题字数上限；
+4) 给图片与文字的主次关系；
+5) 给缩小到手机屏的自检方法。
+【约束】不堆信息；不编造活动信息；不使用无法印刷的效果除非说明替代方案；必须保证主标题在缩略图下可读。
+【输出格式】按「信息优先级 / 版式方案 / 字号阶梯 / 图文关系 / 自检方法」输出。</pre><details><summary>为什么这样写</summary><p>海报失败通常是所有信息一样重。这条提示词要求先排信息优先级，再定网格与字号阶梯，最后用缩略图自检主标题是否还可读，避免排版只在满屏时好看。</p></details></article><article class="pcard" id="p4-brand-packaging"><div class="phead"><b>包装设计：货架上三秒被拿起</b><span>深度思考</span></div><p class="muted">在竞品包围中设计能自证的包装信息结构</p><pre class="prompt">【角色】你是做过快消包装的设计师，货架上的竞争只有三秒。
+【输入】产品、竞品陈列环境、价格带、法规要求：
+{{problem}}
+【任务】
+1) 定三秒识别点：远看靠什么被认出；
+2) 排信息层级：品牌、品类、卖点、规格、法规信息；
+3) 给正面与背面的信息分配；
+4) 列印刷工艺与成本约束；
+5) 给一个与竞品放一起看的货架自检。
+【约束】不夸大功效、不使用绝对化用语；不编造法规要求；必须预留法规信息区；不确定的工艺标「待打样」。
+【输出格式】按「三秒识别点 / 信息层级 / 正背面分配 / 工艺约束 / 货架自检」输出。</pre><details><summary>为什么这样写</summary><p>包装要在看不清的条件下传达差异。这条提示词要求先定远看识别点，再排品牌、品类、卖点、规格与法规信息，最后用与竞品同框的方式做自检。</p></details></article><article class="pcard" id="p4-brand-vi"><div class="phead"><b>VI 手册：让设计能被复用</b><span>深度思考</span></div><p class="muted">把品牌规范写成非设计师也能照着用的手册</p><pre class="prompt">【角色】你是写品牌规范的设计负责人，手册只写会被用到的规则。
+【输入】品牌资产、使用部门、常见误用情况：
+{{problem}}
+【任务】
+1) 列出必须规范的元素：标志、色、字、图形、版式；
+2) 给每个元素的最小使用规则与安全距离；
+3) 给正误对照，说明错在哪；
+4) 给不同介质的适配示例；
+5) 给一页非设计师也能查的速查页。
+【约束】不写成作品集；不编造资产；规则必须可测量；不确定的工艺标「待确认」。
+【输出格式】按「规范元素 / 使用规则 / 正误对照 / 介质适配 / 速查页」输出。</pre><details><summary>为什么这样写</summary><p>手册的价值是可执行。这条提示词要求只写会被用到的规则，给最小使用标准与正误对照，并做一页速查，避免手册变成没人翻的作品集。</p></details></article><article class="pcard" id="p4-brand-naming"><div class="phead"><b>品牌命名：好念、好记、可注册</b><span>深度思考</span></div><p class="muted">在可用性约束下产出可注册、可传播的名字</p><pre class="prompt">【角色】你是做过多个品牌命名的顾问，名字要过三关：读得出、记得住、注册得了。
+【输入】品类、目标人群、语言市场、已有商标情况：
+{{problem}}
+【任务】
+1) 定命名策略（描述型、联想型、造词型）与音节规则；
+2) 按策略批量给 20 个候选，标注意思与读音；
+3) 按可读、可记、可扩展、可注册四项打分；
+4) 挑 5 个做场景检验：电话里说、Logo 里放、搜索时输；
+5) 给商标初筛的注意事项。
+【约束】不编造商标查询结果，注册可行性标「需检索」；不蹭知名品牌；不使用生僻字与歧义读音；必须给淘汰理由。
+【输出格式】按「策略与规则 / 20 个候选 / 四项打分 / 场景检验 / 检索注意」输出。</pre><details><summary>为什么这样写</summary><p>名字要过三道关：读得出、记得住、注册得了。这条提示词要求先定命名策略与音节规则，再批量产出并按四项打分，最后用电话里说、Logo 里放、搜索时输做场景检验。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=Logo%20%E8%AE%BE%E8%AE%A1%20brief%EF%BC%9A%E6%8A%8A%E6%84%9F%E8%A7%89%E5%8F%98%E7%BA%A6%E6%9D%9F#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

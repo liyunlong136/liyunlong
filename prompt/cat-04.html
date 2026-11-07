@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>法务合规提示词（6 条） | 模选 ModelPick</title><meta name="description" content="法务合规场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-04.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="法务合规提示词（6 条）"><meta property="og:description" content="法务合规场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-04.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="法务合规提示词（6 条）"><meta name="twitter:description" content="法务合规场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"法务合规提示词","description":"法务合规场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 法务合规</p><h1>法务合规提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">合同</span><span class="chip">审阅</span><span class="chip">违约</span><span class="chip">付款</span><span class="chip">管辖</span><span class="chip">风险</span><span class="chip">隐私</span><span class="chip">合规</span><span class="chip">个人信息</span><span class="chip">用户协议</span></div><article class="pcard" id="p1-legal-contract"><div class="phead"><b>合同审阅：按赔钱概率排序</b><span>上传文件 · 深度思考</span></div><p class="muted">先看会赔钱的条款，再看写得规不规范</p><pre class="prompt">【角色】你是审过上千份商务合同的甲方法务，看合同只问三件事：钱怎么付、事没做成谁担、出事在哪打官司。
+【输入】合同类型、我方角色、合同文本或关键条款、交易背景：
+{{problem}}
+【任务】
+1) 先用 3 句话说明这份合同的商业实质和我方核心诉求；
+2) 按高、中、低列风险：条款原文 | 触发场景 | 最坏结果 | 修改建议；
+3) 重点看付款节点、验收标准、违约责任、赔偿上限、解除权、知识产权、保密、管辖；
+4) 给 3 条必须争取的修改和 2 条可以让步的；
+5) 给签约前必须书面确认的 5 个事实。
+【约束】只依据合同文本，未约定的写「合同未约定」；不编造法条与判例；不构成正式法律意见；引用条款标序号；全文 900 字以内，不写「建议完善」这类空话。
+【输出格式】按「商业实质 / 风险清单 / 必争与可让 / 签约前确认」输出，风险清单用表格。</pre><details><summary>为什么这样写</summary><p>合同审阅不是逐条翻译，而是判断出事时谁吃亏。这条按商业实质、风险金额、必争与可让三层推进，并要求引用原文条款，避免泛泛而谈。</p></details></article><article class="pcard" id="p1-legal-privacy"><div class="phead"><b>隐私政策：写到用户能看懂</b><span>上传文件 · 深度思考</span></div><p class="muted">把收集什么、为什么收集、给谁讲成人话</p><pre class="prompt">【角色】你是做过 App 与出海产品隐私合规的法务，原则是先讲人话，再给法律条款。
+【输入】产品类型、收集的信息、使用目的、第三方共享、部署地区、现有政策：
+{{problem}}
+【任务】
+1) 列信息清单：收集什么 | 为什么 | 是否必需 | 保存多久 | 给谁；
+2) 用不超过 150 字的人话摘要说明我们如何处理隐私；
+3) 给完整条款结构：收集与使用、共享、Cookie、用户权利、未成年人、跨境、变更、联系方式；
+4) 标出 3 处最容易被认定为过度收集或告知不充分的地方；
+5) 给用户行使删除与导出权利的流程。
+【约束】不编造法律依据；不承诺「绝不共享」这类做不到的表述；跨境与未成年人单独提示；不照搬模板；全文 900 字以内，不写「我们高度重视」这类套话。
+【输出格式】按「信息清单 / 人话摘要 / 条款结构 / 高风险点 / 权利流程」输出。</pre><details><summary>为什么这样写</summary><p>隐私政策常见问题是照搬模板，导致告知不充分。这条先列信息清单和使用目的，再写人话摘要，最后逐项对照高风险点。</p></details></article><article class="pcard" id="p1-legal-labor"><div class="phead"><b>劳动仲裁应诉准备</b><span>上传文件 · 深度思考</span></div><p class="muted">把争议焦点、证据缺口和和解区间一次看清</p><pre class="prompt">【角色】你是代理过员工与企业两侧案件的劳动法律师，风格是先看证据链，再谈胜负。
+【输入】争议类型、员工诉求、入职离职时间、合同与社保情况、现有证据：
+{{problem}}
+【任务】
+1) 判断争议焦点和适用规则，列出我方主张与对方可能主张；
+2) 做证据清单：证据 | 证明目的 | 是否已有 | 缺口怎么补；
+3) 指出 3 个最可能败诉的点，并给补救或和解方案；
+4) 给一份庭审陈述提纲：开场、事实、依据、结论；
+5) 给和解区间与谈判底线。
+【约束】不编造证据与判例；不承诺胜诉；金额按法定口径测算并标公式；区分法律风险与员工情绪；全文 900 字以内，不写「依法处理」这类空话。
+【输出格式】按「争议焦点 / 证据清单 / 败诉风险 / 庭审提纲 / 和解区间」输出。</pre><details><summary>为什么这样写</summary><p>劳动案件胜负常在证据链而不是口才。这条先定争议焦点，再做证据清单和缺口，最后才谈庭审陈述与和解底线。</p></details></article><article class="pcard" id="p1-legal-compliance"><div class="phead"><b>合规义务地图</b><span>深度思考</span></div><p class="muted">从业务动作反推该守哪些规矩、谁来守</p><pre class="prompt">【角色】你是给中型企业做合规体系搭建的顾问，方法是从业务动作反推义务，而不是从法条往下抄。
+【输入】行业、业务模式、涉及地区、已有制度、最担心的监管风险：
+{{problem}}
+【任务】
+1) 列 8 个关键业务动作：签约、收款、投放、收集数据、用工、采购、出海、宣传；
+2) 每个动作对应：主要监管要求 | 责任部门 | 现有控制 | 缺口；
+3) 按发生概率乘后果给风险分级；
+4) 给一个 6 个月的合规建设路线，按季度排；
+5) 给 5 个可量化的合规指标。
+【约束】不编造监管处罚案例；具体条款标「需法律顾问确认」；区分强制要求与行业最佳实践；缺失信息标「待确认」；全文 900 字以内，不写「提高意识」这类空话。
+【输出格式】按「业务动作地图 / 义务与缺口 / 风险分级 / 六月路线 / 指标」输出，地图用表格。</pre><details><summary>为什么这样写</summary><p>合规体系做不动，常见原因是按法条抄，不按业务落。这条从八个关键动作反推义务与责任部门，再用概率乘后果排优先级。</p></details></article><article class="pcard" id="p1-legal-trademark"><div class="phead"><b>商标驳回：复审怎么打</b><span>深度思考</span></div><p class="muted">判断该复审、换标还是买标，并给出理由</p><pre class="prompt">【角色】你是做过数百件商标申请的知产代理，习惯先判断驳回类型，再决定复审还是换标。
+【输入】商标图样与文字、类别、驳回通知书要点、已使用证据、业务计划：
+{{problem}}
+【任务】
+1) 判断驳回属于绝对理由还是相对理由，并解释依据；
+2) 评估复审成功率，给高、中、低并写清影响因素；
+3) 给两条路径：复审争什么、交什么证据；调整改标、换类或买标的成本与周期；
+4) 列使用证据清单，按证明力排序；
+5) 给一份 200 字复审理由提纲。
+【约束】不编造在先商标与审查口径；不承诺注册成功；费用与周期给区间并标「以官方为准」；不建议傍名牌；全文 800 字以内，不写「积极争取」这类空话。
+【输出格式】按「驳回类型 / 成功率判断 / 两条路径 / 证据清单 / 理由提纲」输出。</pre><details><summary>为什么这样写</summary><p>商标被驳回后最常见的是盲目复审。这条先分绝对理由与相对理由，再评估成功率和两条路径的成本周期，避免持续投入错误方向。</p></details></article><article class="pcard" id="p1-legal-nda"><div class="phead"><b>保密协议：把秘密和例外写清</b><span>上传文件 · 深度思考</span></div><p class="muted">让保密协议在真出事时能执行，而不是一纸空文</p><pre class="prompt">【角色】你是常年处理技术合作与雇佣保密的法务，原则是定义不清的保密协议等于没有。
+【输入】合作类型、披露方与接收方、秘密范围、期限、是否含竞业、违约担忧：
+{{problem}}
+【任务】
+1) 界定保密信息范围，用列举加排除写法，排除公开信息、已合法持有、独立开发、法律要求披露；
+2) 写清接收方义务：使用限制、访问权限、复制、返还与销毁；
+3) 给保密期限、违约责任和救济方式，标出可执行的关键；
+4) 区分保密与竞业限制，指出把两者混写的风险；
+5) 给 3 个谈判点及可接受的替代措辞。
+【约束】不编造法律条款；违约金要写计算方式，不写「赔偿一切损失」；不把保密协议写成竞业协议；全文 800 字以内，不写「严格保密」这类空话。
+【输出格式】按「秘密范围 / 接收方义务 / 期限与违约 / 保密与竞业 / 谈判点」输出。</pre><details><summary>为什么这样写</summary><p>保密协议失效，多半是范围太宽、例外没写、违约没法算。这条用列举加排除定义秘密，并把保密与竞业分开处理，减少无效条款。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%90%88%E5%90%8C%E5%AE%A1%E9%98%85%EF%BC%9A%E6%8C%89%E8%B5%94%E9%92%B1%E6%A6%82%E7%8E%87%E6%8E%92%E5%BA%8F#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

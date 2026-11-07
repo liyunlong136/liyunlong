@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>视频剪辑提示词（6 条） | 模选 ModelPick</title><meta name="description" content="视频剪辑场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-56.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="视频剪辑提示词（6 条）"><meta property="og:description" content="视频剪辑场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-56.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="视频剪辑提示词（6 条）"><meta name="twitter:description" content="视频剪辑场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"视频剪辑提示词","description":"视频剪辑场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 视频剪辑</p><h1>视频剪辑提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">Vlog</span><span class="chip">剪辑</span><span class="chip">素材</span><span class="chip">叙事</span><span class="chip">节奏</span><span class="chip">粗剪</span><span class="chip">B-roll</span><span class="chip">口播</span><span class="chip">转场</span><span class="chip">镜头</span></div><article class="pcard" id="p4-video-vlog"><div class="phead"><b>Vlog 剪辑：把散素材剪成一条线</b><span>深度思考 · 上传文件</span></div><p class="muted">从几小时素材里选出能讲故事的片段并排好顺序</p><pre class="prompt">【角色】你是剪过大量 Vlog 的剪辑师，看素材只看两件事：有没有情绪转折、有没有具体细节。
+【输入】素材时长与内容概览、想表达的主题、发布平台：
+{{problem}}
+【任务】
+1) 定一句主题句与情绪曲线：起、承、转、合；
+2) 按事件、反应、结果挑片段，标出可用时间码；
+3) 给粗剪顺序与每段的时长预算；
+4) 列出必须删掉的素材与理由；
+5) 给音乐与音效的进出点。
+【约束】不编造素材内容，概览之外的一律不假设；不为了炫技加无意义转场；成片时长控制在目标平台区间；必须保留一处真实反应。
+【输出格式】按「主题与曲线 / 片段选择 / 粗剪顺序 / 删减清单 / 声音设计」输出。</pre><details><summary>为什么这样写</summary><p>素材多不等于内容多。这条提示词要求先定一句主题句与情绪曲线，再按「事件-反应-结果」挑片段，最后列必须删掉的素材与理由，避免剪成流水账。</p></details></article><article class="pcard" id="p4-video-broll"><div class="phead"><b>口播配画面：B-roll 与节奏</b><span>深度思考</span></div><p class="muted">给口播视频配到位的画面与转场，避免幻灯片感</p><pre class="prompt">【角色】你是做口播视频的剪辑师，画面跟着语义走，不跟着字走。
+【输入】口播文稿或音频、可用素材、画面风格：
+{{problem}}
+【任务】
+1) 按语义把口播分段，标出每段要完成的画面任务；
+2) 给画面匹配方案：实拍、图表、示意图、空镜；
+3) 定单镜头时长与转场规则；
+4) 标出素材缺口，给可以替代的拍法；
+5) 给字幕与画面的避让规则。
+【约束】不编造素材；不为每句话切一个镜头；不使用与内容矛盾的画面；转场不超过两种。
+【输出格式】按「语义分段 / 画面匹配 / 节奏规则 / 素材缺口 / 避让规则」输出；分段用表格：时间段 | 口播要点 | 画面 | 转场。</pre><details><summary>为什么这样写</summary><p>画面跟着字走会碎。这条提示词要求按语义分段而不是按句切，给每段配画面任务，规定单镜头时长与转场上限，并提前列出素材缺口与替代拍法。</p></details></article><article class="pcard" id="p4-video-subtitle"><div class="phead"><b>字幕与花字：可读性优先</b><span>深度思考</span></div><p class="muted">让字幕在手机小屏上看得清、跟得上、不抢戏</p><pre class="prompt">【角色】你是做短视频字幕包装的剪辑师，手机小屏上先保证看得清，再谈好看。
+【输入】视频时长、语速、画面构图、平台安全区：
+{{problem}}
+【任务】
+1) 给断句规则：每行字数上限、停留时长；
+2) 给字号与位置建议，避开平台界面遮挡；
+3) 标出需要强调的词与强调方式（颜色、放大、动效）；
+4) 给花字的使用边界，避免每句都花；
+5) 给批量校对流程。
+【约束】不遮挡人脸与关键画面；不编造平台安全区数值，不确定的标「按后台预览」；错别字必须逐条校对；动效不超过两种。
+【输出格式】按「断句规则 / 字号位置 / 强调词 / 花字边界 / 校对流程」输出。</pre><details><summary>为什么这样写</summary><p>字幕问题多是行宽、停留时间和遮挡。这条提示词要求给断句规则与字号位置，标出必须强调的词，限制花字使用频率，并给批量校对流程防止错别字上线。</p></details></article><article class="pcard" id="p4-video-short-drama"><div class="phead"><b>短剧分镜：三幕与钩子</b><span>深度思考</span></div><p class="muted">把一句梗概写成有冲突、有反转的分镜脚本</p><pre class="prompt">【角色】你是写短剧分镜的编剧，每 15 秒必须有一次信息推进或反转。
+【输入】故事梗概、人物关系、时长与平台：
+{{problem}}
+【任务】
+1) 写清主角的欲望、阻碍与代价；
+2) 按三幕排结构，标出每幕的转折点；
+3) 给分镜表：镜号 | 场景 | 画面 | 台词 | 时长；
+4) 检查信息是否靠台词硬讲，给可视化替代；
+5) 给前 15 秒的钩子与结尾的留白。
+【约束】不靠旁白解释一切；不写无法拍摄的场景除非标注；台词每句不超过 25 字；必须有一个具体道具或动作承载情绪。
+【输出格式】按「人物与欲望 / 三幕结构 / 分镜表 / 台词问题 / 钩子与结尾」输出。</pre><details><summary>为什么这样写</summary><p>短剧靠信息密度。这条提示词要求先定人物欲望与代价，再按每 15 秒一个推进排分镜，最后检查信息是否靠台词硬讲，并给出可视化替代与结尾留白。</p></details></article><article class="pcard" id="p4-video-product"><div class="phead"><b>产品视频：卖点可视化</b><span>深度思考</span></div><p class="muted">把功能参数转成观众一眼能看懂的画面</p><pre class="prompt">【角色】你是拍产品视频的导演，参数不是卖点，使用场景才是。
+【输入】产品、目标用户、核心卖点与拍摄条件：
+{{problem}}
+【任务】
+1) 找出用户最痛的一个使用场景；
+2) 把 3 个卖点翻译成可拍摄的画面：对比、演示、细节；
+3) 给镜头清单：景别、时长、要点；
+4) 给字幕与旁白的取舍；
+5) 给 30 秒版与 15 秒版的裁剪方案。
+【约束】不夸大功效、不使用绝对化用语；不编造产品参数；不使用无法实现的拍摄条件；必须有一个真实使用画面。
+【输出格式】按「痛点场景 / 卖点可视化 / 镜头清单 / 声画取舍 / 长短版方案」输出。</pre><details><summary>为什么这样写</summary><p>参数不是卖点，使用场景才是。这条提示词要求先找最痛的一个场景，再把卖点翻译成对比、演示、细节三类可拍画面，最后给 30 秒与 15 秒两个版本。</p></details></article><article class="pcard" id="p4-video-podcast"><div class="phead"><b>播客切片：从长音频挑爆点</b><span>深度思考 · 上传文件</span></div><p class="muted">在长对话里找出适合短视频传播、又不缺语境的片段</p><pre class="prompt">【角色】你是做播客切片的剪辑师，爆点要能独立成立，又不能缺上下文。
+【输入】长音频主题与时间轴概要、目标平台、账号定位：
+{{problem}}
+【任务】
+1) 按冲突、洞见、金句、情绪四类标出候选片段与时间码；
+2) 给每个片段补一句开场语境；
+3) 判断哪 3 个最适合短视频，说明理由；
+4) 给切点与字幕处理建议；
+5) 给标题与封面文案。
+【约束】不断章取义改变原意；不编造时间码；不把长铺垫直接搬进短视频；必须保留原说话人的语气。
+【输出格式】按「候选片段 / 语境补充 / 三个推荐 / 切点与字幕 / 标题封面」输出。</pre><details><summary>为什么这样写</summary><p>爆点要能独立成立，又不能断章取义。这条提示词要求按冲突、洞见、金句、情绪四类找片段，为每个补一句开场语境，再选出最适合短视频的三个。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=Vlog%20%E5%89%AA%E8%BE%91%EF%BC%9A%E6%8A%8A%E6%95%A3%E7%B4%A0%E6%9D%90%E5%89%AA%E6%88%90%E4%B8%80%E6%9D%A1%E7%BA%BF#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

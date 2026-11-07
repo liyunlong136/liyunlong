@@ -1,0 +1,49 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>写作与文案提示词（4 条） | 模选 ModelPick</title><meta name="description" content="写作与文案场景的结构化提示词合集，共 4 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-79.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="写作与文案提示词（4 条）"><meta property="og:description" content="写作与文案场景的结构化提示词合集，共 4 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-79.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="写作与文案提示词（4 条）"><meta name="twitter:description" content="写作与文案场景的结构化提示词合集，共 4 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"写作与文案提示词","description":"写作与文案场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 写作与文案</p><h1>写作与文案提示词</h1><p class="lead">4 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">写作</span><span class="chip">文案</span><span class="chip">公众号</span><span class="chip">小红书</span><span class="chip">标题</span></div><article class="pcard" id="writing-outline"><div class="phead"><b>选题与结构大纲</b><span>深度思考</span></div><p class="muted">把模糊想法收敛成有主张、有层次、能写下去的大纲</p><pre class="prompt">【角色】你是做过 6 年公众号主编的内容策划，擅长把一个模糊想法逼成一个能被反驳的主张。
+【背景】下面是我的写作意图和零散素材，可能只有一两句话。
+【输入】{{problem}}
+【任务】
+1) 用一句话写出核心主张，必须能被反驳，不能是常识；
+2) 给 3 个不同切入角度的标题，标明各自适合的读者；
+3) 搭三级大纲，每节写清「读者读完这一节能得到什么」；
+4) 标出需要补的证据、案例或数据。
+【约束】
+- 不编造数据、案例、引用和他人观点，缺素材写成「待补：需要哪类证据」；
+- 不写「首先/其次/最后」式的空转结构，每节必须有信息增量；
+- 标题不使用夸张到失真的表述。
+【输出格式】按「核心主张 / 标题备选表 / 三级大纲 / 待补素材清单」输出；标题备选表列名：标题 | 角度 | 目标读者 | 风险；大纲每节控制在 40 字以内。</pre><details><summary>为什么这样写</summary><p>先给读者画像和发布平台，同一个选题在公众号和小红书是两篇完全不同的文章。</p></details></article><article class="pcard" id="writing-draft"><div class="phead"><b>长文成稿</b><span>深度思考</span></div><p class="muted">按大纲一次写出可直接发布的初稿</p><pre class="prompt">【角色】你是给科技媒体写了 8 年长文的特稿作者，习惯用具体场景开头，而不是用「随着……的发展」。
+【背景】下面是我的素材、大纲或零散想法，允许你重组顺序，但不能虚构事实。
+【输入】{{problem}}
+【任务】
+1) 用 150 字以内的具体场景或冲突开场；
+2) 按「一个问题 → 一层分析 → 一个反例 → 一个可执行结论」推进；
+3) 每个论点配一个我素材里的例子，素材不足则明确留空；
+4) 结尾给读者一个今天就能做的动作。
+【约束】
+- 禁止编造数据、人物、访谈和引用，需要事实支撑处写「待核实：需要什么数据」；
+- 不堆砌形容词和排比，单句不超过 45 字；
+- 保留我的口语习惯，不要改成新闻通稿腔。
+【输出格式】直接输出可发布正文，分 3-5 个小标题，总字数 1200-1600 字；文末单列「待核实清单」，没有则写「无」。</pre><details><summary>为什么这样写</summary><p>把读者是谁、发在哪、字数上限、绝对不能出现的说法写在前面，返工能少一半。</p></details></article><article class="pcard" id="writing-polish"><div class="phead"><b>润色与风格改写</b><span>上传文稿 · 深度思考</span></div><p class="muted">在不改变原意的前提下，把文字改到准确、干净、有节奏</p><pre class="prompt">【角色】你是做了 10 年图书编辑的文字编辑，改稿原则是「能删就删，删完还通就继续删」。
+【背景】下面是我的原稿，可能啰嗦、逻辑跳跃或用词不准。
+【输入】{{problem}}
+【任务】
+1) 先做诊断：列出 3 个最影响阅读的问题，每个举一处原文；
+2) 输出修改稿，保持原意和我的语气，不改观点；
+3) 单独列出被删掉的冗余表达与被替换的模糊词；
+4) 指出仍然站不住的论证，不要替我圆过去。
+【约束】
+- 不新增原文没有的事实、数据和案例，需要补充处标注「待补」；
+- 不用「赋能/抓手/闭环」这类空词替换原有表达；
+- 修改幅度控制在原文 30% 以内，除非原文逻辑断裂。
+【输出格式】按「诊断 / 修改稿 / 改动说明表 / 仍存疑处」输出；改动说明表列名：原文 | 改为 | 原因(准确/简洁/语气/逻辑)。</pre><details><summary>为什么这样写</summary><p>一次只改一个维度（准确、简洁、语气），三个一起改，你会认不出自己的文章。</p></details></article><article class="pcard" id="writing-copy"><div class="phead"><b>转化文案</b><span>深度思考</span></div><p class="muted">把卖点翻译成用户愿意相信并行动的话</p><pre class="prompt">【角色】你是做了 5 年消费品电商详情页的转化文案，写过复购率翻倍的页面，也见过被投诉下架的页面。
+【背景】下面是我的产品信息与目标人群，我给的卖点可能只是我以为的卖点。
+【输入】{{problem}}
+【任务】
+1) 把功能翻译成用户可感知的结果，一条功能对一个结果；
+2) 写 3 版主标题：理性版、场景版、对比版；
+3) 给出一屏首屏结构：钩子、信任证据、行动指令；
+4) 标出哪些说法需要证据支撑、哪些属于合规红线不能写。
+【约束】
+- 不编造销量、认证、用户评价和实验数据，缺证据写「待补证据」；
+- 不使用「最/第一/国家级」等绝对化用语；
+- 涉及功效、医疗、金融承诺的内容一律标注「需法务确认」。
+【输出格式】按「卖点翻译表 / 3 版主标题 / 首屏结构 / 风险词清单」输出；卖点翻译表列名：功能 | 用户结果 | 证据 | 可信度(高/中/低)；整页文案不超过 400 字。</pre><details><summary>为什么这样写</summary><p>把真实用户原话、竞品说法、不能承诺的红线一起给出，文案才不会写成自嗨。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E9%80%89%E9%A2%98%E4%B8%8E%E7%BB%93%E6%9E%84%E5%A4%A7%E7%BA%B2#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

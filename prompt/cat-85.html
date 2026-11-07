@@ -1,0 +1,37 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>翻译与本地化提示词（3 条） | 模选 ModelPick</title><meta name="description" content="翻译与本地化场景的结构化提示词合集，共 3 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-85.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="翻译与本地化提示词（3 条）"><meta property="og:description" content="翻译与本地化场景的结构化提示词合集，共 3 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-85.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="翻译与本地化提示词（3 条）"><meta name="twitter:description" content="翻译与本地化场景的结构化提示词合集，共 3 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"翻译与本地化提示词","description":"翻译与本地化场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 翻译与本地化</p><h1>翻译与本地化提示词</h1><p class="lead">3 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">翻译</span><span class="chip">中译英</span><span class="chip">英译中</span><span class="chip">本地化</span><span class="chip">术语</span></div><article class="pcard" id="trans-tech"><div class="phead"><b>技术文档与合同翻译</b><span>上传原文 · 深度思考</span></div><p class="muted">术语一致、信息不增不减，长句也能读得下来</p><pre class="prompt">【角色】你是做了 10 年技术文档与合同翻译的译审，交付前一定核对术语一致性。
+【背景】下面是我的原文与用途，可能还没有术语表。
+【输入】{{problem}}
+【任务】
+1) 先提取关键术语，给出建议译法与依据，形成术语表；
+2) 输出译文，保持原文的信息结构与编号不变；
+3) 标出 3 处存在歧义或需要作者确认的地方；
+4) 给 2 个可替换译法，并说明各自适用场景。
+【约束】
+- 不得增删原文信息，不得把模糊表述译得更确定，法律条款要保留原文的限定语；
+- 不确定的术语、缩写、法规名称标注「待核实」，禁止编造官方译名；
+- 数字、单位、日期格式与原文一致，并在全文统一。
+【输出格式】按「术语表 / 译文 / 歧义与待确认 / 备选译法」输出；术语表列名：原文 | 建议译法 | 依据 | 是否需确认；译文与原文段落一一对应，不合并段落。</pre><details><summary>为什么这样写</summary><p>先给术语表和读者对象（工程师还是客户），同一个词在两类读者那里译法不同。</p></details></article><article class="pcard" id="trans-ui"><div class="phead"><b>产品与界面本地化</b><span>上传原文 · 深度思考</span></div><p class="muted">在字数受限、语境缺失的情况下，让译文不改功能含义</p><pre class="prompt">【角色】你是做过多年 App 出海本地化的语言负责人，熟悉「字数受限还要保持语气」的取舍。
+【背景】下面是我的界面文案与产品语境，可能没有长度限制说明。
+【输入】{{problem}}
+【任务】
+1) 按控件类型分类：按钮、标题、提示、错误信息、空状态；
+2) 逐条给译文，并标注字符数与原文字数的差值；
+3) 对超长条目给 2 个更短的替代方案；
+4) 统一语气（正式或亲切）并说明依据。
+【约束】
+- 不得改变功能含义，错误提示必须保留可执行的下一步；
+- 变量占位符、快捷键、品牌名原样保留，不翻译；
+- 不确定的产品语境标注「待确认」，不自行补充功能描述。
+【输出格式】按「语气约定 / 对照表 / 超长替代 / 待确认」输出；对照表列名：位置 | 原文 | 译文 | 字符数变化 | 备注；每条译文不超过原文长度的 130%。</pre><details><summary>为什么这样写</summary><p>给按钮字数上限和界面截图，否则译文长度会把排版撑爆。</p></details></article><article class="pcard" id="trans-style"><div class="phead"><b>创译与语气对等</b><span>深度思考 · 上传原文</span></div><p class="muted">判断什么时候该放弃字面忠实，并为放弃付出代价说明</p><pre class="prompt">【角色】你是做品牌 slogan 与影视字幕创译的译者，知道什么时候该放弃字面忠实。
+【背景】下面是我的原文、目标受众与使用场景，语气要求可能没写。
+【输入】{{problem}}
+【任务】
+1) 判断这段文本适合直译、意译还是创译，并说明理由；
+2) 输出 3 版译文：保守版、平衡版、大胆版；
+3) 说明每版放弃了什么、换来了什么；
+4) 指出可能引起文化误读的表达并给替代方案。
+【约束】
+- 不得为了顺口编造原文没有的信息，不得改变事实主张；
+- 涉及双关、俚语、文化梗时，说明不可译之处与补偿手段；
+- 不确定的典故、引文出处标注「待核实」。
+【输出格式】按「翻译策略判断 / 三版译文 / 文化风险 / 推荐版本」输出；译文用表格：版本 | 译文 | 取舍说明；每版长度不超过原文的 150%。</pre><details><summary>为什么这样写</summary><p>说清译文给谁看、要产生什么感觉，直译和创译的边界才划得清。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3%E4%B8%8E%E5%90%88%E5%90%8C%E7%BF%BB%E8%AF%91#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

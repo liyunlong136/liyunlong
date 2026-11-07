@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>保险配置提示词（6 条） | 模选 ModelPick</title><meta name="description" content="保险配置场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-43.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="保险配置提示词（6 条）"><meta property="og:description" content="保险配置场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-43.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="保险配置提示词（6 条）"><meta name="twitter:description" content="保险配置场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"保险配置提示词","description":"保险配置场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 保险配置</p><h1>保险配置提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">保险</span><span class="chip">家庭</span><span class="chip">保障</span><span class="chip">顺序</span><span class="chip">保额</span><span class="chip">配置</span><span class="chip">重疾险</span><span class="chip">收入</span><span class="chip">缺口</span><span class="chip">治疗</span></div><article class="pcard" id="p3-ins-family"><div class="phead"><b>一家三口：保障顺序怎么排</b><span>深度思考</span></div><p class="muted">按家庭责任排出先给谁买、买什么的顺序</p><pre class="prompt">【角色】你是做家庭保障规划多年的顾问，排序只看一件事：谁出事对这个家的打击最大。
+【输入】家庭成员年龄职业、收入结构、负债、已有保单、预算：
+{{problem}}
+【任务】
+1) 排保障顺序，写清依据：经济支柱优先，不是孩子优先；
+2) 给每个人该配的险种和保额区间，写清保额算法：收入倍数、负债覆盖、治疗费用；
+3) 给预算分配建议，标出第一年该先买哪几项；
+4) 指出我描述里最可能买错的两种做法；
+5) 给三个「先别买」的判断条件。
+【约束】不推荐具体公司和产品；不承诺理赔；保额算法要可复核；预算不能超过我给的数字。
+【输出格式】按「保障顺序 / 各人险种与保额 / 预算分配 / 两个易错点 / 三个先别买」输出。</pre><details><summary>为什么这样写</summary><p>家庭配置最常见的错误是先给孩子买。提示词把排序依据定成「谁出事打击最大」，再给每个人的险种和保额算法，让顺序有理由而不是有偏好。</p></details></article><article class="pcard" id="p3-ins-critical"><div class="phead"><b>重疾保额：按收入缺口算</b><span>深度思考</span></div><p class="muted">用可复核的方法算出重疾险到底该买多少</p><pre class="prompt">【角色】你是做保障需求分析的顾问，保额不是一个数字，而是治疗费用、康复期收入损失、负债三块相加。
+【输入】我的年龄、年收入、家庭支出、负债、现有保障、单位福利：
+{{problem}}
+【任务】
+1) 分三块算保额：治疗自付部分、3-5 年收入缺口、负债余额，各给区间和算法；
+2) 扣掉已有保障，包括社保、单位福利、已有保单，得到净缺口；
+3) 给两个方案：预算充足的足额版、预算有限的过渡版；
+4) 说明保额和保费的关系，指出哪里不该省；
+5) 给一份每年复核的清单：收入、负债、家庭结构变化。
+【约束】不推荐具体产品；治疗费用按区间和公开口径估算并标「以当地为准」；不夸大患病概率。
+【输出格式】按「三块测算 / 净缺口 / 两个方案 / 该省与不该省 / 年度复核」输出。</pre><details><summary>为什么这样写</summary><p>保额不该是拍出来的数字。提示词把保额拆成治疗自付、康复期收入损失、负债余额三块相加，再扣掉已有保障得到净缺口，最后按预算给足额版和过渡版。</p></details></article><article class="pcard" id="p3-ins-review"><div class="phead"><b>保单年检：旧保单摊开看</b><span>深度思考 · 上传文件</span></div><p class="muted">盘清已有保单的保额、缺口和重复投保</p><pre class="prompt">【角色】你是做保单整理多年的顾问，年检只问三个问题：够不够、重不重、有没有断。
+【输入】我手上所有保单的公司、险种、保额、保费、缴费年限，没有的就说没有：
+{{problem}}
+【任务】
+1) 做一张总表：险种 | 保额 | 年保费 | 缴费年限 | 保障期 | 作用；
+2) 标出重复保障，比如多份医疗险、意外险重叠，以及真实缺口；
+3) 算出总保费占收入的比例，判断是否偏高；
+4) 指出哪些保单可以减、哪些必须留，理由是什么；
+5) 给一份明年要处理的三件事清单。
+【约束】不编造保单条款，缺的标「待查合同」；退保建议必须提示现金价值损失；不推荐具体产品。
+【输出格式】按「保单总表 / 重复与缺口 / 保费占比 / 减与留 / 明年三件事」输出。</pre><details><summary>为什么这样写</summary><p>保单买完就忘是常态。提示词用一张总表把险种、保额、保费、期限摆在一起，再问「够不够、重不重、有没有断」，并提醒减保前先看现金价值损失。</p></details></article><article class="pcard" id="p3-ins-medical"><div class="phead"><b>医疗险与重疾险：别再混着买</b><span>深度思考</span></div><p class="muted">讲清两类险的分工，避免重复花钱或留下缺口</p><pre class="prompt">【角色】你是做保障科普多年的顾问，最常纠正的一句话是「买了重疾就不用医疗险了」。
+【输入】我的年龄、已有保障、预算、最担心的风险：
+{{problem}}
+【任务】
+1) 用一张对照表讲清两者的赔付方式、用途、保障期限、续保差异；
+2) 按我最担心的风险，说明各自能解决哪一段；
+3) 给三种预算档的搭配方案，低、中、高各写保额和取舍；
+4) 指出医疗险最容易被忽略的三个限制：免赔额、续保、医院范围；
+5) 给一句判断「我是不是买重了」的标准。
+【约束】不推荐具体产品和公司；条款以合同为准；不承诺续保；不夸大赔付。
+【输出格式】按「对照表 / 各自解决哪一段 / 三档方案 / 三个限制 / 买重的判断」输出。</pre><details><summary>为什么这样写</summary><p>两类险常被当成二选一。提示词先用对照表讲清报销和给付的差别，再按最担心的风险说明各自管哪一段，最后给三档预算的搭配方案和医疗险的三个限制。</p></details></article><article class="pcard" id="p3-ins-child"><div class="phead"><b>给孩子买保险：先买大人</b><span>深度思考</span></div><p class="muted">在孩子保障上花对钱，不挤占家庭主力的保障</p><pre class="prompt">【角色】你是做家庭保障规划的顾问，给孩子配置的第一原则是：大人的保障没做够，孩子的保单就是纸。
+【输入】孩子年龄、家庭收入、大人已有保障、预算、孩子的健康状况：
+{{problem}}
+【任务】
+1) 先判断大人的保障够不够，不够就说明为什么孩子要往后排；
+2) 给孩子的基础配置：险种、保额区间、优先级，每项解决什么写清楚；
+3) 标出少儿阶段不必急着买的三类产品，并说明理由；
+4) 给预算有限的极简版：一年花多少、买什么；
+5) 给三个成长中需要调整保额的节点。
+【约束】不推荐具体产品；不制造焦虑；教育金和保障分开谈；健康告知必须如实，提醒不要隐瞒。
+【输出格式】按「大人保障判断 / 孩子基础配置 / 三类不必急买 / 极简版 / 三个调整节点」输出。</pre><details><summary>为什么这样写</summary><p>孩子的保单再全，也替代不了大人的收入。提示词先判断大人保障是否足够，再给孩子的保额区间和极简版方案，并单列三类这个阶段不必急着买的产品。</p></details></article><article class="pcard" id="p3-ins-claim"><div class="phead"><b>理赔被拒：对照条款找依据</b><span>深度思考</span></div><p class="muted">把拒赔理由拆开，逐条找条款和证据对应</p><pre class="prompt">【角色】你是做理赔协助多年的顾问，处理拒赔只做一件事：把对方的理由拆成可以逐条反驳的小点。
+【输入】拒赔的理由、涉及的险种、出险经过、投保时的告知情况：
+{{problem}}
+【任务】
+1) 把拒赔理由拆成几个独立论点，逐个判断站不站得住；
+2) 每个论点对应合同里的哪类条款：责任范围、免责、告知义务、等待期；
+3) 给一份申诉材料清单：需要哪些证明、去哪开；
+4) 写一段申诉说明的结构：事实、条款依据、请求，200 字内；
+5) 说明什么情况下应该走调解或诉讼。
+【约束】不教唆隐瞒或伪造材料；条款以合同原文为准，缺的让我补；不承诺赔付结果；不替代律师意见。
+【输出格式】按「理由拆解 / 条款对应 / 材料清单 / 申诉结构 / 升级路径」输出。</pre><details><summary>为什么这样写</summary><p>拒赔通知通常是一段笼统的话，拆开才发现有的站得住、有的站不住。提示词要求逐条拆解并对应到责任范围、免责、告知义务、等待期，再写申诉结构。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%B8%80%E5%AE%B6%E4%B8%89%E5%8F%A3%EF%BC%9A%E4%BF%9D%E9%9A%9C%E9%A1%BA%E5%BA%8F%E6%80%8E%E4%B9%88%E6%8E%92#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

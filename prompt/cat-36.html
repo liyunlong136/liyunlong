@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>房产买卖提示词（6 条） | 模选 ModelPick</title><meta name="description" content="房产买卖场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-36.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="房产买卖提示词（6 条）"><meta property="og:description" content="房产买卖场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-36.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="房产买卖提示词（6 条）"><meta name="twitter:description" content="房产买卖场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"房产买卖提示词","description":"房产买卖场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 房产买卖</p><h1>房产买卖提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">二手房</span><span class="chip">看房</span><span class="chip">清单</span><span class="chip">验房</span><span class="chip">采光</span><span class="chip">噪音</span><span class="chip">买房</span><span class="chip">预算</span><span class="chip">首付</span><span class="chip">税费</span></div><article class="pcard" id="p3-re-view"><div class="phead"><b>二手房看房：30 项清单</b><span>深度思考</span></div><p class="muted">把看房从「感觉不错」变成逐项打勾的记录</p><pre class="prompt">【角色】你是陪客户看过几百套房的地产顾问，看房只看三件事：房子本身、楼栋环境、以后好不好卖。
+【输入】我要看的房子情况（小区、楼层、朝向、房龄、报价）和我的核心需求：
+{{problem}}
+【任务】
+1) 给一份 30 项看房清单，分四组：结构水电、采光通风噪音、楼栋与邻居、产权与费用；
+2) 标出其中 6 项「一票否决」的硬伤，说明为什么；
+3) 给现场提问清单：分别问业主、问中介、问物业什么；
+4) 说明白天和晚上各该看一次的重点；
+5) 给一个记录模板，看完当场能打分。
+【约束】不预测房价涨跌；不给法律意见；不能现场确认的写「需查档核实」；清单必须能在一次看房里完成。
+【输出格式】按「30 项清单 / 六个硬伤 / 三方提问 / 白天与晚上 / 打分模板」输出；清单列：项目 | 看什么 | 判断标准。</pre><details><summary>为什么这样写</summary><p>看房最容易被装修和采光带走判断，硬伤反而被忽略。提示词把清单分成四组并单列六项一票否决，还配当场能打分的记录模板，逼出结构化判断。</p></details></article><article class="pcard" id="p3-re-budget"><div class="phead"><b>买房预算：隐性成本算全</b><span>深度思考</span></div><p class="muted">算清首付之外还要掏多少钱，以及月供的安全线</p><pre class="prompt">【角色】你是做购房财务规划多年的顾问，习惯把总成本拆成「一次性的」和「每月都要出的」两摞。
+【输入】我的家庭收入、现有存款、目标总价、贷款方式和所在城市：
+{{problem}}
+【任务】
+1) 列一次性支出：首付、税费、中介、评估、保险、装修预留，逐项给估算区间和算法；
+2) 列每月支出：月供、物业、水电、通勤变化，算出各自占收入的比例；
+3) 给三条安全线：月供不超过收入多少、手上要留几个月现金、装修最多花多少；
+4) 做两个压力测试：利率上行、收入下降两成各会怎样；
+5) 指出我的方案里最脆的一环。
+【约束】税费和费率按我所在城市的常见口径估算并标「以当地为准」；不预测利率；不推荐具体贷款产品；数字必须写算法。
+【输出格式】按「一次性支出表 / 每月支出表 / 三条安全线 / 两个压力测试 / 最脆环节」输出。</pre><details><summary>为什么这样写</summary><p>买房超支几乎都超在首付之外。提示词把总成本拆成一次性支出和每月支出两摞，再给三条安全线和两个压力测试，让预算从数字变成抗风险能力。</p></details></article><article class="pcard" id="p3-re-price"><div class="phead"><b>卖房定价：三套挂牌策略</b><span>深度思考</span></div><p class="muted">在急售和卖高价之间选一条可执行的挂牌路径</p><pre class="prompt">【角色】你是卖过大量二手房的经纪，定价只看三件事：同小区近三个月成交、在售竞品、我的时间成本。
+【输入】房子情况、小区近况、我的心理底价和可接受的成交时间：
+{{problem}}
+【任务】
+1) 把我的房子和 3 个竞品做对比表：面积、楼层、装修、挂牌价、挂牌时长；
+2) 给三套策略：快速成交价、市场价、试高价，各写预期成交周期和让价空间；
+3) 每套策略配一条「什么时候该降」的触发条件；
+4) 给议价应对：对方压价时先让什么、绝不让什么；
+5) 列出会让买家砍价的 5 个弱点，以及低成本改善方式。
+【约束】不编造成交数据，缺的让我补；不承诺成交价；不建议隐瞒房屋瑕疵；所有价格用区间表达。
+【输出格式】按「竞品对比 / 三套策略 / 降价触发 / 议价应对 / 五个弱点」输出。</pre><details><summary>为什么这样写</summary><p>定价靠的不是心理底价，而是竞品和挂牌时长。提示词先用三个竞品定位，再给三套策略各配降价触发条件，把「卖不掉再降」变成事先定好的规则。</p></details></article><article class="pcard" id="p3-re-clause"><div class="phead"><b>购房合同：补这五条</b><span>深度思考</span></div><p class="muted">在标准合同上补上最容易吃亏的五个条款</p><pre class="prompt">【角色】你是审过大量购房合同的律师，补充协议只写能落地的东西：时间、标准、违约后果。
+【输入】我要签的合同类型（新房或二手）、交房时间、付款方式、中介给的说法：
+{{problem}}
+【任务】
+1) 先指出这笔交易里我最容易吃亏的 5 个点；
+2) 每个点写一条补充条款建议，含触发条件、责任方、金额或处理方式；
+3) 标出哪些条款需要谈、哪些是底线不能删；
+4) 给一份签约前核对清单：主体、面积、付款节点、交房标准、户口与抵押；
+5) 提醒我哪些口头承诺必须写进合同。
+【约束】不代替正式审阅，标注「最终以律师审阅为准」；不编造法条编号；条款表述要可执行，不写「双方另行协商」。
+【输出格式】按「五个风险点 / 五条补充条款 / 必谈与底线 / 签约核对清单 / 口头承诺」输出；条款单独列出。</pre><details><summary>为什么这样写</summary><p>标准合同保护的是双方，吃亏的地方在细节空白。提示词先找五个风险点，每条写可执行的补充条款，并要求把中介的口头承诺写进合同，拒绝「另行协商」式表述。</p></details></article><article class="pcard" id="p3-re-choose"><div class="phead"><b>两套房取舍：通勤与学区</b><span>深度思考</span></div><p class="muted">在两个各有短板的房子之间做出可解释的选择</p><pre class="prompt">【角色】你是帮家庭做换房决策的顾问，原则是先定「不能牺牲的那一项」，再算总成本。
+【输入】两套房的情况（价格、面积、通勤、学区、房龄）和家里的硬性要求：
+{{problem}}
+【任务】
+1) 把家庭需求分成「不可妥协 / 可让步 / 加分项」三类；
+2) 做对比表：价格、月供、通勤时间、学区、房龄、未来转手，逐项打分并写依据；
+3) 把通勤时间换算成每年花掉的时间和钱，学区换算成替代方案的成本；
+4) 给两个方案各自的最坏情况；
+5) 给建议，并写清什么情况下应该改选。
+【约束】不预测学区政策变化，涉及政策标「需核实」；不编造房价数据；不用「看情况」作结论；打分要说明标准。
+【输出格式】按「需求三分类 / 对比表 / 换算成本 / 最坏情况 / 建议与改选条件」输出。</pre><details><summary>为什么这样写</summary><p>换房决策的分歧往往不在数据，而在没提前定「不能牺牲什么」。提示词先把需求分三类，再把通勤和学区换算成时间和钱，让取舍有共同的度量。</p></details></article><article class="pcard" id="p3-re-handover"><div class="phead"><b>收房验房：先筛出该整改的</b><span>深度思考 · 上传文件</span></div><p class="muted">把验房发现的问题整理成可提交的整改清单</p><pre class="prompt">【角色】你是做新房交付验房多年的验房师，判断问题只看两条：是否影响使用、是否在保修范围。
+【输入】我收房时发现的问题和照片描述、开发商的交付标准：
+{{problem}}
+【任务】
+1) 把问题按「安全 / 使用功能 / 观感」三级分类；
+2) 每项写清位置、现象、可能成因、是否属于整改范围；
+3) 给一份整改通知单模板：编号 | 位置 | 问题 | 要求 | 期限 | 复验结果；
+4) 标出哪几项必须在收钥匙前处理，哪几项可以走保修；
+5) 给一份复验方法：空鼓怎么敲、渗水怎么看。
+【约束】不代替专业检测机构的结论；结构安全一律建议找专业机构；不编造国家标准条款号。
+【输出格式】按「三级分类 / 逐项说明 / 整改通知单模板 / 交付前必处理 / 复验方法」输出。</pre><details><summary>为什么这样写</summary><p>验房的难点不是发现问题，而是分清哪些必须整改、哪些只能走保修。提示词按安全、功能、观感三级分类，并给出整改通知单模板和复验方法。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%BA%8C%E6%89%8B%E6%88%BF%E7%9C%8B%E6%88%BF%EF%BC%9A30%20%E9%A1%B9%E6%B8%85%E5%8D%95#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

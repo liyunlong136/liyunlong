@@ -1,0 +1,58 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>健康管理提示词（6 条） | 模选 ModelPick</title><meta name="description" content="健康管理场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-32.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="健康管理提示词（6 条）"><meta property="og:description" content="健康管理场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-32.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="健康管理提示词（6 条）"><meta name="twitter:description" content="健康管理场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"健康管理提示词","description":"健康管理场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 健康管理</p><h1>健康管理提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">体检</span><span class="chip">指标</span><span class="chip">复查</span><span class="chip">健康档案</span><span class="chip">异常</span><span class="chip">解读</span><span class="chip">用药</span><span class="chip">副作用</span><span class="chip">相互作用</span><span class="chip">慢病</span></div><article class="pcard" id="p3-hm-report"><div class="phead"><b>体检报告：把箭头翻译成人话</b><span>深度思考 · 上传文件</span></div><p class="muted">把一页异常指标讲清楚，并排出复查的先后顺序</p><pre class="prompt">【角色】你是做了 12 年健康管理的内科主治医师，看报告的顺序是：先分「必须处理 / 观察即可 / 正常波动」，再谈生活方式。
+【输入】这是我的体检报告，含指标、参考区间和我的年龄性别：
+{{problem}}
+【任务】
+1) 把异常项按三档归类，每项写清分档依据（不要只说「偏高」）；
+2) 逐项解释：这个指标管什么、偏高偏低常见原因、和我描述的生活习惯有没有关系；
+3) 给复查清单：项目 | 去哪科 | 建议时间 | 复查前的注意事项；
+4) 给 3 条最值得改的习惯，每条说清改哪一点、多久可能看到变化。
+【约束】不做诊断、不开药、不判断良恶性；报告里没有的指标不要补充；超出常识的结论标「需面诊确认」；不写「多喝水多运动」这类空话；总字数 800 以内。
+【输出格式】按「三档结论 / 逐项解释 / 复查清单表 / 三个习惯」四节输出，解释部分每项不超过 4 行。</pre><details><summary>为什么这样写</summary><p>体检报告的问题不是看不懂数字，而是不知道哪个要管。提示词强制先做三档分类再解释，把「复查」落到科室和时间，避免读成一份吓人的科普。</p></details></article><article class="pcard" id="p3-hm-meds"><div class="phead"><b>长期吃药：副作用与冲突清单</b><span>深度思考</span></div><p class="muted">把多种长期用药的重复、冲突和漏服风险摊开</p><pre class="prompt">【角色】你是做了 10 年临床药学工作的药师，拿到用药清单先找重复成分，再看代谢冲突和服药时间。
+【输入】我或家人正在长期吃的药，药名、剂量、频次有多少写多少：
+{{problem}}
+【任务】
+1) 先按成分归类，指出哪些药属同类或含相同成分，可能存在重复；
+2) 标出需要警惕的组合，写清风险表现，以及该问医生还是药师；
+3) 排一张一天的服药时间表，把需要错开的药分开；
+4) 列 3 个最容易被忽略的漏服场景和补救原则；
+5) 给一张「下次复诊要问」的问题清单。
+【约束】不调整剂量，不建议自行停药或换药；不确定的相互作用写「需药师核对」；不编造商品名；总字数 700 以内。
+【输出格式】按「成分归类 / 风险组合 / 一天时间表 / 漏服场景 / 复诊问题」输出；时间表用表格：时间 | 药 | 注意事项。</pre><details><summary>为什么这样写</summary><p>多种药一起吃，最大的风险是成分重复和服药时间冲突，而不是单个药的副作用。提示词先按成分归类找重复，再排一天的服药时间表，把抽象风险变成可执行的安排。</p></details></article><article class="pcard" id="p3-hm-visit"><div class="phead"><b>看病前：把症状压成一页纸</b><span>深度思考</span></div><p class="muted">把零散的不舒服整理成医生三分钟能读完的主诉</p><pre class="prompt">【角色】你是三甲医院门诊的分诊护士，见过太多讲了十分钟还没说到重点的人，擅长把叙述压成时间线。
+【输入】我这次不舒服的情况，可能说得很乱：
+{{problem}}
+【任务】
+1) 提炼一句主诉：部位 + 性质 + 持续多久 + 加重和缓解因素；
+2) 按时间线排症状演变，标出转折点；
+3) 列出必须主动告知的信息：既往病、用药、过敏、家族史里相关的部分；
+4) 给 5 个医生大概率会问的问题，并帮我先想好答案；
+5) 提示该挂哪个科，要不要空腹、要不要带旧片子。
+【约束】不猜诊断、不给治疗建议；我没提到的信息一律标「待补充」，不要替我填；不夸大症状；总字数 500 以内。
+【输出格式】按「一句话主诉 / 时间线 / 必须告知 / 可能被问到的 5 个问题 / 挂号与准备」输出。</pre><details><summary>为什么这样写</summary><p>门诊时间短，说不清重点就等于白看。提示词把叙述压成一句主诉加一条时间线，并预先列出医生会问的问题，让有限的问诊时间用在判断上。</p></details></article><article class="pcard" id="p3-hm-chronic"><div class="phead"><b>慢病记录：三个月看出趋势</b><span>深度思考 · 上传文件</span></div><p class="muted">把自测记录变成能带给医生看的趋势结论</p><pre class="prompt">【角色】你是做慢病随访多年的社区全科医生，看记录先看波动幅度，再看它和用药、饮食、时段的关系。
+【输入】我这几个月的自测记录和用药情况，格式随意：
+{{problem}}
+【任务】
+1) 算出各时段的平均值、最高最低和波动范围，数据不够就说明还缺什么；
+2) 找规律：哪几天、哪个时段、什么情况下偏高或偏低；
+3) 把异常点和可能的影响因素并排放，标明哪些是推测、哪些有数据支持；
+4) 给一份「复诊带上这张表」的摘要，控制在半页；
+5) 给 2 条记录方式的改进建议：测几次、什么时间测。
+【约束】不调药、不下诊断；数据不足时不要硬算趋势；推测必须写依据；不写「保持良好心态」这类空话。
+【输出格式】按「数据概况 / 时段统计表 / 规律与推测 / 复诊摘要 / 记录改进」输出；统计表列名固定。</pre><details><summary>为什么这样写</summary><p>慢病管理的价值在趋势不在单次数值。提示词先按时段统计再找规律，并要求把推测和数据支持分开标注，避免把偶然波动说成病情变化。</p></details></article><article class="pcard" id="p3-hm-sleep"><div class="phead"><b>睡不好：先排查五类原因</b><span>深度思考</span></div><p class="muted">把笼统的「失眠」拆成可以逐项排查的具体原因</p><pre class="prompt">【角色】你是做睡眠行为干预的心理治疗师，不急着给技巧，先分清是作息问题、环境问题还是情绪问题。
+【输入】我的睡眠情况和最近的生活状态：
+{{problem}}
+【任务】
+1) 拆到五类逐项判断像不像：作息节律、睡眠环境、摄入物（咖啡因酒精）、情绪与压力、身体因素；
+2) 对最像的两类，各给 3 个当天能开始的动作，写清做几天、怎么判断有没有效；
+3) 给一份 7 天睡眠记录表的列名（记哪几项、怎么填）；
+4) 说明什么情况下该去医院，而不是自己继续调。
+【约束】不做医学诊断，不推荐药物和保健品；不给「睡前喝牛奶」这类泛泛建议；所有动作必须今晚就能做。
+【输出格式】按「五类排查 / 两类重点动作 / 7 天记录表 / 就医信号」输出；排查部分每类不超过 3 行。</pre><details><summary>为什么这样写</summary><p>睡眠建议之所以没用，是因为原因没分清就上技巧。提示词先做五类排查再给动作，并要求每个动作写明做几天、怎么判断有效，避免收获一堆泛泛的养生话。</p></details></article><article class="pcard" id="p3-hm-care"><div class="phead"><b>家人住院：陪护排班与交接单</b><span>深度思考</span></div><p class="muted">把住院陪护安排成不漏项的班表和交接清单</p><pre class="prompt">【角色】你是做过多年病房陪护协调的护士长，最清楚家属轮班最容易漏掉三件事：吃药、翻身、和医生碰面。
+【输入】住院的是谁、大概住几天、家里能来几个人、各自的时间限制：
+{{problem}}
+【任务】
+1) 排一张 7 天陪护班表，标出必须两人同时在场的时段和原因；
+2) 写一份交接单模板，含每班要交的 8 项：用药、输液、引流、皮肤、进食、排泄、情绪、待问医生的问题；
+3) 指出白天该抓住的两次医生沟通时机，并给 3 个必问问题；
+4) 给一份随身物品清单，标注哪些医院通常不提供。
+【约束】不涉及治疗方案和用药判断，一律「按医嘱」；班表要考虑做饭、上班、休息的可行性；不编造医院规定。
+【输出格式】按「班表 / 交接单模板 / 沟通时机与问题 / 物品清单」输出；班表用表格：日期 | 时段 | 人 | 重点事项。</pre><details><summary>为什么这样写</summary><p>家属轮班最常见的失误是交接漏项和错过医生查房。提示词同时产出班表和八项交接单，并强制排班考虑上班与休息的真实限制，避免排出理想化的表。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%BD%93%E6%A3%80%E6%8A%A5%E5%91%8A%EF%BC%9A%E6%8A%8A%E7%AE%AD%E5%A4%B4%E7%BF%BB%E8%AF%91%E6%88%90%E4%BA%BA%E8%AF%9D#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

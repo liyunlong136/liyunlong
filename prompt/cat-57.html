@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>写作文案提示词（6 条） | 模选 ModelPick</title><meta name="description" content="写作文案场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-57.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="写作文案提示词（6 条）"><meta property="og:description" content="写作文案场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-57.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="写作文案提示词（6 条）"><meta name="twitter:description" content="写作文案场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"写作文案提示词","description":"写作文案场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 写作文案</p><h1>写作文案提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">落地页</span><span class="chip">文案</span><span class="chip">转化</span><span class="chip">价值主张</span><span class="chip">异议</span><span class="chip">按钮</span><span class="chip">口号</span><span class="chip">主张</span><span class="chip">品牌</span><span class="chip">传播</span></div><article class="pcard" id="p4-write-landing"><div class="phead"><b>落地页文案：一句话说清价值</b><span>深度思考</span></div><p class="muted">让访客在五秒内知道这是什么、凭什么信、下一步做什么</p><pre class="prompt">【角色】你是写转化型落地页的文案，判断标准是：五秒内知道这是什么、凭什么信、下一步做什么。
+【输入】产品、目标用户、主要异议、现有证据：
+{{problem}}
+【任务】
+1) 写一句价值主张：给谁、解决什么、和替代方案的差别；
+2) 列用户不买的 5 个理由，各配一条证据；
+3) 给页面区块顺序与每块字数上限；
+4) 写主按钮与次按钮文案；
+5) 标出哪句最像自夸，并改写。
+【约束】不编造客户与数据；不使用「赋能」「闭环」这类词；证据不足的写「待补」；首屏文案不超过 30 字。
+【输出格式】按「价值主张 / 异议与证据 / 区块顺序 / 按钮文案 / 自夸自检」输出。</pre><details><summary>为什么这样写</summary><p>落地页常见病是自夸。这条提示词要求先写「给谁解决什么」，再补用户不买的理由与对应证据，最后按区块给字数上限，并专门找出最像广告的一句改写。</p></details></article><article class="pcard" id="p4-write-slogan"><div class="phead"><b>品牌口号：短、准、不空</b><span>深度思考</span></div><p class="muted">产出能被记住、能被复用的品牌主张句</p><pre class="prompt">【角色】你是写品牌主张的文案，好口号要能被记住、被复用，且反着说就不成立。
+【输入】品牌定位、目标人群、语气偏好、使用场景：
+{{problem}}
+【任务】
+1) 定一句主张与语气：理性、感性、行动；
+2) 按不同修辞各写 5 条，共 20 条，每条不超过 12 字；
+3) 用「能否被反着说」筛掉空话；
+4) 挑 3 条做延展：海报、短视频结尾、包装；
+5) 给淘汰理由。
+【约束】不堆形容词；不使用「引领」「赋能」；不编造品牌事实；必须避免与已知品牌口号雷同。
+【输出格式】按「主张与语气 / 20 条候选 / 空话筛查 / 三条延展 / 淘汰理由」输出。</pre><details><summary>为什么这样写</summary><p>口号要么太抽象要么太长。这条提示词要求先定主张与语气，再按不同修辞批量产出，用「能否被反着说」筛掉空话，最后挑三条做海报与视频结尾的延展。</p></details></article><article class="pcard" id="p4-write-press"><div class="phead"><b>新闻稿：倒金字塔与引语</b><span>深度思考</span></div><p class="muted">把一次发布写成媒体愿意采用的稿件</p><pre class="prompt">【角色】你是写企业新闻稿的公关文案，媒体只会用你的前两段。
+【输入】发布事项、关键事实与数据、可引用的对象：
+{{problem}}
+【任务】
+1) 写导语：谁、做了什么、对谁有用、什么时候；
+2) 按倒金字塔排背景、细节、引语；
+3) 写一句可直接引用的高层引语，不能空洞；
+4) 删掉广告腔与多余形容词；
+5) 给标题与副标题各 3 个版本。
+【约束】不编造数据与引语；不使用「里程碑」「颠覆」；不写无法证实的第一；必须标注引语需被引者确认。
+【输出格式】按「导语 / 正文结构 / 引语 / 广告腔清理 / 标题版本」输出。</pre><details><summary>为什么这样写</summary><p>媒体只会用你的前两段。这条提示词要求导语一次给全信息，再按倒金字塔补背景与时事细节，最后清理广告腔并准备三个标题版本，让稿件可被直接摘用。</p></details></article><article class="pcard" id="p4-write-brand-story"><div class="phead"><b>品牌故事：从细节到主张</b><span>深度思考</span></div><p class="muted">把创始经历写成不煽情、可信的故事</p><pre class="prompt">【角色】你是写品牌故事的撰稿人，好故事靠一个具体转折，不靠形容词。
+【输入】品牌由来、关键人物与事件、想传递的主张：
+{{problem}}
+【任务】
+1) 找出一个具体转折点：困境、选择、代价；
+2) 用细节替代评价：场景、动作、数字；
+3) 按「处境、冲突、选择、结果、主张」写 500 字；
+4) 把主张落到用户能感知的好处；
+5) 给一个 100 字短版用于关于页。
+【约束】不编造情节与对话；不煽情；不堆砌「梦想」「初心」；涉及他人须可核实或匿名处理。
+【输出格式】按「转折点 / 细节清单 / 500 字故事 / 主张落地 / 100 字短版」输出。</pre><details><summary>为什么这样写</summary><p>品牌故事最容易写成自传。这条提示词要求围绕一个具体转折点展开，用场景、动作、数字替代形容词，最后把主张落到用户能感知的好处，并给一个百字短版。</p></details></article><article class="pcard" id="p4-write-email-seq"><div class="phead"><b>邮件序列：七封把试用转付费</b><span>深度思考</span></div><p class="muted">设计按行为触发的邮件序列，而不是按日历群发</p><pre class="prompt">【角色】你是做生命周期营销的文案，邮件按行为触发，不按日历群发。
+【输入】产品、试用流程、关键行为节点、现有邮件：
+{{problem}}
+【任务】
+1) 画出用户从注册到付费的关键行为节点；
+2) 给序列结构：每封的触发条件、目标、只推进一步；
+3) 写 7 封的主题行与正文要点，每封不超过 150 字；
+4) 给退订友好做法与频次上限；
+5) 给衡量指标与停止发送条件。
+【约束】不编造用户数据；不使用「最后机会」式假紧迫；每封只允许一个行动；必须写清什么情况下不发。
+【输出格式】按「行为节点 / 序列结构 / 七封内容 / 频次与退订 / 指标与停止」输出。</pre><details><summary>为什么这样写</summary><p>群发邮件没人看。这条提示词要求先画从注册到付费的行为节点，再让每封只推进一步，并给频次上限、退订友好与停止发送条件，避免用假紧迫消耗信任。</p></details></article><article class="pcard" id="p4-write-cut"><div class="phead"><b>文案瘦身：删掉一半更清楚</b><span>深度思考</span></div><p class="muted">在不丢信息的前提下把冗长文案压到一半</p><pre class="prompt">【角色】你是做文案精简的编辑，删字不是目的，降低理解成本才是。
+【输入】待精简的文案、使用场景、字数目标：
+{{problem}}
+【任务】
+1) 标出每句的信息类型：事实、评价、修饰、重复；
+2) 按「删修饰、拆长句、换动词」三步改；
+3) 给精简版，字数压到原文一半左右；
+4) 用表格列出删除内容与理由；
+5) 指出删掉会损失的信息，让我决定。
+【约束】不改变事实与承诺；不删限定条件；不把长句改成歧义句；保留必要的专业术语。
+【输出格式】按「信息标注 / 三步改写 / 精简版 / 删除清单 / 待确认损失」输出。</pre><details><summary>为什么这样写</summary><p>删字不是目的，降低理解成本才是。这条提示词要求先标注每句的信息类型，再按删修饰、拆长句、换动词三步改，最后列出删掉会损失的信息交由人决定。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E8%90%BD%E5%9C%B0%E9%A1%B5%E6%96%87%E6%A1%88%EF%BC%9A%E4%B8%80%E5%8F%A5%E8%AF%9D%E8%AF%B4%E6%B8%85%E4%BB%B7%E5%80%BC#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

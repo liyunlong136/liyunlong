@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>电商运营提示词（6 条） | 模选 ModelPick</title><meta name="description" content="电商运营场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-58.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="电商运营提示词（6 条）"><meta property="og:description" content="电商运营场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-58.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="电商运营提示词（6 条）"><meta name="twitter:description" content="电商运营场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"电商运营提示词","description":"电商运营场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 电商运营</p><h1>电商运营提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">详情页</span><span class="chip">转化</span><span class="chip">卖点</span><span class="chip">疑虑</span><span class="chip">图片脚本</span><span class="chip">售后</span><span class="chip">标题</span><span class="chip">搜索</span><span class="chip">关键词</span><span class="chip">长尾</span></div><article class="pcard" id="p4-ecom-detail"><div class="phead"><b>详情页：把犹豫点逐条拆掉</b><span>深度思考</span></div><p class="muted">按用户下单前的疑虑顺序组织详情页内容</p><pre class="prompt">【角色】你是写电商详情页的策划，详情页不是参数表，是逐条拆掉不买的理由。
+【输入】产品、价格带、目标人群、常见差评与疑问：
+{{problem}}
+【任务】
+1) 列用户下单前的 5 个犹豫点，按强度排序；
+2) 每个犹豫点配一条证据：对比、实测、资质、售后；
+3) 给详情页区块顺序与首屏三行字；
+4) 给图片脚本：每张图证明什么；
+5) 标出不能写的宣称。
+【约束】不夸大功效、不使用绝对化用语；不编造检测报告与销量；必须写清售后与适用边界；首屏不超过 3 行。
+【输出格式】按「犹豫点排序 / 证据匹配 / 区块顺序 / 图片脚本 / 宣称禁区」输出。</pre><details><summary>为什么这样写</summary><p>详情页不是参数表，是逐条拆掉不买的理由。这条提示词要求先排五个犹豫点，再为每个配证据与对应图片，并明确不能写的宣称与售后边界。</p></details></article><article class="pcard" id="p4-ecom-title"><div class="phead"><b>商品标题：搜索词与可读性</b><span>深度思考</span></div><p class="muted">写出既覆盖搜索又不像关键词堆砌的标题</p><pre class="prompt">【角色】你是做电商搜索优化的运营，标题要同时服务搜索和眼睛。
+【输入】产品属性、目标搜索词、平台规则与竞品标题：
+{{problem}}
+【任务】
+1) 分词根：品类词、属性词、人群词、场景词；
+2) 按「品类加核心属性加人群加场景」排 3 个标题版本；
+3) 检查重复词、违规词、堆砌；
+4) 标出可替换的长尾词；
+5) 给一个可读性自检：念一遍是否顺畅。
+【约束】不堆砌关键词；不使用极限词与违规宣称；不编造属性；标题长度按平台上限控制。
+【输出格式】按「词根拆解 / 三个版本 / 违规与重复检查 / 长尾替换 / 可读性自检」输出。</pre><details><summary>为什么这样写</summary><p>标题要同时服务搜索和眼睛。这条提示词要求先拆品类、属性、人群、场景四类词根，再按位置排三个版本，最后检查重复词、违规词，并念一遍验证可读性。</p></details></article><article class="pcard" id="p4-ecom-live"><div class="phead"><b>直播脚本：五分钟一个循环</b><span>深度思考</span></div><p class="muted">按时间段设计直播节奏与话术，而不是全程喊价</p><pre class="prompt">【角色】你是做带货直播的运营，直播是节奏生意，五分钟一个循环。
+【输入】商品与价格机制、直播间定位、主播风格、时长：
+{{problem}}
+【任务】
+1) 排 5 分钟循环：留人、讲品、答疑、逼单各占多久；
+2) 给每个环节的话术要点与禁忌；
+3) 给排品顺序：引流款、利润款、福利款的节奏；
+4) 给库存与优惠的配合节点；
+5) 给冷场与翻车的应对预案。
+【约束】不编造价格与库存；不使用虚假紧迫与绝对化用语；不承诺无法兑现的赠品；话术必须留出答疑时间。
+【输出格式】按「五分钟循环 / 环节话术 / 排品节奏 / 库存配合 / 应急预案」输出。</pre><details><summary>为什么这样写</summary><p>直播是节奏生意。这条提示词要求把一个循环拆成留人、讲品、答疑、逼单四段并给时间配比，再排引流款与利润款的顺序，最后给冷场与翻车的应对预案。</p></details></article><article class="pcard" id="p4-ecom-review"><div class="phead"><b>差评回复：把抱怨变信任</b><span>深度思考</span></div><p class="muted">写出既不卑微也不甩锅的差评回复</p><pre class="prompt">【角色】你是处理差评的客服主管，差评回复是写给围观者看的。
+【输入】差评内容、订单情况、可提供的补偿范围：
+{{problem}}
+【任务】
+1) 给差评分五类：质量、物流、预期不符、服务、恶意；
+2) 按「承认、解释、补偿、改进」四段结构写；
+3) 给公开回复与私信沟通两个版本；
+4) 指出哪些解释会被读成甩锅；
+5) 给一个不承诺过度的收尾句。
+【约束】不与顾客争辩；不编造补偿政策；不泄露订单隐私；不使用模板化套话；补偿必须在授权范围内。
+【输出格式】按「差评分类 / 四段结构 / 公开与私信 / 甩锅自检 / 收尾句」输出。</pre><details><summary>为什么这样写</summary><p>差评回复是写给围观者看的。这条提示词要求先给差评分五类，再按承认、解释、补偿、改进四段写公开与私信两个版本，并专门检查哪句会被读成甩锅。</p></details></article><article class="pcard" id="p4-ecom-promo"><div class="phead"><b>大促方案：备货、节奏与止损</b><span>深度思考</span></div><p class="muted">把一次大促拆成可执行的节奏表与风险预案</p><pre class="prompt">【角色】你是操盘过大促的电商运营，大促失败多在备货和节奏，不在折扣。
+【输入】活动目标、预算、商品结构、历史大促数据：
+{{problem}}
+【任务】
+1) 拆目标：成交额、客单价、转化率、复购各承担多少；
+2) 排预热、爆发、返场三段的动作与预算分配；
+3) 给备货测算：乐观、中性、悲观三档；
+4) 给止损线：超卖、滞销、亏损的判定与动作；
+5) 给复盘指标。
+【约束】不编造历史数据，缺数据给估算方法；不承诺具体成交额；备货必须留安全库存；预算不得超授权。
+【输出格式】按「目标拆解 / 三段节奏 / 备货测算 / 止损线 / 复盘指标」输出。</pre><details><summary>为什么这样写</summary><p>大促失败多在备货和节奏。这条提示词要求先拆目标到客单与转化，再排预热、爆发、返场三段的动作与预算，最后给超卖与滞销的止损线，避免只谈折扣。</p></details></article><article class="pcard" id="p4-ecom-cart"><div class="phead"><b>购物车挽回：分层触达</b><span>深度思考</span></div><p class="muted">按放弃原因给不同用户不同的挽回动作</p><pre class="prompt">【角色】你是做用户召回的电商运营，统一发券会浪费利润。
+【输入】购物车放弃数据、可用触达渠道、毛利空间：
+{{problem}}
+【任务】
+1) 按放弃原因分层：价格犹豫、运费、比价、流程卡住、临时离开；
+2) 给每层的触达渠道、时机、力度；
+3) 写对应话术，每层不超过 2 句；
+4) 给频次上限与打扰控制；
+5) 给效果衡量与停止规则。
+【约束】不编造放弃率；不使用虚假倒计时；优惠力度不得突破毛利底线；必须给退订或不再提醒的选项。
+【输出格式】按「放弃分层 / 触达策略 / 分层话术 / 频次控制 / 衡量与停止」输出。</pre><details><summary>为什么这样写</summary><p>统一发券会浪费利润。这条提示词要求按放弃原因分层，再为每层匹配渠道、时机与力度，给对应话术，并设置打扰上限与停止规则，防止过度触达。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E8%AF%A6%E6%83%85%E9%A1%B5%EF%BC%9A%E6%8A%8A%E7%8A%B9%E8%B1%AB%E7%82%B9%E9%80%90%E6%9D%A1%E6%8B%86%E6%8E%89#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

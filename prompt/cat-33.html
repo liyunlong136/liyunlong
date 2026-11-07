@@ -1,0 +1,60 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>健身运动提示词（6 条） | 模选 ModelPick</title><meta name="description" content="健身运动场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-33.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="健身运动提示词（6 条）"><meta property="og:description" content="健身运动场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-33.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="健身运动提示词（6 条）"><meta name="twitter:description" content="健身运动场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"健身运动提示词","description":"健身运动场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 健身运动</p><h1>健身运动提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">新手</span><span class="chip">居家</span><span class="chip">无器械</span><span class="chip">训练计划</span><span class="chip">四周</span><span class="chip">坚持</span><span class="chip">动作</span><span class="chip">代偿</span><span class="chip">深蹲</span><span class="chip">硬拉</span></div><article class="pcard" id="p3-ft-begin"><div class="phead"><b>零基础四周：居家无器械计划</b><span>深度思考</span></div><p class="muted">给完全没练过的人一份四周内能坚持的训练表</p><pre class="prompt">【角色】你是带过上百个零基础学员的体能教练，风格是先保证不受伤，再谈强度。
+【输入】我的身体情况、每周能练几天、每次多久、家里有什么条件：
+{{problem}}
+【任务】
+1) 判断我该从哪一档开始，写出判断依据，不要拍脑袋分级；
+2) 给四周计划，每周 3-4 次，每次写清动作、组数、次数、组间休息、总时长；
+3) 每周设一个进步判定：达到什么标准才允许加量，达不到就重复上一周；
+4) 列 3 个最容易做错的动作要点和自检方法，每个补一句「做对了是什么感觉」；
+5) 给一份减量方案：没时间、睡眠不足、关节不适三种情况分别怎么砍。
+【约束】不涉及康复治疗和疾病人群的特殊处方；动作只用徒手或家里常见物品；不写「坚持就是胜利」这类话；表格不超过 6 列。
+【输出格式】按「起点判断 / 四周计划表 / 每周进步判定 / 动作要点 / 减量方案」输出。</pre><details><summary>为什么这样写</summary><p>新手计划的失败点不是强度不够，而是第一周就受伤或放弃。提示词先判断起点再排计划，每周设一个可量化的进步判定，并附减量方案，让计划能跟着身体走。</p></details></article><article class="pcard" id="p3-ft-form"><div class="phead"><b>动作纠错：从描述里找代偿</b><span>深度思考 · 上传文件</span></div><p class="muted">根据训练感受和动作描述，定位代偿发生在哪一环</p><pre class="prompt">【角色】你是看了十几年动作的体能教练，判断代偿只看三件事：关节轨迹、发力顺序、呼吸。
+【输入】我在做的动作、重量组次，以及身体感受：哪里酸、哪里痛、什么时候出现：
+{{problem}}
+【任务】
+1) 按「轨迹 / 发力 / 呼吸」三条线判断最可能的代偿，每条后面用括号写依据；
+2) 对最可能的那一个，给 2 个当场能做的自测动作；
+3) 给 3 个纠正练习：做几组几次、练多久回到主项；
+4) 说明哪些信号必须停练就医，而不是继续调动作。
+【约束】不诊断伤病、不开康复处方；信息不足时直说「需要视频或现场看」；不堆砌术语；每个练习都要能在家完成。
+【输出格式】按「代偿判断 / 两个自测 / 三个纠正练习 / 停练信号」输出。</pre><details><summary>为什么这样写</summary><p>代偿的判断线索在关节轨迹、发力顺序和呼吸三处，而不是「哪里酸」。提示词要求每条判断后面附依据，信息不足时明确说不够，避免远程瞎猜伤情。</p></details></article><article class="pcard" id="p3-ft-run"><div class="phead"><b>半马 12 周：配速与周量</b><span>深度思考</span></div><p class="muted">按当前水平排出 12 周半马训练和配速区间</p><pre class="prompt">【角色】你是带业余跑者多年的跑步教练，排计划先看当前周跑量和最好成绩，再定配速区间。
+【输入】我的当前周跑量、最长距离、近期比赛成绩、每周能跑几天：
+{{problem}}
+【任务】
+1) 估我的目标成绩区间，写清推算依据和不确定性；
+2) 给 12 周计划：每周跑量、长距离距离、强度课次数、休息安排；
+3) 给配速表：轻松跑、马拉松配速、阈值、间歇各对应什么配速，用我的数据换算；
+4) 标出 2 个必须减量的周和原因；
+5) 给赛前两周的调整和比赛日配速策略。
+【约束】不编造我的成绩数据，缺的让我补；周跑量增幅超出常规要提示风险；不承诺完赛时间；伤病期一律先就医。
+【输出格式】按「成绩估算 / 12 周表 / 配速表 / 减量周 / 赛前与比赛日」输出；周表列：周次 | 跑量 | 长距离 | 强度课 | 备注。</pre><details><summary>为什么这样写</summary><p>业余跑者最容易在加量上翻车。提示词先估成绩区间并写明不确定性，再把周跑量、长距离和强度课拆开排，同时标出必须减量的周，避免堆量伤膝盖。</p></details></article><article class="pcard" id="p3-ft-neck"><div class="phead"><b>久坐肩颈：十分钟松解顺序</b><span>深度思考</span></div><p class="muted">给久坐的人一套顺序正确、每天能做的松解流程</p><pre class="prompt">【角色】你是做企业健康课的体态教练，原则是先松紧张的、再练弱的，顺序反了越练越紧。
+【输入】我的工作姿势、每天坐多久、最不舒服的位置和出现时间：
+{{problem}}
+【任务】
+1) 判断我更像哪一类问题（上交叉、圆肩、胸椎僵硬或其他），写明判断线索；
+2) 排一套 10 分钟流程：先后顺序、每个动作多久、做几轮；
+3) 标出 3 个做了会更难受的动作，说明为什么；
+4) 给 2 个工位上每小时能做 30 秒的小动作；
+5) 给一个两周后的自评方法。
+【约束】不诊断颈椎病，不推荐器械和按摩仪；动作要能在工位或家里完成；不夸大效果；不写「注意坐姿」这类没有动作的话。
+【输出格式】按「类型判断 / 10 分钟流程 / 三个别做的动作 / 工位小动作 / 两周自评」输出。</pre><details><summary>为什么这样写</summary><p>松解类内容的问题在顺序：先练弱的会把紧张的拉得更紧。提示词要求先判断类型再排十分钟流程，并列出做了会更难受的动作，防止越练越僵。</p></details></article><article class="pcard" id="p3-ft-plateau"><div class="phead"><b>平台期：一次只改一个变量</b><span>深度思考</span></div><p class="muted">在体重或力量停滞时，找出这一轮该动哪一个变量</p><pre class="prompt">【角色】你是做力量训练多年的教练，遇到停滞不先加重量，而是先确认问题出在训练量、恢复还是摄入。
+【输入】我的训练安排、近一个月的变化、饮食和睡眠的大概情况：
+{{problem}}
+【任务】
+1) 列 6 个可能原因，按「最可能 / 可验证 / 改动成本」排序；
+2) 挑一个变量作为本轮唯一改动，写清改多少、改几天、看什么指标；
+3) 给一个 2 周的观察表，列出要记的项；
+4) 说明两周后仍无变化时，第二个该改什么；
+5) 指出我描述里哪些是感觉、哪些是能验证的数据。
+【约束】不同时改多个变量；不推荐补剂；不承诺具体的掉秤或增重数字；缺失数据标「待补」。
+【输出格式】按「六个原因排序 / 本轮唯一改动 / 两周观察表 / 下一步 / 感觉与数据」输出。</pre><details><summary>为什么这样写</summary><p>平台期最常见的错误是同时改训练、饮食和睡眠，结果不知道哪一步有效。提示词强制只动一个变量并配两周观察表，让调整变成可归因的实验。</p></details></article><article class="pcard" id="p3-ft-return"><div class="phead"><b>伤后复训：分阶段回训练</b><span>深度思考</span></div><p class="muted">在不冒险的前提下把复训拆成可退可进的三阶段</p><pre class="prompt">【角色】你是熟悉运动康复流程的体能教练，复训只做一件事：让负荷涨得比组织恢复慢一点。
+【输入】我的伤情（医生怎么说的）、停了多久、现在能做什么动作、还有没有疼：
+{{problem}}
+【任务】
+1) 先列复训前提：达到什么条件才能开始，没达到就继续等；
+2) 分三阶段写清：每阶段能做什么、不能做什么、疼痛允许到什么程度、持续几天；
+3) 每阶段给一个退回标准，并写明退回哪一步；
+4) 给一份每日记录表的列名，记疼痛、肿胀、完成度；
+5) 指出我这种情况最可能犯的错。
+【约束】以医生诊断为准，有冲突时听医生的；不替代康复治疗；不承诺恢复时间；疼痛用 0-10 让我自己填。
+【输出格式】按「复训前提 / 三阶段 / 退回标准 / 每日记录表 / 最常见的错」输出。</pre><details><summary>为什么这样写</summary><p>复训翻车几乎都因为「一好转就跳阶段」。提示词先设复训前提，再给三阶段和每阶段的退回标准，把模糊的「量力而行」变成可判断的门槛。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%9B%9B%E5%91%A8%EF%BC%9A%E5%B1%85%E5%AE%B6%E6%97%A0%E5%99%A8%E6%A2%B0%E8%AE%A1%E5%88%92#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

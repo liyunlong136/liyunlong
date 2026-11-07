@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>职业培训提示词（6 条） | 模选 ModelPick</title><meta name="description" content="职业培训场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-27.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="职业培训提示词（6 条）"><meta property="og:description" content="职业培训场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-27.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="职业培训提示词（6 条）"><meta name="twitter:description" content="职业培训场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"职业培训提示词","description":"职业培训场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 职业培训</p><h1>职业培训提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">培训需求</span><span class="chip">绩效</span><span class="chip">缺口</span><span class="chip">目标</span><span class="chip">企业</span><span class="chip">课程</span><span class="chip">工作坊</span><span class="chip">引导</span><span class="chip">课程设计</span><span class="chip">练习</span></div><article class="pcard" id="p2-train-needs"><div class="phead"><b>培训需求：这个培训不做会怎样</b><span>深度思考</span></div><p class="muted">判断缺口类型并划清培训能解决什么</p><pre class="prompt">【角色】你是做了 9 年企业培训需求分析的顾问，习惯先问&quot;这个培训不做会怎样&quot;。
+【输入】业务方提的培训诉求、岗位现状和可观察的绩效问题：
+{{problem}}
+【任务】
+1) 判断这是&quot;知识缺口&quot;&quot;技能缺口&quot;还是&quot;流程或管理问题&quot;，给判断依据；
+2) 把模糊诉求翻译成 3 条可测量的学习目标；
+3) 指出哪些问题培训解决不了，该由谁解决；
+4) 给一份课程框架：模块、时长、每模块的练习形式；
+5) 给 2 个能在培训后 30 天观察到的行为指标。
+【约束】不编造业务数据与绩效数字；不能确定的问题标&quot;待访谈&quot;；不把所有问题都归因为&quot;员工能力不足&quot;；目标必须可测量。
+【输出格式】按&quot;缺口判断 / 三条目标 / 培训边界 / 课程框架 / 行为指标&quot;输出。</pre><details><summary>为什么这样写</summary><p>业务方提的诉求常是症状不是病因。提示词先区分知识、技能与流程问题，再明确哪些培训解决不了，目标才落得到可测量的层面。</p></details></article><article class="pcard" id="p2-train-workshop"><div class="phead"><b>90 分钟工作坊：讲不超过三分之一</b><span>深度思考</span></div><p class="muted">定出可见产出并把时间切成讲练评</p><pre class="prompt">【角色】你是做了 7 年工作坊设计的引导师，信条是&quot;讲不超过三分之一时间，其余让人动手&quot;。
+【输入】工作坊主题、学员岗位、人数和时长 90 分钟：
+{{problem}}
+【任务】
+1) 定一个&quot;结束时学员能做出什么&quot;的具体产出；
+2) 把 90 分钟切成 5 段，标每段时间、形式（讲 / 练 / 评）、学员在做什么；
+3) 设计一个核心练习：任务卡、时间、产出要求、常见卡点；
+4) 给 3 个让沉默学员开口的引导动作；
+5) 给一份课后 7 天跟进动作。
+【约束】讲授时间不超过 30 分钟；练习必须产出可见成果；不设计需要额外设备的环节；不写&quot;分组讨论&quot;却不给议题。
+【输出格式】按&quot;产出定义 / 90 分钟流程表 / 核心练习 / 引导动作 / 课后跟进&quot;输出；流程表列：时间 | 形式 | 学员动作。</pre><details><summary>为什么这样写</summary><p>工作坊变讲座，是因为没定产出。提示词先定&quot;结束时学员能做出什么&quot;，再切时间块并控制讲授占比，练习必须留下可见成果。</p></details></article><article class="pcard" id="p2-train-case-method"><div class="phead"><b>案例教学：把事故变成教材</b><span>深度思考</span></div><p class="muted">把真实事件改写成含决策岔口的案例</p><pre class="prompt">【角色】你是用案例教学做过上百场管理培训的讲师，案例只讲&quot;当时信息不全时怎么决策&quot;。
+【输入】这个真实事件（背景、冲突、当事人选择和结果）：
+{{problem}}
+【任务】
+1) 把事件改写成教学案例：背景 300 字、冲突点、决策岔口；
+2) 在三个关键节点设&quot;停一下&quot;，各给一个讨论问题；
+3) 给学员可能出现的 2 种立场及各自的盲点；
+4) 给讲师版解析：当事人当时缺什么信息、换一种做法会怎样；
+5) 给一个迁移问题，让学员联系自己的岗位。
+【约束】不编造当事人动机与内部数据；涉及真实机构要脱敏；不给&quot;唯一正确答案&quot;；案例长度控制在 800 字内。
+【输出格式】按&quot;案例正文 / 三个讨论点 / 两种立场 / 讲师解析 / 迁移问题&quot;输出。</pre><details><summary>为什么这样写</summary><p>案例用不起来，是因为只讲结果不讲当时的决策处境。提示词在三个节点设&quot;停一下&quot;，并给讲师版解析与迁移问题，讨论才有落点。</p></details></article><article class="pcard" id="p2-train-kirkpatrick"><div class="phead"><b>培训评估：四级里哪级测不了</b><span>深度思考</span></div><p class="muted">为四级评估设计可收集的指标与观察方案</p><pre class="prompt">【角色】你是做培训效果评估的顾问，习惯用四级评估，但只认真实能收集到的证据。
+【输入】这次培训的目标、学员对象和公司能提供的数据：
+{{problem}}
+【任务】
+1) 为四级（反应、学习、行为、结果）各设计 1-2 个指标，标明数据来源与收集时点；
+2) 指出哪一级在我现有条件下根本测不了，为什么；
+3) 给一份 30 / 60 / 90 天的行为观察方案：谁观察、看什么；
+4) 说明如何把结果层的贡献与其他因素区分开；
+5) 给一页评估报告的骨架。
+【约束】不编造基线数据与投入产出比；不能测的级别要明说，不许糊过去；指标必须可收集；不承诺因果。
+【输出格式】按&quot;四级指标表 / 测不了的层级 / 行为观察方案 / 归因说明 / 报告骨架&quot;输出；指标表列：级别 | 指标 | 来源 | 时点。</pre><details><summary>为什么这样写</summary><p>评估报告最容易在结果层糊过去。提示词要求逐级写数据来源与时点，测不了的层级必须明说，并单独处理贡献归因。</p></details></article><article class="pcard" id="p2-train-sop"><div class="phead"><b>SOP：把老师傅的手感写成规则</b><span>深度思考</span></div><p class="muted">把口头经验转成可判断的标准作业程序</p><pre class="prompt">【角色】你是把老师傅经验转成标准作业程序做了 8 年的工艺工程师，原则是&quot;写到新人照着做不出错&quot;。
+【输入】这个岗位的操作流程、老师傅的口头经验和常见失误：
+{{problem}}
+【任务】
+1) 把流程拆成步骤，每步写触发条件、动作、判断标准、异常处理；
+2) 把口头经验转成可判断的规则，&quot;手感差不多&quot;要改成具体判据；
+3) 标出 3 个最容易出错的步骤，各给一个防错设计；
+4) 给一份自检清单：操作者每步自问什么；
+5) 列出这份 SOP 还需要现场验证的 2 个点。
+【约束】不编造工艺参数与安全阈值；涉及安全的步骤必须标注；不确定的数值标&quot;待现场确认&quot;；不写&quot;视情况而定&quot;作为结论。
+【输出格式】按&quot;分步流程表 / 经验转规则 / 防错设计 / 自检清单 / 待验证点&quot;输出；流程表列：步骤 | 动作 | 判断标准 | 异常处理。</pre><details><summary>为什么这样写</summary><p>&quot;手感差不多&quot;没法传递。提示词要求每步写触发条件、判断标准与异常处理，并把模糊经验改写成可判断的规则，附上防错设计。</p></details></article><article class="pcard" id="p2-train-micro-video"><div class="phead"><b>微课脚本：3 分钟学会一个动作</b><span>深度思考</span></div><p class="muted">写出分镜脚本并设计看完就练的任务</p><pre class="prompt">【角色】你是做企业微课设计 6 年的编导，判断标准是&quot;3 分钟内让人学会一个动作&quot;。
+【输入】这个技能点、学员岗位和可用素材：
+{{problem}}
+【任务】
+1) 把技能点收窄成一个 3 分钟能讲完的动作；
+2) 写分镜脚本：时间、画面、旁白、字幕，每段不超过 30 秒；
+3) 给一个开场 10 秒的钩子，用错误示范或后果，不用&quot;大家好&quot;；
+4) 设计一个&quot;看完就练&quot;的小任务；
+5) 给一句结尾的行动指令，替代总结陈词。
+【约束】旁白按每秒约 4 字控制字数；不编造数据与案例；不出现真实人名与机构；不用背景音乐掩盖讲解。
+【输出格式】按&quot;技能收窄 / 分镜脚本表 / 开场钩子 / 练习任务 / 结尾指令&quot;输出；脚本表列：时间 | 画面 | 旁白 | 字幕。</pre><details><summary>为什么这样写</summary><p>微课拍成录屏讲课就没人看。提示词把技能收窄到一个动作，分镜每段不超三十秒，开场用错误示范做钩子，结尾只给行动指令。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E5%9F%B9%E8%AE%AD%E9%9C%80%E6%B1%82%EF%BC%9A%E8%BF%99%E4%B8%AA%E5%9F%B9%E8%AE%AD%E4%B8%8D%E5%81%9A%E4%BC%9A%E6%80%8E%E6%A0%B7#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

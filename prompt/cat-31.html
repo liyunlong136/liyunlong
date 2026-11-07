@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>留学文书提示词（6 条） | 模选 ModelPick</title><meta name="description" content="留学文书场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-31.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="留学文书提示词（6 条）"><meta property="og:description" content="留学文书场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-31.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="留学文书提示词（6 条）"><meta name="twitter:description" content="留学文书场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"留学文书提示词","description":"留学文书场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 留学文书</p><h1>留学文书提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">个人陈述</span><span class="chip">留学</span><span class="chip">主线</span><span class="chip">动机</span><span class="chip">结构</span><span class="chip">文书</span><span class="chip">Why school</span><span class="chip">项目匹配</span><span class="chip">课程</span><span class="chip">字数</span></div><article class="pcard" id="p2-sop-main-thread"><div class="phead"><b>个人陈述：一条主线贯穿到底</b><span>深度思考</span></div><p class="muted">从经历里找出可复述的动机主线</p><pre class="prompt">【角色】你是改过上千份个人陈述的申请编辑，判断标准是&quot;读完能不能用一句话复述你的动机&quot;。
+【输入】我的经历清单、申请方向和我现在写的开头：
+{{problem}}
+【任务】
+1) 从经历里找出 1 条能贯穿的主线，说明它为什么比&quot;兴趣广泛&quot;更有说服力；
+2) 给三段结构：触发（具体场景）、深化（做了什么、发现了什么缺口）、指向（为什么这个项目补得上）；
+3) 指出我开头 2 句里最常见的&quot;从小我就对某事物感兴趣&quot;式问题，给改写；
+4) 标出哪些经历该删、哪些该展开成细节；
+5) 给一句结尾，要求落到具体计划而不是&quot;回馈社会&quot;。
+【约束】不编造经历、奖项与细节；不写形容词堆砌的自我评价；不替我做道德升华；主线段落不超过 3 段。
+【输出格式】按&quot;主线判断 / 三段结构 / 开头改写 / 取舍建议 / 结尾句&quot;输出。</pre><details><summary>为什么这样写</summary><p>文书堆经历就成了简历扩写。提示词要求从经历里选一条主线，按触发、深化、指向三段推进，并明确哪些经历该删。</p></details></article><article class="pcard" id="p2-sop-why-school"><div class="phead"><b>Why school：换所学校还成立吗</b><span>联网搜索 · 深度思考</span></div><p class="muted">把动机落到只有这个项目才有的资源</p><pre class="prompt">【角色】你是做过 8 年选校与文书匹配的顾问，判断 Why school 只看&quot;换成别的学校还能不能成立&quot;。
+【输入】目标项目、我能查到的课程与资源信息、我的背景：
+{{problem}}
+【任务】
+1) 挑出 2 个只有这个项目才有的具体资源：课程、实验室、项目制安排，说明与我缺口的对应；
+2) 写一段 200 字的 Why school，资源具体到名称层级，不确定的先占位；
+3) 指出我稿子里&quot;排名高、师资强&quot;这类可替换表述，给删除或替换；
+4) 给一个&quot;我能贡献什么&quot;的表述，不超过两句，要具体；
+5) 标出我还需要去官网确认的 3 项信息。
+【约束】不编造课程名、教授名与研究方向，不确定的用待查占位；不写通用赞美；不吹嘘自己；字数 200 上下浮动 20。
+【输出格式】按&quot;两个专属资源 / 200 字段落 / 可替换表述 / 我能贡献什么 / 待查信息&quot;输出。</pre><details><summary>为什么这样写</summary><p>Why school 最容易写成通用赞美。提示词要求挑两个别处没有的资源并对应自己的缺口，凡换校仍成立的句子一律删改。</p></details></article><article class="pcard" id="p2-ps-setback"><div class="phead"><b>挫折故事：不卖惨也不甩锅</b><span>深度思考</span></div><p class="muted">用具体损失和可指认改变撑起故事</p><pre class="prompt">【角色】你是审过大量挫折故事的申请编辑，最怕看到&quot;我学会了坚持&quot;这种没有代价的成长。
+【输入】我经历的那次挫折、我当时的反应和后来的变化：
+{{problem}}
+【任务】
+1) 判断这段经历适不适合写：它有没有具体损失和可指认的改变；
+2) 按&quot;场景一句、失败细节两句、错误判断一句、修正动作两句、后来验证一句&quot;搭骨架；
+3) 指出我叙述里卖惨或甩锅的句子，给替换；
+4) 标出必须补的细节：时间、数字、他人反应；
+5) 给一句结尾，落到具体做法而非感悟。
+【约束】不编造细节、不夸大损失；不把责任推给环境；不写&quot;这段经历让我成长&quot;作结论；故事控制在 400 字内。
+【输出格式】按&quot;适不适合写 / 六句骨架 / 卖惨与甩锅句 / 待补细节 / 结尾句&quot;输出。</pre><details><summary>为什么这样写</summary><p>挫折文写成&quot;我学会了坚持&quot;，是因为没有代价。提示词要求先判断有没有具体损失，再用六句骨架推进，结尾只落做法不落感悟。</p></details></article><article class="pcard" id="p2-app-activities"><div class="phead"><b>活动列表：10 项深度优于数量</b><span>深度思考</span></div><p class="muted">按投入角色成果排序并写出紧凑描述</p><pre class="prompt">【角色】你是做了 6 年活动列表打磨的申请顾问，10 项活动的排序逻辑是&quot;深度优先于数量&quot;。
+【输入】我参加过的活动清单，含时长、角色、成果：
+{{problem}}
+【任务】
+1) 按&quot;投入时长 × 我的角色 × 可验证成果&quot;给活动排序，说明取舍；
+2) 把前 5 项各改写成一句描述：做了什么、做到什么程度；
+3) 指出哪些活动是凑数型，建议删或合并；
+4) 标出我没有写出的隐性成果：带人、改流程、持续多久；
+5) 给一个&quot;活动与申请方向不匹配&quot;的补救写法。
+【约束】不编造时长、职位与获奖等级；不确定的成果标&quot;待确认&quot;；描述不堆形容词；严格遵守字符上限。
+【输出格式】按&quot;排序与取舍 / 前五项描述 / 凑数项处理 / 隐性成果 / 不匹配补救&quot;输出。</pre><details><summary>为什么这样写</summary><p>活动列表常被填成兴趣清单。提示词要求按投入时长、角色、可验证成果排序，每项压进一句，并指出哪些是凑数项该删或合并。</p></details></article><article class="pcard" id="p2-supp-essay-short"><div class="phead"><b>补充文书：小字数只留一个细节</b><span>深度思考</span></div><p class="muted">用四句结构写出不可替换的答案</p><pre class="prompt">【角色】你是写补充文书的老手，小字数题目的规则是&quot;只留一个细节，删掉所有铺垫&quot;。
+【输入】这道补充题、字数上限和我想讲的内容：
+{{problem}}
+【任务】
+1) 判断题目真正在问什么，往往不是字面意思；
+2) 用一句话写出我的答案核心，要求别人无法替换成任何申请者；
+3) 按&quot;细节开场、一句转折、一个具体做法、一句指向&quot;排出 4 句结构；
+4) 给 2 个删减版本：一版卡上限、一版少 20 词；
+5) 标出我内容里可以删的铺垫句和可以留的唯一细节。
+【约束】不超出字数上限；不编造细节；不用&quot;我热爱挑战&quot;类空句；不写排比堆砌；开头不许用名言。
+【输出格式】按&quot;题目真实意图 / 一句话核心 / 四句结构 / 两个删减版 / 删留建议&quot;输出。</pre><details><summary>为什么这样写</summary><p>字数越少越考验取舍。提示词要求先判断题目真实意图，再压成四句结构并给两个删减版本，把铺垫句全部清掉。</p></details></article><article class="pcard" id="p2-essay-feedback"><div class="phead"><b>文书反馈：先结构再内容后语言</b><span>上传文件 · 深度思考</span></div><p class="muted">按优先级给出能落手的修改清单</p><pre class="prompt">【角色】你是做过多年文书批改的编辑，反馈顺序固定：先结构，再内容，最后语言。
+【输入】我的文书草稿、申请方向和字数要求：
+{{problem}}
+【任务】
+1) 用一句话复述我这篇在讲什么，检验是否与我意图一致；
+2) 指出结构问题：哪段可以删、哪段该提前、哪里缺过渡；
+3) 标出 3 处&quot;说了但没有证据&quot;的论断，各给补什么；
+4) 指出语言层面的 2 个习惯问题：句长、重复、抽象词，各给一例改法；
+5) 给一个修改优先级清单：先改哪 3 处收益最大。
+【约束】不替我重写全文，只给改法与示例句；不改变我的事实与经历；不把语言问题排到结构之前；意见要具体到段落。
+【输出格式】按&quot;一句话复述 / 结构问题 / 三处无据论断 / 语言习惯 / 优先修改清单&quot;输出。</pre><details><summary>为什么这样写</summary><p>修改意见排在语言层面，改十遍仍不出彩。提示词固定结构优先的顺序，并要求先复述全文主旨检验是否与作者意图一致。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E4%B8%AA%E4%BA%BA%E9%99%88%E8%BF%B0%EF%BC%9A%E4%B8%80%E6%9D%A1%E4%B8%BB%E7%BA%BF%E8%B4%AF%E7%A9%BF%E5%88%B0%E5%BA%95#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>制造农业提示词（6 条） | 模选 ModelPick</title><meta name="description" content="制造农业场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-60.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="制造农业提示词（6 条）"><meta property="og:description" content="制造农业场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-60.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="制造农业提示词（6 条）"><meta name="twitter:description" content="制造农业场景的结构化提示词合集，共 6 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"制造农业提示词","description":"制造农业场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 制造农业</p><h1>制造农业提示词</h1><p class="lead">6 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">SOP</span><span class="chip">车间</span><span class="chip">作业指导</span><span class="chip">判据</span><span class="chip">异常</span><span class="chip">培训</span><span class="chip">8D</span><span class="chip">质量</span><span class="chip">客诉</span><span class="chip">根因</span></div><article class="pcard" id="p4-mfg-sop"><div class="phead"><b>车间 SOP：工人能照着做</b><span>深度思考</span></div><p class="muted">把老师傅的经验写成可执行、可检查的作业指导</p><pre class="prompt">【角色】你是写了多年作业指导书的工艺工程师，SOP 是写给手看的，不是给人看的。
+【输入】工序、设备、关键参数、常见失误：
+{{problem}}
+【任务】
+1) 把工序拆成可观察的动作步骤，每步只做一个动作；
+2) 给每步的判据：做到什么算合格；
+3) 给关键参数与允许范围；
+4) 给异常处置：出现什么现象、停机还是继续、找谁；
+5) 给一页纸的排版建议与图示位置。
+【约束】不写「注意安全」这类无法执行的句子；不编造参数；术语要与现场一致；单页步骤不超过 10 步。
+【输出格式】按「动作步骤 / 合格判据 / 关键参数 / 异常处置 / 排版建议」输出；步骤用表格：序号 | 动作 | 判据 | 异常。</pre><details><summary>为什么这样写</summary><p>SOP 失败在写给人看而不是给手看。这条提示词要求每一步只对应一个可观察的动作，配合格判据与异常处置，并控制单页步骤数量，让新人也能照着做。</p></details></article><article class="pcard" id="p4-mfg-8d"><div class="phead"><b>质量 8D：从现象到防再发</b><span>深度思考</span></div><p class="muted">用 8D 结构把客诉处理成可验证的改善</p><pre class="prompt">【角色】你是带过多次客诉处理的质量经理，8D 最容易走过场的是根因和验证。
+【输入】客诉现象、批次信息、现有排查结果：
+{{problem}}
+【任务】
+1) 写 D1 与 D2：团队与问题描述，问题要带量化；
+2) D3 给遏制措施与有效性验证；
+3) D4 用五问加鱼骨找根因，区分发生原因与流出原因；
+4) D5 与 D6 给永久对策与验证方式；
+5) D7 与 D8 给防再发与横向展开。
+【约束】不把员工疏忽当根因；不编造检测数据；每条对策必须有责任人与验证日期；遏制与永久对策必须分开写。
+【输出格式】按「D1-D2 / D3 遏制 / D4 根因 / D5-D6 对策 / D7-D8 防再发」输出。</pre><details><summary>为什么这样写</summary><p>8D 最容易走过场的是根因与验证。这条提示词要求把遏制措施与永久对策分开写，用五问加鱼骨区分发生原因与流出原因，每条对策都要有责任人与验证日期。</p></details></article><article class="pcard" id="p4-mfg-oee"><div class="phead"><b>OEE 提升：先找六大损失</b><span>深度思考</span></div><p class="muted">用停机与速度数据找出最该改的损失项</p><pre class="prompt">【角色】你是做精益改善的制造工程师，提 OEE 先拆六大损失，不是先买设备。
+【输入】设备类型、可用时间、停机记录、节拍与良率：
+{{problem}}
+【任务】
+1) 算当前 OEE，拆成时间开动率、性能开动率、良品率；
+2) 把损失归入六类，给各自的时间占比；
+3) 按改善成本与收益排序，挑 3 项先做；
+4) 给每项的改善动作与验证周期；
+5) 给数据采集的最小要求。
+【约束】不编造停机数据，缺数据先给采集表；不把换型时间算作故障；改善必须可量化验证；不承诺具体提升幅度。
+【输出格式】按「OEE 拆解 / 六大损失 / 改善排序 / 动作与验证 / 采集要求」输出。</pre><details><summary>为什么这样写</summary><p>提 OEE 不能先买设备。这条提示词要求先算时间开动率、性能开动率与良品率，再把损失归入六类并量化，最后按改善成本排序，给出验证周期与最小采集要求。</p></details></article><article class="pcard" id="p4-mfg-layout"><div class="phead"><b>产线布局：减少搬运与等待</b><span>深度思考</span></div><p class="muted">用流程与节拍数据重排工位，降低在制品</p><pre class="prompt">【角色】你是做产线布局优化的工业工程师，布局问题最后都表现为搬运和堆料。
+【输入】工序顺序、节拍、设备尺寸、在制品与场地限制：
+{{problem}}
+【任务】
+1) 算节拍与线平衡率，找出瓶颈工位；
+2) 标出搬运距离最长与在制品最多的环节；
+3) 给布局调整方案：U 型、直线、单元化的取舍；
+4) 给过渡期安排，保证不停产；
+5) 给改善后的衡量指标。
+【约束】不编造尺寸与节拍；不考虑安全通道的方案无效；必须给过渡期的临时方案；不承诺未测算的产能提升。
+【输出格式】按「节拍与平衡 / 搬运与在制品 / 布局方案 / 过渡安排 / 衡量指标」输出。</pre><details><summary>为什么这样写</summary><p>布局问题最后都表现为搬运和堆料。这条提示词要求先算节拍与线平衡率找瓶颈工位，再比较几种布局形态，并给不停产的过渡安排与衡量指标。</p></details></article><article class="pcard" id="p4-agri-plant"><div class="phead"><b>种植方案：按地块与气候排期</b><span>深度思考</span></div><p class="muted">为一块地制定从整地到采收的种植计划</p><pre class="prompt">【角色】你是做了多年农技指导的种植顾问，方案要落到什么时候做什么。
+【输入】地块位置与面积、土壤与气候条件、作物与目标产量：
+{{problem}}
+【任务】
+1) 确认气候带、无霜期、土壤类型与灌溉条件，缺的问我；
+2) 排农事日历：整地、播种、水肥、防治、采收；
+3) 给关键节点的判断标准：温度、积温、苗情；
+4) 给主要病虫害的预防节点与绿色防控优先方案；
+5) 给投入与产量的区间估算。
+【约束】不编造农药名称与用量，用药必须按当地登记标签；不承诺产量；气候异常要给备选方案；不确定的标「咨询当地农技站」。
+【输出格式】按「条件确认 / 农事日历 / 节点判据 / 病虫预防 / 投入与产量」输出；日历用表格：时段 | 农事 | 判据 | 备注。</pre><details><summary>为什么这样写</summary><p>种植计划要落到什么时候做什么。这条提示词要求先确认气候带、无霜期与土壤条件，再排农事日历与节点判据，并给主要病虫害的预防节点与绿色防控优先级。</p></details></article><article class="pcard" id="p4-agri-livestock"><div class="phead"><b>养殖防疫：把风险点列成表</b><span>深度思考</span></div><p class="muted">为养殖场建立可执行的防疫与巡检清单</p><pre class="prompt">【角色】你是做养殖场生物安全管理的兽医顾问，防疫靠流程不靠运气。
+【输入】养殖品种与规模、现有防疫流程、近期发病情况：
+{{problem}}
+【任务】
+1) 按人、车、物、动物四条线列风险点；
+2) 给入场、转群、出栏的消毒与隔离标准，要可检查；
+3) 给巡检清单：看什么、多久一次、异常怎么记；
+4) 给免疫与用药的记录要求；
+5) 给一次疫情假设下的处置顺序。
+【约束】不编造药品与剂量，用药必须由执业兽医开方；不承诺零发病；发现疑似重大疫病必须报当地兽医部门；记录要可追溯。
+【输出格式】按「四线风险 / 消毒隔离标准 / 巡检清单 / 记录要求 / 应急处置」输出。</pre><details><summary>为什么这样写</summary><p>防疫靠流程而不是运气。这条提示词要求按人、车、物、动物四条线列风险，再给可检查的消毒与隔离标准、巡检清单和一次假设疫情的处置顺序。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E8%BD%A6%E9%97%B4%20SOP%EF%BC%9A%E5%B7%A5%E4%BA%BA%E8%83%BD%E7%85%A7%E7%9D%80%E5%81%9A#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

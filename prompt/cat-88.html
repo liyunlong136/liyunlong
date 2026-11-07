@@ -1,0 +1,20 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>商业分析提示词（2 条） | 模选 ModelPick</title><meta name="description" content="商业分析场景的结构化提示词合集，共 2 条，含角色、任务、约束与输出格式。"><link rel="canonical" href="https://myaskmate.com/prompt/cat-88.html"><meta property="og:type" content="article"><meta property="og:site_name" content="模选 ModelPick"><meta property="og:title" content="商业分析提示词（2 条）"><meta property="og:description" content="商业分析场景的结构化提示词合集，共 2 条，含角色、任务、约束与输出格式。"><meta property="og:url" content="https://myaskmate.com/prompt/cat-88.html"><meta property="og:image" content="https://myaskmate.com/assets/img/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="商业分析提示词（2 条）"><meta name="twitter:description" content="商业分析场景的结构化提示词合集，共 2 条，含角色、任务、约束与输出格式。"><meta name="twitter:image" content="https://myaskmate.com/assets/img/og.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"商业分析提示词","description":"商业分析场景的结构化提示词合集"}</script><link rel="stylesheet" href="../assets/css/page.css"></head><body><header class="ph"><div class="pw"><a class="plogo" href="../index.html"><b>M</b> 模选 ModelPick</a><nav><a href="../model/index.html">模型</a><a href="../task/index.html">任务</a><a href="../solution/index.html">方案</a><a href="../prompt/index.html">提示词</a></nav></div></header><main class="pw"><p class="crumb"><a href="../prompt/index.html">提示词库</a> / 商业分析</p><h1>商业分析提示词</h1><p class="lead">2 条可直接套用的结构化提示词。每条都写清角色、输入、任务、约束和输出格式，替换 {{problem}} 即可用。</p><div class="chips"><span class="chip">竞品</span><span class="chip">市场</span><span class="chip">分析</span><span class="chip">定位</span><span class="chip">差异化</span><span class="chip">商业</span><span class="chip">决策</span><span class="chip">选择</span><span class="chip">权衡</span><span class="chip">风险</span></div><article class="pcard" id="competitor"><div class="phead"><b>竞品拆解：找对手守不住的位</b><span>联网搜索 · 深度思考</span></div><p class="muted">从功能、定价、渠道、心智四个面拆出可打的空位</p><pre class="prompt">【角色】你是做过多次 0 到 1 的产品负责人，看竞品只看四件事：谁在买、为什么买、对手靠什么守住、哪里守不住。
+【输入】我的产品/问题和已知竞品：
+{{problem}}
+【任务】
+1) 先用一句话定义战场（品类、人群、场景），不要泛泛说行业；
+2) 选 3 个直接竞品，按「功能 | 定价 | 渠道 | 用户心智」做对比表；
+3) 对每个竞品写一条「它最强的地方」和一条「它结构上守不住的地方」，并说明原因；
+4) 给出 2 个可切入的空位，各配一个最小验证动作和验证指标。
+【约束】不编造竞品数据与融资信息，不确定的标「待核实」；不把「功能更多」当优势；结论必须能落到一个具体人群。
+【输出格式】按「战场定义 / 对比表 / 强点与破绽 / 两个空位与验证」输出；对比表列名固定。</pre><details><summary>为什么这样写</summary><p>竞品分析常见的失败是列功能表。这条提示词强迫输出「对手为什么守不住」，并把结论落到可执行的定位与验证动作。</p></details></article><article class="pcard" id="decision-matrix"><div class="phead"><b>重大决策：把纠结变成可算的账</b><span>深度思考</span></div><p class="muted">在多个选项之间做可解释、可复盘的选择</p><pre class="prompt">【角色】你是做过大量高风险决策的顾问，习惯先定标准再选项，最后做「如果判断错了会怎样」的压力测试。
+【输入】我正在纠结的决定和候选选项：
+{{problem}}
+【任务】
+1) 先列出 4-6 个评估维度，每个给权重（合计 100%），并说明为什么是这个权重；
+2) 列出所有候选选项，用决策矩阵打分（1-5），算出加权分；
+3) 做敏感性分析：哪个维度的权重变化会翻转结论；
+4) 给出「最坏情况」下每个选项的可逆性和止损点；
+5) 最后给建议，并写清「什么信号出现时应该改选」。
+【约束】不替我编造事实或概率；缺失信息标「待确认」并说明它会怎么改变结论；不要用「看情况」当结论。
+【输出格式】按「评估维度与权重 / 决策矩阵 / 敏感性 / 最坏情况 / 建议与改选信号」输出；矩阵用表格。</pre><details><summary>为什么这样写</summary><p>纠结往往不是选项太少，而是标准没定。提示词先逼出「不可妥协项」和权重，再算分，最后做敏感性分析，避免拍脑袋。</p></details></article><p class="cta"><a class="btn" href="../index.html?pm=%E7%AB%9E%E5%93%81%E6%8B%86%E8%A7%A3%EF%BC%9A%E6%89%BE%E5%AF%B9%E6%89%8B%E5%AE%88%E4%B8%8D%E4%BD%8F%E7%9A%84%E4%BD%8D#prompts">在提示词库里搜索同类 →</a></p></main><footer class="pf"><div class="pw"><span>模选 ModelPick · 免费、无登录、纯前端</span><a href="../index.html">回到选型首页 →</a></div></footer></body></html>

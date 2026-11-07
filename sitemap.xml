@@ -5,6 +5,7 @@
   <url><loc>https://myaskmate.com/task/</loc><lastmod>2026-11-07</lastmod></url>
   <url><loc>https://myaskmate.com/solution/</loc><lastmod>2026-11-07</lastmod></url>
   <url><loc>https://myaskmate.com/prompt/</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/</loc><lastmod>2026-11-07</lastmod></url>
   <url><loc>https://myaskmate.com/model/deepseek-v4-pro.html</loc><lastmod>2026-11-07</lastmod></url>
   <url><loc>https://myaskmate.com/model/deepseek-flash.html</loc><lastmod>2026-11-07</lastmod></url>
   <url><loc>https://myaskmate.com/model/qwen3.8-max.html</loc><lastmod>2026-11-07</lastmod></url>
@@ -240,4 +241,54 @@
   <url><loc>https://myaskmate.com/prompt/cat-88.html</loc><lastmod>2026-11-07</lastmod></url>
   <url><loc>https://myaskmate.com/prompt/cat-89.html</loc><lastmod>2026-11-07</lastmod></url>
   <url><loc>https://myaskmate.com/prompt/cat-90.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/deepseek-v4-pro-vs-qwen3.8-max.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/deepseek-v4-pro-vs-kimi-k3.1-pro.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/deepseek-v4-pro-vs-glm-5.3.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/qwen3.8-max-vs-glm-5.3.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/kimi-k3.1-pro-vs-glm-5.3.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/gpt-5.5-vs-claude-fable-5.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/gpt-5.5-vs-gemini-3.5-pro.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/claude-opus-4.6-vs-gpt-5.5.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/claude-fable-5-vs-gemini-3.5-pro.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/claude-sonnet-4.6-vs-gpt-5.1.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/claude-haiku-4.5-vs-gemini-3.5-flash-8b.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/doubao-seed-2.1-pro-vs-qwen3.8-max.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/doubao-seed-2.1-pro-vs-kimi-k3.1-pro.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/doubao-seed-2.1-turbo-vs-qwen3.8-turbo.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/doubao-seed-2.0-turbo-vs-qwen3.7-plus.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/deepseek-flash-vs-glm-5.3-flash.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/deepseek-flash-vs-qwen3.8-flash.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/doubao-seed-2.1-lite-vs-gemini-3.5-flash-lite.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/qwen3.8-turbo-vs-glm-5.3-air.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/qwen3.7-plus-vs-kimi-k3.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/kimi-k3-vs-minimax-m3.1.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/gpt-5.5-codex-vs-claude-opus-4.6.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/gpt-5.5-codex-vs-deepseek-v4-pro.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/qwen3-coder-plus-vs-deepseek-v4-pro.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/qwen3-coder-plus-vs-kimi-k2.7-code.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/o5-vs-gpt-5.5.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/o5-vs-claude-opus-4.6.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/o5-pro-vs-gpt-5.5-pro.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/gemini-3-pro-vs-gpt-5.5.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/glm-5v-vs-qwen3.8-vl.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/glm-ocr-vs-qwen3.8-vl.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/qwen3-vl-32b-vs-gemma-3-27b.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/llama-4.5-behemoth-vs-qwen3.8-max.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/llama-4.5-maverick-vs-qwen3.8-max.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/qwen3-235b-a22b-vs-deepseek-v3.2.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/qwen3-32b-vs-llama-4.5-maverick-17b.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/qwen3-8b-vs-phi-4-mini.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/gemma-3-9b-vs-qwen3-8b.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/glm-4.5-air-vs-qwen3-14b.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/mistral-large-3-vs-llama-4.5-maverick.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/command-r-plus-vs-llama-3.3-70b.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/nova-pro-vs-gpt-5.1.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/jamba-2-vs-llama-4.5-maverick.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/nemotron-4-340b-vs-llama-3.3-70b.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/ernie-5.0-vs-glm-5.3.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/spark-x1-vs-deepseek-v4-pro.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/hunyuan-turbos-vs-glm-5.3-flash.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/step-3-vs-minimax-m2.5.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/mistral-small-3-vs-phi-4.html</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://myaskmate.com/compare/grok-5-vs-gpt-5.5.html</loc><lastmod>2026-11-07</lastmod></url>
 </urlset>

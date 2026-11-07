@@ -19,9 +19,10 @@
 | task/<id>.html | 单个任务：推荐模型、成本账、为什么、完整提示词 | 10 |
 | solution/<id>.html | 单套方案：主模型 / 省钱替代 / 配套 / 步骤 / 坑 | 10 |
 | prompt/cat-xx.html | 按场景聚合的提示词集合页 | 90 |
-| model/ task/ solution/ prompt/ | 四个分栏索引 | 4 |
+| compare/<a>-vs-<b>.html | 50 组高频 A vs B 对比：价格、十维能力、怎么选、FAQ | 50 |
+| model/ task/ solution/ prompt/ compare/ | 五个分栏索引 | 5 |
 
-共 239 个静态页 + 首页，sitemap.xml 240 条 URL。每个页面都有独立的 title / description / canonical / og:image；模型、任务、方案和提示词集合页另有 JSON-LD。
+共 290 个静态页 + 首页，sitemap.xml 291 条 URL。每个页面都有独立的 title / description / canonical / og:image；模型、任务、方案、提示词集合和对比页另有 JSON-LD。
 
 生成方式（不依赖 npm 包）：
 
@@ -41,8 +42,9 @@
 | 智能选型 | 10 个领域自动识别，拆成 3–4 步；按时间 / 预算 / token / 硬需求给每一步推荐 Top 5 模型，含等级、匹配度、价格、理由、坑 |
 | 任务大厅 | 首页直接给 10 个任务卡（写小红书、读财报、修 bug、发票录入…），点开先看「为什么推荐」和这笔账，再一键开始 |
 | PK 对比 | 同一条问题：左边原样问 + L1/L2，右边结构化提示词 + L4/L5；可只做结构对比，也可用自己的 API Key 真跑 |
+| A vs B 对比页 | 50 组高频成对对比（DeepSeek vs Qwen、GPT vs Claude、开源 vs 闭源、便宜档 vs 旗舰档），每页有价格表、十维对比、结论和 FAQ |
 | 排行榜 | 首页总榜 + 口碑 / 代码 / 写作 / 性价比 / 长文本 / 多模态 / Agent / 免费 / L2 / 开源 10 个分榜；总榜 = 能力 80% + 用户评分 20% |
-| 独立内容页 | 125 模型 + 10 任务 + 10 方案 + 90 提示词分类，共 239 个静态页；每页有 canonical、OG、JSON-LD |
+| 独立内容页 | 125 模型 + 10 任务 + 10 方案 + 90 提示词分类 + 50 组对比，共 290 个静态页；每页有 canonical、OG、JSON-LD |
 | 最近方案 | 自动记住最近 5 次选型（问题 + 预算 / 时间 / token + 硬需求），首页一点即重跑；只存 localStorage |
 | 方案分享 | 结果区「复制分享链接」把完整约束压进 ?h=，对方打开自动还原并重新生成同一套方案 |
 | 场景方案 | 10 套「主模型 + 省钱替代 + 配套工具」组合：长文档、翻译、客服、代码、OCR、内容、数据、私有化、学习、Agent；直接算单次成本 |
@@ -220,7 +222,7 @@ anon key 是公开的，但必须配合 RLS 使用；**绝对不要把 service_r
 
     大模型推荐平台/
     ├─ index.html                  # 页面骨架：选型 / 模型库 / 算法库 / 提示词 / 关于
-    ├─ model/ task/ solution/ prompt/ # 预渲染内容页（239 个）
+    ├─ model/ task/ solution/ prompt/ compare/ # 预渲染内容页（290 个）
     ├─ 404.html / robots.txt / sitemap.xml
     ├─ assets/
     │  ├─ css/style.css            # 深色主题、响应式、打印样式
@@ -237,6 +239,7 @@ anon key 是公开的，但必须配合 RLS 使用；**绝对不要把 service_r
     │     │  ├─ prompts-pack-1~5.js # 5 个行业包，共 450 条
     │     │  ├─ solutions.js       # 10 套场景组合方案
     │     │  └─ task-hall.js       # 10 个任务大厅卡片
+    │     ├─ recent.js             # 最近 5 次方案 + ?h= 分享还原
     │     ├─ ranking.js            # 首页总榜/分榜：能力分 + 用户评分
     │     ├─ rating.js             # 五星评分 + Supabase 写入
     │     ├─ supabase-config.js    # Supabase URL / anon key

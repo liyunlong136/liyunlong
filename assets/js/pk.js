@@ -1,0 +1,249 @@
+/* PK 对比：普通提示词 + L1/L2 vs 结构化提示词 + L4/L5。
+   有 Key 时真调模型；没有 Key 时只做结构与成本对比，不伪造回答。 */
+(function () {
+  var MODELS = window.MP_MODELS || [];
+  var PRESETS = {
+    zhipu: { name: '智谱', base: 'https://open.bigmodel.cn/api/paas/v4', models: [
+      { api: 'glm-4.7-flash', id: 'glm-4.7-flash' }, { api: 'glm-5.3-flash', id: 'glm-5.3-flash' },
+      { api: 'glm-5.1', id: 'glm-5.1' }, { api: 'glm-5.3', id: 'glm-5.3' }
+    ] },
+    deepseek: { name: 'DeepSeek', base: 'https://api.deepseek.com', models: [
+      { api: 'deepseek-flash', id: 'deepseek-flash' }, { api: 'deepseek-v4-pro', id: 'deepseek-v4-pro' }
+    ] },
+    qwen: { name: '通义千问', base: 'https://dashscope.aliyuncs.com/compatible-mode/v1', models: [
+      { api: 'qwen3.8-flash', id: 'qwen3.8-flash' }, { api: 'qwen3.7-plus', id: 'qwen3.7-plus' }, { api: 'qwen3.8-max', id: 'qwen3.8-max' }
+    ] },
+    openai: { name: 'OpenAI', base: 'https://api.openai.com/v1', models: [
+      { api: 'gpt-5.5-mini', id: 'gpt-5.5-mini' }, { api: 'gpt-5.5', id: 'gpt-5.5' }, { api: 'gpt-5.1', id: 'gpt-5.1' }
+    ] }
+  };
+  var state = { provider: 'zhipu', key: '', running: false };
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function modelById(id) { return MODELS.filter(function (m) { return m.id === id; })[0]; }
+  function fmt(n) { return window.MPEngine ? window.MPEngine.fmt(n) : String(n); }
+
+  function fillModels() {
+    var p = PRESETS[state.provider];
+    var opts = p.models.map(function (x) {
+      var m = modelById(x.id);
+      return '<option value="' + esc(x.api) + '">' + esc(m ? m.name : x.api) + (m ? ' · L' + m.tier : '') + '</option>';
+    }).join('');
+    var a = $('pkModelA'), b = $('pkModelB');
+    if (!a || !b) return;
+    a.innerHTML = opts; b.innerHTML = opts;
+    a.value = p.models[0].api;
+    b.value = p.models[p.models.length - 1].api;
+  }
+
+  function selectedModel(sel) {
+    var api = $(sel).value;
+    var p = PRESETS[state.provider];
+    var hit = p.models.filter(function (x) { return x.api === api; })[0];
+    return hit ? modelById(hit.id) : modelById('glm-5.3');
+  }
+
+  function genericPrompt(topic) {
+    return '【角色】你是这个领域的资深从业者，习惯先给结论再给依据。\n' +
+      '【输入】' + topic + '\n' +
+      '【任务】\n1) 先复述你理解的目标和读者；\n2) 给出 3 个关键判断，每个配一条依据；\n3) 给一个可执行的下一步。\n' +
+      '【约束】不确定的信息标注「待核实」；不编造数据；不写空话。\n' +
+      '【输出格式】按「目标复述 / 3 个判断 / 下一步」三节输出，总字数 500 以内。';
+  }
+
+  function buildPrompts() {
+    var topic = ($('pkTopic').value || '').trim();
+    if (!topic) return;
+    var a = topic;
+    var b = '';
+    var match = window.MPPrompt ? window.MPPrompt.match(topic, 1)[0] : null;
+    if (match && match.score >= 6) {
+      b = window.MPPrompt.substitute(match.item.prompt, topic);
+    } else {
+      b = genericPrompt(topic);
+    }
+    var mb = selectedModel('pkModelB');
+    if (window.MPPrompt && mb) {
+      b = window.MPPrompt.tailor(b, mb, { opts: { time: 'normal', budget: 'mid', tokens: 'normal' }, files: [] }, { need: { ctx: 8000 } });
+    }
+    $('pkPromptA').value = a;
+    $('pkPromptB').value = b;
+    updateMeta();
+  }
+
+  function estimate(text, model, outTok) {
+    var inTok = Math.max(1, Math.ceil(text.length / 1.6));
+    var cost = (model.priceIn * inTok + model.priceOut * outTok) / 1e6;
+    var tps = 8 + model.speed * 10;
+    var ttft = Math.max(0.6, 4.2 - model.speed * 0.32);
+    return { inTok: inTok, outTok: outTok, cost: cost, sec: ttft + outTok / tps };
+  }
+  function tokText(n) { return n >= 1000 ? (n / 1000).toFixed(1) + 'K' : String(Math.max(1, Math.round(n))); }
+  function updateMeta() {
+    var ma = selectedModel('pkModelA'), mb = selectedModel('pkModelB');
+    if (!ma || !mb) return;
+    var ea = estimate($('pkPromptA').value, ma, 500);
+    var eb = estimate($('pkPromptB').value, mb, 800);
+    $('pkMetaA').innerHTML = 'L' + ma.tier + ' · 约 ' + tokText(ea.inTok) + ' tokens · ¥' + fmt(ea.cost, 4) + ' · ' + Math.round(ea.sec) + ' 秒';
+    $('pkMetaB').innerHTML = 'L' + mb.tier + ' · 约 ' + tokText(eb.inTok) + ' tokens · ¥' + fmt(eb.cost, 4) + ' · ' + Math.round(eb.sec) + ' 秒';
+  }
+
+  async function callModel(preset, key, apiModel, prompt, maxTokens) {
+    var t0 = performance.now();
+    var payload = { model: apiModel, messages: [{ role: 'user', content: prompt }] };
+    if (/openai/i.test(preset.name)) { payload.max_completion_tokens = maxTokens; }
+    else { payload.max_tokens = maxTokens; payload.temperature = 0.6; }
+    var res = await fetch(preset.base.replace(/\/$/, '') + '/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + key },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      var txt = await res.text();
+      throw new Error('HTTP ' + res.status + '：' + txt.slice(0, 120));
+    }
+    var data = await res.json();
+    var text = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
+    var u = data.usage || {};
+    return { text: text || '（返回为空）', inTok: u.prompt_tokens || null, outTok: u.completion_tokens || null, ms: performance.now() - t0 };
+  }
+
+  function outputHtml(r, model) {
+    if (!r) return '<div class="empty">没有结果</div>';
+    var text = String(r.text || '').replace(/\n{3,}/g, '\n\n');
+    return '<div class="pk-answer">' + esc(text) + '</div>' +
+      '<div class="pk-stats">' + (r.inTok ? r.inTok + ' 输入 / ' : '') + (r.outTok ? r.outTok + ' 输出 · ' : '') +
+      '¥' + fmt(r.cost || 0, 4) + ' · ' + Math.round(r.ms / 100) / 10 + ' 秒 · ' + esc(model.name) + '</div>';
+  }
+
+  function diffHtml(aText, bText, ma, mb, ra, rb) {
+    var ea = ra ? { inTok: ra.inTok || 0, outTok: ra.outTok || 0 } : estimate(aText, ma, 500);
+    var eb = rb ? { inTok: rb.inTok || 0, outTok: rb.outTok || 0 } : estimate(bText, mb, 800);
+    var ca = (ma.priceIn * ea.inTok + ma.priceOut * ea.outTok) / 1e6;
+    var cb = (mb.priceIn * eb.inTok + mb.priceOut * eb.outTok) / 1e6;
+    var secA = ra ? ra.ms / 1000 : (ea.sec || 0);
+    var secB = rb ? rb.ms / 1000 : (eb.sec || 0);
+    function tk(n) { return n >= 1000 ? (n / 1000).toFixed(1) + 'K' : String(Math.max(0, Math.round(n))); }
+    var has = function (t, k) { return t.indexOf('【' + k + '】') >= 0; };
+    function yes(ok) { return ok ? '<span class="ok">有</span>' : '<span class="no">没有</span>'; }
+    var rows = [
+      ['角色设定', yes(has(aText, '角色')), yes(has(bText, '角色'))],
+      ['任务拆解', yes(/\n\s*\d+[\)\.、]/.test(aText)), yes(/\n\s*\d+[\)\.、]/.test(bText))],
+      ['约束 / 防幻觉', yes(has(aText, '约束')), yes(has(bText, '约束'))],
+      ['输出格式', yes(has(aText, '输出格式')), yes(has(bText, '输出格式'))],
+      ['模型等级', 'L' + ma.tier, 'L' + mb.tier],
+      ['本次成本', ca > 0 ? '¥' + fmt(ca, 4) : '免费', cb > 0 ? '¥' + fmt(cb, 4) : '免费']
+    ];
+    return '<div class="panel pk-diff"><div class="panel-head"><h2>差异分析</h2><span class="hint">' +
+      (ra ? '真实调用结果' : '结构对比（未调用模型）') + '</span></div>' +
+      '<div class="pk-consume"><b>本次对话消耗预估</b>' +
+      '<span>普通：' + tk(ea.inTok) + ' tokens · ' + (ca > 0 ? '¥' + fmt(ca, 4) : '免费') + ' · ' + Math.round(secA) + ' 秒</span>' +
+      '<span>专家：' + tk(eb.inTok) + ' tokens · ' + (cb > 0 ? '¥' + fmt(cb, 4) : '免费') + ' · ' + Math.round(secB) + ' 秒</span>' +
+      '<i>同样的事，人类助理约需 15 分钟</i></div>' +
+      '<table class="dlg-table"><thead><tr><th>对比项</th><th>普通模式</th><th>专家模式</th></tr></thead><tbody>' +
+      rows.map(function (r) { return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>'; }).join('') +
+      '</tbody></table>' +
+      '<p class="pk-takeaway">右侧的差距主要来自两件事：<b>结构化提示词</b>（角色、任务拆解、约束、输出格式）和<b>模型升级</b>（L' + ma.tier + ' → L' + mb.tier + '）。' +
+      '提示词的贡献通常比模型更大；先改提示词，再考虑升级模型。</p>' +
+      '<div class="pk-costline">按每天 100 次：普通约 ¥' + fmt(ca * 100 * 30, 2) + '/月；专家约 ¥' + fmt(cb * 100 * 30, 2) + '/月。' +
+      (ra ? '本次真实耗时：普通 ' + Math.round(ra.ms / 100) / 10 + ' 秒，专家 ' + Math.round(rb.ms / 100) / 10 + ' 秒。' : '') + '</div>' +
+      '</div>';
+  }
+
+  function setOutputs(htmlA, htmlB, diff) {
+    $('pkOutA').innerHTML = htmlA;
+    $('pkOutB').innerHTML = htmlB;
+    $('pkDiff').innerHTML = diff;
+  }
+
+  function runDemo() {
+    buildPrompts();
+    var ma = selectedModel('pkModelA'), mb = selectedModel('pkModelB');
+    var a = $('pkPromptA').value, b = $('pkPromptB').value;
+    setOutputs(
+      '<div class="pk-placeholder"><b>未调用模型</b><p>普通模式只发送你原样输入的一句话。真实效果取决于模型和运气。</p></div>',
+      '<div class="pk-placeholder"><b>未调用模型</b><p>专家模式会发送右侧这条结构化提示词。配置 API Key 后可真跑一次。</p></div>',
+      diffHtml(a, b, ma, mb, null, null)
+    );
+    if (window.MPTrack) MPTrack.event('pk_demo', { topic: a.slice(0, 40) });
+    $('pkDiff').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  async function runLive() {
+    buildPrompts();
+    var key = ($('pkKey').value || '').trim();
+    if (!key) { runDemo(); return; }
+    if (window.MPTrack && !MPTrack.count('pk', 5)) {
+      setOutputs('<div class="pk-error">今天的免费体验次数（5 次）用完了。明天再试，或只用「只看提示词对比」。</div>',
+        '<div class="pk-error">今天的免费体验次数（5 次）用完了。</div>', '');
+      return;
+    }
+    var p = PRESETS[state.provider];
+    var ma = selectedModel('pkModelA'), mb = selectedModel('pkModelB');
+    var apiA = $('pkModelA').value, apiB = $('pkModelB').value;
+    state.running = true;
+    $('pkOutA').innerHTML = '<div class="pk-loading">正在调用…</div>';
+    $('pkOutB').innerHTML = '<div class="pk-loading">正在调用…</div>';
+    try {
+      var results = await Promise.allSettled([
+        callModel(p, key, apiA, $('pkPromptA').value, 500),
+        callModel(p, key, apiB, $('pkPromptB').value, 800)
+      ]);
+      var ra = results[0].status === 'fulfilled' ? results[0].value : null;
+      var rb = results[1].status === 'fulfilled' ? results[1].value : null;
+      if (ra) ra.cost = (ma.priceIn * ra.inTok + ma.priceOut * ra.outTok) / 1e6;
+      if (rb) rb.cost = (mb.priceIn * rb.inTok + mb.priceOut * rb.outTok) / 1e6;
+      var errA = results[0].status === 'rejected' ? results[0].reason.message : '';
+      var errB = results[1].status === 'rejected' ? results[1].reason.message : '';
+      setOutputs(
+        ra ? outputHtml(ra, ma) : '<div class="pk-error">调用失败：' + esc(errA) + '<br><span>常见原因：Key 无效、模型名不对、浏览器被 CORS 拦截。</span></div>',
+        rb ? outputHtml(rb, mb) : '<div class="pk-error">调用失败：' + esc(errB) + '<br><span>如果两边都失败，多半是 CORS；请换供应商或部署一个代理。</span></div>',
+        diffHtml($('pkPromptA').value, $('pkPromptB').value, ma, mb, ra, rb)
+      );
+      if (window.MPTrack) MPTrack.event('pk_live', { okA: !!ra, okB: !!rb, provider: state.provider });
+    } catch (e) {
+      setOutputs('<div class="pk-error">' + esc(e.message) + '</div>', '', '');
+    } finally { state.running = false; }
+  }
+
+  function saveKey() {
+    state.key = $('pkKey').value.trim();
+    try { sessionStorage.setItem('mp_pk_key', state.key); } catch (e) { }
+  }
+
+  function init() {
+    if (!$('pkTopic')) return;
+    try { var k = sessionStorage.getItem('mp_pk_key'); if (k) { $('pkKey').value = k; state.key = k; } } catch (e) { }
+    fillModels();
+    buildPrompts();
+    $('pkProvider').addEventListener('change', function () {
+      state.provider = this.value;
+      fillModels(); buildPrompts();
+    });
+    $('pkTopic').addEventListener('input', function () {
+      clearTimeout(this._t); var self = this;
+      this._t = setTimeout(function () { buildPrompts(); }, 220);
+    });
+    ['pkModelA', 'pkModelB'].forEach(function (id) { $(id).addEventListener('change', updateMeta); });
+    $('pkRun').addEventListener('click', function () { saveKey(); runLive(); });
+    $('pkDemo').addEventListener('click', runDemo);
+    $('pkClearKey').addEventListener('click', function () {
+      $('pkKey').value = ''; state.key = '';
+      try { sessionStorage.removeItem('mp_pk_key'); } catch (e) { }
+    });
+    $('pkKey').addEventListener('change', saveKey);
+    document.querySelectorAll('[data-copy-pk]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var v = b.getAttribute('data-copy-pk') === 'a' ? $('pkPromptA').value : $('pkPromptB').value;
+        if (navigator.clipboard) navigator.clipboard.writeText(v).then(function () { b.textContent = '已复制'; setTimeout(function () { b.textContent = '复制'; }, 1200); });
+      });
+    });
+  }
+
+  window.MPPK = { init: init, buildPrompts: buildPrompts, demo: runDemo };
+})();

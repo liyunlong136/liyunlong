@@ -1,0 +1,11 @@
+global.window=global;
+const B="D:/Users/l'y'l/Desktop/liyunlong/assets/js/data/";
+['models.js','models-extra-cn.js','models-extra-global.js','models-extra-2.js'].forEach(f=>require(B+f));
+const M=(window.MP_MODELS||[]).concat(window.MP_MODELS_EXTRA||[]);
+const free=M.filter(m=>m.priceIn===0&&m.priceOut===0);
+const open=free.filter(m=>m.open);
+console.log('总模型',M.length,'价格0',free.length,'其中open自托管',open.length);
+console.log('零预算可用(免费API):', free.filter(m=>!m.open).map(m=>m.id).join(', ')||'无');
+console.log('自托管(零预算排除):', open.map(m=>m.id).join(', '));
+const conf={official:0,ref:0,est:0}; M.forEach(m=>conf[m.priceConf]=(conf[m.priceConf]||0)+1);
+console.log('priceConf分布', conf);

@@ -13,11 +13,35 @@
 
   var state = {
     view: 'pick', plan: null, route: 'quality', files: [], autoProblem: '',
+    allowRelax: false,
+    audience: (function () { try { return localStorage.getItem('mp_audience') || 'beginner'; } catch (e) { return 'beginner'; } })(),
+    callsPerDay: (function () { try { return Math.max(1, Number(localStorage.getItem('mp_calls_per_day') || 20)); } catch (e) { return 20; } })(),
     lib: { country: 'all', tier: 'all', flag: 'all', q: '', sort: 'power' },
     algo: { cat: '全部', q: '' },
     prompt: { cat: 'all', q: '', limit: 48 }
   };
   var MAX_FILES = 3, MAX_SIZE = 15 * 1024 * 1024;
+  var promptPacksLoaded = false, promptPacksLoading = false;
+  function ensurePrompts(cb) {
+    if (promptPacksLoaded) { if (cb) cb(); return; }
+    if (promptPacksLoading) { setTimeout(function () { ensurePrompts(cb); }, 120); return; }
+    promptPacksLoading = true;
+    var files = ['prompts-pack-1', 'prompts-pack-2', 'prompts-pack-3', 'prompts-pack-4', 'prompts-pack-5'];
+    var left = files.length;
+    files.forEach(function (name) {
+      var s = document.createElement('script');
+      s.src = 'assets/js/data/' + name + '.js';
+      s.onload = s.onerror = function () {
+        if (--left === 0) {
+          promptPacksLoaded = true;
+          promptPacksLoading = false;
+          if (window.MPPrompt && MPPrompt.all.clearCache) MPPrompt.all.clearCache();
+          if (cb) cb();
+        }
+      };
+      document.body.appendChild(s);
+    });
+  }
 
   function $(id) { return document.getElementById(id); }
   function esc(s) {
@@ -190,13 +214,28 @@
   }
 
   /* ================= 导航 ================= */
-  function showView(name) {
+  function showView(name, replace) {
     state.view = name;
     document.querySelectorAll('.view').forEach(function (v) { v.classList.toggle('active', v.id === 'view-' + name); });
     document.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('active', t.getAttribute('data-view') === name); });
-    try { if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name); } catch (e) { }
+    try {
+      if (location.hash !== '#' + name) {
+        if (replace) history.replaceState(null, '', '#' + name);
+        else history.pushState(null, '', '#' + name);
+      }
+    } catch (e) {
+      try { location.hash = name; } catch (err) { }
+    }
     if (window.MPTrack) MPTrack.event('view', { name: name });
     if (name === 'about' && typeof renderAboutTrack === 'function') renderAboutTrack();
+    if (name === 'prompts') {
+      ensurePrompts(function () {
+        renderPromptFilters();
+        renderPrompts();
+        if ($('heroTasks')) $('heroTasks').innerHTML = allPrompts().length + '<em>套</em>';
+        renderAbout();
+      });
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -225,7 +264,8 @@
       requireVision: !!need.vision, requireAudio: !!need.audio,
       requireCtx: need.longdoc ? 200000 : 0,
       domainId: $('domainSelect').value || '',
-      need: need, files: state.files.slice()
+      need: need, files: state.files.slice(),
+      allowRelax: !!state.allowRelax
     };
   }
 
@@ -274,20 +314,110 @@
     return plan.routes[key].picks;
   }
 
+  function showScoreAudit(audit) {
+    var a = audit || {};
+    var list = function (arr) {
+      return (arr && arr.length) ? '<ul class="list">' + arr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '<p class="muted">没有记录</p>';
+    };
+    $('scoreBody').innerHTML =
+      '<p><b>匹配依据</b></p>' + list(a.matched) +
+      '<p><b>还没有验证</b></p>' + list(a.unverified) +
+      '<p><b>数据来源</b></p><p class="muted">' + esc(a.source || '自研十维') + ' · 评估日 ' + esc(a.evaluatedAt || '—') + '</p>' +
+      '<div class="dlg-note">' + esc(a.caveat || '这是规则匹配分，不是成功率，也不是官方 benchmark。') + '</div>';
+    var d = $('scoreDlg');
+    if (d && !d.open) d.showModal();
+  }
+
+  function bindScoreHelp(root) {
+    if (!root) return;
+    root.querySelectorAll('.score-help').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var a = {};
+        try { a = JSON.parse(b.getAttribute('data-audit') || '{}'); } catch (err) { }
+        showScoreAudit(a);
+      });
+    });
+  }
+
+  function hardConstraintHtml(conflicts) {
+    var labels = {
+      local: '必须私有化：闭源模型被排除',
+      ctx: '上下文不足：部分模型装不下你的资料',
+      vision: '必须支持图片输入',
+      audio: '必须支持音频输入',
+      video: '必须支持视频输入',
+      free: '零预算：自托管/付费 API 被排除'
+    };
+    var list = Object.keys(conflicts).map(function (k) {
+      return '<li><b>' + esc(labels[k] || k) + '</b><span>' + conflicts[k] + ' 个模型因此被排除</span></li>';
+    }).join('');
+    return '<div class="hard-empty">' +
+      '<h3>暂无符合硬性条件的模型</h3>' +
+      '<p>系统没有自动放宽条件。你可以逐项取消，或明确同意放宽后重新搜索。</p>' +
+      '<ul class="conflict-list">' + list + '</ul>' +
+      '<div class="actions">' +
+      '<button class="btn btn-primary" id="allowRelaxBtn">同意放宽全部硬约束并重新搜索</button>' +
+      '<span class="hint-line" style="margin:0">放宽后结果会标注“不满足原硬约束”，请自行复核。</span>' +
+      '</div></div>';
+  }
+
+  function audienceTabsHtml() {
+    return '<div class="audience-tabs" role="tablist">' +
+      '<button class="' + (state.audience === 'beginner' ? 'on' : '') + '" data-audience="beginner">新手 · 只看费用</button>' +
+      '<button class="' + (state.audience === 'dev' ? 'on' : '') + '" data-audience="dev">开发者 · 看 Token</button>' +
+      '</div>';
+  }
+
+  function conclusionHtml(plan) {
+    var route = plan.routes[state.route];
+    var pick = route && route.picks ? route.picks[0] : null;
+    if (!pick) return '';
+    var m = pick.model;
+    var monthly = pick.cost * state.callsPerDay * 30;
+    var reasons = (pick.reasons || []).slice(0, 3);
+    return '<section class="conclusion">' +
+      '<div class="conclusion-kicker">首选方案</div>' +
+      '<div class="conclusion-main"><h2>' + esc(m.name) + '</h2>' +
+      '<span class="tier tier-' + m.tier + '">' + esc(E.tierLabel(m.tier)) + '</span></div>' +
+      '<p class="conclusion-price beginner-only">单次约 <b>¥' + fmt(pick.cost, 3) + '</b> · 每天 ' + state.callsPerDay + ' 次约 <b>¥' + fmt(monthly, 2) + '/月</b></p>' +
+      '<p class="conclusion-price dev-only">本步约 <b>¥' + fmt(pick.cost, 3) + '</b> · ' + esc(priceShort(m)) + ' / 百万 token</p>' +
+      '<ul class="conclusion-reasons">' + reasons.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+      '<div class="conclusion-actions">' +
+      '<button class="btn btn-primary" id="copyFirstPrompt">复制第一句提示词</button>' +
+      '<button class="btn btn-ghost" id="showAllSteps">展开每一步</button>' +
+      '<label class="calls-input">每天 <input id="callsPerDay" type="number" min="1" value="' + state.callsPerDay + '"> 次</label>' +
+      '</div></section>';
+  }
+
   function renderResults() {
     var plan = state.plan;
     if (!plan) return;
+    var conflicts = plan.constraintConflicts || {};
+    if (Object.keys(conflicts).length && !plan.relaxed) {
+      $('results').innerHTML = hardConstraintHtml(conflicts);
+      var rb = $('allowRelaxBtn');
+      if (rb) rb.addEventListener('click', function () {
+        state.allowRelax = true;
+        runPlan(false, true);
+      });
+      return;
+    }
     var domain = plan.domain;
     var chips = [
       '<span class="chip acc">' + esc(domain.icon || '*') + ' ' + esc(domain.name) + '</span>',
       '<span class="chip">预算：' + budgetLabel(plan.opts.budget) + '</span>',
       '<span class="chip">时间：' + timeLabel(plan.opts.time) + '</span>',
-      '<span class="chip">Token：' + tokenLabel(plan.opts.tokens) + '</span>'
+      '<span class="chip dev-only">Token：' + tokenLabel(plan.opts.tokens) + '</span>'
     ];
     if (plan.opts.local) chips.push('<span class="chip">仅本地部署</span>');
     if (plan.files && plan.files.length) chips.push('<span class="chip acc">附件 ' + plan.files.length + ' 个</span>');
 
-    var html = '';
+    var html = audienceTabsHtml() + conclusionHtml(plan);
+    if (plan.relaxed) {
+      html += '<div class="warn-banner">已按你的确认放宽硬约束：以下方案不再保证私有化 / 上下文 / 模态满足原条件。</div>';
+    }
+    html += '<details class="result-details" id="resultDetails"><summary>查看完整拆解、成本与每一步推荐</summary>';
     if (plan.files && plan.files.length) html += fileSummaryHtml(plan.files);
     html += '<div class="result-head"><div><h2>你的问题被拆成 <span>' + plan.subtasks.length + '</span> 步</h2>' +
       '<div style="font-size:13px;color:var(--dim);margin-top:4px">先拆解，再按你的时间 / 预算 / token 约束逐步骤匹配模型</div></div></div>';
@@ -304,8 +434,10 @@
       '<button class="btn" id="copyScriptBtn">复制整段话术</button>' +
 
       '<button class="btn btn-ghost" id="printPlanBtn">打印 / 存 PDF</button>' +
-      '<span class="hint-line" style="margin:0">价格为公开价快照，实际以下单页为准</span></div>';
+      '<span class="hint-line" style="margin:0">价格为公开价快照，实际以下单页为准</span></div></details>';
     $('results').innerHTML = html;
+
+    bindScoreHelp($('results'));
 
     $('routeTabs').addEventListener('click', function (e) {
       var b = e.target.closest('button[data-route]'); if (!b) return;
@@ -315,10 +447,27 @@
       $('strategyText').textContent = E.strategyText(plan, state.route);
       $('saveLine').textContent = saveLine(plan, state.route);
       $('subtaskList').innerHTML = renderSubtasks();
+      bindScoreHelp($('subtaskList'));
     });
     $('copyPlanBtn').addEventListener('click', function () { copyText(planToText(plan)); });
     $('copyScriptBtn').addEventListener('click', function () { copyText(window.MPPrompt.fullScript(plan, state.route)); });
     $('printPlanBtn').addEventListener('click', function () { window.print(); });
+    var firstBtn = $('copyFirstPrompt');
+    if (firstBtn) firstBtn.addEventListener('click', function () {
+      var first = plan.subtasks[0];
+      var fp = plan.routes[state.route].picks[0];
+      if (first && fp) copyText(window.MPPrompt.tailor(first.prompt, fp.model, plan, first));
+    });
+    var showBtn = $('showAllSteps');
+    if (showBtn) showBtn.addEventListener('click', function () {
+      var d = $('resultDetails'); if (d) { d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+    var calls = $('callsPerDay');
+    if (calls) calls.addEventListener('change', function () {
+      state.callsPerDay = Math.max(1, Number(this.value) || 20);
+      try { localStorage.setItem('mp_calls_per_day', String(state.callsPerDay)); } catch (e) { }
+      renderResults();
+    });
   }
 
   function matchedPanel(plan) {
@@ -388,7 +537,7 @@
       if (others.length) {
         html += '<div class="alt-row"><b>备选：</b>' + others.map(function (r) {
           return '<button class="link-btn js-model" data-model="' + esc(r.model.id) + '">' + esc(r.model.name) + '</button>' +
-            ' <span style="color:var(--dim)">' + MPEngineTier(r.model.tier) + ' · ' + Math.round(r.score) + '分 · ' + priceShort(r.model) + '</span>';
+            ' <span style="color:var(--dim)">' + MPEngineTier(r.model.tier) + ' · ' + Math.round(r.score) + '规则分 · ' + priceShort(r.model) + '</span>';
         }).join('　') + '</div>';
       }
       if (st.advice) html += '<div class="advice">用法建议：' + esc(st.advice) + '</div>';
@@ -539,14 +688,18 @@
     html += '<div class="rec-name"><h4>' + esc(m.name) + '</h4>' +
       '<span class="tier tier-' + m.tier + '">' + esc(E.tierLabel(m.tier)) + '</span>' +
       '<span class="rec-vendor">' + esc(m.vendor) + (m.open ? ' · 开源权重' : '') + (m.country !== 'CN' ? ' · 海外' : '') + '</span></div>';
-    html += '<div class="rec-meta"><span>上下文 <b>' + ctxLabel(m.ctx) + '</b></span><span>速度 <b>' + m.speed.toFixed(1) + '/10</b></span>' +
+    var monthly = r.cost * state.callsPerDay * 30;
+    html += '<div class="rec-meta dev-only"><span>上下文 <b>' + ctxLabel(m.ctx) + '</b></span><span>速度 <b>' + m.speed.toFixed(1) + '/10</b></span>' +
       '<span>价格 <b>' + priceShort(m) + '</b> / 百万 token</span><span>本步约 <b>¥' + fmt(r.cost, 3) + '</b></span></div>';
+    html += '<div class="rec-meta beginner-only"><span>单次约 <b>¥' + fmt(r.cost, 3) + '</b></span><span>每天 ' + state.callsPerDay + ' 次，约 <b>¥' + fmt(monthly, 2) + '/月</b></span></div>';
+    if (r.overCap) html += '<div class="warn-banner">输入约 ' + (r.rawInTok || '') + ' tokens，超出 60K 估算上限；当前费用按 60K 计算，实际更高。</div>';
     html += '<ul class="reasons">' + r.reasons.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
     if (r.cautions && r.cautions.length) {
       html += '<ul class="cautions">' + r.cautions.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
     }
     html += '</div>';
     html += '<div class="rec-side"><div class="score">' + Math.round(r.score) + '<small>/100</small></div>' +
+      '<button class="score-help" data-audit="' + esc(JSON.stringify(r.audit || {})) + '">规则匹配分 ⓘ</button>' +
       '<div class="score-bar"><i style="width:' + pct(r.score) + '%"></i></div>' +
       '<div class="price">' + esc(m.priceNote || '') + '</div></div>';
     html += '<div class="rec-foot">' + mods +
@@ -581,7 +734,7 @@
       L.push('## ' + (i + 1) + '. ' + st.title);
       L.push('目标：' + st.goal);
       if (pick) {
-        L.push('推荐：' + pick.model.name + '（' + E.tierLabel(pick.model.tier) + '，匹配度 ' + Math.round(pick.score) + '/100）');
+        L.push('推荐：' + pick.model.name + '（' + E.tierLabel(pick.model.tier) + '，规则匹配分 ' + Math.round(pick.score) + '/100）');
         L.push('理由：' + pick.reasons.join('；'));
         L.push('价格：' + priceShort(pick.model) + ' / 百万 token，本步约 ¥' + fmt(pick.cost, 3));
       }
@@ -1214,11 +1367,35 @@
       input.addEventListener('change', function () { c.classList.toggle('on', input.checked); });
     });
     $('runBtn').addEventListener('click', runPlan);
+    $('results').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-audience]');
+      if (b) {
+        state.audience = b.getAttribute('data-audience');
+        try { localStorage.setItem('mp_audience', state.audience); } catch (err) { }
+        document.body.dataset.audience = state.audience;
+        renderResults();
+        return;
+      }
+      var h = e.target.closest('.score-help');
+      if (h) {
+        var a = {};
+        try { a = JSON.parse(h.getAttribute('data-audit') || '{}'); } catch (err) { }
+        showScoreAudit(a);
+      }
+    });
+    $('scoreClose').addEventListener('click', function () { $('scoreDlg').close(); });
+    $('scoreDlg').addEventListener('click', function (e) { if (e.target === $('scoreDlg')) $('scoreDlg').close(); });
     $('problemInput').addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') runPlan();
     });
     $('problemInput').addEventListener('input', function () {
       $('charCount').textContent = $('problemInput').value.length + ' 字';
+      state.allowRelax = false;
+    });
+    document.addEventListener('change', function (e) {
+      if (e.target && e.target.matches('input[name=budget],input[name=time],input[name=tokens],.check input,#domainSelect')) {
+        state.allowRelax = false;
+      }
     });
     document.querySelectorAll('.js-example').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -1347,6 +1524,7 @@
   }
 
   function init() {
+    document.body.dataset.audience = state.audience;
     bind();
     applyPrices(window.MP_PRICES);
     renderPriceSync();
@@ -1359,9 +1537,16 @@
     var vendors = {}; MODELS.forEach(function (m) { vendors[m.vendor] = 1; });
     $('heroModels').innerHTML = MODELS.length + '<em>个</em>';
     $('heroAlgos').innerHTML = (ALGOS.length || '—') + '<em>条</em>';
-    $('heroTasks').innerHTML = allPrompts().length + '<em>套</em>';
+    if (promptPacksLoaded) $('heroTasks').innerHTML = allPrompts().length + '<em>套</em>';
     $('heroVendors').innerHTML = Object.keys(vendors).length + '<em>家</em>';
-    if (META.dataDate) $('footDate').textContent = META.dataDate;
+    if (META.dataDate) {
+      $('footDate').textContent = META.dataDate;
+      if ($('dataDate')) $('dataDate').textContent = META.dataDate;
+    }
+    var pd = (window.MP_PRICES && MP_PRICES.updatedAt)
+      ? new Date(MP_PRICES.updatedAt).toISOString().slice(0, 10)
+      : (META.dataDate || '');
+    if ($('priceDate')) $('priceDate').textContent = pd;
     renderAbout();
     renderLibStats();
     renderLibrary();
@@ -1371,7 +1556,11 @@
     renderTaskHall();
     if (window.MPPK) MPPK.init();
     var h = (location.hash || '').replace('#', '');
-    if (['pick', 'solutions', 'pk', 'models', 'algos', 'prompts', 'about'].indexOf(h) >= 0) showView(h);
+    if (['pick', 'solutions', 'pk', 'models', 'algos', 'prompts', 'about'].indexOf(h) >= 0) showView(h, true);
+    window.addEventListener('popstate', function () {
+      var hh = (location.hash || '#pick').replace('#', '');
+      if (['pick', 'solutions', 'pk', 'models', 'algos', 'prompts', 'about'].indexOf(hh) >= 0) showView(hh, true);
+    });
     if (!ALGOS.length) $('algoList').innerHTML = '<div class="empty">算法库加载中…</div>';
 
     var qs = new URLSearchParams(location.search);

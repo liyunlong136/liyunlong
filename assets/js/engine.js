@@ -161,11 +161,14 @@
     });
     base = sum ? (base / sum) * 10 : 60;
 
-    if (o.local && !m.open) return { blocked: '需要私有化部署，闭源模型不可用' };
-    if (need.ctx && m.ctx < need.ctx) return { blocked: '上下文 ' + Math.round(m.ctx / 1000) + 'K，不足本步所需 ' + Math.round(need.ctx / 1000) + 'K' };
-    if (need.vision && !has(m.modalities, 'image')) return { blocked: '不支持图片输入' };
-    if (need.audio && !has(m.modalities, 'audio')) return { blocked: '不支持音频输入' };
-    if (need.video && !has(m.modalities, 'video')) return { blocked: '不支持视频输入' };
+    if (!o.relaxAll) {
+      if (o.local && !m.open) return { blocked: '需要私有化部署，闭源模型不可用', blockedCode: 'local' };
+      if (need.ctx && m.ctx < need.ctx) return { blocked: '上下文 ' + Math.round(m.ctx / 1000) + 'K，不足本步所需 ' + Math.round(need.ctx / 1000) + 'K', blockedCode: 'ctx' };
+      if (need.vision && !has(m.modalities, 'image')) return { blocked: '不支持图片输入', blockedCode: 'vision' };
+      if (need.audio && !has(m.modalities, 'audio')) return { blocked: '不支持音频输入', blockedCode: 'audio' };
+      if (need.video && !has(m.modalities, 'video')) return { blocked: '不支持视频输入', blockedCode: 'video' };
+      if (o.budget === 'free' && (blend(m) > 0 || m.open)) return { blocked: '零预算只保留免费 API；自托管/付费 API 已排除', blockedCode: 'free' };
+    }
 
     var s = base;
     var b = blend(m);
@@ -201,7 +204,10 @@
     if (o.budget === 'free' && /免费/.test(m.freeTier || '')) s += 5;
     if (m.country === 'CN' && o.region === 'cn') s += 2;
 
-    var inTok = need.ctx ? Math.min(need.ctx, 60000) : 4000;
+    var EST_CAP = 60000;
+    var rawInTok = need.ctx || 4000;
+    var inTok = Math.min(rawInTok, EST_CAP);
+    var overCap = rawInTok > EST_CAP;
     var outTok = st.outTok || 1500;
     var cost = estimateCost(m, inTok, outTok);
 
@@ -225,24 +231,60 @@
     if (!m.open && m.country !== 'CN' && o.region === 'cn') { /* already added */ }
     if (m.tier === 5) cautions.push('L5 顶级档，建议只用在关键步骤');
 
-    return { score: clamp(s, 1, 97), reasons: reasons.slice(0, 3), cautions: cautions.slice(0, 3), cost: cost, inTok: inTok, outTok: outTok };
+    var meta = window.MP_META || {};
+    var audit = {
+      matched: reasons.slice(0, 3),
+      unverified: [
+        '你的真实文件复杂度未验证',
+        '厂商实时延迟与稳定性未验证',
+        '你的账号限流与并发未验证'
+      ],
+      source: '自研十维 + 公开基准参考 + 人工校准',
+      evaluatedAt: meta.dataDate || '',
+      caveat: '这是规则匹配分，不是成功率，也不是官方 benchmark'
+    };
+    return {
+      score: clamp(s, 1, 97), reasons: reasons.slice(0, 3), cautions: cautions.slice(0, 3),
+      cost: cost, inTok: inTok, outTok: outTok, audit: audit,
+      overCap: overCap, rawInTok: rawInTok
+    };
   }
 
-  function recommend(st, o, n) {
+  function recommend(st, o, n, allowRelax) {
     o = o || {};
     var scored = [];
+    var conflicts = {};
     MODELS.forEach(function (m) {
       var r = scoreModel(m, st, o);
-      if (!r.blocked) scored.push({ model: m, score: r.score, reasons: r.reasons, cautions: r.cautions, cost: r.cost, inTok: r.inTok, outTok: r.outTok });
+      if (r.blocked) {
+        var code = r.blockedCode || 'other';
+        conflicts[code] = (conflicts[code] || 0) + 1;
+        return;
+      }
+      scored.push({ model: m, score: r.score, reasons: r.reasons, cautions: r.cautions, cost: r.cost, inTok: r.inTok, outTok: r.outTok, audit: r.audit, overCap: r.overCap, rawInTok: r.rawInTok });
     });
     scored.sort(function (a, b) { return b.score - a.score; });
-    if (!scored.length) {
+
+    if (!scored.length && !allowRelax) {
+      var empty = [];
+      empty.conflicts = conflicts;
+      empty.relaxed = false;
+      return empty;
+    }
+
+    if (!scored.length && allowRelax) {
       MODELS.forEach(function (m) {
-        var r = scoreModel(m, st, Object.assign({}, o, { local: false, budget: 'high' }));
-        if (!r.blocked) scored.push({ model: m, score: r.score - 10, reasons: r.reasons, cautions: ['放宽了硬性约束后推荐'].concat(r.cautions), cost: r.cost, inTok: r.inTok, outTok: r.outTok });
+        var r = scoreModel(m, st, Object.assign({}, o, { relaxAll: true, local: false, requireCtx: 0, requireVision: false, requireAudio: false, requireVideo: false, budget: 'high' }));
+        if (!r.blocked) scored.push({ model: m, score: r.score - 10, reasons: r.reasons, cautions: ['你已同意放宽硬性约束后推荐'].concat(r.cautions), cost: r.cost, inTok: r.inTok, outTok: r.outTok, audit: r.audit, overCap: r.overCap, rawInTok: r.rawInTok });
       });
       scored.sort(function (a, b) { return b.score - a.score; });
+      scored.relaxed = true;
+      scored.conflicts = conflicts;
+      return scored.slice(0, n || 4);
     }
+
+    scored.conflicts = {};
+    scored.relaxed = false;
     return scored.slice(0, n || 4);
   }
 
@@ -325,7 +367,8 @@
       lang: opts.lang || 'zh', region: opts.region || 'cn', local: !!opts.local,
       domainId: opts.domainId,
       requireCtx: Math.max(opts.requireCtx || 0, Math.min(200000, approxChars ? Math.round(approxChars * 1.3) : 0)),
-      requireVision: !!opts.requireVision || fileVision, requireAudio: !!opts.requireAudio
+      requireVision: !!opts.requireVision || fileVision, requireAudio: !!opts.requireAudio, requireVideo: !!opts.requireVideo,
+      allowRelax: !!opts.allowRelax
     };
     var constrained = (o.budget === 'free' || o.budget === 'low' || o.tokens === 'scarce');
     var routeKey = constrained ? 'save' : (o.time === 'urgent' ? 'fast' : 'quality');
@@ -335,7 +378,7 @@
     if (files.length) items.unshift(makeAttachSubtask(files, problem, o));
     if (items.length > 4) items = items.slice(0, 4);
     var subs = items.map(function (st) {
-      var recs = recommend(st, o, 5);
+      var recs = recommend(st, o, 5, !!o.allowRelax);
       var prompt = String(st.prompt || '').replace(/\{\{problem\}\}/g, problem || '（这里粘贴你的具体问题）');
       if (!/\{\{problem\}\}/.test(st.prompt || '') && (st.prompt || '').indexOf(problem) < 0 && !st._attach) {
         prompt = '【我的问题】\n' + problem + '\n\n' + prompt;
@@ -344,8 +387,20 @@
       return {
         id: st.id, title: st.title, goal: st.goal, dims: st.dims, need: st.need,
         mode: st.mode || [], advice: st.advice || '', prompt: prompt, recs: recs, best: recs[0],
-        save: pickRoute(recs, 'save', st, o), fast: pickRoute(recs, 'fast', st, o)
+        save: recs.length ? pickRoute(recs, 'save', st, o) : null,
+        fast: recs.length ? pickRoute(recs, 'fast', st, o) : null,
+        conflicts: recs.conflicts || {},
+        relaxed: !!recs.relaxed
       };
+    });
+
+    var conflictMap = {};
+    var relaxed = false;
+    subs.forEach(function (s) {
+      Object.keys(s.conflicts || {}).forEach(function (k) {
+        conflictMap[k] = (conflictMap[k] || 0) + s.conflicts[k];
+      });
+      if (s.relaxed) relaxed = true;
     });
 
     var routes = {
@@ -361,6 +416,7 @@
       problem: problem, domain: dec.domain, secondary: dec.secondary, subtasks: subs,
       routes: routes, routeKey: routeKey, opts: o,
       totalCost: routes[routeKey].total, files: files,
+      constraintConflicts: conflictMap, relaxed: relaxed,
       notes: buildNotes(subs, o, routeKey, files)
     };
   }

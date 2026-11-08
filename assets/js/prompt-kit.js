@@ -36,6 +36,8 @@
     return out;
   }
 
+  all.clearCache = function () { all._cache = null; };
+
   function grams(text) {
     var map = {};
     var cjk = String(text).match(/[\u4e00-\u9fa5]+/g) || [];

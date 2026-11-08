@@ -17,7 +17,7 @@
       { api: 'gpt-5.5-mini', id: 'gpt-5.5-mini' }, { api: 'gpt-5.5', id: 'gpt-5.5' }, { api: 'gpt-5.1', id: 'gpt-5.1' }
     ] }
   };
-  var state = { provider: 'zhipu', key: '', running: false };
+  var state = { provider: 'zhipu', key: '', running: false, mode: 'prompt' };
 
   function $(id) { return document.getElementById(id); }
   function esc(s) {
@@ -59,20 +59,28 @@
   function buildPrompts() {
     var topic = ($('pkTopic').value || '').trim();
     if (!topic) return;
-    var a = topic;
-    var b = '';
+    var structured = '';
     var match = window.MPPrompt ? window.MPPrompt.match(topic, 1)[0] : null;
     if (match && match.score >= 6) {
-      b = window.MPPrompt.substitute(match.item.prompt, topic);
+      structured = window.MPPrompt.substitute(match.item.prompt, topic);
     } else {
-      b = genericPrompt(topic);
+      structured = genericPrompt(topic);
     }
-    var mb = selectedModel('pkModelB');
-    if (window.MPPrompt && mb) {
-      b = window.MPPrompt.tailor(b, mb, { opts: { time: 'normal', budget: 'mid', tokens: 'normal' }, files: [] }, { need: { ctx: 8000 } });
+
+    if (state.mode === 'prompt') {
+      var ma = selectedModel('pkModelA');
+      $('pkModelB').value = $('pkModelA').value;
+      $('pkModelB').disabled = true;
+      if (window.MPPrompt && ma) {
+        structured = window.MPPrompt.tailor(structured, ma, { opts: { time: 'normal', budget: 'mid', tokens: 'normal' }, files: [] }, { need: { ctx: 8000 } });
+      }
+      $('pkPromptA').value = topic;
+      $('pkPromptB').value = structured;
+    } else {
+      $('pkModelB').disabled = false;
+      $('pkPromptA').value = structured;
+      $('pkPromptB').value = structured;
     }
-    $('pkPromptA').value = a;
-    $('pkPromptB').value = b;
     updateMeta();
   }
 
@@ -87,7 +95,7 @@
   function updateMeta() {
     var ma = selectedModel('pkModelA'), mb = selectedModel('pkModelB');
     if (!ma || !mb) return;
-    var ea = estimate($('pkPromptA').value, ma, 500);
+    var ea = estimate($('pkPromptA').value, ma, 800);
     var eb = estimate($('pkPromptB').value, mb, 800);
     $('pkMetaA').innerHTML = 'L' + ma.tier + ' · 约 ' + tokText(ea.inTok) + ' tokens · ¥' + fmt(ea.cost, 4) + ' · ' + Math.round(ea.sec) + ' 秒';
     $('pkMetaB').innerHTML = 'L' + mb.tier + ' · 约 ' + tokText(eb.inTok) + ' tokens · ¥' + fmt(eb.cost, 4) + ' · ' + Math.round(eb.sec) + ' 秒';
@@ -122,7 +130,7 @@
   }
 
   function diffHtml(aText, bText, ma, mb, ra, rb) {
-    var ea = ra ? { inTok: ra.inTok || 0, outTok: ra.outTok || 0 } : estimate(aText, ma, 500);
+    var ea = ra ? { inTok: ra.inTok || 0, outTok: ra.outTok || 0 } : estimate(aText, ma, 800);
     var eb = rb ? { inTok: rb.inTok || 0, outTok: rb.outTok || 0 } : estimate(bText, mb, 800);
     var ca = (ma.priceIn * ea.inTok + ma.priceOut * ea.outTok) / 1e6;
     var cb = (mb.priceIn * eb.inTok + mb.priceOut * eb.outTok) / 1e6;
@@ -145,11 +153,12 @@
       '<span>普通：' + tk(ea.inTok) + ' tokens · ' + (ca > 0 ? '¥' + fmt(ca, 4) : '免费') + ' · ' + Math.round(secA) + ' 秒</span>' +
       '<span>专家：' + tk(eb.inTok) + ' tokens · ' + (cb > 0 ? '¥' + fmt(cb, 4) : '免费') + ' · ' + Math.round(secB) + ' 秒</span>' +
       '<i>同样的事，人类助理约需 15 分钟</i></div>' +
-      '<table class="dlg-table"><thead><tr><th>对比项</th><th>普通模式</th><th>专家模式</th></tr></thead><tbody>' +
+      '<table class="dlg-table"><thead><tr><th>对比项</th><th>' + (state.mode === 'model' ? '模型 A' : '普通模式') + '</th><th>' + (state.mode === 'model' ? '模型 B' : '专家模式') + '</th></tr></thead><tbody>' +
       rows.map(function (r) { return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>'; }).join('') +
       '</tbody></table>' +
-      '<p class="pk-takeaway">右侧的差距主要来自两件事：<b>结构化提示词</b>（角色、任务拆解、约束、输出格式）和<b>模型升级</b>（L' + ma.tier + ' → L' + mb.tier + '）。' +
-      '提示词的贡献通常比模型更大；先改提示词，再考虑升级模型。</p>' +
+      '<p class="pk-takeaway">' + (state.mode === 'model'
+        ? '同提示词下，差异来自<b>模型本身</b>（L' + ma.tier + ' → L' + mb.tier + '）：能力、速度、价格和稳定性。'
+        : '同模型下，差异来自<b>提示词结构</b>（角色、任务拆解、约束、输出格式）；这次不比较模型差异。') + '</p>' +
       '<div class="pk-costline">按每天 100 次：普通约 ¥' + fmt(ca * 100 * 30, 2) + '/月；专家约 ¥' + fmt(cb * 100 * 30, 2) + '/月。' +
       (ra ? '本次真实耗时：普通 ' + Math.round(ra.ms / 100) / 10 + ' 秒，专家 ' + Math.round(rb.ms / 100) / 10 + ' 秒。' : '') + '</div>' +
       '</div>';
@@ -166,18 +175,75 @@
     var ma = selectedModel('pkModelA'), mb = selectedModel('pkModelB');
     var a = $('pkPromptA').value, b = $('pkPromptB').value;
     setOutputs(
-      '<div class="pk-placeholder"><b>未调用模型</b><p>普通模式只发送你原样输入的一句话。真实效果取决于模型和运气。</p></div>',
-      '<div class="pk-placeholder"><b>未调用模型</b><p>专家模式会发送右侧这条结构化提示词。配置 API Key 后可真跑一次。</p></div>',
+      '<div class="pk-placeholder"><b>未调用模型</b><p>' + (state.mode === 'model' ? '模型 A：同一提示词。' : '普通模式：只发送你原样输入的一句话。') + '</p></div>',
+      '<div class="pk-placeholder"><b>未调用模型</b><p>' + (state.mode === 'model' ? '模型 B：同一提示词。' : '专家模式：发送右侧结构化提示词。') + '</p></div>',
       diffHtml(a, b, ma, mb, null, null)
     );
     if (window.MPTrack) MPTrack.event('pk_demo', { topic: a.slice(0, 40) });
     $('pkDiff').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  function askPkConsent(providerName) {
+    return new Promise(function (resolve) {
+      var dlg = $('pkConsentDlg');
+      if (!dlg) { resolve(false); return; }
+      var check = $('pkConsentCheck');
+      var go = $('pkConsentGo');
+      var canceled = false;
+
+      $('pkConsentProvider').textContent = providerName;
+      check.checked = false;
+      go.disabled = true;
+
+      function cleanup() {
+        check.removeEventListener('change', onChange);
+        go.removeEventListener('click', onGo);
+        $('pkConsentCancel').removeEventListener('click', onCancel);
+        $('pkConsentClose').removeEventListener('click', onCancel);
+        dlg.removeEventListener('cancel', onCancel);
+        dlg.removeEventListener('click', onBackdrop);
+      }
+      function finish(ok) {
+        cleanup();
+        if (dlg.open) dlg.close();
+        resolve(ok);
+        if (canceled) canceled = false;
+      }
+      function onChange() { go.disabled = !check.checked; }
+      function onGo() { if (check.checked) finish(true); }
+      function onCancel() { canceled = true; finish(false); }
+      function onBackdrop(e) { if (e.target === dlg) onCancel(); }
+
+      check.addEventListener('change', onChange);
+      go.addEventListener('click', onGo);
+      $('pkConsentCancel').addEventListener('click', onCancel);
+      $('pkConsentClose').addEventListener('click', onCancel);
+      dlg.addEventListener('cancel', onCancel);
+      dlg.addEventListener('click', onBackdrop);
+      if (!dlg.open) dlg.showModal();
+    });
+  }
+
+  function updateRunLabel() {
+    var hasKey = !!($('pkKey').value || '').trim();
+    if ($('pkRun')) $('pkRun').textContent = hasKey ? '生成对比（会发送到厂商）' : '生成对比';
+  }
+
   async function runLive() {
     buildPrompts();
     var key = ($('pkKey').value || '').trim();
     if (!key) { runDemo(); return; }
+
+    var providerName = PRESETS[state.provider].name;
+    var consentKey = 'mp_pk_consent_' + state.provider;
+    var consented = false;
+    try { consented = !!sessionStorage.getItem(consentKey); } catch (e) { }
+    if (!consented) {
+      var ok = await askPkConsent(providerName);
+      if (!ok) return;
+      try { sessionStorage.setItem(consentKey, '1'); } catch (e) { }
+    }
+
     if (window.MPTrack && !MPTrack.count('pk', 5)) {
       setOutputs('<div class="pk-error">今天的免费体验次数（5 次）用完了。明天再试，或只用「只看提示词对比」。</div>',
         '<div class="pk-error">今天的免费体验次数（5 次）用完了。</div>', '');
@@ -191,7 +257,7 @@
     $('pkOutB').innerHTML = '<div class="pk-loading">正在调用…</div>';
     try {
       var results = await Promise.allSettled([
-        callModel(p, key, apiA, $('pkPromptA').value, 500),
+        callModel(p, key, apiA, $('pkPromptA').value, 800),
         callModel(p, key, apiB, $('pkPromptB').value, 800)
       ]);
       var ra = results[0].status === 'fulfilled' ? results[0].value : null;
@@ -214,6 +280,7 @@
   function saveKey() {
     state.key = $('pkKey').value.trim();
     try { sessionStorage.setItem('mp_pk_key', state.key); } catch (e) { }
+    updateRunLabel();
   }
 
   function init() {
@@ -229,7 +296,18 @@
       clearTimeout(this._t); var self = this;
       this._t = setTimeout(function () { buildPrompts(); }, 220);
     });
-    ['pkModelA', 'pkModelB'].forEach(function (id) { $(id).addEventListener('change', updateMeta); });
+    ['pkModelA', 'pkModelB'].forEach(function (id) {
+      $(id).addEventListener('change', function () {
+        if (state.mode === 'prompt') $('pkModelB').value = $('pkModelA').value;
+        buildPrompts();
+      });
+    });
+    $('pkMode').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-pk-mode]'); if (!b) return;
+      state.mode = b.getAttribute('data-pk-mode');
+      $('pkMode').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      buildPrompts();
+    });
     $('pkRun').addEventListener('click', function () { saveKey(); runLive(); });
     $('pkDemo').addEventListener('click', runDemo);
     $('pkClearKey').addEventListener('click', function () {
@@ -237,6 +315,8 @@
       try { sessionStorage.removeItem('mp_pk_key'); } catch (e) { }
     });
     $('pkKey').addEventListener('change', saveKey);
+    $('pkKey').addEventListener('input', updateRunLabel);
+    updateRunLabel();
     document.querySelectorAll('[data-copy-pk]').forEach(function (b) {
       b.addEventListener('click', function () {
         var v = b.getAttribute('data-copy-pk') === 'a' ? $('pkPromptA').value : $('pkPromptB').value;

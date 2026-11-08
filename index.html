@@ -33,7 +33,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235eead4'/%3E%3Cstop offset='1' stop-color='%23818cf8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230a0f1c'/%3E%3Cpath d='M16 46V18h6l10 16 10-16h6v28h-6V29l-10 15-10-15v17z' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body data-audience="beginner">
 
 <header class="site-head">
   <div class="wrap head-inner">
@@ -61,9 +61,9 @@
   <!-- ================= 选型 ================= -->
   <section class="view active" id="view-pick">
     <div class="hero">
-      <span class="kicker"><i></i> 免费 · 无登录 · 数据快照 2026-11</span>
-      <h1>选对模型，<br><span class="grad">比用最强模型更重要。</span></h1>
-      <p class="hero-sub">把一个大问题拆成几步，再按你的时间、预算和 token 余量，为每一步挑一个<strong>具体模型</strong>（精确到版本和等级），并告诉你为什么适合、该开什么模式、第一句话怎么问。现在也可以直接上传<strong>截图、PDF、Word 或代码</strong>，让推荐从你的文件开始。</p>
+      <span class="kicker"><i></i> 免费 · 无登录 · 数据快照 <span id="dataDate">—</span></span>
+      <h1>告诉我你要做什么，<br><span class="grad">帮你选模型、估费用、写好第一句提示词。</span></h1>
+      <p class="hero-sub">不用懂 token，也不用背提示词。说清产出、时间和预算，拆解、选型、模式、第一句话都给你安排好。也可以直接上传<strong>截图、PDF、Word 或代码</strong>，从你的文件开始。</p>
       <div class="hero-stats">
         <div class="stat"><b id="heroModels">125<em>个</em></b><span>国内外模型</span></div>
         <div class="stat"><b id="heroAlgos">65<em>条</em></b><span>算法与训练要点</span></div>
@@ -75,40 +75,6 @@
     <section class="recent" id="recentWrap" hidden>
       <div class="recent-head"><span class="kicker">最近方案</span><button class="link-btn" id="recentClear" type="button">清空</button></div>
       <div class="recent-list" id="recentList"></div>
-    </section>
-
-    <section class="task-hall">
-      <div class="th-head">
-        <div><span class="kicker">任务大厅</span><h2>不知道从哪开始？先选一个任务</h2>
-          <p>每张卡都标好推荐等级和大致成本，点开先看「为什么推荐」，再决定要不要自己写。</p></div>
-        <button class="btn btn-ghost btn-sm" data-view="solutions">看全部方案</button>
-      </div>
-      <div class="task-grid" id="taskGrid"></div>
-    </section>
-
-    <section class="rank-home" id="rankHome">
-      <div class="rank-head">
-        <div><span class="kicker">排行榜</span><h2>总榜与分榜</h2>
-          <p id="rankSub">能力分 + 用户评分；点任意模型看详情。</p></div>
-        <button class="btn btn-sm" id="rankMore">查看完整榜单</button>
-      </div>
-      <div class="filters" id="rankTabs"></div>
-      <div class="rank-list" id="rankList"></div>
-      <p class="rank-method">口径：能力分 80% = 自研十维评分（人工设定，参考公开基准与实测）；用户评分 20% 仅在有评分时生效。能力分不是官方 benchmark。</p>
-      <div class="rank-note" id="rankNote"></div>
-    </section>
-
-    <section class="mission">
-      <div class="mission-copy">
-        <span class="kicker">我们的目标</span>
-        <h2>让更多人<span class="grad">学会使用模型</span>，<br>而不是被模型选择。</h2>
-        <p>模型不会自己变好，是「会用」让它变好。我们把选型、模式、提示词和踩过的坑拆开讲清楚，让第一次用大模型的人，也能做出专业的选择。</p>
-      </div>
-      <div class="pillars">
-        <div class="pillar"><b>01</b><h3>看懂</h3><p>65 条算法与训练要点，知道模型为什么会这样。</p></div>
-        <div class="pillar"><b>02</b><h3>选对</h3><p>按时间、预算、token 推荐到具体版本，而不是一句「用最强的」。</p></div>
-        <div class="pillar"><b>03</b><h3>用起来</h3><p>每个任务配好模式与提示词，复制就能开始。</p></div>
-      </div>
     </section>
 
     <div class="panel">
@@ -189,6 +155,40 @@
       </div>
     </div>
 
+    <section class="task-hall">
+      <div class="th-head">
+        <div><span class="kicker">任务大厅</span><h2>不知道从哪开始？先选一个任务</h2>
+          <p>每张卡都标好推荐等级和大致成本，点开先看「为什么推荐」，再决定要不要自己写。</p></div>
+        <button class="btn btn-ghost btn-sm" data-view="solutions">看全部方案</button>
+      </div>
+      <div class="task-grid" id="taskGrid"></div>
+    </section>
+
+    <section class="rank-home" id="rankHome">
+      <div class="rank-head">
+        <div><span class="kicker">排行榜</span><h2>总榜与分榜</h2>
+          <p id="rankSub">能力分 + 用户评分；点任意模型看详情。</p></div>
+        <button class="btn btn-sm" id="rankMore">查看完整榜单</button>
+      </div>
+      <div class="filters" id="rankTabs"></div>
+      <div class="rank-list" id="rankList"></div>
+      <p class="rank-method">口径：能力分 80% = 自研十维评分（人工设定，参考公开基准与实测）；用户评分 20% 仅在有评分时生效。能力分不是官方 benchmark。</p>
+      <div class="rank-note" id="rankNote"></div>
+    </section>
+
+    <section class="mission">
+      <div class="mission-copy">
+        <span class="kicker">我们的目标</span>
+        <h2>让更多人<span class="grad">学会使用模型</span>，<br>而不是被模型选择。</h2>
+        <p>模型不会自己变好，是「会用」让它变好。我们把选型、模式、提示词和踩过的坑拆开讲清楚，让第一次用大模型的人，也能做出专业的选择。</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><b>01</b><h3>看懂</h3><p>65 条算法与训练要点，知道模型为什么会这样。</p></div>
+        <div class="pillar"><b>02</b><h3>选对</h3><p>按时间、预算、token 推荐到具体版本，而不是一句「用最强的」。</p></div>
+        <div class="pillar"><b>03</b><h3>用起来</h3><p>每个任务配好模式与提示词，复制就能开始。</p></div>
+      </div>
+    </section>
+
     <div class="results" id="results"></div>
   </section>
 
@@ -240,6 +240,16 @@
         <h1>普通模式 vs 专家模式</h1>
         <p>同一条问题：左边随便问 + L1/L2，右边结构化提示词 + L4/L5。差在哪、差多少钱，一眼看到。</p>
       </div>
+    </div>
+
+    <div class="pk-mode" id="pkMode">
+      <button class="on" data-pk-mode="prompt">同模型 · 比提示词</button>
+      <button data-pk-mode="model">同提示词 · 比模型</button>
+    </div>
+
+    <div class="privacy-strip">
+      <div><b>本地运行</b><span>选型、文件解析、成本估算；评分默认只存本机</span></div>
+      <div class="cloud"><b>云端运行</b><span>PK 真跑会把问题和提示词发给所选厂商；启用共享评分后只上传分数与匿名 ID</span></div>
     </div>
 
     <div class="panel pk-topic">
@@ -417,7 +427,7 @@
         <ul>
           <li><b>先拆解</b>：按领域把问题拆成 3-4 个有依赖关系的子任务，每个子任务单独匹配模型（同一个问题，第 1 步和第 3 步适合的模型经常不同）。</li>
           <li><b>再打分</b>：每个子任务有权重向量（推理 / 代码 / 写作 / 中文 / 长文 / 多模态 / 速度 / 性价比 / 智能体 / 数学），与模型能力向量做加权匹配。</li>
-          <li><b>加约束</b>：硬需求（上下文、图片、音频、私有化）先做排除；再按预算、时间、token 余量做加减分，最终给出 0-100 的匹配度。</li>
+          <li><b>加约束</b>：硬需求（上下文、图片、音频、私有化）先做排除；再按预算、时间、token 余量做加减分，最终给出 0-100 的规则匹配分（不是成功率）。</li>
           <li><b>给理由</b>：每条推荐必须说清「哪项能力匹配、这一步大约花多少钱、有什么坑」，而不是只给名字。</li>
           <li><b>三套路线</b>：质量优先 / 省钱优先 / 速度优先，算好每条路线的单次成本，由你自己权衡。</li>
         </ul>
@@ -444,9 +454,9 @@
         <h3>合规标签怎么来的</h3>
         <p>「国内直连」表示厂商在国内有可用 API；「可私有化」表示权重开放或厂商提供私有部署；「境内备案」按厂商公开信息标注，具体以网信办公示与合同为准。本站不做合规背书，金融、医疗等强监管场景请走正式合规审查。</p>
         <h3>价格说明</h3>
-        <p>价格是 2026-11-05 的公开价快照，单位为人民币 / 百万 tokens。海外模型按 1 美元 ≈ 7.1 元折算，未含渠道与税费；标注「推算」的条目是按同级产品估算，仅用于横向比较，下单前请以官网为准。各家阶梯计价、缓存命中、Batch 折扣差异很大，实际成本可能显著低于标价。</p>
+        <p>价格核验于 <span id="priceDate">—</span>，单位为人民币 / 百万 tokens。海外模型按 1 美元 ≈ 7.1 元折算，未含渠道与税费；标注「推算」的条目是按同级产品估算，仅用于横向比较，下单前请以官网为准。各家阶梯计价、缓存命中、Batch 折扣差异很大，实际成本可能显著低于标价。</p>
         <h3>免费承诺</h3>
-        <p>本站无登录、无追踪、无广告、不卖课。所有数据在浏览器本地计算，你的问题不会离开这台设备。</p>
+        <p>本站无登录、无追踪、无广告、不卖课。选型、文件解析、成本估算都在浏览器本地完成；评分默认只存本机，只有启用 Supabase 共享评分时才会上传分数和匿名 ID。唯一会发送问题内容的是 PK 真跑：只有你主动填写 Key、确认后，问题与提示词才会发送给你选择的模型厂商；不填 Key 时只做结构与成本对比，不发送任何内容。</p>
       </div>
       <div>
         <div class="panel">
@@ -478,8 +488,8 @@
 
 <footer>
   <div class="wrap foot-inner">
-    <div>模选 ModelPick · 数据快照 <span id="footDate">2026-11</span> · 价格与能力以各平台官网为准</div>
-    <div>免费使用 · 本地计算 · 不收集你的问题 · <button class="link-btn" data-open-feedback>反馈与建议</button></div>
+    <div>模选 ModelPick · 数据快照 <span id="footDate">—</span> · 价格与能力以各平台官网为准</div>
+    <div>免费使用 · 选型/文件/评分默认本地 · PK 真跑会发往第三方 · <button class="link-btn" data-open-feedback>反馈与建议</button></div>
   </div>
   <div class="wrap foot-links">
     <span>分栏索引</span>
@@ -500,6 +510,11 @@
     <div class="filters" id="rankDlgTabs"></div>
     <div id="rankDlgList"></div>
   </div>
+</dialog>
+
+<dialog id="scoreDlg" class="score-dlg">
+  <div class="dlg-head"><div><h3>规则匹配分怎么来的</h3><div class="m-sub">不是成功率，也不是官方 benchmark</div></div><button class="dlg-close" id="scoreClose" aria-label="关闭">×</button></div>
+  <div class="dlg-body" id="scoreBody"></div>
 </dialog>
 
 <dialog id="whyDlg" class="why-dlg">
@@ -526,6 +541,26 @@
     <button class="dlg-close" id="dlgClose" aria-label="关闭">×</button>
   </div>
   <div class="dlg-body" id="dlgBody"></div>
+</dialog>
+
+<dialog id="pkConsentDlg" class="consent-dlg">
+  <div class="dlg-head">
+    <div><h3>这次会把内容发送到第三方</h3><div class="m-sub">PK 真跑才会发送；只看结构对比不会</div></div>
+    <button class="dlg-close" id="pkConsentClose" aria-label="关闭">×</button>
+  </div>
+  <div class="dlg-body">
+    <p>你将调用 <b id="pkConsentProvider">智谱</b> 的 API。</p>
+    <ul class="consent-list">
+      <li>会发送：你的问题、左侧原文、右侧结构化提示词</li>
+      <li>不会发送：上传的文件、浏览器本地记录</li>
+      <li>API Key 只存在当前标签页的 sessionStorage</li>
+    </ul>
+    <label class="check"><input type="checkbox" id="pkConsentCheck"> 我已知晓并同意把上述内容发送给该厂商</label>
+    <div class="actions">
+      <button class="btn" id="pkConsentCancel">取消</button>
+      <button class="btn btn-primary" id="pkConsentGo" disabled>继续发送</button>
+    </div>
+  </div>
 </dialog>
 
 <button class="fb-fab" id="feedbackBtn" aria-label="反馈与建议"><span class="fb-fab-ico">✎</span><span>反馈</span></button>
@@ -566,11 +601,6 @@
 <script src="assets/js/data/algorithms.js"></script>
 <script src="assets/js/data/tasks.js"></script>
 <script src="assets/js/data/prompts-extra.js"></script>
-<script src="assets/js/data/prompts-pack-1.js"></script>
-<script src="assets/js/data/prompts-pack-2.js"></script>
-<script src="assets/js/data/prompts-pack-3.js"></script>
-<script src="assets/js/data/prompts-pack-4.js"></script>
-<script src="assets/js/data/prompts-pack-5.js"></script>
 <script src="assets/js/track.js"></script>
 <script src="assets/js/prompt-kit.js"></script>
 <script src="assets/js/file-analyzer.js"></script>

@@ -57,7 +57,7 @@
     if (!el || !modelId) return;
     el.innerHTML =
       '<div class="rate-card" data-model="' + modelId + '">' +
-      '<div class="rate-top"><div class="rate-title">这个模型好用吗？</div><div class="rate-avg">暂无评分</div></div>' +
+      '<div class="rate-top"><div class="rate-title">我的评分 <small>仅本机</small></div><div class="rate-avg">暂无共享评分</div></div>' +
       '<div class="rate-stars" role="radiogroup" aria-label="模型评分">' + starsHtml() + '</div>' +
       '<div class="rate-thanks" hidden>感谢您的评价！</div>' +
       '<div class="rate-status"></div>' +
@@ -93,7 +93,7 @@
       thanks.classList.add('show');
     }
     function renderAvg(avg, count) {
-      if (!count) { avgEl.textContent = '暂无评分'; return; }
+      if (!count) { avgEl.textContent = '暂无共享评分'; return; }
       avgEl.textContent = avg.toFixed(1) + ' · ' + count + ' 人';
     }
     function loadAverage() {
@@ -108,7 +108,7 @@
         .catch(function () { avgEl.textContent = '评分暂不可用'; });
     }
     function loadMine() {
-      if (!cfgOk()) { setStatus('本地演示：未配置 Supabase，评分只保存在本机。'); return; }
+      if (!cfgOk()) { setStatus('我的评分只保存在本机，不参与全站总榜。'); return; }
       fetch(base() + '?model_id=eq.' + encodeURIComponent(modelId) + '&user_fingerprint=eq.' + encodeURIComponent(fingerprint()) + '&select=score&limit=1', { headers: headers() })
         .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
         .then(function (rows) {

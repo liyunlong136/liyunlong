@@ -84,8 +84,10 @@
     var base = baseScore(m, dim);
     var u = userAvg(m);
     if (dim === 'rating') return u ? u.avg * 2 : 0;
-    // 只有总榜混入用户评分；分榜保持纯能力，避免样本太少时被一票带偏
-    if (dim === 'all' && u) return base * 0.8 + (u.avg * 2) * 0.2;
+    // 只有真实共享评分（Supabase）且样本足够，才混入总榜；本机评分不参与
+    if (dim === 'all' && state.source === 'supabase' && u && u.count >= 3) {
+      return base * 0.8 + (u.avg * 2) * 0.2;
+    }
     return base;
   }
   function rank(dim, n) {
@@ -143,9 +145,9 @@
     if (isDialog) el.className = 'rank-list dialog';
   }
   function noteText() {
-    if (state.source === 'supabase') return '用户评分来自 Supabase（' + state.votes + ' 条）；总榜 = 能力 80% + 用户 20%，分榜按纯能力排序。';
-    if (state.source === 'local') return '当前使用本地演示评分（' + state.votes + ' 个模型）；配置 Supabase 后会换成真实评分。';
-    return '还没有用户评分，当前按能力分排序；配置 Supabase 并收到评分后，总榜会自动混入用户评分。';
+    if (state.source === 'supabase') return '用户评分来自 Supabase（' + state.votes + ' 条）；同一模型至少 3 条评分才混入总榜，总榜 = 能力 80% + 共享评分 20%。';
+    if (state.source === 'local') return '本机有你的评分，但本机评分不参与全站总榜；总榜当前按能力分排序。';
+    return '还没有共享评分，当前按能力分排序；配置 Supabase 并收到至少 3 条同模型评分后，总榜才会混入共享评分。';
   }
   function renderAll() {
     renderTabs($('rankTabs'), false);

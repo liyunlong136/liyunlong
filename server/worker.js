@@ -45,6 +45,41 @@ export default {
     if (request.method !== 'POST') return json({ error: 'method not allowed' }, 405);
 
     const url = new URL(request.url);
+
+    if (url.pathname === '/api/feedback') {
+      const len = +(request.headers.get('content-length') || 0);
+      if (len > 20000) return json({ error: 'body too large' }, 413);
+
+      let body;
+      try { body = await request.json(); } catch (e) { return json({ error: 'invalid json' }, 400); }
+      if (body.website) return json({ ok: true }, 201);
+      const text = String(body.text || '').trim();
+      if (text.length < 5) return json({ error: 'text too short' }, 400);
+      if (text.length > 2000) return json({ error: 'text too long' }, 413);
+      if (!env.DB) return json({ error: 'feedback database not configured' }, 503);
+
+      const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+      const day = new Date().toISOString().slice(0, 10);
+      const ipHash = await sha256(ip + '|fb|' + day);
+      if (!(await bump(env, 'fb:ip:' + day + ':' + ipHash, 10, 86400))) {
+        return json({ error: 'daily feedback limit reached' }, 429);
+      }
+
+      await env.DB.prepare(
+        'INSERT INTO feedback (type, rating, text, contact, page, model, ua, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, datetime(\'now\'))'
+      ).bind(
+        String(body.type || '').slice(0, 40),
+        Math.max(0, Math.min(5, +(body.rating || 0))),
+        text,
+        String(body.contact || '').slice(0, 120),
+        String(body.page || '').slice(0, 160),
+        String(body.model || '').slice(0, 120),
+        String(request.headers.get('User-Agent') || '').slice(0, 300)
+      ).run();
+
+      return json({ ok: true }, 201);
+    }
+
     if (url.pathname !== '/v1/chat') return json({ error: 'not found' }, 404);
 
     const len = +(request.headers.get('content-length') || 0);

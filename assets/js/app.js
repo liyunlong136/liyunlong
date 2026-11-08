@@ -20,6 +20,7 @@
     algo: { cat: '全部', q: '' },
     prompt: { cat: 'all', q: '', limit: 48 }
   };
+  var priceCheck = null; // 最近一次「检查更新」结果：{ status: 'ok' | 'error', msg }
   var MAX_FILES = 3, MAX_SIZE = 15 * 1024 * 1024;
   var promptPacksLoaded = false, promptPacksLoading = false;
   function ensurePrompts(cb) {
@@ -107,10 +108,13 @@
         '<span>' + esc(tag) + (f.chars ? ' · 约 ' + f.chars + ' 字' : '') + (f.needsVision ? ' · 需要视觉' : '') + '</span></div>';
     }).join('');
     var vision = ok.some(function (f) { return f.needsVision; });
-    box.innerHTML = '<div class="fa-head"><b>已读取 ' + ok.length + ' 个附件</b>' +
+    var parsed = ok.filter(function (f) { return f.status !== 'error'; }).length;
+    var failedCount = ok.length - parsed;
+    box.innerHTML = '<div class="fa-head"><b>已读取 ' + parsed + ' 个附件' + (failedCount ? ' · ' + failedCount + ' 个未读到正文' : '') + '</b>' +
       '<span>' + (vision ? '会自动按「需要视觉」筛选模型' : '已按附件篇幅调整上下文门槛') + '</span>' +
       '<button class="btn btn-sm" id="useFileBtn">用附件生成问题描述</button></div>' +
       rows +
+      (failedCount ? '<div class="fa-note" style="color:#fca5a5">有附件正文读取失败：生成前会让你确认，避免推荐偏离实际内容。</div>' : '') +
       '<div class="fa-note">文件只在本机解析，不会上传；选定模型后请把原文件拖进它的对话框，提示词里已写好附件说明。</div>';
   }
   function syncAutoProblem(force) {
@@ -262,6 +266,7 @@
       problem: problem, budget: budget, time: time, tokens: tokens,
       lang: 'zh', region: 'cn', local: !!need.local,
       requireVision: !!need.vision, requireAudio: !!need.audio,
+      requireVideo: !!need.video,
       requireCtx: need.longdoc ? 200000 : 0,
       domainId: $('domainSelect').value || '',
       need: need, files: state.files.slice(),
@@ -269,16 +274,17 @@
     };
   }
 
-  function runPlan(auto, instant) {
+  function runPlan(auto, instant, forceFiles) {
     if (state.files.some(function (x) { return x.status === 'reading'; })) {
       toast('附件还在解析，稍等一两秒'); return;
     }
+    var failedFiles = state.files.filter(function (x) { return x.status === 'error'; });
+    if (failedFiles.length && !forceFiles) { showFileParseError(failedFiles); return; }
     var f = readForm();
     if (!f) return;
     var btn = $('runBtn'); btn.disabled = true; btn.textContent = '正在拆解与匹配…';
     setTimeout(function () {
       try {
-        applyNeed(f);
         var plan = E.buildPlan(f.problem, f);
         state.plan = plan;
         state.route = plan.routeKey;
@@ -297,17 +303,66 @@
         }
       } catch (err) {
         console.error(err);
-        toast('生成失败：' + err.message);
+        showResultError('生成失败', err && err.message ? err.message : String(err), function () { runPlan(false, true, forceFiles); });
       } finally {
         btn.disabled = false; btn.textContent = '生成选型方案';
       }
     }, 60);
   }
 
-  function applyNeed(f) {
-    if (!f.need) return;
-    // 在拆解后按用户勾选的硬需求过滤：此处通过全局临时标记，由 render 前处理
-    window.__needFlags = f.need;
+  function showFileParseError(failed) {
+    var box = $('results');
+    if (!box) return;
+    var names = failed.map(function (f) { return f.name; }).join('、');
+    box.innerHTML = '<div class="error-state">' +
+      '<div class="es-head"><b>有 ' + failed.length + ' 个附件没有读到正文</b>' +
+      '<span>只拿到了文件信息（名称、大小），没有解析出内容</span></div>' +
+      '<p>受影响：' + esc(names) + '</p>' +
+      '<p>基于这些附件生成方案，推荐只能按文件名和篇幅估算，可能和实际内容对不上。扫描版 PDF、加密文档、特殊编码的 Office 文件最容易出现这种情况。</p>' +
+      '<div class="actions">' +
+      '<button class="btn btn-primary" id="retryFilesBtn">重新选择文件</button>' +
+      '<button class="btn" id="removeFailedFilesBtn">移除这些附件</button>' +
+      '<button class="btn btn-ghost" id="forceRunBtn">仍然生成（按文件名与问题推荐）</button>' +
+      '</div>' +
+      '<div class="hint-line" style="margin:8px 0 0">更稳的做法：扫描件先转成清晰图片，或另存成可复制文字的 PDF 再上传。</div>' +
+      '</div>';
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $('retryFilesBtn').addEventListener('click', function () { $('fileInput').click(); });
+    $('removeFailedFilesBtn').addEventListener('click', function () {
+      failed.forEach(function (f) { removeFile(f.id); });
+      runPlan(false, true);
+    });
+    $('forceRunBtn').addEventListener('click', function () { runPlan(false, true, true); });
+  }
+
+  function showResultError(title, detail, retry) {
+    var box = $('results');
+    if (!box) return;
+    box.innerHTML = '<div class="error-state">' +
+      '<div class="es-head"><b>' + esc(title) + '</b><span>这次没有生成结果；可以重试，或复制错误信息排查</span></div>' +
+      '<p class="es-detail">' + esc(detail || '未知错误') + '</p>' +
+      '<div class="actions"><button class="btn btn-primary" id="retryResultBtn">重试</button>' +
+      '<button class="btn btn-ghost" id="copyErrBtn">复制错误信息</button></div>' +
+      '</div>';
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $('retryResultBtn').addEventListener('click', retry || function () { runPlan(false, true); });
+    $('copyErrBtn').addEventListener('click', function () { copyText(title + '：' + (detail || '')); });
+  }
+
+  var EXCLUDE_LABELS = {
+    local: '必须私有化', ctx: '上下文不足', vision: '不支持图片',
+    audio: '不支持音频', video: '不支持视频', free: '零预算', other: '其他硬条件'
+  };
+  function exclusionNoteHtml(plan) {
+    if (plan.relaxed) return '';
+    var ex = plan.excluded || {};
+    var keys = Object.keys(ex).filter(function (k) { return ex[k] > 0; });
+    var total = plan.excludedTotal || 0;
+    if (!keys.length || !total) return '';
+    var parts = keys.map(function (k) { return (EXCLUDE_LABELS[k] || k) + ' ' + ex[k] + ' 个'; }).join(' · ');
+    return '<div class="exclude-note"><b>已按硬性条件排除 ' + total + ' 个模型</b>' +
+      '<span>' + esc(parts) + '</span>' +
+      '<span class="hint-inline">这些模型在部分步骤不满足条件，下面只用满足条件的模型；勾选越少，候选越多。</span></div>';
   }
 
   function routePicks(plan, key) {
@@ -394,7 +449,8 @@
     var plan = state.plan;
     if (!plan) return;
     var conflicts = plan.constraintConflicts || {};
-    if (Object.keys(conflicts).length && !plan.relaxed) {
+    var hasAnyPick = plan.subtasks.some(function (s) { return !!s.best; });
+    if (!hasAnyPick && Object.keys(conflicts).length && !plan.relaxed) {
       $('results').innerHTML = hardConstraintHtml(conflicts);
       var rb = $('allowRelaxBtn');
       if (rb) rb.addEventListener('click', function () {
@@ -422,6 +478,7 @@
     html += '<div class="result-head"><div><h2>你的问题被拆成 <span>' + plan.subtasks.length + '</span> 步</h2>' +
       '<div style="font-size:13px;color:var(--dim);margin-top:4px">先拆解，再按你的时间 / 预算 / token 约束逐步骤匹配模型</div></div></div>';
     html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">' + chips.join('') + '</div>';
+    html += exclusionNoteHtml(plan);
     html += '<div class="summary"><div class="st-title">执行策略</div><p id="strategyText">' + esc(E.strategyText(plan, state.route)) + '</p>' +
       '<div class="route-note" id="saveLine">' + saveLine(plan, state.route) + '</div>' +
       '<div class="route-tabs" id="routeTabs">' + routeTabs(plan) + '</div>' +
@@ -494,6 +551,7 @@
   }
 
   function fileSummaryHtml(files) {
+    var failedCount = files.filter(function (f) { return f.status === 'error'; }).length;
     var rows = files.map(function (f) {
       return '<div class="fa-row"><i>' + esc(extLabel(f.name)) + '</i><b title="' + esc(f.name) + '">' + esc(f.name) + '</b>' +
         '<span>' + esc(f.typeLabel || f.kind || '') + (f.chars ? ' · 约 ' + f.chars + ' 字' : '') +
@@ -502,6 +560,7 @@
     return '<div class="file-analysis" style="margin-bottom:14px">' +
       '<div class="fa-head"><b>本次方案基于 ' + files.length + ' 个附件</b><span>上下文门槛与视觉需求已按附件调整</span></div>' +
       rows +
+      (failedCount ? '<div class="fa-note" style="color:#fca5a5">其中 ' + failedCount + ' 个附件只读到文件信息，推荐只按文件名与篇幅估算。</div>' : '') +
       '<div class="fa-note">附件未上传；把原文件拖进选定模型的对话框即可，提示词里已包含附件说明。</div></div>';
   }
 
@@ -533,7 +592,7 @@
       html += '<div class="subtask-head"><div class="num">' + (i + 1) + '</div><div><h3>' + esc(st.title) + '</h3><div class="goal">' + esc(st.goal) + '</div>' +
         (modes ? '<div class="sub-modes">建议模式：' + modes + '</div>' : '') + '</div></div>';
       html += '<div class="subtask-body">';
-      html += '<div class="rec-list">' + (pick ? recCard(pick, i, true) : '<div class="empty">没有满足硬约束的模型，请放宽条件</div>') + '</div>';
+      html += '<div class="rec-list">' + (pick ? recCard(pick, i, true) : '<div class="empty">这一步没有满足硬约束的模型；取消对应勾选后重新生成，或点上方「同意放宽」</div>') + '</div>';
       if (others.length) {
         html += '<div class="alt-row"><b>备选：</b>' + others.map(function (r) {
           return '<button class="link-btn js-model" data-model="' + esc(r.model.id) + '">' + esc(r.model.name) + '</button>' +
@@ -1137,12 +1196,14 @@
     var pr = window.MP_PRICES;
     if (pr && pr.entries) {
       var n = Object.keys(pr.entries).length;
+      var pst = priceSyncStats(pr);
       var srcRows = (pr.sources || []).map(function (s) {
         return '<div class="kv"><div><span>' + esc(s.name) + '</span><b>' + (s.ok ? (s.count + ' 条') : '抓取失败') + '</b></div></div>';
       }).join('');
       $('aboutPriceSync').innerHTML =
         '<div class="kv"><div><span>最近同步</span><b>' + dtText(pr.updatedAt) + '</b></div>' +
         '<div><span>覆盖条目</span><b>' + n + ' 个模型</b></div>' +
+        '<div><span>仍用旧价</span><b>' + pst.stale + ' 个模型（沿用快照 ' + esc(META.dataDate || '—') + '）</b></div>' +
         '<div><span>汇率</span><b>1 USD = ' + (pr.fx || 7.1) + ' CNY</b></div></div>' +
         srcRows +
         '<p class="hint-line" style="margin-top:10px">静态站点不能直接跨域抓各家官网，所以同步由一个小脚本完成；部署到 GitHub 后由 Actions 每天自动提交，本地可用计划任务。</p>' +
@@ -1284,6 +1345,16 @@
       m.priceSource = e.source;
     });
   }
+  function priceSyncStats(pr) {
+    var sources = (pr && pr.sources) || [];
+    var n = pr && pr.entries ? Object.keys(pr.entries).length : 0;
+    var updated = MODELS.filter(function (m) { return pr && m.syncedAt === pr.updatedAt; }).length;
+    return {
+      n: n, sources: sources,
+      okSources: sources.filter(function (s) { return s.ok; }).length,
+      updated: updated, stale: MODELS.length - updated
+    };
+  }
   function renderPriceSync() {
     var box = $('priceSync');
     if (!box) return;
@@ -1292,9 +1363,23 @@
       box.innerHTML = '价格快照 ' + (META.dataDate || '') + ' · 运行 <code>tools/sync-prices.mjs</code> 可每日更新';
       return;
     }
-    var n = Object.keys(pr.entries).length;
-    var okSources = (pr.sources || []).filter(function (s) { return s.ok; }).length;
-    box.innerHTML = '<span class="dot"></span>价格已同步 · ' + dtText(pr.updatedAt) + ' · ' + n + ' 条官方价 · ' + okSources + ' 个来源在线';
+    var st = priceSyncStats(pr);
+    var html = '<span class="dot"></span>价格已同步 · ' + dtText(pr.updatedAt) +
+      ' · 成功来源 ' + st.okSources + '/' + st.sources.length +
+      ' · 本次更新 ' + st.n + ' 条（覆盖 ' + st.updated + '/' + MODELS.length + ' 个模型）' +
+      (st.stale ? ' · <b style="color:#fcd34d">' + st.stale + ' 个模型仍用旧价</b>' : '') +
+      ' <button class="link-btn" id="checkPriceBtn" type="button">检查更新</button>';
+    if (st.stale) {
+      html += '<div class="sync-note">未覆盖的模型沿用数据快照 ' + esc(META.dataDate || '—') + ' 的价格；「来源在线」只表示抓取成功，不等于价格已重新核验。</div>';
+    }
+    if (priceCheck && priceCheck.status === 'error') {
+      html += '<div class="sync-note err">上次检查失败：' + esc(priceCheck.msg) +
+        '；当前使用 ' + dtText(pr.updatedAt) + ' 的本地快照。</div>' +
+        '<button class="link-btn" id="checkPriceBtn2" type="button">重试</button>';
+    } else if (priceCheck && priceCheck.status === 'ok') {
+      html += '<div class="sync-note ok">最近一次检查：' + esc(priceCheck.msg) + '</div>';
+    }
+    box.innerHTML = html;
   }
   function refreshAfterPrices() {
     renderPriceSync();
@@ -1310,6 +1395,8 @@
   }
   function checkPrices() {
     if (location.protocol === 'file:') {
+      priceCheck = { status: 'error', msg: 'file:// 模式不能联网检查' };
+      renderPriceSync();
       toast('file:// 模式不能联网检查；请运行 node tools/sync-prices.mjs --apply 后刷新');
       return;
     }
@@ -1321,13 +1408,20 @@
         if (!old || new Date(pr.updatedAt) > new Date(old)) {
           window.MP_PRICES = pr;
           applyPrices(pr);
+          priceCheck = { status: 'ok', msg: '已更新到 ' + dtText(pr.updatedAt) };
           refreshAfterPrices();
           toast('价格已更新到 ' + dtText(pr.updatedAt));
         } else {
+          priceCheck = { status: 'ok', msg: '已是最新（' + dtText(pr.updatedAt) + '）' };
+          renderPriceSync();
           toast('已经是最新价格');
         }
       })
-      .catch(function (e) { toast('检查失败：' + e.message + '（需通过 http 访问）'); });
+      .catch(function (e) {
+        priceCheck = { status: 'error', msg: (e && e.message) || '网络错误' };
+        renderPriceSync();
+        toast('检查失败，当前使用上次快照');
+      });
   }
 
   /* ================= 事件 ================= */
@@ -1492,7 +1586,7 @@
     });
 
     document.addEventListener('click', function (e) {
-      if (e.target.closest('#checkPriceBtn, #aboutCheckPrice')) { checkPrices(); return; }
+      if (e.target.closest('#checkPriceBtn, #checkPriceBtn2, #aboutCheckPrice')) { checkPrices(); return; }
       var copy = e.target.closest('[data-copy]');
       if (copy) { copyText(CLIP[copy.getAttribute('data-copy')] || ''); return; }
       var task = e.target.closest('.js-task');

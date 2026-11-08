@@ -253,14 +253,16 @@
   function recommend(st, o, n, allowRelax) {
     o = o || {};
     var scored = [];
-    var conflicts = {};
+    var conflicts = {};      // 每个约束原因排除的模型数（按步骤）
+    var blockedModels = {};  // 每个约束原因排除的模型 id 集合（用于跨步骤去重）
+    function noteBlocked(code, id) {
+      conflicts[code] = (conflicts[code] || 0) + 1;
+      blockedModels[code] = blockedModels[code] || {};
+      blockedModels[code][id] = 1;
+    }
     MODELS.forEach(function (m) {
       var r = scoreModel(m, st, o);
-      if (r.blocked) {
-        var code = r.blockedCode || 'other';
-        conflicts[code] = (conflicts[code] || 0) + 1;
-        return;
-      }
+      if (r.blocked) { noteBlocked(r.blockedCode || 'other', m.id); return; }
       scored.push({ model: m, score: r.score, reasons: r.reasons, cautions: r.cautions, cost: r.cost, inTok: r.inTok, outTok: r.outTok, audit: r.audit, overCap: r.overCap, rawInTok: r.rawInTok });
     });
     scored.sort(function (a, b) { return b.score - a.score; });
@@ -268,24 +270,32 @@
     if (!scored.length && !allowRelax) {
       var empty = [];
       empty.conflicts = conflicts;
+      empty.blocked = blockedModels;
       empty.relaxed = false;
       return empty;
     }
 
     if (!scored.length && allowRelax) {
+      var stillBlocked = {};
+      function noteStill(code, id) { stillBlocked[code] = stillBlocked[code] || {}; stillBlocked[code][id] = 1; }
       MODELS.forEach(function (m) {
         var r = scoreModel(m, st, Object.assign({}, o, { relaxAll: true, local: false, requireCtx: 0, requireVision: false, requireAudio: false, requireVideo: false, budget: 'high' }));
         if (!r.blocked) scored.push({ model: m, score: r.score - 10, reasons: r.reasons, cautions: ['你已同意放宽硬性约束后推荐'].concat(r.cautions), cost: r.cost, inTok: r.inTok, outTok: r.outTok, audit: r.audit, overCap: r.overCap, rawInTok: r.rawInTok });
+        else noteStill(r.blockedCode || 'other', m.id);
       });
       scored.sort(function (a, b) { return b.score - a.score; });
-      scored.relaxed = true;
-      scored.conflicts = conflicts;
-      return scored.slice(0, n || 4);
+      var relaxedOut = scored.slice(0, n || 4);
+      relaxedOut.relaxed = true;
+      relaxedOut.conflicts = conflicts;
+      relaxedOut.blocked = stillBlocked;
+      return relaxedOut;
     }
 
-    scored.conflicts = {};
-    scored.relaxed = false;
-    return scored.slice(0, n || 4);
+    var out = scored.slice(0, n || 4);
+    out.conflicts = conflicts;
+    out.blocked = blockedModels;
+    out.relaxed = false;
+    return out;
   }
 
   function coreDim(st) {
@@ -390,18 +400,32 @@
         save: recs.length ? pickRoute(recs, 'save', st, o) : null,
         fast: recs.length ? pickRoute(recs, 'fast', st, o) : null,
         conflicts: recs.conflicts || {},
+        blocked: recs.blocked || {},
         relaxed: !!recs.relaxed
       };
     });
 
     var conflictMap = {};
+    var blockedUnion = {};
     var relaxed = false;
     subs.forEach(function (s) {
       Object.keys(s.conflicts || {}).forEach(function (k) {
         conflictMap[k] = (conflictMap[k] || 0) + s.conflicts[k];
       });
+      Object.keys(s.blocked || {}).forEach(function (k) {
+        blockedUnion[k] = blockedUnion[k] || {};
+        Object.keys(s.blocked[k]).forEach(function (id) { blockedUnion[k][id] = 1; });
+      });
       if (s.relaxed) relaxed = true;
     });
+    /* 跨步骤去重：同一个模型在多个步骤被排除只计一次 */
+    var excluded = {};
+    var excludedAll = {};
+    Object.keys(blockedUnion).forEach(function (k) {
+      excluded[k] = Object.keys(blockedUnion[k]).length;
+      Object.keys(blockedUnion[k]).forEach(function (id) { excludedAll[id] = 1; });
+    });
+    var excludedTotal = Object.keys(excludedAll).length;
 
     var routes = {
       quality: { name: '质量优先', desc: '每一步都用当前最强，适合结果价值高、可反复返工的场景', picks: subs.map(function (s) { return s.best; }) },
@@ -417,6 +441,7 @@
       routes: routes, routeKey: routeKey, opts: o,
       totalCost: routes[routeKey].total, files: files,
       constraintConflicts: conflictMap, relaxed: relaxed,
+      excluded: excluded, excludedTotal: excludedTotal,
       notes: buildNotes(subs, o, routeKey, files)
     };
   }

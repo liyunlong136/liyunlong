@@ -17,7 +17,8 @@
       { api: 'gpt-5.5-mini', id: 'gpt-5.5-mini' }, { api: 'gpt-5.5', id: 'gpt-5.5' }, { api: 'gpt-5.1', id: 'gpt-5.1' }
     ] }
   };
-  var state = { provider: 'zhipu', key: '', running: false, mode: 'prompt' };
+  var state = { provider: 'zhipu', key: '', running: false, mode: 'prompt', ctls: [], cancelRequested: false };
+  var TIMEOUT_MS = 45000;
 
   function $(id) { return document.getElementById(id); }
   function esc(s) {
@@ -106,19 +107,38 @@
     var payload = { model: apiModel, messages: [{ role: 'user', content: prompt }] };
     if (/openai/i.test(preset.name)) { payload.max_completion_tokens = maxTokens; }
     else { payload.max_tokens = maxTokens; payload.temperature = 0.6; }
-    var res = await fetch(preset.base.replace(/\/$/, '') + '/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + key },
-      body: JSON.stringify(payload)
-    });
-    if (!res.ok) {
-      var txt = await res.text();
-      throw new Error('HTTP ' + res.status + '：' + txt.slice(0, 120));
+    var ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timedOut = false;
+    var timer = null;
+    if (ctl) {
+      state.ctls.push(ctl);
+      timer = setTimeout(function () { timedOut = true; try { ctl.abort(); } catch (e) { } }, TIMEOUT_MS);
     }
-    var data = await res.json();
-    var text = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
-    var u = data.usage || {};
-    return { text: text || '（返回为空）', inTok: u.prompt_tokens || null, outTok: u.completion_tokens || null, ms: performance.now() - t0 };
+    try {
+      var opts = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + key },
+        body: JSON.stringify(payload)
+      };
+      if (ctl) opts.signal = ctl.signal;
+      var res = await fetch(preset.base.replace(/\/$/, '') + '/chat/completions', opts);
+      if (!res.ok) {
+        var txt = await res.text();
+        throw new Error('HTTP ' + res.status + '：' + txt.slice(0, 120));
+      }
+      var data = await res.json();
+      var text = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
+      var u = data.usage || {};
+      return { text: text || '（返回为空）', inTok: u.prompt_tokens || null, outTok: u.completion_tokens || null, ms: performance.now() - t0 };
+    } catch (e) {
+      if (e && (e.name === 'AbortError' || (ctl && ctl.signal.aborted))) {
+        throw new Error(timedOut ? '请求超过 ' + Math.round(TIMEOUT_MS / 1000) + ' 秒未返回，已自动中断' : '已手动取消');
+      }
+      throw e;
+    } finally {
+      if (timer) clearTimeout(timer);
+      if (ctl) state.ctls = state.ctls.filter(function (c) { return c !== ctl; });
+    }
   }
 
   function outputHtml(r, model) {
@@ -229,6 +249,21 @@
     if ($('pkRun')) $('pkRun').textContent = hasKey ? '生成对比（会发送到厂商）' : '生成对比';
   }
 
+  function setRunningUI(running) {
+    state.running = running;
+    if (running) state.cancelRequested = false;
+    if ($('pkCancel')) $('pkCancel').hidden = !running;
+    if ($('pkRun')) $('pkRun').disabled = running;
+  }
+
+  function cancelRunning() {
+    if (!state.running) return;
+    state.cancelRequested = true;
+    state.ctls.forEach(function (c) { try { c.abort(); } catch (e) { } });
+    $('pkOutA').innerHTML = '<div class="pk-loading">取消中…</div>';
+    $('pkOutB').innerHTML = '<div class="pk-loading">取消中…</div>';
+  }
+
   async function runLive() {
     buildPrompts();
     var key = ($('pkKey').value || '').trim();
@@ -252,14 +287,19 @@
     var p = PRESETS[state.provider];
     var ma = selectedModel('pkModelA'), mb = selectedModel('pkModelB');
     var apiA = $('pkModelA').value, apiB = $('pkModelB').value;
-    state.running = true;
-    $('pkOutA').innerHTML = '<div class="pk-loading">正在调用…</div>';
-    $('pkOutB').innerHTML = '<div class="pk-loading">正在调用…</div>';
+    setRunningUI(true);
+    $('pkOutA').innerHTML = '<div class="pk-loading">正在调用…（单侧最长 45 秒，可点「取消请求」）</div>';
+    $('pkOutB').innerHTML = '<div class="pk-loading">正在调用…（单侧最长 45 秒，可点「取消请求」）</div>';
     try {
       var results = await Promise.allSettled([
         callModel(p, key, apiA, $('pkPromptA').value, 800),
         callModel(p, key, apiB, $('pkPromptB').value, 800)
       ]);
+      if (state.cancelRequested) {
+        setOutputs('<div class="pk-error">已取消请求，本次没有产生结果。</div>',
+          '<div class="pk-error">已取消请求，本次没有产生结果。</div>', '');
+        return;
+      }
       var ra = results[0].status === 'fulfilled' ? results[0].value : null;
       var rb = results[1].status === 'fulfilled' ? results[1].value : null;
       if (ra) ra.cost = (ma.priceIn * ra.inTok + ma.priceOut * ra.outTok) / 1e6;
@@ -267,14 +307,17 @@
       var errA = results[0].status === 'rejected' ? results[0].reason.message : '';
       var errB = results[1].status === 'rejected' ? results[1].reason.message : '';
       setOutputs(
-        ra ? outputHtml(ra, ma) : '<div class="pk-error">调用失败：' + esc(errA) + '<br><span>常见原因：Key 无效、模型名不对、浏览器被 CORS 拦截。</span></div>',
+        ra ? outputHtml(ra, ma) : '<div class="pk-error">调用失败：' + esc(errA) + '<br><span>常见原因：Key 无效、模型名不对、浏览器被 CORS 拦截，或请求超过 45 秒。</span></div>',
         rb ? outputHtml(rb, mb) : '<div class="pk-error">调用失败：' + esc(errB) + '<br><span>如果两边都失败，多半是 CORS；请换供应商或部署一个代理。</span></div>',
         diffHtml($('pkPromptA').value, $('pkPromptB').value, ma, mb, ra, rb)
       );
       if (window.MPTrack) MPTrack.event('pk_live', { okA: !!ra, okB: !!rb, provider: state.provider });
     } catch (e) {
       setOutputs('<div class="pk-error">' + esc(e.message) + '</div>', '', '');
-    } finally { state.running = false; }
+    } finally {
+      state.ctls = [];
+      setRunningUI(false);
+    }
   }
 
   function saveKey() {
@@ -310,6 +353,7 @@
     });
     $('pkRun').addEventListener('click', function () { saveKey(); runLive(); });
     $('pkDemo').addEventListener('click', runDemo);
+    if ($('pkCancel')) $('pkCancel').addEventListener('click', cancelRunning);
     $('pkClearKey').addEventListener('click', function () {
       $('pkKey').value = ''; state.key = '';
       try { sessionStorage.removeItem('mp_pk_key'); } catch (e) { }

@@ -138,7 +138,8 @@
         <span class="label">硬性需求<small>勾选后不满足的模型会被直接排除</small></span>
         <div class="checks">
           <label class="check"><input type="checkbox" value="vision"> 要看图 / 截图 / PDF</label>
-          <label class="check"><input type="checkbox" value="audio"> 要处理语音 / 视频</label>
+          <label class="check"><input type="checkbox" value="audio"> 要处理语音 / 音频</label>
+          <label class="check"><input type="checkbox" value="video"> 要处理视频</label>
           <label class="check"><input type="checkbox" value="longdoc"> 超长文档（20 万字+）</label>
           <label class="check"><input type="checkbox" value="local"> 必须私有化 / 内网</label>
         </div>
@@ -269,10 +270,11 @@
         <label>API Key（只存在本标签页）
           <input id="pkKey" type="password" placeholder="不填也能看结构对比" autocomplete="off">
         </label>
-        <span class="hint-line" style="margin:0">Key 不会上传服务器；关闭标签页即失效。</span>
+        <span class="hint-line" style="margin:0">Key 不会上传服务器；关闭标签页即失效。真跑单侧最长 45 秒，超时会自动中断，也可以随时点「取消请求」。</span>
       </div>
       <div class="actions">
         <button class="btn btn-primary" id="pkRun">生成对比</button>
+        <button class="btn btn-ghost" id="pkCancel" hidden>取消请求</button>
         <button class="btn" id="pkDemo">只看提示词对比</button>
         <button class="btn btn-ghost btn-sm" id="pkClearKey">清除 Key</button>
       </div>

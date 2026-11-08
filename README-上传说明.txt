@@ -1,26 +1,21 @@
-﻿# A vs B 对比页：上传说明
+﻿# myaskmate.com 线上更新包（2026-11-08）
 
-这个压缩包包含：
-- compare/：50 个对比页 + 对比总览（新增）
-- model/：125 个模型页（已把「同级对比」指向对比页）
-- assets/css/page.css、assets/img/og.png
-- index.html（页脚新增「A vs B 对比」）
-- sitemap.xml（291 条 URL）
-- tools/build-pages.mjs（生成器，可不传）
+当前线上仍是旧版。把本包内容覆盖到网站根目录（或拖到 Netlify Deploys）。
 
-## 怎么用
-1. 解压后，把里面的 compare/、model/、assets/、index.html、sitemap.xml 覆盖到网站根目录。
-2. 确认能打开：
-   - https://myaskmate.com/compare/
-   - https://myaskmate.com/compare/deepseek-v4-pro-vs-qwen3.8-max.html
-3. 去 Google Search Console / 百度搜索资源平台重新提交 sitemap.xml。
-4. 对比页是纯静态 HTML，不需要 Node、不需要构建、不需要数据库。
+包含：
+- 首页首屏输入框/生成按钮
+- 关于页新文案：一个带「科学榜单」的选型工具……
+- 隐私：本地 vs PK 云端调用，PK 首次确认
+- 硬约束严格模式，不自动放宽
+- 反馈：邮箱 + GitHub issue
+- 无公共评分/口碑榜，评分仅本机
+- 价格来源、更新时间、官方/折算/推算标签
+- robots.txt + sitemap.xml（291 条）
+- model/task/solution/prompt/compare 静态页
 
-## 只想最小改动
-如果不想覆盖 model/，至少上传：
-- compare/
-- assets/css/page.css
-- assets/img/og.png
-- index.html
-- sitemap.xml
-model/ 只是让模型页的「同级对比」直接跳到对比页，不传也能访问对比页。
+上传后检查：
+- https://myaskmate.com/sitemap.xml 200
+- https://myaskmate.com/robots.txt 200
+- https://myaskmate.com/model/deepseek-v4-pro.html 200
+- 首页首屏出现「描述你真正要解决的问题」
+- 关于页出现「科学榜单」

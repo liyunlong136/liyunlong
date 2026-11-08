@@ -1027,3 +1027,12 @@ details.panel.optional-fold[open]>.panel-head{margin-bottom:16px}
   .panel{padding:16px}
   .optional-fold[open]>.fold-summary{margin-bottom:6px}
 }
+
+
+/* 资料库下拉不能被 .tabs 的横向滚动裁切 */
+.tabs{overflow:visible}
+@media (max-width:760px){
+  .tabs{flex-wrap:wrap;justify-content:flex-end;overflow:visible}
+  .head-inner{height:auto;min-height:56px;padding:6px 0}
+  .nav-more-menu{position:absolute;right:0;left:auto}
+}

@@ -912,3 +912,7 @@ body[data-audience="dev"] .beginner-only{display:none!important}
 .pk-mode{display:inline-flex;gap:4px;padding:3px;border:1px solid var(--line);border-radius:10px;background:rgba(10,16,28,.6);margin:0 0 12px}
 .pk-mode button{border:0;background:none;color:var(--dim);font-size:11.5px;padding:6px 11px;border-radius:7px;cursor:pointer}
 .pk-mode button.on{background:rgba(251,191,36,.12);color:var(--gold)}
+
+
+/* 价格来源 */
+.price-meta{font-size:9.5px;color:var(--dim);margin-top:4px;line-height:1.5}

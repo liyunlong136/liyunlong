@@ -1,4 +1,4 @@
-/* 首页排行榜：总榜 + 分榜；能力分 + 用户评分（Supabase / 本地）。 */
+/* 首页排行榜：总榜 + 分榜；只按能力分排序。评分仅本机，不参与总榜。 */
 (function () {
   var MODELS = (window.MP_MODELS || []).concat(window.MP_MODELS_EXTRA || []);
   var E = window.MPEngine;
@@ -6,8 +6,7 @@
   var state = { dim: 'all', ratings: {}, votes: 0, source: 'none', loading: false };
 
   var DIMS = [
-    { id: 'all', name: '总榜', sub: '综合能力 + 用户评分' },
-    { id: 'rating', name: '口碑', sub: '用户真实评分' },
+    { id: 'all', name: '总榜', sub: '综合能力（不含用户评分）' },
     { id: 'coding', name: '代码', sub: '代码工程与推理' },
     { id: 'writing', name: '写作', sub: '写作与中文语感' },
     { id: 'value', name: '性价比', sub: '能力与价格' },
@@ -77,22 +76,14 @@
     if (dim === 'free') return m.priceIn === 0 && m.priceOut === 0;
     if (dim === 'l2') return m.tier <= 2;
     if (dim === 'open') return !!m.open;
-    if (dim === 'rating') return !!userAvg(m);
     return true;
   }
   function scoreOf(m, dim) {
-    var base = baseScore(m, dim);
-    var u = userAvg(m);
-    if (dim === 'rating') return u ? u.avg * 2 : 0;
-    // 只有真实共享评分（Supabase）且样本足够，才混入总榜；本机评分不参与
-    if (dim === 'all' && state.source === 'supabase' && u && u.count >= 3) {
-      return base * 0.8 + (u.avg * 2) * 0.2;
-    }
-    return base;
+    return baseScore(m, dim);
   }
   function rank(dim, n) {
     return MODELS.filter(function (m) { return fits(m, dim); })
-      .map(function (m) { return { m: m, score: scoreOf(m, dim), user: userAvg(m) }; })
+      .map(function (m) { return { m: m, score: scoreOf(m, dim), user: null }; })
       .sort(function (a, b) { return b.score - a.score || b.m.tier - a.m.tier; })
       .slice(0, n || 6);
   }
@@ -100,8 +91,7 @@
   function reason(m, dim, u) {
     var d = m.dims;
     var r = '';
-    if (dim === 'rating') r = '用户评分 ' + (u ? u.avg.toFixed(1) : '-') + ' · ' + (u ? u.count : 0) + ' 人';
-    else if (dim === 'coding') r = '代码 ' + d.coding.toFixed(1) + ' · 推理 ' + d.reasoning.toFixed(1);
+    if (dim === 'coding') r = '代码 ' + d.coding.toFixed(1) + ' · 推理 ' + d.reasoning.toFixed(1);
     else if (dim === 'writing') r = '写作 ' + d.writing.toFixed(1) + ' · 中文 ' + d.chinese.toFixed(1);
     else if (dim === 'value') r = '性价比 ' + d.value.toFixed(1) + ' · ' + priceShort(m);
     else if (dim === 'longctx') r = '长文本 ' + d.longctx.toFixed(1) + ' · ' + ctxLabel(m.ctx) + ' 上下文';
@@ -111,7 +101,6 @@
     else if (dim === 'l2') r = 'L2 · 代码 ' + d.coding.toFixed(1) + ' · 中文 ' + d.chinese.toFixed(1);
     else if (dim === 'open') r = '开源 · 代码 ' + d.coding.toFixed(1) + ' · 长文 ' + d.longctx.toFixed(1);
     else r = '推理 ' + d.reasoning.toFixed(1) + ' · 代码 ' + d.coding.toFixed(1);
-    if (u && dim !== 'rating') r += ' · 用户 ' + u.avg.toFixed(1) + '（' + u.count + '）';
     return r;
   }
 
@@ -137,7 +126,7 @@
     if (!el) return;
     var rows = rank(state.dim, n);
     if (!rows.length) {
-      el.innerHTML = '<div class="empty">还没有用户评分。打开任意模型，点星星打分；配置 Supabase 后会汇总所有人。</div>';
+      el.innerHTML = '<div class="empty">这个维度暂时没有符合条件的模型。</div>';
       if (isDialog) el.className = 'rank-list dialog';
       return;
     }
@@ -145,9 +134,7 @@
     if (isDialog) el.className = 'rank-list dialog';
   }
   function noteText() {
-    if (state.source === 'supabase') return '用户评分来自 Supabase（' + state.votes + ' 条）；同一模型至少 3 条评分才混入总榜，总榜 = 能力 80% + 共享评分 20%。';
-    if (state.source === 'local') return '本机有你的评分，但本机评分不参与全站总榜；总榜当前按能力分排序。';
-    return '还没有共享评分，当前按能力分排序；配置 Supabase 并收到至少 3 条同模型评分后，总榜才会混入共享评分。';
+    return '总榜只按能力分排序；模型详情里的评分仅保存在本机，不参与全站总榜。';
   }
   function renderAll() {
     renderTabs($('rankTabs'), false);
@@ -155,7 +142,7 @@
     renderList($('rankList'), 6, false);
     renderList($('rankDlgList'), 20, true);
     var dim = DIMS.filter(function (d) { return d.id === state.dim; })[0];
-    if ($('rankSub')) $('rankSub').textContent = (dim ? dim.sub : '') + ' · 能力分 80% + 用户评分 20%';
+    if ($('rankSub')) $('rankSub').textContent = (dim ? dim.sub : '') + ' · 只按能力分';
     if ($('rankDlgSub')) $('rankDlgSub').textContent = (dim ? dim.name + ' · ' + dim.sub : '');
     if ($('rankNote')) $('rankNote').textContent = noteText();
   }
@@ -206,7 +193,6 @@
   }
   function init() {
     if (!$('rankList')) return;
-    loadLocal();
     renderAll();
     bindTabs($('rankTabs'));
     bindTabs($('rankDlgTabs'));
@@ -218,12 +204,6 @@
       var row = e.target.closest('.rank-item');
       if (row) { e.preventDefault(); row.click(); }
     });
-    window.addEventListener('mp:rated', function () {
-      if (state.source !== 'supabase') loadLocal();
-      renderAll();
-      setTimeout(loadRemote, 800);
-    });
-    loadRemote();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

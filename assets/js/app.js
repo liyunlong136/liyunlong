@@ -562,6 +562,19 @@
     if (m.priceIn === 0 && m.priceOut === 0) return m.open ? '自托管' : '免费';
     return '¥' + num(m.priceIn) + '/' + num(m.priceOut);
   }
+  function priceConfLabel(m) {
+    return m.priceConf === 'official' ? '官方' : (m.priceConf === 'ref' ? '折算' : '推算');
+  }
+  function priceSourceLabel(m) {
+    var map = { zhipu: '智谱官网', volc: '火山方舟', deepseek: 'DeepSeek 官网', hunyuan: '腾讯混元官网' };
+    if (m.syncSource && map[m.syncSource]) return map[m.syncSource];
+    if (m.priceConf === 'official') return '厂商官网 / 公开定价页';
+    if (m.priceConf === 'ref') return '渠道 / 聚合定价页';
+    return '同级推算';
+  }
+  function priceUpdatedLabel(m) {
+    return m.syncedAt ? dtText(m.syncedAt) : (META.dataDate || '—');
+  }
 
   /* ================= 解决方案 ================= */
   function modelById(id) { return MODELS.filter(function (m) { return m.id === id; })[0]; }
@@ -838,7 +851,8 @@
         '</div>' +
         '<div class="m-tags">' + (m.bestFor || []).slice(0, 4).map(function (t) { return '<span class="m-tag">' + esc(t) + '</span>'; }).join('') + '</div>' +
         '<div class="m-dims">' + bars + '</div>' +
-        '<div class="m-foot"><span>上下文 <b>' + ctxLabel(m.ctx) + '</b></span><span>价格 <b>' + priceShort(m) + '</b><i class="pc">' + (m.priceConf === 'official' ? '官方同步' : (m.priceConf === 'ref' ? '参考' : '估算')) + '</i></span></div>' +
+        '<div class="m-foot"><span>上下文 <b>' + ctxLabel(m.ctx) + '</b></span><span>价格 <b>' + priceShort(m) + '</b><i class="pc">' + priceConfLabel(m) + '</i></span></div>' +
+        '<div class="price-meta">来源：' + esc(priceSourceLabel(m)) + ' · 更新：' + esc(priceUpdatedLabel(m)) + '</div>' +
         '</article>';
     }).join('');
     $('modelGrid').innerHTML = html || '<div class="empty">没有匹配的模型，换个关键词试试</div>';
@@ -945,7 +959,7 @@
       '<div class="dlg-grid" style="margin-top:12px">' +
       '<div class="dlg-stat"><span>上下文 / 最大输出</span><b>' + ctxLabel(m.ctx) + ' / ' + ctxLabel(m.maxOut) + '</b></div>' +
       '<div class="dlg-stat"><span>价格（输入 / 输出）</span><b>' + priceShort(m) + ' 每百万</b>' +
-      '<i class="mini">' + Math.round(m.priceIn * 1000) + ' / ' + Math.round(m.priceOut * 1000) + ' 厘 · ' + (m.priceConf === 'official' ? '官方同步' : (m.priceConf === 'ref' ? '参考价' : '估算价')) + '</i></div>' +
+      '<i class="mini">' + Math.round(m.priceIn * 1000) + ' / ' + Math.round(m.priceOut * 1000) + ' 厘 · ' + priceConfLabel(m) + '</i></div>' +
       '<div class="dlg-stat"><span>速度</span><b>' + m.speed.toFixed(1) + ' / 10</b></div>' +
       '<div class="dlg-stat"><span>发布</span><b>' + esc(m.release || '-') + '</b></div>' +
       '</div>' +
@@ -961,7 +975,7 @@
       '<h4>Token 与时间效率</h4>' + timeHtml +
       '<h4>上下文能装多少</h4>' + capHtml +
       '<h4>价格说明</h4><p>' + esc(m.priceNote || '') + '。' +
-      (m.syncedAt ? '<span class="dlg-note">价格同步于 ' + dtText(m.syncedAt) + '</span>。' : '') +
+      '<span class="dlg-note">来源：' + esc(priceSourceLabel(m)) + ' · 更新：' + esc(priceUpdatedLabel(m)) + ' · ' + priceConfLabel(m) + '</span>。' +
       (m.freeTier ? '免费额度：' + esc(m.freeTier) + '。' : '') + '接口：' + esc(m.api || '-') + '。</p>' +
       '<h4>成本试算</h4><div class="calc"><input type="number" id="calcIn" value="3000" min="0"><span style="color:var(--dim);font-size:12px">输入 tokens</span>' +
       '<input type="number" id="calcOut" value="1500" min="0"><span style="color:var(--dim);font-size:12px">输出 tokens</span>' +
@@ -1267,6 +1281,7 @@
       m.priceConf = e.conf || 'official';
       m.syncedAt = pr.updatedAt;
       m.syncSource = e.source;
+      m.priceSource = e.source;
     });
   }
   function renderPriceSync() {

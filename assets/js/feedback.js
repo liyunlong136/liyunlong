@@ -2,6 +2,7 @@
 (function () {
   var FB = window.MP_FEEDBACK || {};
   var ONLINE = !!FB.endpoint;
+  var HAS_CHANNEL = !!(FB.email || FB.github);
   var TYPES = [
     { k: '体验问题', i: '🧭' }, { k: '功能建议', i: '💡' },
     { k: '数据纠错', i: '📊' }, { k: '提示词建议', i: '✎' }, { k: '其他', i: '…' }
@@ -121,7 +122,13 @@
         'title=' + encodeURIComponent('反馈：' + entry.type) + '&body=' + encodeURIComponent(format(entry).slice(0, 1800)) + '">去 GitHub 提 issue</a>'
       : '';
     $('fbDone').innerHTML = '<div class="fb-success"><b>' + esc(msg) + '</b>' +
-      '<p>' + (sent ? '已经发送到反馈接口。' : (ONLINE ? '发送失败，已保存草稿，可复制或重试。' : '当前未接后端，反馈已保存为草稿，可复制或发邮件。')) + '</p>' +
+      '<p>' + (sent
+        ? '已经发送到反馈接口。'
+        : (ONLINE
+          ? '发送失败，已保存草稿，可复制或重试。'
+          : (HAS_CHANNEL
+            ? '反馈已保存在本机，请点下方「发邮件」或「去 GitHub 提 issue」发送。'
+            : '当前未接后端，反馈已保存为草稿，可复制或发邮件。'))) + '</p>' +
       '<div class="actions"><button class="btn btn-sm" data-fb-copy>复制反馈内容</button>' + mail + gh +
       '<button class="btn btn-sm btn-ghost" data-fb-again>再写一条</button></div></div>';
     if (window.MPTrack) MPTrack.event('feedback_submit', { type: entry.type, sent: !!sent });
@@ -130,7 +137,7 @@
     var entry = collect();
     if (!entry) return;
     save(entry);
-    if (!ONLINE) { showDone('草稿已保存', entry, false); return; }
+    if (!ONLINE) { showDone(HAS_CHANNEL ? '反馈已保存，请选择发送方式' : '草稿已保存', entry, false); return; }
     var btn = $('fbSubmit');
     btn.disabled = true; btn.textContent = '发送中…';
     fetch(FB.endpoint, {
@@ -180,9 +187,11 @@
     $('fbClose').addEventListener('click', function () { $('feedbackDlg').close(); });
     $('feedbackDlg').addEventListener('click', function (e) { if (e.target === $('feedbackDlg')) $('feedbackDlg').close(); });
     if (!ONLINE) {
-      $('fbSubmit').textContent = '保存草稿';
+      $('fbSubmit').textContent = HAS_CHANNEL ? '保存并发送' : '保存草稿';
       var note = document.querySelector('.fb-note');
-      if (note) note.textContent = '当前未接后端：反馈只保存在本机，可复制后发邮件。配置 endpoint 后才会真正提交。';
+      if (note) note.textContent = HAS_CHANNEL
+        ? '反馈会先保存在本机，再选择「发邮件」或「去 GitHub 提 issue」发送；不会假装已提交。'
+        : '当前未接后端：反馈只保存在本机，可复制后发邮件。配置 endpoint 后才会真正提交。';
     }
     $('fbSubmit').addEventListener('click', submit);
     $('fbCopy').addEventListener('click', function () {

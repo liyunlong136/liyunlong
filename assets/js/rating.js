@@ -57,7 +57,7 @@
     if (!el || !modelId) return;
     el.innerHTML =
       '<div class="rate-card" data-model="' + modelId + '">' +
-      '<div class="rate-top"><div class="rate-title">我的评分 <small>仅本机</small></div><div class="rate-avg">暂无共享评分</div></div>' +
+      '<div class="rate-top"><div class="rate-title">我的评分 <small>仅本机</small></div><div class="rate-avg">仅本机</div></div>' +
       '<div class="rate-stars" role="radiogroup" aria-label="模型评分">' + starsHtml() + '</div>' +
       '<div class="rate-thanks" hidden>感谢您的评价！</div>' +
       '<div class="rate-status"></div>' +
@@ -135,7 +135,6 @@
       }).then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         setStatus('已提交，谢谢！');
-        loadAverage();
       }).catch(function (e) {
         setStatus('提交失败，已保存在本地：' + (e.message || '网络错误'), true);
       }).finally(function () { sending = false; });
@@ -155,7 +154,6 @@
 
     paint();
     loadMine();
-    loadAverage();
     if (locked) thanks.hidden = true;
   }
 

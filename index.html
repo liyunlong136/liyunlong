@@ -167,12 +167,12 @@
     <section class="rank-home" id="rankHome">
       <div class="rank-head">
         <div><span class="kicker">排行榜</span><h2>总榜与分榜</h2>
-          <p id="rankSub">能力分 + 用户评分；点任意模型看详情。</p></div>
+          <p id="rankSub">只按能力分排序；评分仅本机，不参与总榜。</p></div>
         <button class="btn btn-sm" id="rankMore">查看完整榜单</button>
       </div>
       <div class="filters" id="rankTabs"></div>
       <div class="rank-list" id="rankList"></div>
-      <p class="rank-method">口径：能力分 80% = 自研十维评分（人工设定，参考公开基准与实测）；用户评分 20% 仅在有评分时生效。能力分不是官方 benchmark。</p>
+      <p class="rank-method">口径：总榜只按自研十维能力分排序（人工设定，参考公开基准与实测）；模型详情里的评分只存本机，不参与总榜。能力分不是官方 benchmark。</p>
       <div class="rank-note" id="rankNote"></div>
     </section>
 
@@ -249,7 +249,7 @@
 
     <div class="privacy-strip">
       <div><b>本地运行</b><span>选型、文件解析、成本估算；评分默认只存本机</span></div>
-      <div class="cloud"><b>云端运行</b><span>PK 真跑会把问题和提示词发给所选厂商；启用共享评分后只上传分数与匿名 ID</span></div>
+      <div class="cloud"><b>云端运行</b><span>PK 真跑会把问题和提示词发给所选厂商；评分只存本机，不进入榜单</span></div>
     </div>
 
     <div class="panel pk-topic">
@@ -456,7 +456,7 @@
         <h3>价格说明</h3>
         <p>价格核验于 <span id="priceDate">—</span>，单位为人民币 / 百万 tokens。海外模型按 1 美元 ≈ 7.1 元折算，未含渠道与税费；标注「推算」的条目是按同级产品估算，仅用于横向比较，下单前请以官网为准。各家阶梯计价、缓存命中、Batch 折扣差异很大，实际成本可能显著低于标价。</p>
         <h3>免费承诺</h3>
-        <p>本站无登录、无追踪、无广告、不卖课。选型、文件解析、成本估算都在浏览器本地完成；评分默认只存本机，只有启用 Supabase 共享评分时才会上传分数和匿名 ID。唯一会发送问题内容的是 PK 真跑：只有你主动填写 Key、确认后，问题与提示词才会发送给你选择的模型厂商；不填 Key 时只做结构与成本对比，不发送任何内容。</p>
+        <p>本站无登录、无追踪、无广告、不卖课。选型、文件解析、成本估算都在浏览器本地完成；评分只存本机，不参与全站总榜。唯一会发送问题内容的是 PK 真跑：只有你主动填写 Key、确认后，问题与提示词才会发送给你选择的模型厂商；不填 Key 时只做结构与成本对比，不发送任何内容。</p>
       </div>
       <div>
         <div class="panel">
@@ -503,7 +503,7 @@
 
 <dialog id="rankDlg" class="rank-dlg">
   <div class="dlg-head">
-    <div><h3>完整榜单</h3><div class="m-sub" id="rankDlgSub">能力分 + 用户评分</div></div>
+    <div><h3>完整榜单</h3><div class="m-sub" id="rankDlgSub">只按能力分</div></div>
     <button class="dlg-close" id="rankClose" aria-label="关闭">×</button>
   </div>
   <div class="dlg-body">

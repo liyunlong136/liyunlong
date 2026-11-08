@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve("D:/Users/l'y'l/Desktop/大模型推荐平台");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = process.env.SITE || 'https://myaskmate.com';
 const TODAY = new Date().toISOString().slice(0, 10);
 const B = path.join(ROOT, 'assets/js/');
@@ -23,7 +24,11 @@ const MODELS = (ctx.MP_MODELS || []).concat(ctx.MP_MODELS_EXTRA || []);
 const PRICES = (ctx.MP_PRICES && ctx.MP_PRICES.entries) || {};
 MODELS.forEach(m => {
   const p = PRICES[m.id];
-  if (p) { m.priceIn = p.priceIn; m.priceOut = p.priceOut; m.priceConf = p.conf || m.priceConf; m.priceNote = p.note || m.priceNote; m.syncedAt = ctx.MP_PRICES.updatedAt; }
+  if (p) {
+    m.priceIn = p.priceIn; m.priceOut = p.priceOut;
+    m.priceConf = p.conf || m.priceConf; m.priceNote = p.note || m.priceNote;
+    m.syncedAt = ctx.MP_PRICES.updatedAt; m.syncSource = p.source;
+  }
 });
 const TASKS = ctx.MP_TASKS || [];
 const SOLUTIONS = ctx.MP_SOLUTIONS || [];
@@ -122,7 +127,17 @@ function ctxText(n) {
 }
 function tier(t) { return 'L' + t + ' ' + ({ 1: '免费', 2: '轻量', 3: '主力', 4: '旗舰', 5: '顶级' }[t] || ''); }
 function confLabel(c) {
-  return c === 'official' ? '官方同步价' : (c === 'ref' ? '参考价' : '估算价（下单前核对）');
+  return c === 'official' ? '官方价' : (c === 'ref' ? '折算价' : '推算价（下单前核对）');
+}
+function sourceLabel(m) {
+  var map = { zhipu: '智谱官网', volc: '火山方舟', deepseek: 'DeepSeek 官网', hunyuan: '腾讯混元官网' };
+  if (m.syncSource && map[m.syncSource]) return map[m.syncSource];
+  if (m.priceConf === 'official') return '厂商官网 / 公开定价页';
+  if (m.priceConf === 'ref') return '渠道 / 聚合定价页';
+  return '同级推算';
+}
+function updatedLabel(m) {
+  return m.syncedAt ? String(m.syncedAt).slice(0, 10) : (ctx.MP_META && ctx.MP_META.dataDate) || '—';
 }
 function priceCell(m) {
   if (m.priceIn === 0 && m.priceOut === 0) return m.open ? '开源自托管' : '免费';
@@ -172,7 +187,7 @@ function modelPage(m) {
   var body = '<p class="crumb"><a href="../model/index.html">模型库</a> / ' + esc(m.vendor) + '</p>' +
     '<h1>' + esc(m.name) + '</h1><p class="lead">' + esc(m.desc) + '</p>' +
     '<div class="meta"><span>' + esc(m.vendor) + '</span><span>' + tier(m.tier) + '</span><span>' + (m.open ? '开源自托管' : 'API 调用') + '</span><span>' + (m.country === 'CN' ? '国内直连' : '海外服务') + '</span></div>' +
-    '<div class="cols"><section class="box"><h2>价格与容量</h2><p class="big">' + priceCell(m) + '</p><p class="muted">' + esc(confLabel(m.priceConf)) + ' · ' + ctxText(m.ctx) + ' 上下文 · 最大输出 ' + ctxText(m.maxOut) + '</p><p class="muted">' + esc(m.priceNote || '') + '</p></section>' +
+    '<div class="cols"><section class="box"><h2>价格与容量</h2><p class="big">' + priceCell(m) + '</p><p class="muted">' + esc(confLabel(m.priceConf)) + ' · 来源：' + esc(sourceLabel(m)) + ' · 更新：' + esc(updatedLabel(m)) + ' · ' + ctxText(m.ctx) + ' 上下文 · 最大输出 ' + ctxText(m.maxOut) + '</p><p class="muted">' + esc(m.priceNote || '') + '</p></section>' +
     '<section class="box"><h2>十维能力</h2>' + dimBars(m) + '</section></div>' +
     '<section><h2>适合什么</h2><ul class="list">' + (m.bestFor || []).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section>' +
     '<div class="cols"><section><h2>优势</h2><ul class="list good">' + (m.strengths || []).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section>' +

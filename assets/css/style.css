@@ -936,3 +936,32 @@ body[data-audience="dev"] .beginner-only{display:none!important}
 
 .pk-mode-hint{font-size:11.5px;color:var(--dim);margin:0 0 12px;line-height:1.6}
 .pk-mode-hint::before{content:'ⓘ ';color:var(--acc)}
+
+
+/* 结果结论：下一步动作 */
+.next-steps{
+  margin:12px 0 14px;padding:0;list-style:none;counter-reset:step;
+  display:flex;flex-direction:column;gap:7px
+}
+.next-steps li{
+  counter-increment:step;position:relative;padding-left:26px;
+  font-size:13px;line-height:1.65;color:var(--muted)
+}
+.next-steps li::before{
+  content:counter(step);position:absolute;left:0;top:1px;
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(94,234,212,.12);border:1px solid rgba(94,234,212,.3);
+  color:var(--acc);font-size:10.5px;font-weight:700;
+  display:flex;align-items:center;justify-content:center
+}
+.next-steps b{color:var(--txt);font-weight:600}
+
+@media (max-width:640px){
+  .conclusion-main h2{font-size:26px}
+  .conclusion-actions .btn{flex:1 1 100%;justify-content:center}
+  .conclusion-actions .calls-input{width:100%;justify-content:center}
+  .next-steps li{font-size:12.5px}
+  .feedback-dlg,.consent-dlg,.rank-dlg,.score-dlg,.why-dlg,.search-dlg,.model-dlg{
+    max-height:88dvh;overflow:auto
+  }
+}

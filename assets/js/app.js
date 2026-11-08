@@ -274,6 +274,66 @@
     };
   }
 
+  function b64e(str) {
+    try { return btoa(unescape(encodeURIComponent(str))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+    catch (e) { return ''; }
+  }
+  function b64d(str) {
+    try {
+      var s = String(str || '').replace(/-/g, '+').replace(/_/g, '/');
+      while (s.length % 4) s += '=';
+      return decodeURIComponent(escape(atob(s)));
+    } catch (e) { return ''; }
+  }
+  function setRadio(name, value) {
+    var el = document.querySelector('input[name="' + name + '"][value="' + value + '"]');
+    if (el) el.checked = true;
+  }
+  function shareUrlOf() {
+    var problem = $('problemInput').value.trim();
+    if (problem.length < 6) return '';
+    var need = {};
+    document.querySelectorAll('.check input:checked').forEach(function (c) { need[c.value] = true; });
+    var payload = {
+      v: 1, q: problem,
+      b: (document.querySelector('input[name=budget]:checked') || {}).value || 'mid',
+      t: (document.querySelector('input[name=time]:checked') || {}).value || 'normal',
+      k: (document.querySelector('input[name=tokens]:checked') || {}).value || 'normal',
+      n: need, d: $('domainSelect').value || '',
+      c: state.callsPerDay, a: state.audience,
+      r: state.allowRelax ? 1 : 0
+    };
+    var encoded = b64e(JSON.stringify(payload));
+    if (!encoded) return '';
+    return location.origin + location.pathname + '?s=' + encoded + '#pick';
+  }
+  function applyShareState() {
+    var raw = '';
+    try { raw = new URLSearchParams(location.search).get('s') || ''; } catch (e) { }
+    if (!raw) return false;
+    var p = null;
+    try { p = JSON.parse(b64d(raw)); } catch (e) { }
+    if (!p || !p.q || String(p.q).trim().length < 6) return false;
+    $('problemInput').value = p.q;
+    $('charCount').textContent = p.q.length + ' 字';
+    setRadio('budget', p.b);
+    setRadio('time', p.t);
+    setRadio('tokens', p.k);
+    if ($('domainSelect')) $('domainSelect').value = p.d || '';
+    document.querySelectorAll('.check input').forEach(function (c) {
+      c.checked = !!(p.n && p.n[c.value]);
+    });
+    state.allowRelax = !!p.r;
+    if (p.c) state.callsPerDay = Math.max(1, Number(p.c) || 20);
+    if (p.a === 'dev' || p.a === 'beginner') state.audience = p.a;
+    setTimeout(function () {
+      showView('pick', true);
+      $('problemInput').scrollIntoView({ block: 'start' });
+      runPlan(false, true);
+    }, 80);
+    return true;
+  }
+
   function runPlan(auto, instant, forceFiles) {
     if (state.files.some(function (x) { return x.status === 'reading'; })) {
       toast('附件还在解析，稍等一两秒'); return;
@@ -283,12 +343,14 @@
     var f = readForm();
     if (!f) return;
     var btn = $('runBtn'); btn.disabled = true; btn.textContent = '正在拆解与匹配…';
+    if ($('results')) $('results').setAttribute('aria-busy', 'true');
     setTimeout(function () {
       try {
         var plan = E.buildPlan(f.problem, f);
         state.plan = plan;
         state.route = plan.routeKey;
         renderResults();
+        if ($('results')) $('results').setAttribute('aria-busy', 'false');
         var el = $('results');
         if (el && !auto) {
           if (instant) {
@@ -303,6 +365,7 @@
         }
       } catch (err) {
         console.error(err);
+        if ($('results')) $('results').setAttribute('aria-busy', 'false');
         showResultError('生成失败', err && err.message ? err.message : String(err), function () { runPlan(false, true, forceFiles); });
       } finally {
         btn.disabled = false; btn.textContent = '生成选型方案';
@@ -429,8 +492,18 @@
     var pick = route && route.picks ? route.picks[0] : null;
     if (!pick) return '';
     var m = pick.model;
+    var alt = route.picks[1] ? route.picks[1].model : null;
     var monthly = pick.cost * state.callsPerDay * 30;
     var reasons = (pick.reasons || []).slice(0, 3);
+    var steps = [
+      '复制第一句提示词，发到 <b>' + esc(m.name) + '</b>',
+      plan.files && plan.files.length
+        ? '先核对附件摘要是否覆盖关键内容，再试跑'
+        : '先用一段真实内容小样本试跑，确认输出格式',
+      alt
+        ? '结果不理想时，切到备选 <b>' + esc(alt.name) + '</b>（贵一些但更稳）'
+        : '把结果和问题一起复制，方便下次复用'
+    ];
     return '<section class="conclusion">' +
       '<div class="conclusion-kicker">首选方案</div>' +
       '<div class="conclusion-main"><h2>' + esc(m.name) + '</h2>' +
@@ -438,8 +511,11 @@
       '<p class="conclusion-price beginner-only">单次约 <b>¥' + fmt(pick.cost, 3) + '</b> · 每天 ' + state.callsPerDay + ' 次约 <b>¥' + fmt(monthly, 2) + '/月</b></p>' +
       '<p class="conclusion-price dev-only">本步约 <b>¥' + fmt(pick.cost, 3) + '</b> · ' + esc(priceShort(m)) + ' / 百万 token</p>' +
       '<ul class="conclusion-reasons">' + reasons.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+      '<ol class="next-steps">' + steps.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>' +
       '<div class="conclusion-actions">' +
       '<button class="btn btn-primary" id="copyFirstPrompt">复制第一句提示词</button>' +
+      (m.url ? '<a class="btn btn-ghost" href="' + esc(m.url) + '" target="_blank" rel="noopener">打开 ' + esc(m.name) + ' 官网</a>' : '') +
+      '<button class="btn btn-ghost" id="sharePlanBtn">复制分享链接</button>' +
       '<button class="btn btn-ghost" id="showAllSteps">展开每一步</button>' +
       '<label class="calls-input">每天 <input id="callsPerDay" type="number" min="1" value="' + state.callsPerDay + '"> 次</label>' +
       '</div></section>';
@@ -514,6 +590,13 @@
       var first = plan.subtasks[0];
       var fp = plan.routes[state.route].picks[0];
       if (first && fp) copyText(window.MPPrompt.tailor(first.prompt, fp.model, plan, first));
+    });
+    var shareBtn = $('sharePlanBtn');
+    if (shareBtn) shareBtn.addEventListener('click', function () {
+      var url = shareUrlOf();
+      if (!url) { toast('先填写问题再分享'); return; }
+      copyText(url, '分享链接已复制');
+      if (state.files && state.files.length) toast('附件不会随链接分享，对方需重新上传');
     });
     var showBtn = $('showAllSteps');
     if (showBtn) showBtn.addEventListener('click', function () {
@@ -1636,8 +1719,32 @@
     });
   }
 
+  function installDialogFocus() {
+    if (!window.HTMLDialogElement) return;
+    var proto = window.HTMLDialogElement.prototype;
+    if (proto.__mpFocusPatched) return;
+    proto.__mpFocusPatched = true;
+    var origShow = proto.showModal;
+    proto.showModal = function () {
+      if (document.activeElement && document.activeElement !== document.body) {
+        this._returnFocus = document.activeElement;
+      }
+      return origShow.apply(this, arguments);
+    };
+    document.addEventListener('close', function (e) {
+      var d = e.target;
+      if (!d || !d._returnFocus) return;
+      var back = d._returnFocus;
+      d._returnFocus = null;
+      if (back && document.contains(back) && typeof back.focus === 'function') {
+        setTimeout(function () { back.focus(); }, 0);
+      }
+    }, true);
+  }
+
   function init() {
     document.body.dataset.audience = state.audience;
+    installDialogFocus();
     bind();
     applyPrices(window.MP_PRICES);
     renderPriceSync();
@@ -1704,6 +1811,7 @@
       $('solutionInput').value = scene;
       renderSolutionMatch(scene);
     }
+    if (qs.get('s')) applyShareState();
     var pm = qs.get('pm');
     if (pm) {
       showView('prompts');

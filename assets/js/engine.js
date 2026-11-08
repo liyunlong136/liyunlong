@@ -167,14 +167,16 @@
       if (need.vision && !has(m.modalities, 'image')) return { blocked: '不支持图片输入', blockedCode: 'vision' };
       if (need.audio && !has(m.modalities, 'audio')) return { blocked: '不支持音频输入', blockedCode: 'audio' };
       if (need.video && !has(m.modalities, 'video')) return { blocked: '不支持视频输入', blockedCode: 'video' };
-      if (o.budget === 'free' && (blend(m) > 0 || m.open)) return { blocked: '零预算只保留免费 API；自托管/付费 API 已排除', blockedCode: 'free' };
+      // 零预算 = 不产生 API 账单。自托管开源权重没有 API 账单，
+      // 不该被当成"不满足预算"直接排除，而是降权 + 在前端标注需自备算力。
+      if (o.budget === 'free' && blend(m) > 0) return { blocked: '有 API 费用，不符合零预算', blockedCode: 'free' };
     }
 
     var s = base;
     var b = blend(m);
     if (o.budget === 'free') {
       if (b > 0.001) { s -= 26; cautions.push('不是免费模型，会产生费用'); }
-      else if (m.open) { s -= 5; cautions.push('开源权重需自备 GPU，自托管不是零成本'); }
+      else if (m.open) { s -= 8; cautions.push('开源权重：零 API 账单，但需自备 GPU，不是零总成本'); }
       else s += 6;
     } else if (o.budget === 'low') {
       s -= Math.min(20, b * 1.1);
@@ -201,7 +203,8 @@
       s -= 5;
       cautions.push('海外服务，国内访问需合规通道');
     }
-    if (o.budget === 'free' && /免费/.test(m.freeTier || '')) s += 5;
+    // "权重免费"是开源权重自托管，不是免费 API 额度，不能当成免费 API 加分
+    if (o.budget === 'free' && !m.open && /免费|试用/.test(m.freeTier || '')) s += 5;
     if (m.country === 'CN' && o.region === 'cn') s += 2;
 
     var EST_CAP = 60000;

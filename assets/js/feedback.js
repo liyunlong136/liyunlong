@@ -2,6 +2,8 @@
 (function () {
   var FB = window.MP_FEEDBACK || {};
   var ONLINE = !!FB.endpoint;
+  var NETLIFY = !ONLINE && !!FB.netlify;
+  var CAN_SEND = ONLINE || NETLIFY;
   var HAS_CHANNEL = !!(FB.email || FB.github);
   var TYPES = [
     { k: '体验问题', i: '🧭' }, { k: '功能建议', i: '💡' },
@@ -123,8 +125,8 @@
       : '';
     $('fbDone').innerHTML = '<div class="fb-success"><b>' + esc(msg) + '</b>' +
       '<p>' + (sent
-        ? '已经发送到反馈接口。'
-        : (ONLINE
+        ? '站长会在 Netlify 后台看到这条反馈。'
+        : (CAN_SEND
           ? '发送失败，已保存草稿，可复制或重试。'
           : (HAS_CHANNEL
             ? '反馈已保存在本机，请点下方「发邮件」或「去 GitHub 提 issue」发送。'
@@ -137,14 +139,38 @@
     var entry = collect();
     if (!entry) return;
     save(entry);
-    if (!ONLINE) { showDone(HAS_CHANNEL ? '反馈已保存，请选择发送方式' : '草稿已保存', entry, false); return; }
+    if (!CAN_SEND) {
+      showDone(HAS_CHANNEL ? '反馈已保存，请选择发送方式' : '草稿已保存', entry, false);
+      return;
+    }
     var btn = $('fbSubmit');
     btn.disabled = true; btn.textContent = '发送中…';
-    fetch(FB.endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(entry)
-    }).then(function (r) {
+    var req;
+    if (ONLINE) {
+      req = fetch(FB.endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(entry)
+      });
+    } else {
+      // Netlify Forms：静态表单在部署时已被 Netlify 识别，这里直接 POST 到站点根路径
+      var formName = FB.netlifyForm || 'feedback';
+      var body = new URLSearchParams();
+      body.set('form-name', formName);
+      body.set('type', entry.type);
+      body.set('rating', String(entry.rating || ''));
+      body.set('text', entry.text);
+      body.set('contact', entry.contact || '');
+      body.set('page', entry.page || '');
+      body.set('model', entry.model || '');
+      body.set('bot-field', '');
+      req = fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
+    }
+    req.then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       showDone('已发送，谢谢', entry, true);
     }).catch(function () {
@@ -186,12 +212,15 @@
     });
     $('fbClose').addEventListener('click', function () { $('feedbackDlg').close(); });
     $('feedbackDlg').addEventListener('click', function (e) { if (e.target === $('feedbackDlg')) $('feedbackDlg').close(); });
-    if (!ONLINE) {
+    if (!CAN_SEND) {
       $('fbSubmit').textContent = HAS_CHANNEL ? '保存并发送' : '保存草稿';
       var note = document.querySelector('.fb-note');
       if (note) note.textContent = HAS_CHANNEL
         ? '反馈会先保存在本机，再选择「发邮件」或「去 GitHub 提 issue」发送；不会假装已提交。'
         : '当前未接后端：反馈只保存在本机，可复制后发邮件。配置 endpoint 后才会真正提交。';
+    } else if (NETLIFY) {
+      var note2 = document.querySelector('.fb-note');
+      if (note2) note2.textContent = '反馈会提交到本站的 Netlify Forms 后台，站长可在 Netlify 后台查看；同时保留一份本机草稿。';
     }
     $('fbSubmit').addEventListener('click', submit);
     $('fbCopy').addEventListener('click', function () {

@@ -57,7 +57,26 @@
       '【输出格式】按「目标复述 / 3 个判断 / 下一步」三节输出，总字数 500 以内。';
   }
 
+  function applyModeUI() {
+    var promptMode = state.mode === 'prompt';
+    var tagA = document.querySelector('#view-pk .pk-col .pk-tag');
+    var tagB = document.querySelector('#view-pk .pk-col.expert .pk-tag');
+    var hint = document.getElementById('pkModeHint');
+    if (tagA) tagA.textContent = promptMode ? '普通提示词' : '模型 A';
+    if (tagB) tagB.textContent = promptMode ? '专家提示词' : '模型 B';
+    $('pkModelB').disabled = promptMode;
+    if (hint) {
+      hint.textContent = promptMode
+        ? '同一模型，只换提示词：排除模型差异。'
+        : '同一提示词，只换模型：排除提示词差异。';
+    }
+    $('pkMode').querySelectorAll('button').forEach(function (x) {
+      x.classList.toggle('on', x.getAttribute('data-pk-mode') === state.mode);
+    });
+  }
+
   function buildPrompts() {
+    applyModeUI();
     var topic = ($('pkTopic').value || '').trim();
     if (!topic) return;
     var structured = '';
@@ -69,6 +88,7 @@
     }
 
     if (state.mode === 'prompt') {
+      // 同模型比提示词：两侧锁同一个模型，只换提示词
       var ma = selectedModel('pkModelA');
       $('pkModelB').value = $('pkModelA').value;
       $('pkModelB').disabled = true;
@@ -78,7 +98,16 @@
       $('pkPromptA').value = topic;
       $('pkPromptB').value = structured;
     } else {
+      // 同提示词比模型：两侧同提示词，必须不同模型
       $('pkModelB').disabled = false;
+      var mb = selectedModel('pkModelB');
+      if (mb && $('pkModelA').value === $('pkModelB').value) {
+        var opts2 = $('pkModelB').options;
+        for (var j = 0; j < opts2.length; j++) {
+          if (opts2[j].value !== $('pkModelA').value) { $('pkModelB').value = opts2[j].value; break; }
+        }
+        mb = selectedModel('pkModelB');
+      }
       $('pkPromptA').value = structured;
       $('pkPromptB').value = structured;
     }
@@ -321,14 +350,13 @@
   }
 
   function saveKey() {
+    // 只放内存：不写 localStorage/sessionStorage，刷新即失效，降低 XSS 读取风险
     state.key = $('pkKey').value.trim();
-    try { sessionStorage.setItem('mp_pk_key', state.key); } catch (e) { }
     updateRunLabel();
   }
 
   function init() {
     if (!$('pkTopic')) return;
-    try { var k = sessionStorage.getItem('mp_pk_key'); if (k) { $('pkKey').value = k; state.key = k; } } catch (e) { }
     fillModels();
     buildPrompts();
     $('pkProvider').addEventListener('change', function () {
@@ -348,7 +376,16 @@
     $('pkMode').addEventListener('click', function (e) {
       var b = e.target.closest('[data-pk-mode]'); if (!b) return;
       state.mode = b.getAttribute('data-pk-mode');
-      $('pkMode').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      if (state.mode === 'model') {
+        // 同提示词比模型：两侧必须是不同模型，否则没有可比性
+        var av = $('pkModelA').value, bv = $('pkModelB').value;
+        if (av === bv) {
+          var opts = $('pkModelB').options;
+          for (var i = 0; i < opts.length; i++) {
+            if (opts[i].value !== av) { $('pkModelB').value = opts[i].value; break; }
+          }
+        }
+      }
       buildPrompts();
     });
     $('pkRun').addEventListener('click', function () { saveKey(); runLive(); });
@@ -356,7 +393,6 @@
     if ($('pkCancel')) $('pkCancel').addEventListener('click', cancelRunning);
     $('pkClearKey').addEventListener('click', function () {
       $('pkKey').value = ''; state.key = '';
-      try { sessionStorage.removeItem('mp_pk_key'); } catch (e) { }
     });
     $('pkKey').addEventListener('change', saveKey);
     $('pkKey').addEventListener('input', updateRunLabel);

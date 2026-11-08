@@ -932,3 +932,7 @@ body[data-audience="dev"] .beginner-only{display:none!important}
 .sync-note{flex-basis:100%;font-size:11px;color:var(--dim);margin-top:4px;line-height:1.6}
 .sync-note.err{color:#fca5a5}
 .sync-note.ok{color:var(--ok)}
+
+
+.pk-mode-hint{font-size:11.5px;color:var(--dim);margin:0 0 12px;line-height:1.6}
+.pk-mode-hint::before{content:'ⓘ ';color:var(--acc)}

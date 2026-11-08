@@ -887,7 +887,11 @@
     else f.push({ k: '海外服务', c: 'warn', t: '需评估网络访问与数据出境' });
     if (m.open) f.push({ k: '可私有化', c: 'ok', t: '权重开放或提供私有部署' });
     if (m.country === 'CN') f.push({ k: '境内备案', c: 'ok', t: '按厂商公开信息，具体以网信办公示为准' });
-    if (m.priceIn === 0 && m.priceOut === 0) f.push({ k: '免费', c: 'ok', t: '当前价格为 0' });
+    if (m.priceIn === 0 && m.priceOut === 0) {
+      f.push(m.open
+        ? { k: '自托管', c: 'warn', t: '零 API 账单，但需自备 GPU/服务器，不是零总成本' }
+        : { k: '免费', c: 'ok', t: '当前价格为 0' });
+    }
     return f;
   }
 
@@ -1035,7 +1039,7 @@
       '<h4>上下文能装多少</h4>' + capHtml +
       '<h4>价格说明</h4><p>' + esc(m.priceNote || '') + '。' +
       '<span class="dlg-note">来源：' + esc(priceSourceLabel(m)) + ' · 更新：' + esc(priceUpdatedLabel(m)) + ' · ' + priceConfLabel(m) + '</span>。' +
-      (m.freeTier ? '免费额度：' + esc(m.freeTier) + '。' : '') + '接口：' + esc(m.api || '-') + '。</p>' +
+      (m.freeTier ? (m.open ? '部署成本：' : '免费额度：') + esc(m.freeTier) + '。' : '') + '接口：' + esc(m.api || '-') + '。</p>' +
       '<h4>成本试算</h4><div class="calc"><input type="number" id="calcIn" value="3000" min="0"><span style="color:var(--dim);font-size:12px">输入 tokens</span>' +
       '<input type="number" id="calcOut" value="1500" min="0"><span style="color:var(--dim);font-size:12px">输出 tokens</span>' +
       '<b class="calc-out" id="calcOutLabel"></b></div>' +

@@ -139,7 +139,7 @@
         <div class="checks">
           <label class="check"><input type="checkbox" value="vision"> 要看图 / 截图 / PDF</label>
           <label class="check"><input type="checkbox" value="audio"> 要处理语音 / 视频</label>
-          <label class="check"><input type="checkbox" value="longdoc"> 超长文档（20 万字+）</label>
+          <label class="check"><input type="checkbox" value="longdoc"> 超长文档（20 万字以上，按 20 万 token 估算）</label>
           <label class="check"><input type="checkbox" value="local"> 必须私有化 / 内网</label>
         </div>
       </div>
@@ -238,7 +238,7 @@
     <div class="lib-head">
       <div>
         <h1>普通模式 vs 专家模式</h1>
-        <p>同一条问题：左边随便问 + L1/L2，右边结构化提示词 + L4/L5。差在哪、差多少钱，一眼看到。</p>
+        <p>同一条问题，两种写法。左边原样问，右边结构化提示词；也可以固定模型只换提示词，或固定提示词只换模型。差在哪、差多少钱，一眼看到。</p>
       </div>
     </div>
 
@@ -246,6 +246,7 @@
       <button class="on" data-pk-mode="prompt">同模型 · 比提示词</button>
       <button data-pk-mode="model">同提示词 · 比模型</button>
     </div>
+    <p class="pk-mode-hint" id="pkModeHint">同一模型，只换提示词：排除模型差异。</p>
 
     <div class="privacy-strip">
       <div><b>本地运行</b><span>选型、文件解析、成本估算；评分默认只存本机</span></div>
@@ -266,10 +267,10 @@
             <option value="openai">OpenAI</option>
           </select>
         </label>
-        <label>API Key（只存在本标签页）
+        <label>API Key（只存在本页内存）
           <input id="pkKey" type="password" placeholder="不填也能看结构对比" autocomplete="off">
         </label>
-        <span class="hint-line" style="margin:0">Key 不会上传服务器；关闭标签页即失效。</span>
+        <span class="hint-line" style="margin:0">Key 不上传服务器，只存在当前页面内存；刷新或关闭页面即失效。</span>
       </div>
       <div class="actions">
         <button class="btn btn-primary" id="pkRun">生成对比</button>
@@ -553,7 +554,7 @@
     <ul class="consent-list">
       <li>会发送：你的问题、左侧原文、右侧结构化提示词</li>
       <li>不会发送：上传的文件、浏览器本地记录</li>
-      <li>API Key 只存在当前标签页的 sessionStorage</li>
+      <li>API Key 只存在当前页面内存，刷新或关闭页面即失效</li>
     </ul>
     <label class="check"><input type="checkbox" id="pkConsentCheck"> 我已知晓并同意把上述内容发送给该厂商</label>
     <div class="actions">
@@ -565,7 +566,18 @@
 
 <button class="fb-fab" id="feedbackBtn" aria-label="反馈与建议"><span class="fb-fab-ico">✎</span><span>反馈</span></button>
 
-<dialog id="feedbackDlg" class="feedback-dlg">
+<form name="feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="feedback">
+    <input name="bot-field">
+    <input name="type">
+    <input name="rating">
+    <textarea name="text"></textarea>
+    <input name="contact">
+    <input name="page">
+    <input name="model">
+  </form>
+
+  <dialog id="feedbackDlg" class="feedback-dlg">
   <div class="dlg-head">
     <div><h3>说说你的体验</h3><div class="m-sub">匿名也可以；留下联系方式更方便回复</div></div>
     <button class="dlg-close" id="fbClose" aria-label="关闭">×</button>

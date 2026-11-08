@@ -6,7 +6,7 @@
   var state = { dim: 'all', ratings: {}, votes: 0, source: 'none', loading: false };
 
   var DIMS = [
-    { id: 'all', name: '总榜', sub: '综合能力（不含用户评分）' },
+    { id: 'all', name: '场景匹配', sub: '综合场景匹配（人工十维，不是官方排名）' },
     { id: 'coding', name: '代码', sub: '代码工程与推理' },
     { id: 'writing', name: '写作', sub: '写作与中文语感' },
     { id: 'value', name: '性价比', sub: '能力与价格' },
@@ -142,7 +142,7 @@
     renderList($('rankList'), 6, false);
     renderList($('rankDlgList'), 20, true);
     var dim = DIMS.filter(function (d) { return d.id === state.dim; })[0];
-    if ($('rankSub')) $('rankSub').textContent = (dim ? dim.sub : '') + ' · 只按能力分';
+    if ($('rankSub')) $('rankSub').textContent = (dim ? dim.sub : '') + ' · 不是官方能力排名';
     if ($('rankDlgSub')) $('rankDlgSub').textContent = (dim ? dim.name + ' · ' + dim.sub : '');
     if ($('rankNote')) $('rankNote').textContent = noteText();
   }

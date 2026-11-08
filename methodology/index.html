@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>评测方法与数据边界 | 模选 ModelPick</title>
+<meta name="description" content="模选的场景匹配分怎么算、价格从哪里来、哪些是官方数据、哪些是人工判断、证据等级 A/B/C 和当前评测样本说明。">
+<link rel="canonical" href="https://myaskmate.com/methodology/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="模选 ModelPick">
+<meta property="og:title" content="评测方法与数据边界">
+<meta property="og:description" content="场景匹配分不是官方 benchmark；这里公开数据来源、方法、样本与不确定性。">
+<meta property="og:url" content="https://myaskmate.com/methodology/">
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .m-wrap{max-width:860px;margin:0 auto;padding:40px 20px 80px}
+  .m-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px}
+  .m-top a{color:var(--acc);text-decoration:none;font-size:13px}
+  .m-title{font-size:34px;font-weight:900;letter-spacing:-.5px;margin:0 0 8px}
+  .m-sub{color:var(--muted);font-size:14px;line-height:1.8;margin:0 0 24px}
+  .m-card{border:1px solid var(--line);border-radius:14px;padding:20px;margin:14px 0;background:rgba(12,18,32,.55)}
+  .m-card h2{font-size:18px;margin:0 0 10px}
+  .m-card h3{font-size:14px;margin:16px 0 6px;color:var(--txt)}
+  .m-card p,.m-card li{font-size:13px;line-height:1.8;color:var(--muted)}
+  .m-card ul{padding-left:20px;margin:6px 0}
+  .m-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+  .m-table th,.m-table td{border:1px solid var(--line);padding:8px 9px;text-align:left;vertical-align:top}
+  .m-table th{color:var(--txt);background:rgba(148,163,184,.06);font-weight:700}
+  .m-tag{display:inline-block;padding:1px 6px;border-radius:4px;border:1px solid var(--line);font-size:11px;margin-right:4px}
+  .m-a{color:#7ee2c4;border-color:rgba(52,211,153,.3)}
+  .m-b{color:#d8b48a;border-color:rgba(251,191,36,.25)}
+  .m-c{color:var(--dim)}
+  .m-note{border-left:2px solid var(--acc);padding-left:12px;color:var(--muted);font-size:12.5px;line-height:1.8;margin:12px 0}
+  .m-foot{margin-top:26px;color:var(--dim);font-size:11.5px;line-height:1.8}
+  @media(max-width:640px){.m-title{font-size:27px}.m-wrap{padding:24px 16px 60px}.m-card{padding:15px}}
+</style>
+</head>
+<body>
+<main class="m-wrap">
+  <div class="m-top">
+    <a href="../">← 返回模选</a>
+    <span class="m-tag m-c">方法版本 v1.0 · 数据快照 2026-11-05</span>
+  </div>
+  <h1 class="m-title">评测方法与数据边界</h1>
+  <p class="m-sub">这份页面回答一个问题：网页上的“场景匹配分”和价格，到底是怎么来的、能信到什么程度。它不是官方 benchmark，也不代表真实成功率。</p>
+
+  <section class="m-card">
+    <h2>1. 五层证据链</h2>
+    <table class="m-table">
+      <tr><th>层</th><th>我们记录什么</th><th>当前状态</th></tr>
+      <tr><td>来源</td><td>价格/能力数据对应的官网或公开页面</td><td>37 个模型有官方同步；其余标注折算/推算</td></tr>
+      <tr><td>时间</td><td>价格核验日、数据快照日</td><td>价格同步日与数据快照日分开显示</td></tr>
+      <tr><td>样本</td><td>评测任务数、运行次数、样本量</td><td><b>当前没有公开评测样本</b>，能力分为人工十维</td></tr>
+      <tr><td>方法</td><td>维度、权重、评分规则</td><td>自研十维，权重为站内人工设定</td></tr>
+      <tr><td>不确定性</td><td>证据等级、未验证项、可能错在哪</td><td>每个推荐分数可点开查看</td></tr>
+    </table>
+  </section>
+
+  <section class="m-card">
+    <h2>2. 场景匹配分怎么算</h2>
+    <p>分数由十维能力画像、任务拆解、硬约束过滤、预算/时间/token 约束共同决定。它不是模型“绝对强弱”，而是“这个任务下是否合适”。</p>
+    <ul>
+      <li>先过滤硬约束：私有化、图片、音频、视频、长上下文、零预算</li>
+      <li>再按任务所需维度加权</li>
+      <li>最后按预算、时间、token 余量做加减分</li>
+      <li>输出 0-100 的匹配分，分数越高越适合当前任务</li>
+    </ul>
+    <div class="m-note">这不是成功率。没有在真实用户任务上跑过，不能承诺“用了就一定好”。</div>
+  </section>
+
+  <section class="m-card">
+    <h2>3. 证据等级 A / B / C</h2>
+    <p><span class="m-tag m-a">A</span>官方价格 + 公开评测样本。当前没有模型达到 A。</p>
+    <p><span class="m-tag m-b">B</span>价格可追溯（官方/折算）+ 人工十维能力评估，没有公开评测样本。</p>
+    <p><span class="m-tag m-c">C</span>价格为推算/折算，能力为人工十维评估，只适合横向比较。</p>
+    <p>证据等级会显示在模型卡片、详情和推荐结果里。C 级模型不应该被当成“最优解”。</p>
+  </section>
+
+  <section class="m-card">
+    <h2>4. 价格口径</h2>
+    <table class="m-table">
+      <tr><th>标签</th><th>含义</th><th>使用建议</th></tr>
+      <tr><td>官方价</td><td>厂商官网/公开定价页，自动同步或人工核验</td><td>可直接用于预算</td></tr>
+      <tr><td>折算价</td><td>按汇率、套餐或阶梯价折算</td><td>下单前以官方账单为准</td></tr>
+      <tr><td>推算价</td><td>同级产品估算，不是厂商报价</td><td>只做横向比较，不用于精确预算</td></tr>
+    </table>
+    <p>每次打开模型库或模型详情，页面会请求本站最新的价格快照，并显示快照时间、核验时间和数据年龄。快照更新依赖同步任务，不是厂商实时报价。</p>
+  </section>
+
+  <section class="m-card">
+    <h2>5. 评测样本：当前为 0</h2>
+    <p>我们不会把“人工十维”包装成 benchmark。当前公开评测样本为 <b>0</b>；下一步计划做最小评测：</p>
+    <ul>
+      <li>10 个模型 × 30 个任务</li>
+      <li>每个任务运行 3 次</li>
+      <li>人工 rubric + 自动格式检查</li>
+      <li>公开任务样例、评分标准、失败案例和样本量</li>
+    </ul>
+    <p>在样本量足够之前，页面只展示“场景匹配分”，不展示“能力排名”或“成功率”。</p>
+  </section>
+
+  <section class="m-card">
+    <h2>6. 榜单边界</h2>
+    <ul>
+      <li><b>场景匹配榜</b>：按任务类型和约束排序，是站内规则结果。</li>
+      <li><b>能力参考榜</b>：接入公开评测样本后才上线；当前不展示。</li>
+      <li>不把用户本机评分混入公共榜单。</li>
+    </ul>
+  </section>
+
+  <section class="m-card">
+    <h2>7. 反馈、纠错与版本</h2>
+    <p>发现价格、上下文、模态或能力标注错误，请用页面右下角「反馈」选择「数据纠错」，附上来源链接。反馈会进入 Netlify Forms 后台，不进入模型厂商。</p>
+    <p>数据版本：2026-11-05 · 方法版本：v1.0 · 下次评测计划：待 API Key 与评测预算就绪</p>
+  </section>
+
+  <p class="m-foot">最后更新：2026-11-08 · 本页不是法律或采购建议；价格与能力以厂商官方页面和你的实际账单为准。</p>
+</main>
+</body>
+</html>

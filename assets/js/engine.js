@@ -244,6 +244,8 @@
       ],
       source: '自研十维 + 公开基准参考 + 人工校准',
       evaluatedAt: meta.dataDate || '',
+      evidence: m.benchmark ? 'A' : (m.priceConf === 'official' ? 'B' : 'C'),
+      sample: '当前 0 个公开评测样本；能力分为站内人工十维评估',
       caveat: '这是规则匹配分，不是成功率，也不是官方 benchmark'
     };
     return {

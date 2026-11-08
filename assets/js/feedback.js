@@ -179,9 +179,13 @@
       btn.disabled = false; btn.textContent = '提交反馈';
     });
   }
-  function open() {
+  function open(type) {
     var d = $('feedbackDlg');
     if (!d) return;
+    if (type && TYPES.some(function (t) { return t.k === type; })) {
+      sel.type = type;
+      renderTypes();
+    }
     if (d.open) { $('fbText').focus(); return; }
     d.showModal();
     if (window.MPTrack) MPTrack.event('feedback_open', { page: pageLabel() });
@@ -208,7 +212,13 @@
       sel.rating = +b.getAttribute('data-fb-star'); renderStars();
     });
     document.querySelectorAll('#feedbackBtn, [data-open-feedback]').forEach(function (b) {
-      b.addEventListener('click', open);
+      b.__fbBound = true;
+      b.addEventListener('click', function () { open(b.getAttribute('data-fb-type')); });
+    });
+    // 动态插入的纠错入口（例如模型详情里的“发现价格错误”）
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-open-feedback]');
+      if (b && !b.__fbBound) { e.preventDefault(); open(b.getAttribute('data-fb-type')); }
     });
     $('fbClose').addEventListener('click', function () { $('feedbackDlg').close(); });
     $('feedbackDlg').addEventListener('click', function (e) { if (e.target === $('feedbackDlg')) $('feedbackDlg').close(); });
@@ -236,7 +246,8 @@
       if (e.target.closest('[data-fb-again]')) { reset(); $('fbText').focus(); }
     });
     try {
-      if (new URLSearchParams(location.search).get('feedback') === '1') setTimeout(open, 300);
+      var qs = new URLSearchParams(location.search);
+      if (qs.get('feedback') === '1') setTimeout(function () { open(qs.get('type')); }, 300);
     } catch (e) { }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

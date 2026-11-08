@@ -1,7 +1,7 @@
 name: sync-prices
 on:
   schedule:
-    - cron: '0 1 * * *' # 每天 09:00（北京时间）
+    - cron: '0 * * * *' # 每小时同步一次，页面每次查看再核验快照
   workflow_dispatch:
 permissions:
   contents: write

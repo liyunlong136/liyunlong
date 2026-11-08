@@ -174,14 +174,15 @@
 
     <section class="rank-home" id="rankHome">
       <div class="rank-head">
-        <div><span class="kicker">排行榜</span><h2>总榜与分榜</h2>
-          <p id="rankSub">只按能力分排序；评分仅本机，不参与总榜。</p></div>
+        <div><span class="kicker">场景匹配</span><h2>场景匹配榜</h2>
+          <p id="rankSub">按任务场景匹配度排序；不是官方能力排名，评分仅本机。</p></div>
         <button class="btn btn-sm" id="rankMore">查看完整榜单</button>
       </div>
       <div class="filters" id="rankTabs"></div>
       <div class="rank-list" id="rankList"></div>
-      <p class="rank-method">口径：总榜只按自研十维能力分排序（人工设定，参考公开基准与实测）；没有公开统一评测样本，分数只用于同场景横向比较，不是官方 benchmark，也不代表真实成功率。模型详情里的评分只存本机，不参与总榜。</p>
+      <p class="rank-method">口径：只按自研十维场景匹配分排序（人工设定，参考公开基准与实测）；没有公开统一评测样本，分数只用于同场景横向比较，不是官方 benchmark，也不代表真实成功率。模型详情里的评分只存本机，不参与榜单。</p>
       <div class="rank-note" id="rankNote"></div>
+      <div class="rank-ref">能力参考榜：接入公开评测样本后上线。当前不展示未经验证的“能力排名”。</div>
     </section>
 
     <section class="mission">
@@ -510,7 +511,7 @@
 <footer>
   <div class="wrap foot-inner">
     <div>模选 ModelPick · 数据快照 <span id="footDate">—</span> · 价格与能力以各平台官网为准</div>
-    <div>免费使用 · 选型/文件/评分默认本地 · PK 真跑会发往第三方 · <button class="link-btn" data-open-feedback>反馈与建议</button></div>
+    <div>免费使用 · 选型/文件/评分默认本地 · PK 真跑会发往第三方 · <a href="methodology/">评测方法</a> · <button class="link-btn" data-open-feedback>反馈与建议</button></div>
   </div>
   <div class="wrap foot-links">
     <span>分栏索引</span>
@@ -586,7 +587,16 @@
 
 <button class="fb-fab" id="feedbackBtn" aria-label="反馈与建议"><span class="fb-fab-ico">✎</span><span>反馈</span></button>
 
-<form name="feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
+<form name="result-feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="result-feedback">
+    <input name="bot-field">
+    <input name="helpful">
+    <input name="reason">
+    <input name="model">
+    <input name="task">
+  </form>
+
+  <form name="feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="hidden" name="form-name" value="feedback">
     <input name="bot-field">
     <input name="type">
@@ -644,6 +654,7 @@
 <script src="assets/js/rating.js"></script>
 <script src="assets/js/ranking.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/price-live.js"></script>
 <script src="assets/js/recent.js"></script>
 </body>
 </html>

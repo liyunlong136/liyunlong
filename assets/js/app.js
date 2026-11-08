@@ -242,6 +242,7 @@
       try { location.hash = name; } catch (err) { }
     }
     if (window.MPTrack) MPTrack.event('view', { name: name });
+    try { window.dispatchEvent(new CustomEvent('mp:view', { detail: { name: name } })); } catch (e) { }
     if (name === 'about' && typeof renderAboutTrack === 'function') renderAboutTrack();
     if (name === 'prompts') {
       ensurePrompts(function () {
@@ -451,6 +452,7 @@
     $('scoreBody').innerHTML =
       '<p><b>匹配依据</b></p>' + list(a.matched) +
       '<p><b>还没有验证</b></p>' + list(a.unverified) +
+      '<p><b>证据等级</b></p><p class="muted">' + esc(a.evidence || 'B') + ' · ' + esc(a.sample || '无公开评测样本') + '</p>' +
       '<p><b>数据来源</b></p><p class="muted">' + esc(a.source || '自研十维') + ' · 评估日 ' + esc(a.evaluatedAt || '—') + '</p>' +
       '<div class="dlg-note">' + esc(a.caveat || '这是规则匹配分，不是成功率，也不是官方 benchmark。') + '</div>';
     var d = $('scoreDlg');
@@ -532,6 +534,55 @@
       '</div></section>';
   }
 
+  function resultFeedbackHtml(plan) {
+    var route = plan.routes[state.route];
+    var pick = route && route.picks ? route.picks[0] : null;
+    if (!pick) return '';
+    return '<div class="result-feedback" id="resultFeedback" data-model="' + esc(pick.model.id) + '">' +
+      '<div class="rf-head"><b>这个推荐能直接用吗？</b><span>反馈进入本站后台，不发给模型厂商</span></div>' +
+      '<div class="rf-actions">' +
+      '<button class="btn btn-sm" data-rf="yes">能直接用</button>' +
+      '<button class="btn btn-sm" data-rf="partial">部分能用</button>' +
+      '<button class="btn btn-sm" data-rf="no">不能用</button>' +
+      '</div>' +
+      '<input id="rfReason" class="rf-reason" maxlength="200" placeholder="可选：哪里不对？价格 / 能力 / 提示词 / 模型不支持">' +
+      '<div class="rf-done" id="rfDone" aria-live="polite" hidden></div>' +
+      '</div>';
+  }
+
+  function bindResultFeedback(plan) {
+    var box = $('resultFeedback');
+    if (!box) return;
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-rf]');
+      if (!b || box.getAttribute('data-sent') === '1') return;
+      var helpful = b.getAttribute('data-rf');
+      var reason = ($('rfReason') && $('rfReason').value || '').trim();
+      var model = box.getAttribute('data-model') || '';
+      var task = (plan.problem || '').slice(0, 120);
+      var entry = { helpful: helpful, reason: reason, model: model, task: task, ts: new Date().toISOString() };
+      try {
+        var arr = JSON.parse(localStorage.getItem('mp_result_feedback') || '[]');
+        arr.push(entry);
+        localStorage.setItem('mp_result_feedback', JSON.stringify(arr.slice(-100)));
+      } catch (err) { }
+      box.setAttribute('data-sent', '1');
+      box.querySelectorAll('[data-rf]').forEach(function (x) { x.disabled = true; });
+      var body = new URLSearchParams();
+      body.set('form-name', 'result-feedback');
+      body.set('helpful', helpful);
+      body.set('reason', reason);
+      body.set('model', model);
+      body.set('task', task);
+      body.set('bot-field', '');
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); })
+        .then(function () { $('rfDone').textContent = '已记录，谢谢。公共统计在样本足够后公布。'; })
+        .catch(function () { $('rfDone').textContent = '已保存在本机；后台发送失败，稍后可再试。'; })
+        .finally(function () { $('rfDone').hidden = false; });
+    });
+  }
+
   function renderResults() {
     var plan = state.plan;
     if (!plan) return;
@@ -556,7 +607,7 @@
     if (plan.opts.local) chips.push('<span class="chip">仅本地部署</span>');
     if (plan.files && plan.files.length) chips.push('<span class="chip acc">附件 ' + plan.files.length + ' 个</span>');
 
-    var html = audienceTabsHtml() + conclusionHtml(plan);
+    var html = audienceTabsHtml() + conclusionHtml(plan) + resultFeedbackHtml(plan);
     if (plan.relaxed) {
       html += '<div class="warn-banner">已按你的确认放宽硬约束：以下方案不再保证私有化 / 上下文 / 模态满足原条件。</div>';
     }
@@ -582,6 +633,7 @@
     $('results').innerHTML = html;
 
     bindScoreHelp($('results'));
+    bindResultFeedback(plan);
 
     $('routeTabs').addEventListener('click', function (e) {
       var b = e.target.closest('button[data-route]'); if (!b) return;
@@ -733,6 +785,21 @@
   function priceUpdatedLabel(m) {
     return m.syncedAt ? dtText(m.syncedAt) : (META.dataDate || '—');
   }
+  function evidenceLevel(m) {
+    if (m.benchmark && m.priceConf === 'official') return 'A';
+    if (m.priceConf === 'official' || m.priceConf === 'ref') return 'B';
+    return 'C';
+  }
+  function evidenceText(m) {
+    var lv = evidenceLevel(m);
+    if (lv === 'A') return '官方价 + 公开评测样本';
+    if (lv === 'B') return '价格可追溯 + 人工十维能力评估（无公开评测样本）';
+    return '价格为推算/折算，能力为人工十维评估，仅供参考';
+  }
+  function evidenceBadge(m) {
+    var lv = evidenceLevel(m);
+    return '<span class="ev ev-' + lv.toLowerCase() + '" title="' + esc(evidenceText(m)) + '">证据 ' + lv + '</span>';
+  }
 
   /* ================= 解决方案 ================= */
   function modelById(id) { return MODELS.filter(function (m) { return m.id === id; })[0]; }
@@ -858,7 +925,7 @@
     html += '<div class="rec-main">';
     html += '<div class="rec-name"><h4>' + esc(m.name) + '</h4>' +
       '<span class="tier tier-' + m.tier + '">' + esc(E.tierLabel(m.tier)) + '</span>' +
-      '<span class="rec-vendor">' + esc(m.vendor) + (m.open ? ' · 开源权重' : '') + (m.country !== 'CN' ? ' · 海外' : '') + '</span></div>';
+      '<span class="rec-vendor">' + esc(m.vendor) + (m.open ? ' · 开源权重' : '') + (m.country !== 'CN' ? ' · 海外' : '') + '</span>' + evidenceBadge(m) + '</div>';
     var monthly = r.cost * state.callsPerDay * 30;
     html += '<div class="rec-meta dev-only"><span>上下文 <b>' + ctxLabel(m.ctx) + '</b></span><span>速度 <b>' + m.speed.toFixed(1) + '/10</b></span>' +
       '<span>价格 <b>' + priceShort(m) + '</b> / 百万 token</span><span>本步约 <b>¥' + fmt(r.cost, 3) + '</b></span></div>';
@@ -1014,7 +1081,7 @@
         '<div class="m-tags">' + (m.bestFor || []).slice(0, 4).map(function (t) { return '<span class="m-tag">' + esc(t) + '</span>'; }).join('') + '</div>' +
         '<div class="m-dims">' + bars + '</div>' +
         '<div class="m-foot"><span>上下文 <b>' + ctxLabel(m.ctx) + '</b></span><span>价格 <b>' + priceShort(m) + '</b><i class="pc" title="' + esc(priceConfTitle(m)) + '">' + priceConfLabel(m) + '</i></span></div>' +
-        '<div class="price-meta">来源：' + esc(priceSourceLabel(m)) + ' · 更新：' + esc(priceUpdatedLabel(m)) + '</div>' +
+        '<div class="price-meta">来源：' + esc(priceSourceLabel(m)) + ' · 更新：' + esc(priceUpdatedLabel(m)) + ' · ' + evidenceBadge(m) + '</div>' +
         '</article>';
     }).join('');
     $('modelGrid').innerHTML = html || '<div class="empty">没有匹配的模型，换个关键词试试</div>';
@@ -1105,6 +1172,7 @@
     var m = MODELS.filter(function (x) { return x.id === id; })[0];
     if (!m) return;
     var dlg = $('modelDlg');
+    dlg.setAttribute('data-id', id);
     var dims = E.DIMS.map(function (k) {
       return '<div class="dim-row"><span>' + esc(E.dimLabel(k)) + '</span><div class="bar"><i style="width:' + pct(m.dims[k]) + '%"></i></div><b>' + m.dims[k].toFixed(1) + '</b></div>';
     }).join('');
@@ -1117,10 +1185,11 @@
     var dgHtml = downgradeHtml(m);
     $('dlgBody').innerHTML =
       '<p>' + esc(m.desc) + '</p>' +
+      '<div id="livePriceNote" class="live-price-note">价格核验中…</div>' +
       '<div id="modelRating" class="rating-mount"></div>' +
       '<div class="dlg-grid" style="margin-top:12px">' +
       '<div class="dlg-stat"><span>上下文 / 最大输出</span><b>' + ctxLabel(m.ctx) + ' / ' + ctxLabel(m.maxOut) + '</b></div>' +
-      '<div class="dlg-stat"><span>价格（输入 / 输出）</span><b>' + priceShort(m) + ' 每百万</b>' +
+      '<div class="dlg-stat"><span>价格（输入 / 输出）</span><b>' + priceShort(m) + ' 每百万</b>' + evidenceBadge(m) +
       '<i class="mini">' + Math.round(m.priceIn * 1000) + ' / ' + Math.round(m.priceOut * 1000) + ' 厘 · ' + priceConfLabel(m) + '</i></div>' +
       '<div class="dlg-stat"><span>速度</span><b>' + m.speed.toFixed(1) + ' / 10</b></div>' +
       '<div class="dlg-stat"><span>发布</span><b>' + esc(m.release || '-') + '</b></div>' +
@@ -1137,8 +1206,9 @@
       '<h4>Token 与时间效率</h4>' + timeHtml +
       '<h4>上下文能装多少</h4>' + capHtml +
       '<h4>价格说明</h4><p>' + esc(m.priceNote || '') + '。' +
-      '<span class="dlg-note">来源：' + esc(priceSourceLabel(m)) + ' · 更新：' + esc(priceUpdatedLabel(m)) + ' · ' + priceConfLabel(m) + '</span>。' +
+      '<span class="dlg-note">来源：' + esc(priceSourceLabel(m)) + ' · 更新：' + esc(priceUpdatedLabel(m)) + ' · ' + priceConfLabel(m) + ' · ' + evidenceText(m) + '</span>。' +
       (m.freeTier ? (m.open ? '部署成本：' : '免费额度：') + esc(m.freeTier) + '。' : '') + '接口：' + esc(m.api || '-') + '。</p>' +
+      '<button class="link-btn" data-open-feedback data-fb-type="数据纠错">发现价格/能力标注错误？</button>' +
       '<h4>成本试算</h4><div class="calc"><input type="number" id="calcIn" value="3000" min="0"><span style="color:var(--dim);font-size:12px">输入 tokens</span>' +
       '<input type="number" id="calcOut" value="1500" min="0"><span style="color:var(--dim);font-size:12px">输出 tokens</span>' +
       '<b class="calc-out" id="calcOutLabel"></b></div>' +
@@ -1159,6 +1229,7 @@
     $('dlgClose2').addEventListener('click', function () { dlg.close(); });
     if (dlg.open) dlg.close();
     dlg.showModal();
+    try { window.dispatchEvent(new CustomEvent('mp:model-open', { detail: { id: id } })); } catch (e) { }
   }
 
   /* ================= 算法库 ================= */
@@ -1471,6 +1542,8 @@
       ' · 成功来源 ' + st.okSources + '/' + st.sources.length +
       ' · 本次更新 ' + st.n + ' 条（覆盖 ' + st.updated + '/' + MODELS.length + ' 个模型）' +
       (st.stale ? ' · <b style="color:#fcd34d">' + st.stale + ' 个模型仍用旧价</b>' : '') +
+      ' <span id="livePrice" class="live-price" aria-live="polite">价格核验中…</span>' +
+      ' <button class="link-btn" id="livePriceBtn" type="button">此刻核验</button>' +
       ' <button class="link-btn" id="checkPriceBtn" type="button">检查更新</button>';
     if (st.stale) {
       html += '<div class="sync-note">未覆盖的模型沿用数据快照 ' + esc(META.dataDate || '—') + ' 的价格；「来源在线」只表示抓取成功，不等于价格已重新核验。</div>';
@@ -1483,12 +1556,17 @@
       html += '<div class="sync-note ok">最近一次检查：' + esc(priceCheck.msg) + '</div>';
     }
     box.innerHTML = html;
+    try { window.dispatchEvent(new CustomEvent('mp:prices-rendered')); } catch (e) { }
   }
   function refreshAfterPrices() {
     renderPriceSync();
     renderLibStats();
     renderLibrary();
     renderAbout();
+    var md = $('modelDlg');
+    if (md && md.open && md.getAttribute('data-id')) {
+      try { showModel(md.getAttribute('data-id')); } catch (e) { }
+    }
     if (state.plan) {
       try {
         state.plan = E.buildPlan(state.plan.problem, state.plan.opts);
@@ -1845,6 +1923,19 @@
       renderPromptMatch(pm);
     }
   }
+
+  window.MPApp = {
+    applyPrices: applyPrices,
+    refreshAfterPrices: refreshAfterPrices,
+    renderPriceSync: renderPriceSync,
+    renderLibrary: renderLibrary,
+    renderLibStats: renderLibStats,
+    showModel: showModel,
+    toast: toast,
+    getModel: modelById,
+    getPrices: function () { return window.MP_PRICES; },
+    state: state
+  };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

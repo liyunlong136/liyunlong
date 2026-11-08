@@ -362,7 +362,7 @@ PAIR_LIST.forEach(comparePage);
 compareIndex();
 
 // main index canonical / OG / JSON-LD is handled separately.
-var urls = [SITE + '/', SITE + '/model/', SITE + '/task/', SITE + '/solution/', SITE + '/prompt/', SITE + '/compare/'];
+var urls = [SITE + '/', SITE + '/model/', SITE + '/task/', SITE + '/solution/', SITE + '/prompt/', SITE + '/compare/', SITE + '/methodology/'];
 MODELS.forEach(m => urls.push(SITE + '/model/' + m.id + '.html'));
 TASKS.forEach(t => urls.push(SITE + '/task/' + t.id + '.html'));
 SOLUTIONS.forEach(s => urls.push(SITE + '/solution/' + s.id + '.html'));

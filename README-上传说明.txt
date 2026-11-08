@@ -1,21 +1,19 @@
-﻿# myaskmate.com 线上更新包（2026-11-08）
+﻿# myaskmate.com 更新包（2026-11-08 第三轮）
 
-当前线上仍是旧版。把本包内容覆盖到网站根目录（或拖到 Netlify Deploys）。
+覆盖到网站根目录，或把解压后的所有内容拖到 Netlify Deploys。
 
-包含：
-- 首页首屏输入框/生成按钮
-- 关于页新文案：一个带「科学榜单」的选型工具……
-- 隐私：本地 vs PK 云端调用，PK 首次确认
-- 硬约束严格模式，不自动放宽
-- 反馈：邮箱 + GitHub issue
-- 无公共评分/口碑榜，评分仅本机
-- 价格来源、更新时间、官方/折算/推算标签
-- robots.txt + sitemap.xml（291 条）
-- model/task/solution/prompt/compare 静态页
+本轮新增：
+- 结果页“下一步动作”3 条（复制提示词 / 打开官网 / 备选模型）
+- 结果页“复制分享链接”，打开链接可还原问题、预算、时间、token、硬需求和放宽状态
+- 结论卡增加“打开模型官网”
+- 弹窗关闭后焦点恢复到触发按钮；结果区 aria-live
+- 移动端：结论按钮全宽、弹窗限高可滚动、下一步字号
+- 自动化测试 tests/engine.test.mjs + GitHub Actions
+- Netlify Forms 反馈、安全响应头、PK Key 仅内存
 
-上传后检查：
-- https://myaskmate.com/sitemap.xml 200
-- https://myaskmate.com/robots.txt 200
-- https://myaskmate.com/model/deepseek-v4-pro.html 200
-- 首页首屏出现「描述你真正要解决的问题」
-- 关于页出现「科学榜单」
+部署后检查：
+1. 生成结果后，结论卡有 3 条“下一步”
+2. 点“复制分享链接”，新标签打开能还原结果
+3. 提交反馈，Netlify 后台 Forms 有记录
+4. 响应头含 X-Frame-Options
+5. 按 Tab 打开弹窗、Esc 关闭后焦点回到原按钮

@@ -48,9 +48,14 @@
       <button class="tab active" data-view="pick">智能选型</button>
       <button class="tab" data-view="solutions">解决方案</button>
       <button class="tab" data-view="pk">PK 对比</button>
-      <button class="tab" data-view="models">模型库</button>
-      <button class="tab" data-view="algos">算法库</button>
-      <button class="tab" data-view="prompts">提示词库</button>
+      <div class="nav-more" id="navMore">
+        <button class="tab nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false">资料库 <span aria-hidden="true">▾</span></button>
+        <div class="nav-more-menu" id="navMoreMenu">
+          <button class="tab" data-view="models">模型库</button>
+          <button class="tab" data-view="algos">算法库</button>
+          <button class="tab" data-view="prompts">提示词库</button>
+        </div>
+      </div>
       <button class="tab" data-view="about">关于</button>
     </nav>
   </div>
@@ -83,6 +88,12 @@
         <textarea id="problemInput" placeholder="例如：我想做一个面向大学生的 AI 求职助手小程序，只有我一个人开发，两周内上线，预算很紧。&#10;&#10;写得越具体，拆解越准：说清「要什么产出、给谁看、什么时候要、卡在哪里」。" aria-label="描述你的问题"></textarea>
         <div class="err" id="formErr">再多写几个字吧：至少描述一下你要的产出和时间，或者上传一个文件。</div>
       </div>
+      <div class="actions actions-primary">
+        <button class="btn btn-primary" id="runBtn">生成选型方案</button>
+        <span class="hint-line" style="margin:0">Ctrl / Cmd + Enter 也可以；不填补充条件时按“正常 / 中等预算 / 够用”推荐</span>
+      </div>
+      <details class="optional-fold" id="optionalUpload">
+        <summary class="fold-summary">补充信息（可选）：上传文件、试试真实场景</summary>
       <div class="field">
         <span class="label">上传截图或文件<small>本地解析，不上传服务器 · 最多 3 个，单个 ≤ 15MB</small></span>
         <div class="drop" id="dropZone">
@@ -104,10 +115,11 @@
           <button class="btn btn-sm js-example" data-text="我想系统学习大模型原理，三个月后能自己微调一个 7B 模型，只有晚上和周末有时间">三个月入门并微调 7B</button>
         </div>
       </div>
+      </details>
     </div>
 
-    <div class="panel">
-      <div class="panel-head"><span class="step">2</span><h2>你的真实约束</h2><span class="hint">这些条件直接决定推荐结果</span></div>
+    <details class="panel optional-fold" id="optionalConstraints">
+      <summary class="panel-head"><span class="step">2</span><h2>补充条件（可选）</h2><span class="hint">预算 / 时间 / 硬性需求，不填走默认</span></summary>
       <div class="field">
         <span class="label">这件事有多急？<small>赶时间会优先推快模型</small></span>
         <div class="seg">
@@ -149,11 +161,7 @@
           <option value="">自动识别（推荐）</option>
         </select>
       </div>
-      <div class="actions">
-        <button class="btn btn-primary" id="runBtn">生成选型方案</button>
-        <span class="hint-line" style="margin:0">Ctrl / Cmd + Enter 也可以</span>
-      </div>
-    </div>
+    </details>
 
     <section class="task-hall">
       <div class="th-head">
@@ -172,7 +180,7 @@
       </div>
       <div class="filters" id="rankTabs"></div>
       <div class="rank-list" id="rankList"></div>
-      <p class="rank-method">口径：总榜只按自研十维能力分排序（人工设定，参考公开基准与实测）；模型详情里的评分只存本机，不参与总榜。能力分不是官方 benchmark。</p>
+      <p class="rank-method">口径：总榜只按自研十维能力分排序（人工设定，参考公开基准与实测）；没有公开统一评测样本，分数只用于同场景横向比较，不是官方 benchmark，也不代表真实成功率。模型详情里的评分只存本机，不参与总榜。</p>
       <div class="rank-note" id="rankNote"></div>
     </section>
 
@@ -250,7 +258,8 @@
 
     <div class="privacy-strip">
       <div><b>本地运行</b><span>选型、文件解析、成本估算；评分默认只存本机</span></div>
-      <div class="cloud"><b>云端运行</b><span>PK 真跑会把问题和提示词发给所选厂商；评分只存本机，不进入榜单</span></div>
+      <div class="cloud"><b>第三方调用</b><span>PK 真跑不是本地功能：会把问题和提示词发送给你选择的模型厂商</span></div>
+      <div class="feedback"><b>反馈</b><span>反馈内容发送到站长邮箱 / Netlify Forms 后台，不进入模型厂商</span></div>
     </div>
 
     <div class="panel pk-topic">
@@ -284,13 +293,13 @@
         <div class="pk-head"><span class="pk-tag plain">普通模式</span><span style="display:flex;gap:6px;align-items:center"><select id="pkModelA" aria-label="左侧模型"></select><button class="btn btn-sm" data-copy-pk="a">复制</button></span></div>
         <div class="pk-meta" id="pkMetaA">—</div>
         <textarea id="pkPromptA" class="pk-prompt" readonly aria-label="普通提示词"></textarea>
-        <div class="pk-output" id="pkOutA"><div class="empty">还没有生成</div></div>
+        <div class="pk-output" id="pkOutA" aria-live="polite"><div class="empty">还没有生成</div></div>
       </div>
       <div class="pk-col expert">
         <div class="pk-head"><span class="pk-tag expert">专家模式</span><span style="display:flex;gap:6px;align-items:center"><select id="pkModelB" aria-label="右侧模型"></select><button class="btn btn-sm" data-copy-pk="b">复制</button></span></div>
         <div class="pk-meta" id="pkMetaB">—</div>
         <textarea id="pkPromptB" class="pk-prompt" readonly aria-label="专家提示词"></textarea>
-        <div class="pk-output" id="pkOutB"><div class="empty">还没有生成</div></div>
+        <div class="pk-output" id="pkOutB" aria-live="polite"><div class="empty">还没有生成</div></div>
       </div>
     </div>
 
@@ -304,6 +313,11 @@
         <h1>模型库 <span class="chip acc" id="modelCount">0</span></h1>
         <p>国内外主流大模型的能力画像、价格、上下文与适用场景。点卡片看详情和成本试算。</p>
         <div class="sync-line" id="priceSync">价格快照加载中…</div>
+        <div class="price-legend">
+          <span><i class="lg official">官方价</i>厂商公开定价</span>
+          <span><i class="lg ref">折算价</i>按汇率 / 套餐折算</span>
+          <span><i class="lg est">推算价</i>同级估算，仅供横向比较</span>
+        </div>
       </div>
     </div>
     <div class="stats-strip" id="libStats"></div>
@@ -457,7 +471,13 @@
         <h3>价格说明</h3>
         <p>价格核验于 <span id="priceDate">—</span>，单位为人民币 / 百万 tokens。海外模型按 1 美元 ≈ 7.1 元折算，未含渠道与税费；标注「推算」的条目是按同级产品估算，仅用于横向比较，下单前请以官网为准。各家阶梯计价、缓存命中、Batch 折扣差异很大，实际成本可能显著低于标价。</p>
         <h3>免费承诺</h3>
-        <p>本站无登录、无追踪、无广告、不卖课。选型、文件解析、成本估算都在浏览器本地完成；评分只存本机，不参与全站总榜。唯一会发送问题内容的是 PK 真跑：只有你主动填写 Key、确认后，问题与提示词才会发送给你选择的模型厂商；不填 Key 时只做结构与成本对比，不发送任何内容。</p>
+        <p>本站无登录、无追踪、无广告、不卖课。数据分三类，边界如下：</p>
+        <ul class="privacy-list">
+          <li><b>本地</b>：选型、文件解析、成本估算、评分和历史记录在浏览器完成；文件内容不上传服务器。</li>
+          <li><b>第三方</b>：PK 真跑不是本地功能。只有你主动填写 Key 并确认后，问题与提示词才会发送给你选择的模型厂商；不填 Key 时只做结构与成本对比，不发送内容。</li>
+          <li><b>站长</b>：反馈内容会发送到站长邮箱或 Netlify Forms 后台，用于处理问题；不会进入模型厂商。</li>
+        </ul>
+        <p>评分只存本机，不参与全站总榜；目前没有公共评分。</p>
       </div>
       <div>
         <div class="panel">
@@ -596,7 +616,7 @@
       <button class="btn" id="fbCopy">复制反馈内容</button>
       <span class="hint-line" style="margin:0">Ctrl / Cmd + Enter 提交</span>
     </div>
-    <div class="fb-note">默认只保存在本机：不注册、不上传。配置 endpoint 后可直传，见 README。</div>
+    <div class="fb-note">提交后进入 Netlify Forms 后台；发送失败会保存本机草稿。公开进度可看 GitHub Issues。</div>
     <div id="fbDone"></div>
   </div>
 </dialog>

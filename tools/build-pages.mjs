@@ -127,7 +127,7 @@ function ctxText(n) {
 }
 function tier(t) { return 'L' + t + ' ' + ({ 1: '免费', 2: '轻量', 3: '主力', 4: '旗舰', 5: '顶级' }[t] || ''); }
 function confLabel(c) {
-  return c === 'official' ? '官方价' : (c === 'ref' ? '折算价' : '推算价（下单前核对）');
+  return c === 'official' ? '官方价' : (c === 'ref' ? '折算价' : '推算价（非官方，下单前核对）');
 }
 function sourceLabel(m) {
   var map = { zhipu: '智谱官网', volc: '火山方舟', deepseek: 'DeepSeek 官网', hunyuan: '腾讯混元官网' };

@@ -965,3 +965,65 @@ body[data-audience="dev"] .beginner-only{display:none!important}
     max-height:88dvh;overflow:auto
   }
 }
+
+
+/* 资料库下拉 */
+.nav-more{position:relative}
+.nav-more-menu{
+  display:none;position:absolute;right:0;top:calc(100% + 8px);min-width:150px;z-index:80;
+  padding:6px;border:1px solid var(--line);border-radius:11px;
+  background:#0d1424;box-shadow:0 16px 40px rgba(0,0,0,.45)
+}
+.nav-more.open .nav-more-menu{display:block}
+.nav-more-menu .tab{display:block;width:100%;text-align:left;margin:0;padding:8px 10px;border-radius:7px}
+.nav-more-menu .tab.active{background:rgba(94,234,212,.12);color:var(--acc)}
+
+/* 首页首屏聚焦：主按钮前置，补充信息折叠 */
+.actions-primary{margin:10px 0 8px}
+.actions-primary .btn-primary{min-height:44px;padding:0 26px;font-size:15px}
+.optional-fold{border-top:1px dashed var(--line);margin-top:6px;padding-top:10px}
+.optional-fold>.fold-summary{
+  cursor:pointer;list-style:none;font-size:12.5px;color:var(--muted);
+  padding:6px 0;user-select:none
+}
+.optional-fold>.fold-summary::-webkit-details-marker{display:none}
+.optional-fold>.fold-summary::before{content:'＋ ';color:var(--acc)}
+.optional-fold[open]>.fold-summary::before{content:'－ '}
+.optional-fold[open]>.fold-summary{color:var(--txt)}
+details.panel.optional-fold{padding:18px 22px}
+details.panel.optional-fold>.panel-head{cursor:pointer;list-style:none;margin-bottom:0}
+details.panel.optional-fold>.panel-head::-webkit-details-marker{display:none}
+details.panel.optional-fold[open]>.panel-head{margin-bottom:16px}
+
+@media (max-width:720px){
+  .nav-more-menu{right:auto;left:0}
+  .actions-primary .btn-primary{width:100%}
+}
+
+
+/* 价格标签图例 */
+.price-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:10.5px;color:var(--dim)}
+.price-legend span{display:inline-flex;align-items:center;gap:4px}
+.price-legend .lg{font-style:normal;padding:1px 5px;border-radius:4px;border:1px solid var(--line)}
+.price-legend .official{color:#7ee2c4;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.07)}
+.price-legend .ref{color:#d8b48a;border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.06)}
+.price-legend .est{color:var(--dim);border-color:var(--line)}
+
+
+/* 隐私三类数据 */
+.privacy-strip{grid-template-columns:repeat(3,1fr)}
+.privacy-strip>div.feedback{border-color:rgba(129,140,248,.3);background:rgba(129,140,248,.05)}
+.privacy-strip>div.feedback b{color:#a5b4fc}
+.privacy-list{margin:8px 0 10px;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7}
+.privacy-list li{margin:5px 0}
+.privacy-list b{color:var(--txt)}
+@media(max-width:720px){.privacy-strip{grid-template-columns:1fr}}
+
+
+@media (max-width:640px){
+  .result-details table,.dlg-table{display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+  .drop{height:auto;min-height:76px;padding:14px 12px}
+  .drop-text span{font-size:10.5px}
+  .panel{padding:16px}
+  .optional-fold[open]>.fold-summary{margin-bottom:6px}
+}

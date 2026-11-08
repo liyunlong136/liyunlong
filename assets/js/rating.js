@@ -93,7 +93,7 @@
       thanks.classList.add('show');
     }
     function renderAvg(avg, count) {
-      if (!count) { avgEl.textContent = '暂无共享评分'; return; }
+      if (!count) { avgEl.textContent = '公共评分未开放'; return; }
       avgEl.textContent = avg.toFixed(1) + ' · ' + count + ' 人';
     }
     function loadAverage() {
@@ -108,7 +108,7 @@
         .catch(function () { avgEl.textContent = '评分暂不可用'; });
     }
     function loadMine() {
-      if (!cfgOk()) { setStatus('我的评分只保存在本机，不参与全站总榜。'); return; }
+      if (!cfgOk()) { setStatus('公共评分尚未开放；当前评分只保存在本机，不进入总榜。'); return; }
       fetch(base() + '?model_id=eq.' + encodeURIComponent(modelId) + '&user_fingerprint=eq.' + encodeURIComponent(fingerprint()) + '&select=score&limit=1', { headers: headers() })
         .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
         .then(function (rows) {

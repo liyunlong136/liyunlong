@@ -218,10 +218,21 @@
   }
 
   /* ================= 导航 ================= */
+  function closeNavMore() {
+    var box = $('navMore');
+    if (!box) return;
+    box.classList.remove('open');
+    var b = $('navMoreBtn');
+    if (b) b.setAttribute('aria-expanded', 'false');
+  }
+
   function showView(name, replace) {
     state.view = name;
+    closeNavMore();
     document.querySelectorAll('.view').forEach(function (v) { v.classList.toggle('active', v.id === 'view-' + name); });
     document.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('active', t.getAttribute('data-view') === name); });
+    var nmBtn = $('navMoreBtn');
+    if (nmBtn) nmBtn.classList.toggle('active', ['models', 'algos', 'prompts'].indexOf(name) >= 0);
     try {
       if (location.hash !== '#' + name) {
         if (replace) history.replaceState(null, '', '#' + name);
@@ -705,7 +716,12 @@
     return '¥' + num(m.priceIn) + '/' + num(m.priceOut);
   }
   function priceConfLabel(m) {
-    return m.priceConf === 'official' ? '官方' : (m.priceConf === 'ref' ? '折算' : '推算');
+    return m.priceConf === 'official' ? '官方价' : (m.priceConf === 'ref' ? '折算价' : '推算价');
+  }
+  function priceConfTitle(m) {
+    if (m.priceConf === 'official') return '厂商官网/公开定价页，已同步';
+    if (m.priceConf === 'ref') return '按汇率或套餐折算，非厂商直接报价';
+    return '同级产品推算，不是官方报价，仅用于横向比较';
   }
   function priceSourceLabel(m) {
     var map = { zhipu: '智谱官网', volc: '火山方舟', deepseek: 'DeepSeek 官网', hunyuan: '腾讯混元官网' };
@@ -997,7 +1013,7 @@
         '</div>' +
         '<div class="m-tags">' + (m.bestFor || []).slice(0, 4).map(function (t) { return '<span class="m-tag">' + esc(t) + '</span>'; }).join('') + '</div>' +
         '<div class="m-dims">' + bars + '</div>' +
-        '<div class="m-foot"><span>上下文 <b>' + ctxLabel(m.ctx) + '</b></span><span>价格 <b>' + priceShort(m) + '</b><i class="pc">' + priceConfLabel(m) + '</i></span></div>' +
+        '<div class="m-foot"><span>上下文 <b>' + ctxLabel(m.ctx) + '</b></span><span>价格 <b>' + priceShort(m) + '</b><i class="pc" title="' + esc(priceConfTitle(m)) + '">' + priceConfLabel(m) + '</i></span></div>' +
         '<div class="price-meta">来源：' + esc(priceSourceLabel(m)) + ' · 更新：' + esc(priceUpdatedLabel(m)) + '</div>' +
         '</article>';
     }).join('');
@@ -1672,7 +1688,17 @@
       if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); renderSolutionMatch($('solutionInput').value); }
     });
 
+    var navMoreBtn = $('navMoreBtn'), navMore = $('navMore');
+    if (navMoreBtn && navMore) {
+      navMoreBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = navMore.classList.toggle('open');
+        navMoreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+
     document.addEventListener('click', function (e) {
+      if (navMore && !navMore.contains(e.target)) closeNavMore();
       if (e.target.closest('#checkPriceBtn, #checkPriceBtn2, #aboutCheckPrice')) { checkPrices(); return; }
       var copy = e.target.closest('[data-copy]');
       if (copy) { copyText(CLIP[copy.getAttribute('data-copy')] || ''); return; }

@@ -46,6 +46,15 @@ test('硬约束：必须看图时只返回支持图片的模型', () => {
   recs.forEach(r => assert.ok((r.model.modalities || []).includes('image'), r.model.id));
 });
 
+test('硬约束：必须音频 / 视频时只返回对应模态模型', () => {
+  const audio = E.recommend(state(), opts({ requireAudio: true }), 20);
+  const video = E.recommend(state(), opts({ requireVideo: true }), 20);
+  assert.ok(audio.length > 0);
+  assert.ok(video.length > 0);
+  audio.forEach(r => assert.ok((r.model.modalities || []).includes('audio'), r.model.id));
+  video.forEach(r => assert.ok((r.model.modalities || []).includes('video'), r.model.id));
+});
+
 test('零预算：保留免费 API 和自托管，排除有 API 费用的模型', () => {
   const recs = E.recommend(state(), opts({ budget: 'free' }), 20);
   assert.ok(recs.length > 1);

@@ -336,8 +336,8 @@
       var errA = results[0].status === 'rejected' ? results[0].reason.message : '';
       var errB = results[1].status === 'rejected' ? results[1].reason.message : '';
       setOutputs(
-        ra ? outputHtml(ra, ma) : '<div class="pk-error">调用失败：' + esc(errA) + '<br><span>常见原因：Key 无效、模型名不对、浏览器被 CORS 拦截，或请求超过 45 秒。</span></div>',
-        rb ? outputHtml(rb, mb) : '<div class="pk-error">调用失败：' + esc(errB) + '<br><span>如果两边都失败，多半是 CORS；请换供应商或部署一个代理。</span></div>',
+        ra ? outputHtml(ra, ma) : '<div class="pk-error">调用失败：' + esc(errA) + '<br><span>常见原因：Key 无效、模型名不对、浏览器被 CORS 拦截，或请求超过 45 秒。</span><button class="btn btn-sm" data-pk-retry>重试</button></div>',
+        rb ? outputHtml(rb, mb) : '<div class="pk-error">调用失败：' + esc(errB) + '<br><span>如果两边都失败，多半是 CORS；请换供应商或部署一个代理。</span><button class="btn btn-sm" data-pk-retry>重试</button></div>',
         diffHtml($('pkPromptA').value, $('pkPromptB').value, ma, mb, ra, rb)
       );
       if (window.MPTrack) MPTrack.event('pk_live', { okA: !!ra, okB: !!rb, provider: state.provider });
@@ -389,6 +389,9 @@
       buildPrompts();
     });
     $('pkRun').addEventListener('click', function () { saveKey(); runLive(); });
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-pk-retry]')) { saveKey(); runLive(); }
+    });
     $('pkDemo').addEventListener('click', runDemo);
     if ($('pkCancel')) $('pkCancel').addEventListener('click', cancelRunning);
     $('pkClearKey').addEventListener('click', function () {

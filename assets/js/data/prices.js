@@ -1,6 +1,6 @@
 /* 自动生成：node tools/sync-prices.mjs --apply */
 window.MP_PRICES = {
-  "updatedAt": "2026-11-27T15:53:16.345Z",
+  "updatedAt": "2026-11-27T16:58:13.713Z",
   "fx": 7.1,
   "entries": {
     "glm-5.3": {
@@ -130,7 +130,7 @@ window.MP_PRICES = {
       "url": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
       "ok": true,
       "count": 7,
-      "fetchedAt": "2026-11-27T15:53:12.914Z"
+      "fetchedAt": "2026-11-27T16:58:08.856Z"
     },
     {
       "id": "volc",
@@ -138,7 +138,7 @@ window.MP_PRICES = {
       "url": "https://ark.volcengine.com/region:cn-beijing/docs/model-pricing.md",
       "ok": true,
       "count": 8,
-      "fetchedAt": "2026-11-27T15:53:14.022Z"
+      "fetchedAt": "2026-11-27T16:58:09.870Z"
     },
     {
       "id": "deepseek",
@@ -146,7 +146,7 @@ window.MP_PRICES = {
       "url": "https://api-docs.deepseek.com/quick_start/pricing",
       "ok": true,
       "count": 2,
-      "fetchedAt": "2026-11-27T15:53:14.972Z"
+      "fetchedAt": "2026-11-27T16:58:12.088Z"
     },
     {
       "id": "hunyuan",
@@ -154,7 +154,7 @@ window.MP_PRICES = {
       "url": "https://cloud.tencent.com/document/product/1729/97731",
       "ok": true,
       "count": 1,
-      "fetchedAt": "2026-11-27T15:53:16.344Z"
+      "fetchedAt": "2026-11-27T16:58:13.713Z"
     }
   ]
 };
